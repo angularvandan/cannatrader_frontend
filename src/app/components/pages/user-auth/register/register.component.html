@@ -1,1 +1,90 @@
-<p>register works!</p>
+<div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay">
+    <div class="bg-white bg-opacity-90 p-4 rounded-lg shadow-lg max-w-3xl w-full">
+        <h2 class="font-semibold mb-6 text-center font-custom text-secondary">Sign Up</h2>
+        <p class="text-center mb-6 font-custom text-[#fafafa]">Sign up to enjoy the convenience of shopping for a <br>
+            <span class="text-secondary">wide range of products.</span>
+        </p>
+        <form class="text-[#fafafa]">
+            <div class="flex gap-8 justify-between">
+                <div class="grid grid-cols-1 w-full gap-4">
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm text-gray-700 font-custom">Name</label>
+                        <span class="p-input-icon-left w-full">
+                            <i class="pi pi-user text-[#fafafa]"></i>
+                            <input pInputText id="name" type="text" placeholder="Enter your name"
+                                class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
+                        </span>
+                    </div>
+                    <div class="mb-4">
+                        <label for="phone" class="block text-sm text-gray-700 font-custom">Phone Number</label>
+                        <span class="p-input-icon-left w-full">
+                            <i class="pi pi-phone text-[#fafafa]"></i>
+                            <input pInputText id="phone" type="text" placeholder="Enter your phone number"
+                                class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
+                        </span>
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="block text-sm text-gray-700 font-custom">Password</label>
+                        <span class="p-input-icon-left w-full">
+                            <i class="pi pi-lock text-[#fafafa]"></i>
+                            <input pPassword id="password" type="password" [feedback]="false"
+                                placeholder="Enter your password"
+                                class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
+                        </span>
+                    </div>
+                    <div class="mb-4 ">
+                        <label for="confirmPassword" class="block text-sm text-gray-700 font-custom">Confirm
+                            Password</label>
+                        <span class="p-input-icon-left w-full">
+                            <i class="pi pi-lock text-[#fafafa]"></i>
+                            <input pPassword id="confirmPassword" [feedback]="false" type="password"
+                                placeholder="Confirm your password"
+                                class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
+                        </span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 w-full gap-4">
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm text-gray-700 font-custom">Email</label>
+                        <span class="p-input-icon-left w-full">
+                            <i class="pi pi-envelope text-[#fafafa]"></i>
+                            <input pInputText id="email" type="email" placeholder="Enter your email address"
+                                class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
+                        </span>
+                    </div>
+                    <div class="mb-4">
+                        <label for="license" class="block text-sm text-gray-700 font-custom">Health Canada Site License
+                            (Optional)</label>
+                        <div class="file-upload-container">
+                            <label for="file-upload" class="file-upload-label">
+                                <i class="pi pi-cloud-upload"></i>
+                                <p class="text-[#fafafa]">Upload document</p>
+                                <input type="file" id="file-upload" (change)="onFileSelected($event)" accept=".pdf" />
+                            </label>
+                        </div>
+                        <div class="file-details relative text-slate cursor-pointer" *ngIf="selectedFile">
+                            <div class="file-name flex">
+                                <i class="pi pi-file place-content-center font-medium mr-4 text-2xl"></i>
+                                <p class="text-black">{{ selectedFile.name }}</p>
+                            </div>
+                            <i class="pi pi-times top-2 right-2 absolute font-medium " (click)="removeFile()"></i>
+                            <!-- <button (click)="removeFile()">Remove</button> -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="mb-6 ">
+                <input type="checkbox" id="agree" name="agree" class="mr-2">
+                <label for="agree" class="text-sm text-gray-700 font-custom">By continuing, you agree to cannatrader <a
+                        href="#" class="text-blue-600 hover:underline text-secondary">Terms of Use</a> and <a href="#"
+                        class="text-blue-600 hover:underline text-secondary">Privacy Policy</a>.</label>
+            </div>
+            <button type="submit"
+                class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md font-custom bg-secondary text-primary-btn">Sign
+                Up</button>
+        </form>
+        <p class="mt-4 text-center font-custom text-[#fafafa]">Already have an account? <a href="#"
+                class="text-blue-600 hover:underline text-secondary">Sign In</a></p>
+    </div>
+</div>
