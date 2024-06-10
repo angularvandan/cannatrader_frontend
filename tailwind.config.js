@@ -4,10 +4,15 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {},
-    
-    fontFamily:{
-      'poppins':['Poppins']
+    extend: {
+      fontFamily: {
+        'Quicksand': ['Quicksand']
+      }
+    },
+    colors: {
+      'primary': '',
+      'secondary': '#FFE175',
+      'primary-btn': '#3A5C41'
     }
   },
   plugins: [],

@@ -12,3 +12,31 @@
   }
 
 @import "primeicons/primeicons.css";
+
+button {
+    font-family: 'Quicksand';
+}
+
+h2 {
+    font-size: 40px;
+}
+
+.p-inputtext {
+    background: #FFFFFF3D;
+}
+
+.p-input-icon-left>p-password>div>input {
+    padding-left: 2.5rem;
+}
+
+.p-inputtext,
+.p-password {
+    width: 100%;
+    background: #FFFFFF3D;
+}
+
+.p-inputtext {
+    background: #FFFFFF3D;
+    border: 0;
+    color: #fafafa;
+}
