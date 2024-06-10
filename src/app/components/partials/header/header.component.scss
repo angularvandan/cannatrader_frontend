@@ -1,0 +1,36 @@
+$breakpoint-lg:1024px;
+
+header {
+    .logo-container {
+        padding-left: 50px;
+        .logo {
+            width: 169px;
+            height: 46px;
+        }
+        @media(max-width: $breakpoint-lg){
+            padding-left: 0px;
+        }
+    }
+
+    .nav-link {
+        nav {
+            a {
+                line-height: 30px;
+                color: white;
+            }
+        }
+    }
+    .nav-link.active {
+        max-height: 300px; 
+      }
+    .icon-profile-container{
+        padding-right: 50px;
+        a{
+            color: white;
+        }
+        .notification-count{
+            font-size: 14px;
+            line-height: 12px;
+        }
+    }
+}
