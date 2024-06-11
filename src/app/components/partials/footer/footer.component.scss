@@ -1,0 +1,51 @@
+$breakpoint-lg: 1024px;
+$breakpoint-sm: 640px;
+$secondary: #FFE175;
+
+.footer-container {
+    padding-left: 86px;
+    padding-top: 67px;
+    padding-bottom: 40px;
+
+    .left-side {
+        .logo-container {
+            .logo {
+                width: 169px;
+                height: 46px;
+            }
+        }
+
+        .footer-heading-container {
+            .footer-heading {
+                color: #ECFEE6;
+            }
+        }
+
+        .button-container {
+            .buttons {
+
+                button {
+                    font-family: Poppins;
+                    font-size: 20px;
+                    font-weight: 500;
+                    line-height: 30px;
+                    align-items: center;
+                    color: $secondary;
+                    display: flex;
+                    flex-direction: nowrap;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+    .p-button.p-button-outlined{
+        color:cyan!important;
+    }
+
+    @media(max-width: $breakpoint-sm) {
+        padding-left: 50px;
+        padding-right:20px;
+        padding-top: 37px;
+        padding-bottom: 60px;
+    }
+}
