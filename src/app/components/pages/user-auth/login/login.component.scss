@@ -1,0 +1,23 @@
+.bg-gradient-overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 12.46%, rgba(102, 102, 102, 0.216) 100%), url('../../../../../assets/register/Rectangle\ 6212.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.p-inputtext {
+    background: #FFFFFF3D;
+    border: 0;
+    color: #fafafa;
+}
+
+.p-input-icon-left>.p-icon-wrapper.p-icon,
+.p-input-icon-left>i:first-of-type {
+    color: #DCDCDCDC;
+}
+
+.p-inputtext:enabled:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: none;
+    border-color: none;
+}
