@@ -5,7 +5,7 @@
         </div>
         <div class="nav-link hidden lg:block">
             <nav class="space-x-9 flex">
-                <a routerLink="/" class="hover:color-primary text-xl font-medium">Home</a>
+                <a routerLink="/home" class="hover:color-primary text-xl font-medium">Home</a>
                 <a routerLink="/products" class="hover:color-secondary  text-xl font-medium">Add Products</a>
                 <a routerLink="/wishlist" class="hover:text-secondary  text-xl font-medium">Wish List</a>
                 <a href="#" class="hover:text-secondary  text-xl font-medium">Contact</a>
@@ -61,10 +61,10 @@
     <div class="nav-link bg-primary lg:hidden" [class.active]="isMenuOpen"
         [ngClass]="{'hidden':!isMenuOpen,'block':isMenuOpen}">
         <nav class="p-4 ps-8 flex flex-col space-y-4 ">
-            <a href="#" class="hover:text-secondary text-xl font-medium text-white">Home</a>
-            <a href="#" class="hover:text-secondary  text-xl font-medium">Add Products</a>
-            <a href="#" class="hover:text-secondary  text-xl font-medium">Wishlist</a>
-            <a href="#" class="hover:text-secondary  text-xl font-medium">Contact</a>
+            <a routerLink="/home" class="hover:text-secondary text-xl font-medium text-white"(click)="toggleMenu()">Home</a>
+            <a routerLink="/products" class="hover:text-secondary  text-xl font-medium"(click)="toggleMenu()">Add Products</a>
+            <a routerLink="/wishlist" class="hover:text-secondary  text-xl font-medium"(click)="toggleMenu()">Wishlist</a>
+            <a href="#" class="hover:text-secondary  text-xl font-medium"(click)="toggleMenu()">Contact</a>
         </nav>
     </div>
 </div>

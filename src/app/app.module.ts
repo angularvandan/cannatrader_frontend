@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,7 +33,8 @@ import { SharedModule } from 'primeng/api';
     ButtonModule,
     FormsModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

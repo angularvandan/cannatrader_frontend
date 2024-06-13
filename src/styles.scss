@@ -13,6 +13,7 @@
 
 @import "primeicons/primeicons.css";
 
+$bg-primary:#3A5C41;
 
 button {
     font-family: 'Quicksand';
@@ -20,6 +21,17 @@ button {
 
 h2 {
     font-size: 40px;
+}
+app-home{
+    .filter-button{
+        .p-button{
+            width:100%!important;
+            background-color: $bg-primary;
+        }
+        .p-button:hover{
+            background-color: $bg-primary;
+        }
+    }
 }
 
 .p-inputtext {
