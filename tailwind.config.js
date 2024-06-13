@@ -16,14 +16,16 @@ module.exports = {
       'primary-btn': '#3A5C41',
       'white': '#fff',
       'help': '#737373',
-      'side': '#6D8924'
+      'side': '#6D8924',
     },
     backgroundColor: {
       'primary': '#3A5C41',
       'secondary': '#FFE175',
       'white': '#fff',
       'side': '#6D8924',
-      'nav-bg': "#D1DACF"
+      'nav-bg': "#D1DACF",
+      'trashbg': '#0000000A'
+
     },
   },
   plugins: [],

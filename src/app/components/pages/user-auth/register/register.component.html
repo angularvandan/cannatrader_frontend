@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-1 w-full gap-4">
-                    <div class="mb-4">
+                    <div class="mb-4 h-max">
                         <label for="email" class="block text-sm text-gray-700 font-custom">Email</label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-envelope text-[#fafafa]"></i>
@@ -63,6 +63,10 @@
                                 <input type="file" id="file-upload" (change)="onFileSelected($event)" accept=".pdf" />
                             </label>
                         </div>
+
+
+                    </div>
+                    <div class="mb-4">
                         <div class="file-details relative text-slate cursor-pointer" *ngIf="selectedFile">
                             <div class="file-name flex">
                                 <i class="pi pi-file place-content-center font-medium mr-4 text-2xl"></i>
@@ -71,7 +75,6 @@
                             <i class="pi pi-times top-2 right-2 absolute font-medium " (click)="removeFile()"></i>
                             <!-- <button (click)="removeFile()">Remove</button> -->
                         </div>
-
                     </div>
                 </div>
             </div>
