@@ -5,9 +5,15 @@
 }
 
 .p-inputtext {
-    background: #FFFFFF3D;
+    // background: #FFFFFF3D;
     border: 0;
     color: #fafafa;
+    background: rgba(255, 255, 255, 0.24);
+    backdrop-filter: blur(10.9px);
+}
+
+i {
+    z-index: 1;
 }
 
 .p-input-icon-left>.p-icon-wrapper.p-icon,
@@ -31,7 +37,8 @@
     border: 2px dashed #ccc;
     border-radius: 10px;
     text-align: center;
-    background-color: #FFFFFF3D;
+    background: rgba(255, 255, 255, 0.24);
+    backdrop-filter: blur(10.9px);
     cursor: pointer;
     transition: background-color 0.3s ease;
 }

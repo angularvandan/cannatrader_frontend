@@ -4,8 +4,13 @@
     background-position: center;
 }
 
+i {
+    z-index: 1;
+}
+
 .p-inputtext {
     background: #FFFFFF3D;
+    backdrop-filter: blur(10.9px);
     border: 0;
     color: #fafafa;
 }

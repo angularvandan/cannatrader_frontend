@@ -1,0 +1,41 @@
+.container {
+    background-color: rgba(245, 245, 245, 1);
+}
+
+.p-card-body {
+    text-align: center;
+}
+
+.p-card-footer {
+    text-align: center;
+}
+
+.p-grid {
+    margin: 0;
+}
+
+.p-col-12 {
+    padding: 0.5em;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Remove default blue color on focus and active */
+select:focus,
+select option:focus,
+select option:active {
+    outline: none;
+    background-color: #f0f0f0;
+    /* Light gray color */
+    color: #000000;
+    /* Black text color */
+}
+
+/* This will remove the blue highlight color in Webkit browsers */
+select::-ms-expand {
+    display: none;
+}
