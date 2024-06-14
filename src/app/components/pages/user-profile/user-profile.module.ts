@@ -5,6 +5,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { SubscribedDetailsComponent } from './subscribed-details/subscribed-details.component';
 import { RecentProductListingComponent } from './recent-product-listing/recent-product-listing.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { UserProfileRoutingModule } from './user-profile.routing.module';
 
 
 
@@ -17,7 +18,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     EditProductComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    UserProfileRoutingModule
   ]
 })
 export class UserProfileModule { }
