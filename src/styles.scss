@@ -32,6 +32,17 @@ app-home{
             background-color: $bg-primary;
         }
     }
+    .filters{
+        .filter{
+            .p-dropdown{
+                width:100%;
+                background: #ECFEE6;
+                .p-dropdown-panel{
+                    background: #ECFEE6;
+                }
+            }
+        }
+    }
 }
 
 .p-inputtext {

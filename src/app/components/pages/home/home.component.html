@@ -1,4 +1,4 @@
-<div class="w-full h-[480px] sm:h-[580px] relative overflow-hidden ">
+<div class="w-full h-[860px] sm:h-[620px] relative overflow-hidden ">
     <div class="absolute">
         <img class="w-screen h-[400px] sm:h-[550px]" src="../../../../assets/home/background.png" alt="">
     </div>
@@ -20,50 +20,57 @@
         <img src="../../../../assets/home/right_background.png" alt="">
     </div>
 
-    <div class="filter-container w-[400px] sm:w-[600px] absolute z-10 ml-4 mt-4 sm:ml-32 md:ml-36 lg:ml-52 sm:mt-16">
+    <div class="filter-container w-11/12 sm:w-[600px] absolute z-10 ml-[4%] mt-4 sm:ml-32 md:ml-36 lg:ml-52 sm:mt-16">
         <div>
             <div class="filter-heading font-bold text-[38px] leading-[40px] mb-4 sm:text-[48px] sm:leading-[60px]">
                 Discover your ideal <span class="text-secondary">cannabis strain.</span>
             </div>
-            <div class="filters bg-secondary w-[350px] sm:w-[450px] ">
-                <div class="filter flex flex-row flex-wrap gap-2">
-                    <div class="basis-1/2">
+            <div class="filters bg-secondary w-full sm:w-[470px] p-3 rounded-lg">
+                <div class="filter flex flex-col sm:flex-row  flex-wrap gap-2">
+                    <div class="flex-1 mb-3 grow sm:w-[49%]">
 
                         <div class="card flex flex-col justify-content-center">
                             <label class="text-5 leading-6 font-medium">Strain Type</label>
                             <p-dropdown [options]="cities" [(ngModel)]="selectedCity"placeholder="Select Strain Type" optionLabel="name"></p-dropdown>
                         </div>
                     </div>
-                    <div class="basis-1/2">
+                    <div class="flex-1 mb-3 grow sm:w-[49%]">
                         <div class="card flex flex-col justify-content-center">
                             <label class="text-5 leading-6 font-medium">Categories</label>
                             <p-dropdown [options]="cities" [(ngModel)]="selectedCity"placeholder="Select Categories" optionLabel="name"></p-dropdown>
                         </div>
                     </div>
-                    <div class="basis-1/2">
+                    <div class="flex-1 mb-3 grow sm:w-[49%]">
                         <div class="card flex flex-col justify-content-center">
                             <label class="text-5 leading-6 font-medium">THC Range</label>
                             <p-dropdown [options]="cities" [(ngModel)]="selectedCity"placeholder="Select THC Range" optionLabel="name"></p-dropdown>
                         </div>
                     </div>
-                    <div class="basis-1/2">
+                    <div class="flex-1 mb-3 grow sm:w-[49%]">
                         <div class="card flex flex-col justify-content-center">
                             <label class="text-5 leading-6 font-medium">Sub-Categories</label>
                             <p-dropdown [options]="cities" [(ngModel)]="selectedCity"placeholder="Select Sub-Categories" optionLabel="name"></p-dropdown>
                         </div>
                     </div>
-                    <div class="basis-1/2">
+                    <div class="flex-1 mb-3 grow sm:w-[49%]">
                         <div class="card flex flex-col justify-content-center">
                             <label class="text-5 leading-6 font-medium">Search Within</label>
                             <p-dropdown [options]="cities" [(ngModel)]="selectedCity"placeholder="Select (km)" optionLabel="name"></p-dropdown>
                         </div>
                     </div>
-                    <div class="basis-1/2">
+                    <div class="flex-1 mb-3 grow sm:w-[49%]">
                         <div class="card flex flex-col justify-content-center">
                             <label class="text-5 leading-6 font-medium">Location</label>
                             <p-dropdown [options]="cities" [(ngModel)]="selectedCity"placeholder="Select Your location" optionLabel="name"></p-dropdown>
                         </div>
                     </div>
+                    <div class="flex-1 mb-3 grow sm:w-[49%]">
+                        <div class="card flex flex-row justify-content-center">  
+                            <img class="w-6 "src="../../../../assets/home/mage_location-fill.png" alt="logo">
+                            <label class="text-5 leading-6 font-medium pl-2"><a href="">Use My Location</a></label>
+                        </div>
+                    </div>
+                        
                 </div>
                 <div class="filter-button">
                     <div class="button">
