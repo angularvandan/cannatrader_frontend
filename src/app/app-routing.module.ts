@@ -7,7 +7,10 @@ const routes: Routes = [
   },
   {
     path: 'products', loadChildren: () => import('./components/pages/product/product.module').then(m => m.ProductModule)
-  }
+  },
+  {
+    path: 'profile', loadChildren: () => import('./components/pages/user-profile/user-profile.module').then(m => m.UserProfileModule)
+  },
 ];
 
 @NgModule({
