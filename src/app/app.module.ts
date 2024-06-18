@@ -15,7 +15,7 @@ import { AddProductComponent } from './components/pages/add-product/add-product.
 import { HeaderComponent } from './components/partials/header/header.component';
 import { FooterComponent } from './components/partials/footer/footer.component';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from 'primeng/api';
+import { SharedModule } from '../app/shared/shared/shared.module';
 
 @NgModule({
   declarations: [

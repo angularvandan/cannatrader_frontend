@@ -1,1 +1,221 @@
-<p>add-product works!</p>
+<div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay">
+    <div class="max-w-3xl w-full pb-8">
+        <div class="bg-gray-100 py-8">
+            <nav class="flex mb-8" aria-label="Breadcrumb">
+                <div class="w-full">
+                    <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                        <i class="pi pi-arrow-left text-primary"></i>
+                    </div>
+                </div>
+                <a
+                    class="m text-primary w-full text-center inline-flex text-[22px] font-medium text-gray-800 hover:underline md:ml-2">
+                    Add Product Details
+                </a>
+                <a class="w-full"></a>
+            </nav>
+        </div>
+        <form (ngSubmit)="onSubmit()">
+            <div class="flex flex-col lg:flex-row gap-8 justify-between">
+                <div class="grid grid-cols-1 w-full gap-4">
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm text-gray-700 font-custom">Lot ID *</label>
+                        <input required pInputText id="lotId" type="text" placeholder="Enter Lot ID"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.lotId" name="lotId">
+                    </div>
+                    <div class="mb-4">
+                        <label for="thcRange" class="block text-sm text-gray-700 font-custom">THC Range *</label>
+                        <p-dropdown [required]="true" class="w-full" [options]="strainTypes"
+                            [(ngModel)]="productDetails.selectedStrainType" optionLabel="name"
+                            name="thcRange"></p-dropdown>
+                    </div>
+                    <div class="mb-4">
+                        <label for="lineage" class="block text-sm text-gray-700 font-custom">Lineage *</label>
+                        <input required pInputText id="lineage" type="text" placeholder="Enter Lineage"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.lineage" name="lineage">
+                    </div>
+                    <div class="mb-4">
+                        <label for="thcTotal" class="block text-sm text-gray-700 font-custom">THC Total (%) *</label>
+                        <input required pInputText id="thcTotal" type="number" step="0.01" placeholder="Enter THC Total"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.thcTotal" name="thcTotal">
+                    </div>
+                    <div class="mb-4">
+                        <label for="terpene" class="block text-sm text-gray-700 font-custom">Terpene (%) *</label>
+                        <input required pInputText id="terpene" type="number" step="0.01" placeholder="Enter Terpene"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.terpene" name="terpene">
+                    </div>
+                    <div class="mb-4">
+                        <label for="grade" class="block text-sm text-gray-700 font-custom">Grade (like A-AAAA) *</label>
+                        <input required pInputText id="grade" type="text" placeholder="Enter Grade"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.grade" name="grade">
+                    </div>
+                    <div class="mb-4">
+                        <label for="growMedia" class="block text-sm text-gray-700 font-custom">Grow Media *</label>
+                        <input required pInputText id="growMedia" type="text" placeholder="Enter Grow Media"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.growMedia" name="growMedia">
+                    </div>
+                    <div class="mb-4">
+                        <label for="irradiated" class="block text-sm text-gray-700 font-custom">Irradiated *</label>
+                        <div class="flex flex-wrap gap-3">
+                            <div class="flex align-items-center">
+                                <p-radioButton name="irradiated" ngDefaultControl value="Yes"
+                                    [(ngModel)]="productDetails.irradiated" inputId="irradiatedYes"></p-radioButton>
+                                <label for="irradiatedYes" class="ml-2">Yes</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <p-radioButton name="irradiated" value="No" [(ngModel)]="productDetails.irradiated"
+                                    inputId="irradiatedNo"></p-radioButton>
+                                <label for="irradiatedNo" class="ml-2">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="budSize" class="block text-sm text-gray-700 font-custom">Bud Size *</label>
+                        <input required pInputText id="budSize" type="text" placeholder="Enter Bud Size"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.budSize" name="budSize">
+                    </div>
+                    <div class="mb-4">
+                        <label for="tops" class="block text-sm text-gray-700 font-custom">Tops (%) *</label>
+                        <input required pInputText id="tops" type="number" step="0.01" placeholder="Enter Tops"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.tops" name="tops">
+                    </div>
+                    <div class="mb-4">
+                        <label for="mids" class="block text-sm text-gray-700 font-custom">Mids (%) *</label>
+                        <input required pInputText id="mids" type="number" step="0.01" placeholder="Enter Mids"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.mids" name="mids">
+                    </div>
+                    <div class="mb-4">
+                        <label for="lowers" class="block text-sm text-gray-700 font-custom">Lowers (%) *</label>
+                        <input required pInputText id="lowers" type="number" step="0.01" placeholder="Enter Lowers"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.lowers" name="lowers">
+                    </div>
+                    <div class="mb-4">
+                        <label for="location" class="block text-sm text-gray-700 font-custom">Location *</label>
+                        <input required pInputText id="location" type="text" placeholder="Enter Location"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.location" name="location">
+                    </div>
+                    <div class="mb-4">
+                        <label for="license" class="block text-sm text-gray-700 font-custom">Health Canada Site License
+                            (Optional)</label>
+                        <div class="file-upload-container">
+                            <label for="file-upload-license" class="file-upload-label">
+                                <i class="pi pi-cloud-upload"></i>
+                                <p>Upload document</p>
+                                <input type="file" id="file-upload-license" (change)="onFileSelected($event, 'license')"
+                                    accept=".pdf" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-4" *ngIf="selectedLicenseFile">
+                        <div class="file-details relative text-slate cursor-pointer">
+                            <div class="file-name flex">
+                                <i class="pi pi-file place-content-center font-medium mr-4 text-2xl"></i>
+                                <p class="text-black">{{ selectedLicenseFile.name }}</p>
+                            </div>
+                            <i class="pi pi-times top-2 right-2 absolute font-medium"
+                                (click)="removeFile('license',selectedLicenseFile)"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 w-full gap-4">
+                    <div class="mb-4">
+                        <label for="strainTypes" class="block text-sm text-gray-700 font-custom">Strain Types *</label>
+                        <p-dropdown [required]="true" class="w-full" [options]="strainTypes"
+                            [(ngModel)]="productDetails.selectedStrainType" optionLabel="name"
+                            name="strainTypes"></p-dropdown>
+                    </div>
+                    <div class="mb-4">
+                        <label for="categories" class="block text-sm text-gray-700 font-custom">Categories *</label>
+                        <p-dropdown [required]="true" class="w-full" [options]="categories"
+                            [(ngModel)]="productDetails.selectedCategory" optionLabel="name"
+                            name="categories"></p-dropdown>
+                    </div>
+                    <div class="mb-4">
+                        <label for="subCategory" class="block text-sm text-gray-700 font-custom">Sub-Category *</label>
+                        <p-dropdown [required]="true" class="w-full" [options]="subCategories"
+                            [(ngModel)]="productDetails.selectedSubCategory" optionLabel="name"
+                            name="subCategory"></p-dropdown>
+                    </div>
+                    <div class="mb-4">
+                        <label for="harvestDate" class="block text-sm text-gray-700 font-custom">Harvest Date *</label>
+                        <p-calendar [showIcon]="true" [(ngModel)]="date"></p-calendar>
+                    </div>
+                    <div class="mb-4">
+                        <label for="cbd" class="block text-sm text-gray-700 font-custom">CBD (%) *</label>
+                        <input required pInputText id="cbd" type="number" step="0.01" placeholder="Enter CBD"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.cbd" name="cbd">
+                    </div>
+                    <div class="mb-4">
+                        <label for="available" class="block text-sm text-gray-700 font-custom">Available (grams)
+                            *</label>
+                        <input required pInputText id="available" type="number" placeholder="Enter Available Grams"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.available" name="available">
+                    </div>
+                    <div class="mb-4">
+                        <label for="growthMethod" class="block text-sm text-gray-700 font-custom">Growth Method
+                            *</label>
+                        <input required pInputText id="growthMethod" type="text" placeholder="Enter Growth Method"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.growthMethod" name="growthMethod">
+                    </div>
+                    <div class="mb-4">
+                        <label for="dryMethod" class="block text-sm text-gray-700 font-custom">Dry Method *</label>
+                        <input required pInputText id="dryMethod" type="text" placeholder="Enter Dry Method"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.dryMethod" name="dryMethod">
+                    </div>
+                    <div class="mb-4">
+                        <label for="trimMethod" class="block text-sm text-gray-700 font-custom">Trim Method *</label>
+                        <input required pInputText id="trimMethod" type="text" placeholder="Enter Trim Method"
+                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.trimMethod" name="trimMethod">
+                    </div>
+                    <div class="mb-4">
+                        <label for="description" class="block text-sm text-gray-700 font-custom">Description *</label>
+                        <textarea required pInputTextarea id="description" rows="3" placeholder="Enter Description"
+                            class="mt-1 block bg-[#F5F5F5] w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            [(ngModel)]="productDetails.description" name="description"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="productImages" class="block text-sm text-gray-700 font-custom">Upload Product
+                            Images</label>
+                        <div class="file-upload-container">
+                            <label for="file-upload-images" class="file-upload-label">
+                                <i class="pi pi-cloud-upload"></i>
+                                <p>Upload Images</p>
+                                <input type="file" id="file-upload-images" (change)="onFileSelected($event, 'images')"
+                                    accept="image/*" multiple />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-4" *ngIf="selectedImageFiles && selectedImageFiles.length > 0">
+                        <div *ngFor="let file of selectedImageFiles"
+                            class="file-details relative text-slate cursor-pointer">
+                            <div class="file-name flex">
+                                <i class="pi pi-file place-content-center font-medium mr-4 text-2xl"></i>
+                                <p class="text-black">{{ file.name }}</p>
+                            </div>
+                            <i class="pi pi-times top-2 right-2 absolute font-medium"
+                                (click)="removeFile('images', file)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit"
+                class="w-full bg-yellow-500 hover:bg-yellow-600 font-bold py-2 px-4 rounded-md font-custom bg-secondary text-primary-btn">Add
+                Product</button>
+        </form>
+    </div>
+</div>

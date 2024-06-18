@@ -5,7 +5,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { FileUploadModule } from 'primeng/fileupload'
 import { HttpClientModule } from '@angular/common/http';
-
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
+import { RadioButtonModule } from 'primeng/radiobutton';
 @NgModule({
   declarations: [],
   imports: [
@@ -14,7 +16,10 @@ import { HttpClientModule } from '@angular/common/http';
     InputTextModule,
     PasswordModule,
     FileUploadModule,
-    HttpClientModule
+    HttpClientModule,
+    DropdownModule,
+    CalendarModule,
+    RadioButtonModule
   ],
   exports: [
     CommonModule,
@@ -22,7 +27,9 @@ import { HttpClientModule } from '@angular/common/http';
     InputTextModule,
     PasswordModule,
     FileUploadModule,
-    HttpClientModule
+    HttpClientModule,
+    CalendarModule,
+    RadioButtonModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
