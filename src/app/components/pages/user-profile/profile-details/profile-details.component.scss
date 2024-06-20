@@ -1,0 +1,109 @@
+$text-primary: #3A5C41;
+$bg-primary: #3A5C41;
+
+.profile-details-container {
+    .profile-details {
+        .user-action {
+            .buttons {
+                button {
+                    padding: 10px 0px;
+                }
+            }
+        }
+
+        .recent-listing {
+            @media(min-width:1024px){
+                .overflow-x-auto {
+                    overflow-x: unset;
+                }
+            }
+            
+            table {
+                thead {
+
+                    tr{
+                        th {
+                            color: $text-primary!important;
+                        }
+                    }
+
+                }
+
+                tbody {
+
+                    tr {
+                        height: 80px;
+
+                        td {
+                            text-align: center;
+                            color: $text-primary;
+
+                            span {
+                                display: flex;
+                                justify-content: center;
+                                height: 30px;
+
+                                svg {
+                                    border-radius: 50%;
+                                    background-color: #D1DACF;
+
+                                }
+                            }
+                        }
+
+                        .img-container {
+                            display: flex;
+                            justify-content: center;
+
+                            img {
+                                border-radius: 12px;
+                                width:70px;
+                            }
+                        }
+
+                    }
+                    tr:not(:first-child) {
+                        border-bottom: 1px solid #DCDCDC;
+                    }
+                }
+            }
+        }
+
+        .recent-subscribed {
+            table {
+                tbody {
+
+                    tr {
+                        height: 80px;
+
+                        td {
+                            text-align: start;
+                            color: $text-primary;
+
+                            span {
+                                display: flex;
+                                justify-content: center;
+                                height: 40px;
+                            }
+                        }
+
+                        .img-container {
+                            display: flex;
+                            justify-content: center;
+
+                            img {
+                                border-radius: 100%;
+                                width:65px;
+                                height:65px;
+                            }
+                        }
+
+                    }
+                    tr:not(:first-child) {
+                        border-bottom: 1px solid #DCDCDC;
+                    }
+                }
+            }
+        }
+    }
+}

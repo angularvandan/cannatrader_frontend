@@ -7,6 +7,9 @@ import { RecentProductListingComponent } from './recent-product-listing/recent-p
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { UserProfileRoutingModule } from './user-profile.routing.module';
 
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+
 
 
 @NgModule({
@@ -19,7 +22,9 @@ import { UserProfileRoutingModule } from './user-profile.routing.module';
   ],
   imports: [
     CommonModule,
-    UserProfileRoutingModule
+    UserProfileRoutingModule,
+    ButtonModule,
+    TableModule
   ]
 })
 export class UserProfileModule { }
