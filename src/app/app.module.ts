@@ -15,7 +15,9 @@ import { AddProductComponent } from './components/pages/add-product/add-product.
 import { HeaderComponent } from './components/partials/header/header.component';
 import { FooterComponent } from './components/partials/footer/footer.component';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from 'primeng/api';
+import { SharedModule } from '../app/shared/shared/shared.module';
+import { PrivacyPolicyComponent } from './components/pages/privacy-policy/privacy-policy.component';
+import { TermsConditionsComponent } from './components/pages/terms-conditions/terms-conditions.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { SharedModule } from 'primeng/api';
     AddProductComponent,
     HeaderComponent,
     FooterComponent,
+    PrivacyPolicyComponent,
+    TermsConditionsComponent,
   ],
   imports: [
     BrowserModule,

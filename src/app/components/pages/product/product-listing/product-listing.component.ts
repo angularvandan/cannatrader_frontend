@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/shared/models/product';
 
-interface Product {
-  name: string;
-  image: string;
-  strainType: string;
-  thcRange: string;
-  location: string;
-  posted: string;
-}
 
 @Component({
   selector: 'app-product-listing',
@@ -23,9 +16,82 @@ export class ProductListingComponent implements OnInit {
       strainType: 'Indica',
       thcRange: '22%',
       location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago'
-    }
-    // Add more products as needed
+      posted: 'a Day ago',
+      flavour: 'chocolate'
+    },
+    {
+      name: 'Canopy Growth',
+      image: '../../../../assets/product/product.png',
+      strainType: 'Indica',
+      thcRange: '22%',
+      location: 'Ontario (5 Kilometer)',
+      posted: 'a Day ago',
+      flavour: 'chocolate'
+    },
+    {
+      name: 'Canopy Growth',
+      image: '../../../../assets/product/product.png',
+      strainType: 'Indica',
+      thcRange: '22%',
+      location: 'Ontario (5 Kilometer)',
+      posted: 'a Day ago',
+      flavour: 'chocolate'
+    },
+    {
+      name: 'Canopy Growth',
+      image: '../../../../assets/product/product.png',
+      strainType: 'Indica',
+      thcRange: '22%',
+      location: 'Ontario (5 Kilometer)',
+      posted: 'a Day ago',
+      flavour: 'chocolate'
+    },
+    {
+      name: 'Canopy Growth',
+      image: '../../../../assets/product/product.png',
+      strainType: 'Indica',
+      thcRange: '22%',
+      location: 'Ontario (5 Kilometer)',
+      posted: 'a Day ago',
+      flavour: 'chocolate'
+    },
+    {
+      name: 'Canopy Growth',
+      image: '../../../../assets/product/product.png',
+      strainType: 'Indica',
+      thcRange: '22%',
+      location: 'Ontario (5 Kilometer)',
+      posted: 'a Day ago',
+      flavour: 'chocolate'
+    },
+    {
+      name: 'Canopy Growth',
+      image: '../../../../assets/product/product.png',
+      strainType: 'Indica',
+      thcRange: '22%',
+      location: 'Ontario (5 Kilometer)',
+      posted: 'a Day ago',
+      flavour: 'chocolate'
+    },
+    {
+      name: 'Canopy Growth',
+      image: '../../../../assets/product/product.png',
+      strainType: 'Indica',
+      thcRange: '22%',
+      location: 'Ontario (5 Kilometer)',
+      posted: 'a Day ago',
+      flavour: 'chocolate'
+    },
+    {
+      name: 'Canopy Growth',
+      image: '../../../../assets/product/product.png',
+      strainType: 'Indica',
+      thcRange: '22%',
+      location: 'Ontario (5 Kilometer)',
+      posted: 'a Day ago',
+      flavour: 'chocolate'
+    },
+
   ];
 
   categories: any[] = [{ label: 'Indica', value: 'Indica' }];
@@ -54,4 +120,6 @@ export class ProductListingComponent implements OnInit {
     this.sortOrder = order;
     this.showSortOptions = false;
   }
+
+
 }

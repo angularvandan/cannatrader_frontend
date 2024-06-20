@@ -6,10 +6,7 @@ import { SubscribedDetailsComponent } from './subscribed-details/subscribed-deta
 import { RecentProductListingComponent } from './recent-product-listing/recent-product-listing.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { UserProfileRoutingModule } from './user-profile.routing.module';
-
-import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
-
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 
 @NgModule({
@@ -23,8 +20,7 @@ import { TableModule } from 'primeng/table';
   imports: [
     CommonModule,
     UserProfileRoutingModule,
-    ButtonModule,
-    TableModule
+    SharedModule
   ]
 })
 export class UserProfileModule { }

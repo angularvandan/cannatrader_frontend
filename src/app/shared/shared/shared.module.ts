@@ -5,6 +5,14 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { FileUploadModule } from 'primeng/fileupload'
 import { HttpClientModule } from '@angular/common/http';
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SidebarModule } from 'primeng/sidebar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { RatingModule } from 'primeng/rating';
 
 @NgModule({
   declarations: [],
@@ -14,7 +22,16 @@ import { HttpClientModule } from '@angular/common/http';
     InputTextModule,
     PasswordModule,
     FileUploadModule,
-    HttpClientModule
+    HttpClientModule,
+    DropdownModule,
+    CalendarModule,
+    RadioButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SidebarModule,
+    ConfirmDialogModule,
+    ToastModule,
+    RatingModule
   ],
   exports: [
     CommonModule,
@@ -22,7 +39,16 @@ import { HttpClientModule } from '@angular/common/http';
     InputTextModule,
     PasswordModule,
     FileUploadModule,
-    HttpClientModule
+    HttpClientModule,
+    CalendarModule,
+    RadioButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownModule,
+    SidebarModule,
+    ConfirmDialogModule,
+    ToastModule,
+    RatingModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

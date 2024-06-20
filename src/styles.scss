@@ -13,7 +13,8 @@
 
 @import "primeicons/primeicons.css";
 
-$bg-primary:#3A5C41;
+$bg-primary: #3A5C41;
+$secondary: #FFE175;
 
 button {
     font-family: 'Quicksand';
@@ -22,26 +23,159 @@ button {
 h2 {
     font-size: 40px;
 }
-app-home{
-    .filter-button{
-        .p-button{
-            width:100%!important;
+
+app-home {
+    .filter-button {
+        .p-button {
+            width: 100% !important;
             background-color: $bg-primary;
         }
-        .p-button:hover{
+
+        .p-button:hover {
             background-color: $bg-primary;
         }
     }
-    .filters{
-        .filter{
-            .p-dropdown{
-                width:100%;
+
+    .filters {
+        .filter {
+            .p-dropdown {
+                width: 100%;
                 background: #ECFEE6;
-                .p-dropdown-panel{
+                border: none;
+
+                .p-dropdown-panel {
                     background: #ECFEE6;
                 }
             }
         }
+    }
+}
+
+app-add-product {
+
+    .p-dropdown,
+    .p-inputtext {
+        width: 100%;
+        background-color: #F5F5F5;
+        border: 0px;
+    }
+
+    .p-dropdown:not(.p-disabled).p-focus {
+        border-color: $secondary;
+        box-shadow: none;
+    }
+
+    p-calendar {
+        display: block;
+        width: 100%;
+
+        .p-calendar {
+            width: 100%;
+        }
+
+        .p-button {
+            border: none;
+            background-color: #F5F5F5;
+            color: black;
+        }
+
+        .p-button:hover {
+            background: #F5F5F5;
+        }
+    }
+}
+
+app-edit-product {
+
+    .p-dropdown,
+    .p-inputtext {
+        width: 100%;
+        background-color: #F5F5F5;
+        border: 0px;
+    }
+
+    .p-dropdown:not(.p-disabled).p-focus {
+        border-color: $secondary;
+        box-shadow: none;
+    }
+
+    p-calendar {
+        display: block;
+        width: 100%;
+
+        .p-calendar {
+            width: 100%;
+        }
+
+        .p-button {
+            border: none;
+            background-color: #F5F5F5;
+            color: black;
+        }
+
+        .p-button:hover {
+            background: #F5F5F5;
+        }
+    }
+
+    .p-dialog-header {
+        justify-content: center;
+    }
+
+    .pi {
+        font-size: 1.5rem;
+    }
+
+    .p-dialog .p-dialog-footer {
+        display: flex;
+
+        button {
+            width: 100%;
+        }
+    }
+
+    .p-dialog.p-confirm-dialog .p-confirm-dialog-message {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+}
+
+app-header {
+    .p-sidebar-icon {
+        display: none;
+    }
+
+    .p-sidebar-header {
+        justify-content: space-between;
+    }
+}
+
+app-product-details {
+    .twitter-icon {
+        .pi {
+            font-size: 20px;
+            font-weight: 600;
+        }
+    }
+
+    .p-rating .p-rating-icon.p-icon,
+    .p-rating .p-rating-icon.p-rating-icon-active,
+    .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {
+        color: #EDAB00;
+    }
+
+    .rate-product {
+        .p-rating .p-rating-icon.p-icon {
+            width: 3.143rem;
+            height: 2.143rem;
+            color: #EDAB00;
+        }
+    }
+
+    .p-rating .p-rating-icon.p-rating-icon-active {
+        color: #EDAB00;
     }
 }
 

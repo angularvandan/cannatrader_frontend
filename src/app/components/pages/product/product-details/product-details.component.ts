@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent {
+  value: number = 4;
+  rate: number = 0
 
+  btn = true
+
+  toggleBtn() {
+    this.btn = !this.btn
+  }
 }
