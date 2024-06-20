@@ -61,19 +61,47 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onFileSelected(event: any, type: any): void {
-    if (type === 'license') {
-      this.selectedLicenseFile = event.target.files[0];
-    } else if (type === 'images') {
-      this.selectedImageFiles = Array.from(event.target.files);
+  imagePreviews: string[] = [];
+
+  onImageSelected(event: any, type: string) {
+    const files = event.target.files;
+    if (type === 'images') {
+      if (files.length + this.selectedImageFiles.length > 5) {
+        alert('You can only upload a maximum of 5 images.');
+        return;
+      }
+
+      for (let file of files) {
+        this.selectedImageFiles.push(file);
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.imagePreviews.push(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
     }
   }
 
-  removeFile(type: any, file: File): void {
-    if (type === 'license') {
-      this.selectedLicenseFile = null;
-    } else if (type === 'images') {
-      this.selectedImageFiles = this.selectedImageFiles.filter(f => f !== file);
+  selectedFile: File | null = null;
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
+  }
+
+  removeFile(): void {
+    this.selectedFile = null;
+  }
+
+  removeImg(type: string, file: File) {
+    if (type === 'images') {
+      const index = this.selectedImageFiles.indexOf(file);
+      if (index > -1) {
+        this.selectedImageFiles.splice(index, 1);
+        this.imagePreviews.splice(index, 1);
+      }
     }
   }
 

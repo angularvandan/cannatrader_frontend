@@ -1,1 +1,265 @@
-<p>product-details works!</p>
+<!-- app.component.html -->
+<div class="max-w-screen-xl mx-auto p-4">
+    <!-- Breadcrumb -->
+    <nav class="flex mb-8" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 ">
+            <li class="inline-flex items-center">
+                <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                    <i class="pi pi-arrow-left text-primary"></i>
+                </div>
+                <a class="m text-primary inline-flex text-[22px] font-medium hover:underline md:ml-2">
+                    Home / Productslisting / Canopygrowth
+                </a>
+            </li>
+        </ol>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="flex flex-col lg:flex-row mt-4">
+        <!-- Image Section -->
+        <div class="flex-1">
+            <img src="../../../../../assets/product/prod-detail.jpg" alt="Product Image"
+                class="w-full max-h-[650px] h-full rounded-lg">
+            <div class="grid grid-cols-6 lg:grid-cols-4 justify-between space-x-2 mt-8">
+                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 1" class="w-32 h-28 rounded-lg">
+                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 2" class="w-32 h-28 rounded-lg">
+                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 3" class="w-32 h-28 rounded-lg">
+                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 3" class="w-32 h-28 rounded-lg">
+            </div>
+            <div class="p-6 rounded-lg w-full mx-auto mt-24">
+                <h2 class="text-[32px] font-semibold mb-4">Contact Details</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <div class="rounded-full p-2">
+                            <div class="twitter-icon w-12 h-12 bg-nav-bg rounded-full flex justify-center items-center">
+                                <i class="pi pi-map-marker text-primary"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-inner text-[20px]">Location</div>
+                            <div class="text-lg font-semibold text-[24px]">Ontario, Toronto (5 miles)</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="rounded-full p-2">
+                            <div class="twitter-icon w-12 h-12 bg-nav-bg rounded-full flex justify-center items-center">
+                                <i class="pi pi-phone text-primary"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-inner text-[20px]">Phone</div>
+                            <div class="text-lg font-semibold text-[20px] text-primary">xxxx-xxxx</div>
+                            <a href="#" class="text-inner hover:underline">Click here to enquire</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="rounded-full p-2">
+                            <div class="twitter-icon w-12 h-12 bg-nav-bg rounded-full flex justify-center items-center">
+                                <i class="pi pi-envelope text-primary"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-inner text-[20px]">E-Mail</div>
+                            <div class="text-lg font-semibold text-[24px]">cannabisshop@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="rounded-full p-2">
+                            <div class="twitter-icon w-12 h-12 bg-nav-bg rounded-full flex justify-center items-center">
+                                <i class="pi pi-calendar text-primary"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-inner text-[20px]">Uploaded Date</div>
+                            <div class="text-lg font-semibold text-[24px]">01-01-2024</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="rounded-full p-2">
+                            <img src="../../../../../assets/product/profile.jpg" alt="Owner Image"
+                                class="h-12 w-12 object-cover rounded-full">
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-gray-600">Owner</div>
+                            <div class="text-lg font-semibold">Shepardson</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Details Section -->
+        <div class="flex-1 lg:ml-8 mt-4 lg:mt-0 pt-4">
+            <div class="flex pb-2 items-center justify-between">
+                <h1 class="text-5xl font-bold">Canopy Growth</h1>
+                <div class="flex gap-4">
+                    <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                        <svg width="36" height="20" viewBox="0 0 39 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M36.8437 10.0731V22.4613C36.8442 23.4375 36.6523 24.4043 36.2789 25.3064C35.9056 26.2085 35.3582 27.0282 34.668 27.7186C33.9777 28.409 33.1582 28.9566 32.2562 29.3302C31.3542 29.7037 30.3874 29.8959 29.4112 29.8956H24.4555L20.368 33.9831C20.2566 34.1012 20.1222 34.1953 19.973 34.2596C19.8239 34.3239 19.6633 34.3571 19.5009 34.3571C19.3385 34.3571 19.1778 34.3239 19.0287 34.2596C18.8796 34.1953 18.7451 34.1012 18.6337 33.9831L14.5462 29.8956H9.5868C8.61059 29.8956 7.64394 29.7033 6.74207 29.3297C5.84019 28.956 5.02076 28.4084 4.33056 27.718C3.64037 27.0277 3.09293 26.2081 2.71952 25.3061C2.34612 24.4042 2.15405 23.4375 2.1543 22.4613V10.0731C2.1543 8.1019 2.93736 6.21142 4.33123 4.81755C5.72509 3.42369 7.61558 2.64063 9.5868 2.64062H29.4093C31.3805 2.64063 33.271 3.42369 34.6649 4.81755C36.0587 6.21142 36.8437 8.1019 36.8437 10.0731Z"
+                                stroke="#3A5C41" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                        <i class="pi pi-heart text-primary"></i>
+                    </div>
+                </div>
+            </div>
+            <p class="text-2xl text-help pb-4">From Canopygrowth</p>
+            <div class="flex items-center pb-4">
+                <div class="flex gap-2 items-center">
+                    <p-rating [(ngModel)]="value" [readonly]="true" [cancel]="false"></p-rating>
+                </div>
+                <span class="ml-2 text-gray-600">Ratings (1.5k)</span>
+            </div>
+
+            <button (click)="toggleBtn()" *ngIf="btn"
+                class="mt-2 w-2/4 bg-primary text-xl font-semibold text-secondary py-2 px-4 rounded">Subscribed
+                ✓</button>
+
+            <button (click)="toggleBtn()" *ngIf="!btn"
+                class="mt-2 w-2/4 bg-secondary text-xl font-semibold text-primary py-2 px-4 rounded">Subscribe</button>
+
+            <h2 class="text-xl font-semibold pt-10">Description</h2>
+
+            <p class="mt-4 text-help">
+                Our premium cannabis dried flower is cultivated from top-quality strains, ensuring a potent and aromatic
+                experience Our premium cannabis dried flower is cultivated from top-quality strains, ensuring Read
+                more...
+            </p>
+
+            <div class="w-full h-[0.5px] border border-primary mt-10 mb-8"></div>
+
+            <div class="mt-4">
+                <h2 class="text-xl font-semibold">Product Details</h2>
+                <div class="grid grid-cols-1 gap-4 mt-4 text-gray-700">
+                    <div class="font-semibold w-full border-b leading-10">
+                        Strain Type: <span class=" text-help float-right">
+                            Indica
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        Lineage:
+                        <span class=" text-help float-right">
+                            Indica
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        Harvest Date:
+                        <span class=" text-help float-right ">
+                            01-01-2024
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        THC Total:
+                        <span class=" text-help float-right ">
+                            22%
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        CBD:
+                        <span class=" text-help float-right ">
+                            3%
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        Terpene:
+                        <span class=" text-help float-right ">
+                            2.50%
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        Available:
+                        <span class=" text-help float-right ">
+                            500 grams
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        Grade:
+                        <span class=" text-help float-right ">
+                            A-AAAA
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        Growth Method:
+                        <span class=" text-help float-right ">
+                            Green House
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        Grow Media:
+                        <span class=" text-help float-right ">
+                            Hydroponic
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        Dry Method:
+                        <span class=" text-help float-right ">
+                            Hang
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        Trim Method:
+                        <span class=" text-help float-right ">
+                            Machine-hand
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        Irradiated:
+                        <span class=" text-help float-right ">
+                            Yes
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        Bud Size:
+                        <span class=" text-help float-right ">
+                            Medium
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        Tops:
+                        <span class=" text-help float-right ">
+                            20%
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10 border-b">
+                        Mids:
+                        <span class=" text-help float-right ">
+                            50%
+                        </span>
+                    </div>
+                    <div class="font-semibold w-full leading-10">
+                        Lowers:
+                        <span class=" text-help float-right ">
+                            30%
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Details -->
+    <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <!-- Rate Product -->
+        <div class="p-4 border-t-[2px] border-primary">
+            <h2 class="text-xl font-semibold">Rate this product</h2>
+            <p class="mt-2 text-help">Tell others what you think</p>
+            <div class="flex mt-2 text-yellow-500 rate-product">
+                <p-rating [(ngModel)]="rate" [cancel]="false"></p-rating>
+            </div>
+        </div>
+
+        <!-- COA Report -->
+        <div class="p-4 border-t-[2px] border-primary">
+            <div class="bg-gray-100 p-4 flex items-center justify-between">
+                <span class="text-gray-700">
+                    <i class="pi pi-file place-content-center font-medium mr-4 text-2xl"></i>
+                    COA Report.pdf
+                </span>
+                <a href="assets/COA_Report.pdf" class="py-2 px-4 rounded">View
+                    Report</a>
+            </div>
+        </div>
+    </div>
+</div>

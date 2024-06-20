@@ -8,6 +8,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { CardModule } from 'primeng/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductRoutingModule } from './product.routing.module';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 @NgModule({
   declarations: [
     ProductListingComponent,
@@ -21,7 +22,8 @@ import { ProductRoutingModule } from './product.routing.module';
     MultiSelectModule,
     CardModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class ProductModule { }

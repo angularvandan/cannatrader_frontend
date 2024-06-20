@@ -6,6 +6,7 @@ import { SubscribedDetailsComponent } from './subscribed-details/subscribed-deta
 import { RecentProductListingComponent } from './recent-product-listing/recent-product-listing.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { UserProfileRoutingModule } from './user-profile.routing.module';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 
 
@@ -19,7 +20,8 @@ import { UserProfileRoutingModule } from './user-profile.routing.module';
   ],
   imports: [
     CommonModule,
-    UserProfileRoutingModule
+    UserProfileRoutingModule,
+    SharedModule
   ]
 })
 export class UserProfileModule { }

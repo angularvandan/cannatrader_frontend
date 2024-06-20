@@ -8,7 +8,7 @@
             <div class="flex flex-col lg:flex-row gap-8 justify-between ">
                 <div class="grid grid-cols-1 w-full gap-4">
                     <div class="mb-4">
-                        <label for="name" class="block text-sm text-gray-700 font-custom">Name</label>
+                        <label for="name" class="block text-sm  font-custom">Name</label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-user text-[#fafafa]"></i>
                             <input pInputText id="name" type="text" placeholder="Enter your name"
@@ -16,7 +16,7 @@
                         </span>
                     </div>
                     <div class="mb-4">
-                        <label for="phone" class="block text-sm text-gray-700 font-custom">Phone Number</label>
+                        <label for="phone" class="block text-sm  font-custom">Phone Number</label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-phone text-[#fafafa]"></i>
                             <input pInputText id="phone" type="text" placeholder="Enter your phone number"
@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="password" class="block text-sm text-gray-700 font-custom">Password</label>
+                        <label for="password" class="block text-sm  font-custom">Password</label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-lock text-[#fafafa]"></i>
                             <input pPassword id="password" type="password" [feedback]="false"
@@ -34,7 +34,7 @@
                         </span>
                     </div>
                     <div class="mb-4 ">
-                        <label for="confirmPassword" class="block text-sm text-gray-700 font-custom">Confirm
+                        <label for="confirmPassword" class="block text-sm  font-custom">Confirm
                             Password</label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-lock text-[#fafafa]"></i>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="grid grid-cols-1 w-full gap-4">
                     <div class="mb-4 h-max">
-                        <label for="email" class="block text-sm text-gray-700 font-custom">Email</label>
+                        <label for="email" class="block text-sm  font-custom">Email</label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-envelope text-[#fafafa]"></i>
                             <input pInputText id="email" type="email" placeholder="Enter your email address"
@@ -54,7 +54,7 @@
                         </span>
                     </div>
                     <div class="mb-4">
-                        <label for="license" class="block text-sm text-gray-700 font-custom">Health Canada Site License
+                        <label for="license" class="block text-sm  font-custom">Health Canada Site License
                             (Optional)</label>
                         <div class="file-upload-container">
                             <label for="file-upload" class="file-upload-label">
@@ -80,15 +80,16 @@
             </div>
             <div class="mb-6 ">
                 <input type="checkbox" id="agree" name="agree" class="mr-2 accent-secondary">
-                <label for="agree" class="text-sm text-gray-700 font-custom">By continuing, you agree to cannatrader <a
-                        href="#" class="text-blue-600 hover:underline text-secondary">Terms of Use</a> and <a href="#"
-                        class="text-blue-600 hover:underline text-secondary">Privacy Policy</a>.</label>
+                <label for="agree" class="text-sm  font-custom">By continuing, you agree to cannatrader <a href="#"
+                        class="hover:underline text-secondary" routerLink="/terms-conditions">Terms of Use</a> and <a
+                        href="#" class="hover:underline text-secondary" routerLink="/privacy-policy">Privacy
+                        Policy</a>.</label>
             </div>
             <button routerLink="/home" type="submit"
-                class="w-full bg-yellow-500 hover:bg-yellow-600 font-bold py-2 px-4 rounded-md font-custom bg-secondary text-primary-btn">Sign
+                class="w-full font-bold py-2 px-4 rounded-md font-custom bg-secondary text-primary-btn">Sign
                 Up</button>
         </form>
         <p class="mt-4 text-center font-custom text-[#fafafa]">Already have an account? <a routerLink="login"
-                class="text-blue-600 hover:underline text-secondary">Sign In</a></p>
+                class="hover:underline text-secondary">Sign In</a></p>
     </div>
 </div>

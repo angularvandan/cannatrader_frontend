@@ -8,6 +8,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SidebarModule } from 'primeng/sidebar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { RatingModule } from 'primeng/rating';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -19,7 +25,13 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     HttpClientModule,
     DropdownModule,
     CalendarModule,
-    RadioButtonModule
+    RadioButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SidebarModule,
+    ConfirmDialogModule,
+    ToastModule,
+    RatingModule
   ],
   exports: [
     CommonModule,
@@ -29,7 +41,14 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     FileUploadModule,
     HttpClientModule,
     CalendarModule,
-    RadioButtonModule
+    RadioButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownModule,
+    SidebarModule,
+    ConfirmDialogModule,
+    ToastModule,
+    RatingModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

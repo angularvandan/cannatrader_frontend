@@ -83,3 +83,9 @@ i {
 .file-details button:hover {
     color: #c0392b;
 }
+
+.file-details img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}

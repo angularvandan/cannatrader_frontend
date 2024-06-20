@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
 
   isMenuOpen = false;
-
+  sidebarVisible: boolean = false;
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
