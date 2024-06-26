@@ -9,7 +9,6 @@ import { UserProfileRoutingModule } from './user-profile.routing.module';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 
-
 @NgModule({
   declarations: [
     ProfileDetailsComponent,

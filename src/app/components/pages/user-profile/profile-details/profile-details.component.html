@@ -1,1 +1,282 @@
-<p>profile-details works!</p>
+<div class="profile-details-container w-full ">
+    <div class="heading">
+        <h1 class="text-center font-semibold text-[32px] leading-10 text-primary mt-8">Profile</h1>
+    </div>
+    <div class="profile-details lg:p-16 sm:p-4 ">
+        <div class="grid lg:grid-col-5 lg:grid-flow-col grid-flow-row gap-4">
+            <div class="h-[410px] lg:h-[410px] sm:h-[250px] shadow-md lg:p-8 sm:p-6 p-4 lg:col-span-1">
+                <div class="block sm:hidden lg:block">
+                    <div class="flex flex-col items-center">
+                        <div class="user-img w-36 h-36 flex overflow-hidded mb-4">
+                            <img class="rounded-full" src="../../../../../assets/profile/user.jpg" alt="">
+                        </div>
+                        <div class="user-details flex flex-col items-center mb-8">
+                            <div class="name font-bold text-xl">Vandan</div>
+                            <div class="email">vandan@gmail.com</div>
+                        </div>
+                        <div class="user-action flex ">
+                            <div class="buttons flex flex-col items-center w-36">
+                                <div class="edit-profile w-full">
+                                    <button
+                                        class="w-full flex justify-center mb-3 bg-primary text-secondary rounded-lg">Edit
+                                        Profile
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="mr-2" height="24px"
+                                            viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                            <path
+                                                d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="logout w-full ">
+                                    <button class="w-full flex justify-center bg-secondary text-primary rounded-lg">Log
+                                        Out
+                                        <svg width="21" height="25" class="mr-2" viewBox="0 0 30 31" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M15 4.5625C15.2486 4.5625 15.4871 4.66127 15.6629 4.83709C15.8387 5.0129 15.9375 5.25136 15.9375 5.5C15.9375 5.74864 15.8387 5.9871 15.6629 6.16291C15.4871 6.33873 15.2486 6.4375 15 6.4375C12.5965 6.4375 10.2914 7.3923 8.59185 9.09185C6.8923 10.7914 5.9375 13.0965 5.9375 15.5C5.9375 17.9035 6.8923 20.2086 8.59185 21.9082C10.2914 23.6077 12.5965 24.5625 15 24.5625C15.2486 24.5625 15.4871 24.6613 15.6629 24.8371C15.8387 25.0129 15.9375 25.2514 15.9375 25.5C15.9375 25.7486 15.8387 25.9871 15.6629 26.1629C15.4871 26.3387 15.2486 26.4375 15 26.4375C12.0992 26.4375 9.3172 25.2852 7.26602 23.234C5.21484 21.1828 4.0625 18.4008 4.0625 15.5C4.0625 12.5992 5.21484 9.8172 7.26602 7.76602C9.3172 5.71484 12.0992 4.5625 15 4.5625Z"
+                                                fill="#3A5C41" />
+                                            <path
+                                                d="M20.5875 12.4126C20.4219 12.2348 20.3317 11.9998 20.336 11.7569C20.3403 11.514 20.4387 11.2823 20.6105 11.1105C20.7822 10.9388 21.014 10.8404 21.2568 10.8361C21.4997 10.8318 21.7348 10.922 21.9125 11.0876L25.6625 14.8376C25.8381 15.0133 25.9367 15.2516 25.9367 15.5001C25.9367 15.7485 25.8381 15.9868 25.6625 16.1626L21.9125 19.9126C21.8267 20.0047 21.7232 20.0785 21.6082 20.1298C21.4932 20.181 21.369 20.2086 21.2432 20.2108C21.1173 20.213 20.9922 20.1899 20.8755 20.1427C20.7588 20.0956 20.6527 20.0254 20.5637 19.9363C20.4747 19.8473 20.4045 19.7413 20.3573 19.6245C20.3102 19.5078 20.287 19.3828 20.2893 19.2569C20.2915 19.131 20.319 19.0069 20.3703 18.8919C20.4215 18.7769 20.4954 18.6734 20.5875 18.5876L22.7375 16.4376H12.5C12.2514 16.4376 12.0129 16.3388 11.8371 16.163C11.6613 15.9871 11.5625 15.7487 11.5625 15.5001C11.5625 15.2514 11.6613 15.013 11.8371 14.8371C12.0129 14.6613 12.2514 14.5626 12.5 14.5626H22.7375L20.5875 12.4126Z"
+                                                fill="#3A5C41" />
+                                        </svg>
+    
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden sm:block lg:hidden">
+                    <div class="flex  items-center flex-row justify-center">
+                        <div class="user-img flex overflow-hidded flex-col mr-12 justify-center items-center">
+                            
+                            <img class="rounded-full w-32 h-32" src="../../../../../assets/profile/user.jpg" alt="">
+                            <div class="user-details flex flex-col items-center ">
+                                <div class="name font-bold text-xl">Vandan</div>
+                                <div class="email">vandan@gmail.com</div>
+                            </div>
+                        </div>
+                        <div class="user-action flex ">
+                            <div class="buttons flex flex-col items-center w-36">
+                                <div class="edit-profile w-full">
+                                    <button
+                                        class="w-full flex justify-center mb-3 bg-primary text-secondary rounded-lg">Edit
+                                        Profile
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="mr-2" height="24px"
+                                            viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                            <path
+                                                d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="logout w-full ">
+                                    <button class="w-full flex justify-center bg-secondary text-primary rounded-lg">Log
+                                        Out
+                                        <svg width="21" height="25" class="mr-2" viewBox="0 0 30 31" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M15 4.5625C15.2486 4.5625 15.4871 4.66127 15.6629 4.83709C15.8387 5.0129 15.9375 5.25136 15.9375 5.5C15.9375 5.74864 15.8387 5.9871 15.6629 6.16291C15.4871 6.33873 15.2486 6.4375 15 6.4375C12.5965 6.4375 10.2914 7.3923 8.59185 9.09185C6.8923 10.7914 5.9375 13.0965 5.9375 15.5C5.9375 17.9035 6.8923 20.2086 8.59185 21.9082C10.2914 23.6077 12.5965 24.5625 15 24.5625C15.2486 24.5625 15.4871 24.6613 15.6629 24.8371C15.8387 25.0129 15.9375 25.2514 15.9375 25.5C15.9375 25.7486 15.8387 25.9871 15.6629 26.1629C15.4871 26.3387 15.2486 26.4375 15 26.4375C12.0992 26.4375 9.3172 25.2852 7.26602 23.234C5.21484 21.1828 4.0625 18.4008 4.0625 15.5C4.0625 12.5992 5.21484 9.8172 7.26602 7.76602C9.3172 5.71484 12.0992 4.5625 15 4.5625Z"
+                                                fill="#3A5C41" />
+                                            <path
+                                                d="M20.5875 12.4126C20.4219 12.2348 20.3317 11.9998 20.336 11.7569C20.3403 11.514 20.4387 11.2823 20.6105 11.1105C20.7822 10.9388 21.014 10.8404 21.2568 10.8361C21.4997 10.8318 21.7348 10.922 21.9125 11.0876L25.6625 14.8376C25.8381 15.0133 25.9367 15.2516 25.9367 15.5001C25.9367 15.7485 25.8381 15.9868 25.6625 16.1626L21.9125 19.9126C21.8267 20.0047 21.7232 20.0785 21.6082 20.1298C21.4932 20.181 21.369 20.2086 21.2432 20.2108C21.1173 20.213 20.9922 20.1899 20.8755 20.1427C20.7588 20.0956 20.6527 20.0254 20.5637 19.9363C20.4747 19.8473 20.4045 19.7413 20.3573 19.6245C20.3102 19.5078 20.287 19.3828 20.2893 19.2569C20.2915 19.131 20.319 19.0069 20.3703 18.8919C20.4215 18.7769 20.4954 18.6734 20.5875 18.5876L22.7375 16.4376H12.5C12.2514 16.4376 12.0129 16.3388 11.8371 16.163C11.6613 15.9871 11.5625 15.7487 11.5625 15.5001C11.5625 15.2514 11.6613 15.013 11.8371 14.8371C12.0129 14.6613 12.2514 14.5626 12.5 14.5626H22.7375L20.5875 12.4126Z"
+                                                fill="#3A5C41" />
+                                        </svg>
+    
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="h-[900px] lg:col-span-4 shadow-md p-8">
+                <div class="flex flex-col">
+                    <div class="recent-listing mb-5">
+                        <div class="table-heading mb-2">
+                            <h1 class=" text-primary text-start text-2xl leading-8 font-semibold">Recent Listings</h1>
+                        </div>
+                        <div class="w-[86vw] lg:w-[64vw]">
+                            <div class="overflow-x-auto ">
+                                <table class=" min-w-[580px] w-full border-spacing-x-4">
+                                    <caption class="caption-bottom ">
+                                        <div class="pt-6">
+                                            <a class="font-lg leading-4 font-semibold bg-[#D1DACF] text-primary rounded-lg py-1 px-2">View
+                                                More</a>
+                                        </div>
+                                    </caption>
+                                    <thead class="h-[50px]">
+                                        <tr class="border-y">
+                                            <th>Product Image</th>
+                                            <th>Product Name</th>
+                                            <th>Posted On</th>
+                                            <th>Strain Type</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="height:10px"></tr>
+                                        <tr>
+                                            <td class="">
+                                                <a href="" class="img-container">
+                                                    <img src="../../../../../assets/profile/product_listing.png"
+                                                    class="shadow-4" />
+                                                </a>
+                                            </td>
+                                            <td>Mobile</td>
+                                            <td>01-01-2024</td>
+                                            <td>Indica</td>
+                                            <td>
+                                                <span>
+                                                    <svg width="36" height="35" viewBox="0 0 36 35" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M9.88624 25.2222H11.5864L23.2492 14.0896L21.549 12.4667L9.88624 23.5993V25.2222ZM7.5 27.5V22.6597L23.2492 7.65486C23.4878 7.44606 23.7515 7.28472 24.0402 7.17083C24.329 7.05694 24.632 7 24.9494 7C25.2676 7 25.5758 7.05694 25.8741 7.17083C26.1723 7.28472 26.4308 7.45556 26.6496 7.68333L28.2901 9.27778C28.5288 9.48657 28.703 9.73333 28.8127 10.0181C28.9225 10.3028 28.977 10.5875 28.9762 10.8722C28.9762 11.1759 28.9217 11.4656 28.8127 11.7412C28.7037 12.0168 28.5295 12.2681 28.2901 12.4951L12.5708 27.5H7.5ZM22.3842 13.2924L21.549 12.4667L23.2492 14.0896L22.3842 13.2924Z"
+                                                            fill="#3A5C41" />
+                                                    </svg>
+        
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">
+                                                <a href="" class="img-container">
+                                                    <img src="../../../../../assets/profile/product_listing.png"
+                                                    class="shadow-4" />
+                                                </a>
+                                            </td>
+                                            <td>Mobile</td>
+                                            <td>01-01-2024</td>
+                                            <td>Indica</td>
+                                            <td>
+                                                <span>
+                                                    <svg width="36" height="35" viewBox="0 0 36 35" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M9.88624 25.2222H11.5864L23.2492 14.0896L21.549 12.4667L9.88624 23.5993V25.2222ZM7.5 27.5V22.6597L23.2492 7.65486C23.4878 7.44606 23.7515 7.28472 24.0402 7.17083C24.329 7.05694 24.632 7 24.9494 7C25.2676 7 25.5758 7.05694 25.8741 7.17083C26.1723 7.28472 26.4308 7.45556 26.6496 7.68333L28.2901 9.27778C28.5288 9.48657 28.703 9.73333 28.8127 10.0181C28.9225 10.3028 28.977 10.5875 28.9762 10.8722C28.9762 11.1759 28.9217 11.4656 28.8127 11.7412C28.7037 12.0168 28.5295 12.2681 28.2901 12.4951L12.5708 27.5H7.5ZM22.3842 13.2924L21.549 12.4667L23.2492 14.0896L22.3842 13.2924Z"
+                                                            fill="#3A5C41" />
+                                                    </svg>
+        
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">
+                                                <a href="" class="img-container">
+                                                    <img src="../../../../../assets/profile/product_listing.png"
+                                                    class="shadow-4" />
+                                                </a>
+                                            </td>
+                                            <td>Mobile</td>
+                                            <td>01-01-2024</td>
+                                            <td>Indica</td>
+                                            <td>
+                                                <span>
+                                                    <svg width="36" height="35" viewBox="0 0 36 35" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M9.88624 25.2222H11.5864L23.2492 14.0896L21.549 12.4667L9.88624 23.5993V25.2222ZM7.5 27.5V22.6597L23.2492 7.65486C23.4878 7.44606 23.7515 7.28472 24.0402 7.17083C24.329 7.05694 24.632 7 24.9494 7C25.2676 7 25.5758 7.05694 25.8741 7.17083C26.1723 7.28472 26.4308 7.45556 26.6496 7.68333L28.2901 9.27778C28.5288 9.48657 28.703 9.73333 28.8127 10.0181C28.9225 10.3028 28.977 10.5875 28.9762 10.8722C28.9762 11.1759 28.9217 11.4656 28.8127 11.7412C28.7037 12.0168 28.5295 12.2681 28.2901 12.4951L12.5708 27.5H7.5ZM22.3842 13.2924L21.549 12.4667L23.2492 14.0896L22.3842 13.2924Z"
+                                                            fill="#3A5C41" />
+                                                    </svg>
+        
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">
+                                                <a href="" class="img-container">
+                                                    <img src="../../../../../assets/profile/product_listing.png"
+                                                    class="shadow-4" />
+                                                </a>
+                                            </td>
+                                            <td>Mobile</td>
+                                            <td>01-01-2024</td>
+                                            <td>Indica</td>
+                                            <td>
+                                                <span>
+                                                    <svg width="36" height="35" viewBox="0 0 36 35" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M9.88624 25.2222H11.5864L23.2492 14.0896L21.549 12.4667L9.88624 23.5993V25.2222ZM7.5 27.5V22.6597L23.2492 7.65486C23.4878 7.44606 23.7515 7.28472 24.0402 7.17083C24.329 7.05694 24.632 7 24.9494 7C25.2676 7 25.5758 7.05694 25.8741 7.17083C26.1723 7.28472 26.4308 7.45556 26.6496 7.68333L28.2901 9.27778C28.5288 9.48657 28.703 9.73333 28.8127 10.0181C28.9225 10.3028 28.977 10.5875 28.9762 10.8722C28.9762 11.1759 28.9217 11.4656 28.8127 11.7412C28.7037 12.0168 28.5295 12.2681 28.2901 12.4951L12.5708 27.5H7.5ZM22.3842 13.2924L21.549 12.4667L23.2492 14.0896L22.3842 13.2924Z"
+                                                            fill="#3A5C41" />
+                                                    </svg>
+        
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recent-subscribed">
+                        <div class="table-heading mb-2 border-b "style="padding-bottom:10px;">
+                            <h1 class=" text-primary text-start text-2xl leading-8 font-semibold">Recent Listings</h1>
+                        </div>
+                        <table class="w-full border-spacing-x-4">
+                            <caption class="caption-bottom ">
+                                <div class="pt-6">
+                                    <a class="font-lg leading-4 font-semibold bg-[#D1DACF] text-primary rounded-lg py-1 px-2">View
+                                        More</a>
+                                </div>
+                            </caption>
+                            <tbody>
+                                <tr style="height:10px"></tr>
+                                <tr>
+                                    <td class="">
+                                        <a href="" class="img-container">
+                                            <img src="../../../../../assets/profile/user.jpg"
+                                            class="shadow-4" />
+                                        </a>
+                                    </td>
+                                    <td>Vandan Sharma</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <span class="subscribed-btn-container">
+                                            <button class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="">
+                                        <a href="" class="img-container">
+                                            <img src="../../../../../assets/profile/user.jpg"
+                                            class="shadow-4" />
+                                        </a>
+                                    </td>
+                                    <td>Vandan Sharma</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <span class="subscribed-btn-container">
+                                            <button class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="">
+                                        <a href="" class="img-container">
+                                            <img src="../../../../../assets/profile/user.jpg"
+                                            class="shadow-4" />
+                                        </a>
+                                    </td>
+                                    <td>Vandan Sharma</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <span class="subscribed-btn-container">
+                                            <button class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
