@@ -4,6 +4,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { AddProductComponent } from './components/pages/add-product/add-product.component';
 import { TermsConditionsComponent } from './components/pages/terms-conditions/terms-conditions.component';
 import { PrivacyPolicyComponent } from './components/pages/privacy-policy/privacy-policy.component';
+import { ContactComponent } from './components/pages/contact/contact.component';
 
 const routes: Routes = [
   {
@@ -13,10 +14,13 @@ const routes: Routes = [
     path: 'products', loadChildren: () => import('./components/pages/product/product.module').then(m => m.ProductModule)
   },
   {
+    path: 'profile', loadChildren: () => import('./components/pages/user-profile/user-profile.module').then(m => m.UserProfileModule)
+  },
+  {
     path: 'addProduct', component: AddProductComponent
   },
   {
-    path: 'profile', loadChildren: () => import('./components/pages/user-profile/user-profile.module').then(m => m.UserProfileModule)
+    path: 'contact-us', component: ContactComponent
   },
   {
     path: 'home', component: HomeComponent
@@ -30,7 +34,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'top'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -8,7 +8,7 @@
                 <a routerLink="/home" class="hover:color-primary text-xl font-medium">Home</a>
                 <a routerLink="/addProduct" class="hover:color-secondary  text-xl font-medium">Add Products</a>
                 <a routerLink="/wishlist" class="hover:text-secondary  text-xl font-medium">Wish List</a>
-                <a href="#" class="hover:text-secondary  text-xl font-medium">Contact</a>
+                <a routerLink="/contact-us" class="hover:text-secondary  text-xl font-medium">Contact</a>
             </nav>
         </div>
         <div class="flex items-center space-x-6 md:space-x-9 icon-profile-container">
@@ -35,7 +35,7 @@
                         stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </a>
-            <a routerLink="/"(click)="toggleMenu()" class="hover:text-secondary  text-xl font-medium">Sign in</a>
+            <a routerLink="/login" (click)="toggleMenu()" class="hover:text-secondary  text-xl font-medium">Sign in</a>
 
             <a routerLink="/profile/profile-details"(click)="toggleMenu()">
                 <svg class="w-8 h-8 text-white user-profile" fill="currentColor" viewBox="0 0 24 24"
@@ -67,7 +67,8 @@
                 Products</a>
             <a routerLink="/wishlist" class="hover:text-secondary  text-xl font-medium"
                 (click)="toggleMenu()">Wishlist</a>
-            <a href="#" class="hover:text-secondary  text-xl font-medium" (click)="toggleMenu()">Contact</a>
+            <a routerLink="/contact-us" class="hover:text-secondary  text-xl font-medium"
+                (click)="toggleMenu()">Contact</a>
         </nav>
     </div>
 </div>
@@ -80,7 +81,7 @@
                 class="twitter-icon w-10 h-10 bg-nav-bg cursor-pointer rounded-full flex justify-center items-center">
                 <i class="pi pi-arrow-left text-primary"></i>
             </div>
-            <p class="m text-primary inline-flex text-[22px] font-medium text-gray-800 hover:underline md:ml-2">
+            <p class="m text-primary inline-flex text-[22px] font-medium hover:underline md:ml-2">
                 Notification
             </p>
             <p></p>

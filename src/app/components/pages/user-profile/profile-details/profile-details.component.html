@@ -39,7 +39,7 @@
                                                 d="M20.5875 12.4126C20.4219 12.2348 20.3317 11.9998 20.336 11.7569C20.3403 11.514 20.4387 11.2823 20.6105 11.1105C20.7822 10.9388 21.014 10.8404 21.2568 10.8361C21.4997 10.8318 21.7348 10.922 21.9125 11.0876L25.6625 14.8376C25.8381 15.0133 25.9367 15.2516 25.9367 15.5001C25.9367 15.7485 25.8381 15.9868 25.6625 16.1626L21.9125 19.9126C21.8267 20.0047 21.7232 20.0785 21.6082 20.1298C21.4932 20.181 21.369 20.2086 21.2432 20.2108C21.1173 20.213 20.9922 20.1899 20.8755 20.1427C20.7588 20.0956 20.6527 20.0254 20.5637 19.9363C20.4747 19.8473 20.4045 19.7413 20.3573 19.6245C20.3102 19.5078 20.287 19.3828 20.2893 19.2569C20.2915 19.131 20.319 19.0069 20.3703 18.8919C20.4215 18.7769 20.4954 18.6734 20.5875 18.5876L22.7375 16.4376H12.5C12.2514 16.4376 12.0129 16.3388 11.8371 16.163C11.6613 15.9871 11.5625 15.7487 11.5625 15.5001C11.5625 15.2514 11.6613 15.013 11.8371 14.8371C12.0129 14.6613 12.2514 14.5626 12.5 14.5626H22.7375L20.5875 12.4126Z"
                                                 fill="#3A5C41" />
                                         </svg>
-    
+
                                     </button>
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                 <div class="hidden sm:block lg:hidden">
                     <div class="flex  items-center flex-row justify-center">
                         <div class="user-img flex overflow-hidded flex-col mr-12 justify-center items-center">
-                            
+
                             <img class="rounded-full w-32 h-32" src="../../../../../assets/profile/user.jpg" alt="">
                             <div class="user-details flex flex-col items-center ">
                                 <div class="name font-bold text-xl">Vandan</div>
@@ -81,7 +81,7 @@
                                                 d="M20.5875 12.4126C20.4219 12.2348 20.3317 11.9998 20.336 11.7569C20.3403 11.514 20.4387 11.2823 20.6105 11.1105C20.7822 10.9388 21.014 10.8404 21.2568 10.8361C21.4997 10.8318 21.7348 10.922 21.9125 11.0876L25.6625 14.8376C25.8381 15.0133 25.9367 15.2516 25.9367 15.5001C25.9367 15.7485 25.8381 15.9868 25.6625 16.1626L21.9125 19.9126C21.8267 20.0047 21.7232 20.0785 21.6082 20.1298C21.4932 20.181 21.369 20.2086 21.2432 20.2108C21.1173 20.213 20.9922 20.1899 20.8755 20.1427C20.7588 20.0956 20.6527 20.0254 20.5637 19.9363C20.4747 19.8473 20.4045 19.7413 20.3573 19.6245C20.3102 19.5078 20.287 19.3828 20.2893 19.2569C20.2915 19.131 20.319 19.0069 20.3703 18.8919C20.4215 18.7769 20.4954 18.6734 20.5875 18.5876L22.7375 16.4376H12.5C12.2514 16.4376 12.0129 16.3388 11.8371 16.163C11.6613 15.9871 11.5625 15.7487 11.5625 15.5001C11.5625 15.2514 11.6613 15.013 11.8371 14.8371C12.0129 14.6613 12.2514 14.5626 12.5 14.5626H22.7375L20.5875 12.4126Z"
                                                 fill="#3A5C41" />
                                         </svg>
-    
+
                                     </button>
                                 </div>
                             </div>
@@ -99,8 +99,9 @@
                             <div class="overflow-x-auto ">
                                 <table class=" min-w-[580px] w-full border-spacing-x-4">
                                     <caption class="caption-bottom ">
-                                        <div class="pt-6">
-                                            <a routerLink="../recentlisting" class="font-lg leading-4 font-semibold bg-[#D1DACF] text-primary rounded-lg py-1 px-2">View
+                                        <div class="pt-6" routerLink="/profile/recentlisting">
+                                            <a
+                                                class="font-lg leading-4 cursor-pointer font-semibold bg-[#D1DACF] text-primary rounded-lg py-1 px-2">View
                                                 More</a>
                                         </div>
                                     </caption>
@@ -119,14 +120,14 @@
                                             <td class="">
                                                 <a  class="img-container">
                                                     <img src="../../../../../assets/profile/product_listing.png"
-                                                    class="shadow-4" />
+                                                        class="shadow-4" />
                                                 </a>
                                             </td>
                                             <td>Mobile</td>
                                             <td>01-01-2024</td>
                                             <td>Indica</td>
-                                            <td class="action">
-                                                <a routerLink="../editProduct">
+                                            <td>
+                                                <span>
                                                     <svg width="36" height="35" viewBox="0 0 36 35" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -134,14 +135,14 @@
                                                             fill="#3A5C41" />
                                                     </svg>
         
-                                                </a>
+                                                </span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="">
                                                 <a href="" class="img-container">
                                                     <img src="../../../../../assets/profile/product_listing.png"
-                                                    class="shadow-4" />
+                                                        class="shadow-4" />
                                                 </a>
                                             </td>
                                             <td>Mobile</td>
@@ -156,14 +157,14 @@
                                                             fill="#3A5C41" />
                                                     </svg>
         
-                                                </a>
+                                                </span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="">
                                                 <a href="" class="img-container">
                                                     <img src="../../../../../assets/profile/product_listing.png"
-                                                    class="shadow-4" />
+                                                        class="shadow-4" />
                                                 </a>
                                             </td>
                                             <td>Mobile</td>
@@ -178,14 +179,14 @@
                                                             fill="#3A5C41" />
                                                     </svg>
         
-                                                </a>
+                                                </span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="">
                                                 <a href="" class="img-container">
                                                     <img src="../../../../../assets/profile/product_listing.png"
-                                                    class="shadow-4" />
+                                                        class="shadow-4" />
                                                 </a>
                                             </td>
                                             <td>Mobile</td>
@@ -200,7 +201,7 @@
                                                             fill="#3A5C41" />
                                                     </svg>
         
-                                                </a>
+                                                </span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -210,12 +211,12 @@
                     </div>
                     <div class="recent-subscribed">
                         <div class="table-heading mb-2 border-b "style="padding-bottom:10px;">
-                            <h1 class=" text-primary text-start text-2xl leading-8 font-semibold">Subscribed</h1>
+                            <h1 class=" text-primary text-start text-2xl leading-8 font-semibold">Recent Listings</h1>
                         </div>
                         <table class="w-full border-spacing-x-4">
                             <caption class="caption-bottom ">
                                 <div class="pt-6">
-                                    <a routerLink="../subscribed-listing" class="font-lg leading-4 font-semibold bg-[#D1DACF] text-primary rounded-lg py-1 px-2">View
+                                    <a class="font-lg leading-4 font-semibold bg-[#D1DACF] text-primary rounded-lg py-1 px-2">View
                                         More</a>
                                 </div>
                             </caption>
@@ -224,8 +225,7 @@
                                 <tr>
                                     <td class="">
                                         <a href="" class="img-container">
-                                            <img src="../../../../../assets/profile/user.jpg"
-                                            class="shadow-4" />
+                                            <img src="../../../../../assets/profile/user.jpg" class="shadow-4" />
                                         </a>
                                     </td>
                                     <td>Vandan Sharma</td>
@@ -233,7 +233,8 @@
                                     <td></td>
                                     <td>
                                         <span class="subscribed-btn-container">
-                                            <button class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
+                                            <button
+                                                class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
 
                                         </span>
                                     </td>
@@ -241,8 +242,7 @@
                                 <tr>
                                     <td class="">
                                         <a href="" class="img-container">
-                                            <img src="../../../../../assets/profile/user.jpg"
-                                            class="shadow-4" />
+                                            <img src="../../../../../assets/profile/user.jpg" class="shadow-4" />
                                         </a>
                                     </td>
                                     <td>Vandan Sharma</td>
@@ -250,7 +250,8 @@
                                     <td></td>
                                     <td>
                                         <span class="subscribed-btn-container">
-                                            <button class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
+                                            <button
+                                                class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
 
                                         </span>
                                     </td>
@@ -258,8 +259,7 @@
                                 <tr>
                                     <td class="">
                                         <a href="" class="img-container">
-                                            <img src="../../../../../assets/profile/user.jpg"
-                                            class="shadow-4" />
+                                            <img src="../../../../../assets/profile/user.jpg" class="shadow-4" />
                                         </a>
                                     </td>
                                     <td>Vandan Sharma</td>
@@ -267,7 +267,8 @@
                                     <td></td>
                                     <td>
                                         <span class="subscribed-btn-container">
-                                            <button class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
+                                            <button
+                                                class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
 
                                         </span>
                                     </td>

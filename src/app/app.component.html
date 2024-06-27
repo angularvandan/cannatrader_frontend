@@ -1,4 +1,3 @@
-
-<app-header></app-header>
+<app-header *ngIf="route.url != '/' && route.url != '/login' && route.url != '/reset-password'"></app-header>
 <router-outlet></router-outlet>
-<app-footer></app-footer>
+<app-footer *ngIf="route.url != '/' && route.url != '/login' && route.url != '/reset-password'"></app-footer>

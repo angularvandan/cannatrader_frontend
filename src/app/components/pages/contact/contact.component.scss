@@ -1,0 +1,33 @@
+.p-inputtext {
+    background-color: #F5F5F5;
+    border: 0px;
+}
+
+/* Align flags with the input field */
+.custom .ngx-tel-input-container {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    /* Adjust as needed to align the input correctly */
+}
+
+/* Ensure the flag dropdown and input are inline */
+.custom .ngx-tel-input {
+    width: 100%;
+    /* Adjust the width as needed */
+    display: flex;
+    align-items: center;
+}
+
+/* Adjust the flag icon size if needed */
+.custom .iti__flag-container {
+    margin-right: 0.5rem;
+    /* Adjust spacing as needed */
+}
+
+/* Additional styling for better visual appearance */
+.custom input {
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    border: 1px solid #ddd;
+}
