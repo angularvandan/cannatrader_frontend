@@ -37,8 +37,9 @@ $bg-primary: #3A5C41;
                         td {
                             text-align: center;
                             color: $text-primary;
-
-                            span {
+                        }
+                        .action{
+                            a {
                                 display: flex;
                                 justify-content: center;
                                 height: 30px;

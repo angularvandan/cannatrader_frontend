@@ -1,0 +1,41 @@
+$text-primary: #3A5C41;
+$bg-primary: #3A5C41;
+
+.subscribed-listing-container{
+    .recent-subscribed {
+        table {
+            tbody {
+    
+                tr {
+                    height: 80px;
+    
+                    td {
+                        text-align: start;
+                        color: $text-primary;
+    
+                        span {
+                            display: flex;
+                            justify-content: end;
+                            height: 40px;
+                        }
+                    }
+    
+                    .img-container {
+                        display: flex;
+                        justify-content: start;
+    
+                        img {
+                            border-radius: 100%;
+                            width:65px;
+                            height:65px;
+                        }
+                    }
+    
+                }
+                tr:not(:first-child) {
+                    border-bottom: 1px solid #DCDCDC;
+                }
+            }
+        }
+    }
+}

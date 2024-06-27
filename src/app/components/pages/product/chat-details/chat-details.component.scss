@@ -1,0 +1,117 @@
+$text-secondary: #FFE175;
+$bg-primary: #3A5C41;
+
+.chats-container {
+    .chats {
+        .users-container {
+            .users-listing {
+                .users-search {
+                    .p-inputtext {
+                        background: #ededed;
+                        border-radius: 28px;
+                    }
+
+                    .p-inputtext::placeholder {
+                        color: #737373;
+                        font-weight: 400;
+                        font-size: 15px;
+                        line-height: 20px;
+
+                    }
+
+                    .p-inputtext:enabled:focus,
+                    .p-inputtext:enabled:hover {
+                        border: none;
+                        outline: none;
+                        box-shadow: none;
+                    }
+
+                    .p-input-icon-left>i:first-of-type {
+                        color: #737373;
+                        font-weight: 400;
+                        font-size: 1.3rem;
+                    }
+                }
+
+                .users-chats {
+                    .users-image-container {
+                        .user-image {
+                            position: relative;
+                            width: 50px;
+                            height: 50px;
+
+                            img {
+                                height: 50px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .user-chats-container {
+            .user-chats {
+                .user-chats-heading {
+
+                    .img-container {
+                        position: relative;
+                        width: 50px;
+                        height: 50px;
+
+                        img {
+                            height: 50px;
+                        }
+                    }
+                }
+                .user-chats-messages{
+                    .user-chats{
+                        .left-message{
+                            span{
+                                border-bottom-right-radius: 5px;
+                                border-bottom-left-radius:5px;
+                                border-top-right-radius: 5px;
+                            }
+                        }
+                        .right-message{
+                            span{
+                                border-bottom-right-radius: 5px;
+                                border-bottom-left-radius:5px;
+                                border-top-left-radius: 5px;
+                            }
+                        }
+                    }
+                }
+                .user-chat-send-btn {
+                    .user-send {
+                        .p-inputtext{
+                            background: $bg-primary;
+                            border-radius: 10px;
+                            color: $text-secondary;
+                        }
+                        .p-input-icon-left > .p-inputtext{
+                            padding-left: 3.5rem;
+                        }
+                        .p-inputtext::placeholder{
+                            color: $text-secondary;
+                            font-weight: 500;
+                            font-size: 20px;
+                            line-height: 20px;
+    
+                        }
+                        .p-inputtext:enabled:focus ,.p-inputtext:enabled:hover{
+                            border: none;
+                            outline: none;
+                            box-shadow: none;
+                        }
+                        .p-input-icon-left>i{
+                            top:36%;
+                        }
+                        .p-input-icon-right{
+                            right:10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

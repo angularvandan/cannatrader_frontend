@@ -1,0 +1,35 @@
+$text-primary: #3A5C41;
+$bg-primary: #3A5C41;
+
+.profile-edit-container {
+    .profile-details {
+        label{
+            color: #737373;
+        }
+        .p-inputtext {
+            background-color: #F5F5F5;
+            border: 0px;
+        }
+        .p-inputtext:enabled:focus {
+            outline: 0 none;
+            outline-offset: 0;
+            box-shadow: none;
+            border-color: none;
+        }
+        .file-upload-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            text-align: center;
+            background: #F5F5F5;
+            -webkit-backdrop-filter: blur(10.9px);
+            backdrop-filter: blur(10.9px);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    }
+}
