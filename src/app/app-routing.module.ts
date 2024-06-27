@@ -20,7 +20,7 @@ const routes: Routes = [
     path: 'addProduct', component: AddProductComponent
   },
   {
-    path: 'contact', component: ContactComponent
+    path: 'contact-us', component: ContactComponent
   },
   {
     path: 'home', component: HomeComponent
@@ -34,7 +34,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'top'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

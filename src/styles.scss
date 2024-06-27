@@ -179,6 +179,44 @@ app-product-details {
     }
 }
 
+app-contact {
+
+    .iti {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        background-color: #F5F5F5;
+        border: 0px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .iti__flag-container {
+        display: flex;
+        align-items: center;
+    }
+
+    ngx-intl-tel-input {
+        input {
+            background-color: #F5F5F5;
+        }
+
+        input:focus-visible {
+            border: 0;
+            outline: white;
+        }
+    }
+
+    .dropdown-menu.show {
+        overflow: scroll;
+        max-height: 200px;
+    }
+
+    textarea:focus-visible {
+        outline: white;
+    }
+}
+
 .p-inputtext {
     background: #FFFFFF3D;
 }

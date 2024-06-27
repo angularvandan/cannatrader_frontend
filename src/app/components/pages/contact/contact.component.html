@@ -1,1 +1,114 @@
-<p>contact works!</p>
+<div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay">
+    <div class="max-w-4xl w-full pb-8">
+        <div class="pt-8">
+            <nav class="flex justify-center items-center mb-8" aria-label="Breadcrumb">
+                <a
+                    class="m text-primary w-full text-center justify-center inline-flex text-[32px] font-semibold hover:underline md:ml-2">
+                    Contact Us
+                </a>
+            </nav>
+        </div>
+        <div class="contact flex flex-col lg:flex-row justify-center">
+            <div class="text-help bg-opacity-90 border-b lg:border-r p-8 pt-0 max-w-md w-full">
+                <h2 class="text-2xl font-bold mb-6 text-primary text-left">Reach out to us</h2>
+                <p class="text-left mb-6 text-[#8D8D8D]">Complete the form below, and we'll reach
+                    <br> out to you shortly.
+                </p>
+                <form>
+                    <div class="mb-8">
+                        <label for="name" class="block text-sm font-medium">Name</label>
+                        <span class="p-input-icon-right w-full">
+                            <i class="pi pi-user text-[#fafafa]"></i>
+                            <input pInputText id="name" type="name" placeholder="Enter your name"
+                                class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm  sm:text-sm">
+                        </span>
+                    </div>
+                    <div class="mb-8">
+                        <label for="email" class="block text-sm font-medium">Email</label>
+                        <span class="p-input-icon-right w-full">
+                            <i class="pi pi-envelope text-[#fafafa]"></i>
+                            <input pInputText id="email" type="email" placeholder="Enter your email address"
+                                class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm  sm:text-sm">
+                        </span>
+                    </div>
+                    <div class="mb-8">
+                        <label for="phone" class="block text-sm font-custom">Phone Number</label>
+                        <!-- <span class="p-input-icon-right w-full">
+                            <i class="pi pi-phone text-[#fafafa]"></i> -->
+                        <ngx-intl-tel-input [cssClass]="'custom'"
+                            [preferredCountries]="[CountryISO.Canada, CountryISO.UnitedStates]"
+                            [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                            [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                            [selectedCountryISO]="CountryISO.Canada" [phoneValidation]="true" name="phone"
+                            formControlName="phone" [customPlaceholder]="'Enter your phone number'">
+                        </ngx-intl-tel-input>
+                        <!-- </span> -->
+                    </div>
+                    <!-- <button (click)="onSubmit()" class="btn btn-primary">Submit</button> -->
+
+                    <div class="mb-8">
+                        <label for="description" class="block text-sm font-custom text-help">Message</label>
+                        <textarea required pInputTextarea id="description" rows="3"
+                            placeholder="Enter your message here..."
+                            class="mt-1 block bg-[#F5F5F5] w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                            name="description"></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-secondary text-primary-btn justify-center flex font-bold py-2 px-4 rounded-md">Submit
+                        <svg width="35" height="24" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M25.7932 7.6075C26.3332 6.11375 24.8857 4.66625 23.3919 5.2075L5.13569 11.81C3.63694 12.3525 3.45569 14.3975 4.83444 15.1963L10.6619 18.57L15.8657 13.3663C16.1014 13.1386 16.4172 13.0126 16.7449 13.0154C17.0727 13.0183 17.3862 13.1497 17.618 13.3815C17.8497 13.6132 17.9812 13.9268 17.984 14.2545C17.9869 14.5822 17.8609 14.898 17.6332 15.1338L12.4294 20.3375L15.8044 26.165C16.6019 27.5437 18.6469 27.3612 19.1894 25.8638L25.7932 7.6075Z"
+                                fill="#3A5C41" />
+                        </svg>
+
+                    </button>
+                </form>
+
+            </div>
+            <div class="p-8 pt-0 rounded-lg w-full mx-auto flex items-center">
+                <div class="space-y-4">
+
+                    <div class="flex items-center">
+                        <div class="rounded-full p-2">
+                            <div
+                                class="twitter-icon w-12 h-12 bg-secondary rounded-full flex justify-center items-center">
+                                <i class="pi pi-phone text-primary" style="font-size: 1.25rem; font-weight:600"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-inner text-[18px]">Phone</div>
+                            <div class="text-lg font-semibold text-[20px]">2345678910</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="rounded-full p-2">
+                            <div
+                                class="twitter-icon w-12 h-12 bg-secondary rounded-full flex justify-center items-center">
+                                <i class="pi pi-envelope text-primary" style="font-size: 1.25rem; font-weight:600"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-inner text-[18px]">E-Mail</div>
+                            <div class="text-lg font-semibold text-[20px]">adminaddress@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="rounded-full p-2">
+                            <div
+                                class="twitter-icon w-12 h-12 bg-secondary rounded-full flex justify-center items-center">
+                                <i class="pi pi-map-marker text-primary"
+                                    style="font-size: 1.25rem; font-weight:600"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-inner text-[18px]">Location</div>
+                            <div class="text-lg font-semibold text-[20]">66, North side Roads
+                                Toronto, Canada</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
