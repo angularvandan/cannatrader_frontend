@@ -2,14 +2,28 @@
 <div class="max-w-screen-xl mx-auto p-4">
     <!-- Breadcrumb -->
     <nav class="flex mb-8" aria-label="Breadcrumb">
-        <ol class="inline-flex items-center space-x-1 ">
-            <li class="inline-flex items-center">
+        <ol class="lg:inline-flex flex w-full items-center space-x-1 ">
+            <li class="flex w-full lg:inline-flex items-center justify-between lg:justify-normal">
                 <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                     <i class="pi pi-arrow-left text-primary"></i>
                 </div>
-                <a class="m text-primary inline-flex text-[22px] font-medium hover:underline md:ml-2">
+                <a class="m text-primary hidden lg:inline-flex text-[22px] font-medium hover:underline md:ml-2">
                     Home / Productslisting / Canopygrowth
                 </a>
+                <div class="flex gap-4 lg:hidden">
+                    <div routerLink="../chats"
+                        class=" cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                        <svg width="36" height="20" viewBox="0 0 39 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M36.8437 10.0731V22.4613C36.8442 23.4375 36.6523 24.4043 36.2789 25.3064C35.9056 26.2085 35.3582 27.0282 34.668 27.7186C33.9777 28.409 33.1582 28.9566 32.2562 29.3302C31.3542 29.7037 30.3874 29.8959 29.4112 29.8956H24.4555L20.368 33.9831C20.2566 34.1012 20.1222 34.1953 19.973 34.2596C19.8239 34.3239 19.6633 34.3571 19.5009 34.3571C19.3385 34.3571 19.1778 34.3239 19.0287 34.2596C18.8796 34.1953 18.7451 34.1012 18.6337 33.9831L14.5462 29.8956H9.5868C8.61059 29.8956 7.64394 29.7033 6.74207 29.3297C5.84019 28.956 5.02076 28.4084 4.33056 27.718C3.64037 27.0277 3.09293 26.2081 2.71952 25.3061C2.34612 24.4042 2.15405 23.4375 2.1543 22.4613V10.0731C2.1543 8.1019 2.93736 6.21142 4.33123 4.81755C5.72509 3.42369 7.61558 2.64063 9.5868 2.64062H29.4093C31.3805 2.64063 33.271 3.42369 34.6649 4.81755C36.0587 6.21142 36.8437 8.1019 36.8437 10.0731Z"
+                                stroke="#3A5C41" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div
+                        class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                        <i class="pi pi-heart text-primary"></i>
+                    </div>
+                </div>
             </li>
         </ol>
     </nav>
@@ -20,14 +34,18 @@
         <div class="flex-1">
             <img src="../../../../../assets/product/prod-detail.jpg" alt="Product Image"
                 class="w-full max-h-[650px] h-full rounded-lg">
-            <div class="grid grid-cols-6 lg:grid-cols-4 justify-between space-x-2 mt-8">
-                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 1" class="w-32 h-28 rounded-lg">
-                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 2" class="w-32 h-28 rounded-lg">
-                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 3" class="w-32 h-28 rounded-lg">
-                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 3" class="w-32 h-28 rounded-lg">
+            <div class="grid grid-cols-4 lg:grid-cols-4 justify-between mt-8">
+                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 1"
+                    class="lg:w-32 lg:h-28 w-20 h-20 rounded-lg">
+                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 2"
+                    class="lg:w-32 lg:h-28 w-20 h-20 rounded-lg">
+                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 3"
+                    class="lg:w-32 lg:h-28 w-20 h-20 rounded-lg">
+                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 3"
+                    class="lg:w-32 lg:h-28 w-20 h-20 rounded-lg">
             </div>
-            <div class="p-6 rounded-lg w-full mx-auto mt-24">
-                <h2 class="text-[32px] font-semibold mb-4">Contact Details</h2>
+            <div class="p-6 rounded-lg w-full mx-auto mt-24 lg:block hidden">
+                <h2 class="text-[16px] lg:text-[32px] font-semibold mb-4">Contact Details</h2>
                 <div class="space-y-4">
                     <div class="flex items-center">
                         <div class="rounded-full p-2">
@@ -92,15 +110,17 @@
         <div class="flex-1 lg:ml-8 mt-4 lg:mt-0 pt-4">
             <div class="flex pb-2 items-center justify-between">
                 <h1 class="text-5xl font-bold">Canopy Growth</h1>
-                <div class="flex gap-4">
-                    <div routerLink="../chats" class=" cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                <div class="lg:flex hidden gap-4">
+                    <div routerLink="../chats"
+                        class=" cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                         <svg width="36" height="20" viewBox="0 0 39 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M36.8437 10.0731V22.4613C36.8442 23.4375 36.6523 24.4043 36.2789 25.3064C35.9056 26.2085 35.3582 27.0282 34.668 27.7186C33.9777 28.409 33.1582 28.9566 32.2562 29.3302C31.3542 29.7037 30.3874 29.8959 29.4112 29.8956H24.4555L20.368 33.9831C20.2566 34.1012 20.1222 34.1953 19.973 34.2596C19.8239 34.3239 19.6633 34.3571 19.5009 34.3571C19.3385 34.3571 19.1778 34.3239 19.0287 34.2596C18.8796 34.1953 18.7451 34.1012 18.6337 33.9831L14.5462 29.8956H9.5868C8.61059 29.8956 7.64394 29.7033 6.74207 29.3297C5.84019 28.956 5.02076 28.4084 4.33056 27.718C3.64037 27.0277 3.09293 26.2081 2.71952 25.3061C2.34612 24.4042 2.15405 23.4375 2.1543 22.4613V10.0731C2.1543 8.1019 2.93736 6.21142 4.33123 4.81755C5.72509 3.42369 7.61558 2.64063 9.5868 2.64062H29.4093C31.3805 2.64063 33.271 3.42369 34.6649 4.81755C36.0587 6.21142 36.8437 8.1019 36.8437 10.0731Z"
                                 stroke="#3A5C41" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <div class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                    <div
+                        class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                         <i class="pi pi-heart text-primary"></i>
                     </div>
                 </div>
@@ -240,24 +260,88 @@
     </div>
 
     <!-- Contact Details -->
-    <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="mt-8 lg:grid grid-cols-1 lg:grid-cols-2 gap-4 flex flex-col-reverse">
         <!-- Rate Product -->
-        <div class="p-4 border-t-[2px] border-primary">
-            <h2 class="text-xl font-semibold">Rate this product</h2>
-            <p class="mt-2 text-help">Tell others what you think</p>
+        <div class="lg:p-4 border-0 lg:border-t-[2px] border-primary">
+            <h2 class="text-base font-semibold">Rate this product</h2>
+            <p class="mt-2 text-[12px] text-help">Tell others what you think</p>
             <div class="flex mt-2 text-yellow-500 rate-product">
                 <p-rating [(ngModel)]="rate" [cancel]="false"></p-rating>
             </div>
         </div>
 
+        <!-- Contact Details -->
+        <div class="rounded-lg w-full mx-auto lg:hidden">
+            <h2 class="text-[16px] lg:text-[32px] lg:font-semiboldmb-4">Contact Details</h2>
+            <div class="space-y-4">
+                <div class="flex items-center">
+                    <div class="rounded-full p-2">
+                        <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                            <i class="pi pi-map-marker text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <div class="text-inner text-[10px] lg:text-[20px]">Location</div>
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">Ontario, Toronto (5 miles)
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div class="rounded-full p-2">
+                        <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                            <i class="pi pi-phone text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <div class="text-inner text-[10px] lg:text-[20px]">Phone</div>
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[20px] text-primary">xxxx-xxxx</div>
+                        <a href="#" class="text-inner hover:underline text-[10px] lg:text-[20px]">Click here to
+                            enquire</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div class="rounded-full p-2">
+                        <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                            <i class="pi pi-envelope text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <div class="text-inner text-[10px] lg:text-[20px]">E-Mail</div>
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">cannabisshop@gmail.com</div>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div class="rounded-full p-2">
+                        <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                            <i class="pi pi-calendar text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <div class="text-inner text-[10px] lg:text-[20px]">Uploaded Date</div>
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">01-01-2024</div>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div class="rounded-full p-2">
+                        <img src="../../../../../assets/product/profile.jpg" alt="Owner Image"
+                            class="h-12 w-12 object-cover rounded-full">
+                    </div>
+                    <div class="ml-4">
+                        <div class="text-gray-600 text-[10px] lg:text-[20px]">Owner</div>
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">Shepardson</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- COA Report -->
-        <div class="p-4 border-t-[2px] border-primary">
+        <div class="px-0 py-4 border-0 lg:border-t-[2px] border-primary">
             <div class="bg-gray-100 p-4 flex items-center justify-between">
-                <span class="text-gray-700">
-                    <i class="pi pi-file place-content-center font-medium mr-4 text-2xl"></i>
+                <span class="text-gray-700 flex items-center text-[12px] lg:text-[20px]">
+                    <i style="font-size: 1.5rem;" class="pi pi-file place-content-center font-bold mr-4 text-2xl"></i>
                     COA Report.pdf
                 </span>
-                <a href="assets/COA_Report.pdf" class="py-2 px-4 rounded">View
+                <a href="assets/COA_Report.pdf" class="py-2 px-4 rounded text-[12px] lg:text-[20px]">View
                     Report</a>
             </div>
         </div>
