@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 
 
@@ -38,7 +39,8 @@ import { TermsConditionsComponent } from './components/pages/terms-conditions/te
     FormsModule,
     BrowserAnimationsModule,
     SharedModule,
-    DropdownModule
+    DropdownModule,
+    NgxIntlTelInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
