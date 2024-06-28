@@ -1,9 +1,3 @@
-.p-dropdown,
-.p-inputtext {
-    background-color: #F5F5F5;
-    border: 0px;
-}
-
 i {
     z-index: 1;
 }
@@ -18,6 +12,29 @@ i {
     outline-offset: 0;
     box-shadow: none;
     border-color: none;
+}
+
+.input-container {
+    label {
+        color: #737373;
+        font-size: 18px;
+        line-height: 27px;
+        font-weight: 500;
+        font-family: 'Poppins';
+    }
+
+    .p-dropdown,
+    .p-inputtext {
+        background-color: #F5F5F5;
+        border: 0px;
+    }
+    .p-inputtext::placeholder,.p-dropdown-label{
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 500;
+        color: #8D8D8D;
+        font-family: 'Poppins';
+    }
 }
 
 .file-upload-container {
