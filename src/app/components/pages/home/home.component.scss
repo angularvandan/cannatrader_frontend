@@ -3,5 +3,13 @@
         .filter > *{
             min-width:212px;
         }
+        .filter{
+            .p-input-icon-right>i{
+                top:44%;
+            }
+            .p-inputtext{
+                background:#ECFEE6;
+            }
+        }
     }
 }

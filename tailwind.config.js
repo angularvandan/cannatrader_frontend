@@ -7,7 +7,8 @@ module.exports = {
     extend: {
       fontFamily: {
         'Quicksand': ['Quicksand'],
-        'Poppins': ['Poppins']
+        'Poppins': ['Poppins'],
+        'urbanist': ['Urbanist'],
       }
     },
     colors: {

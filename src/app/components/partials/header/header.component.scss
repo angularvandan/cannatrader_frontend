@@ -6,11 +6,6 @@ $secondary: #FFE175;
         .logo-container {
             padding-left: 50px;
 
-            .logo {
-                width: 169px;
-                height: 46px;
-            }
-
             @media(max-width: $breakpoint-lg) {
                 padding-left: 0px;
             }
@@ -46,20 +41,13 @@ $secondary: #FFE175;
             }
         }
     }
-    .nav-link {
+    .mobile-nav-link {
+        top:0;
+        z-index:100;
         nav {
             a {
                 line-height: 30px;
-                color: white;
-            }
-
-            a:hover {
-                color: $secondary;
             }
         }
-    }
-
-    .nav-link.active {
-        max-height: 300px;
     }
 }
