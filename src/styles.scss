@@ -212,6 +212,75 @@ app-product-details {
     }
 }
 
+app-product-listing {
+
+    .custom-last-dropdown {
+        .p-dropdown {
+            background: #D1DACF;
+
+            .p-inputtext {
+                color: $bg-primary;
+                font-weight: 700;
+            }
+
+        }
+
+        .p-dropdown .p-dropdown-trigger {
+            color: $bg-primary;
+        }
+    }
+
+    .custom-new-old-dropdown {
+        .p-dropdown {
+            background: transparent;
+            border: 0px;
+
+            .p-inputtext {
+                color: $bg-primary;
+                font-weight: 700;
+            }
+
+        }
+
+        .p-dropdown .p-dropdown-trigger {
+            color: $bg-primary;
+        }
+    }
+
+    .p-dropdown {
+        background: #3A5C41;
+        border-radius: 25px;
+
+        .p-inputtext {
+            color: white;
+            padding: 0.75rem 0 0.75rem 0.75rem;
+            text-align: center;
+        }
+
+        .p-dropdown-items-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+            color: $bg-primary;
+            background: #ebebeb;
+        }
+    }
+
+    .p-dropdown:not(.p-disabled):hover {
+        border-color: $bg-primary;
+        box-shadow: rgba(245, 245, 245, 1);
+    }
+
+    .p-dropdown .p-dropdown-trigger {
+        color: white;
+    }
+
+    .p-dropdown-trigger {
+        justify-content: normal;
+    }
+}
+
 app-contact {
 
     .iti {

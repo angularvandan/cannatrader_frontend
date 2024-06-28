@@ -18,11 +18,17 @@
             </nav>
             <div class="flex-col lg:flex-row flex items-center justify-between mb-4">
                 <div class="flex space-x-4">
-                    <button
-                        class="bg-primary flex items-center hover:bg-primary text-white font-semibold py-1 px-5 rounded-full text-sm leading-[30px]">Indica
-                        <i class="pi pi-angle-down"></i>
-                    </button>
-                    <button
+                    <p-dropdown [options]="strainTypes" [(ngModel)]="selectedStrainType" optionLabel="name"
+                        [style]="{ 'width': '125px' }" class="custom-dropdown"></p-dropdown>
+                    <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" optionLabel="name"
+                        [style]="{ 'width': 'auto','min-width':'150px' }" class="custom-dropdown"></p-dropdown>
+                    <p-dropdown [options]="subCategories" [(ngModel)]="selectedSubCategory" optionLabel="name"
+                        [style]="{ 'width': '150px' }" class="custom-dropdown"></p-dropdown>
+                    <p-dropdown [options]="thcRanges" [(ngModel)]="selectedThcRange" optionLabel="name"
+                        [style]="{ 'width': '135px' }" class="custom-last-dropdown"></p-dropdown>
+
+
+                    <!-- <button
                         class="bg-primary flex items-center hover:bg-primary text-white font-semibold py-1 px-5 rounded-full text-sm leading-[30px]">Edible
                         <i class="pi pi-angle-down"></i>
                     </button>
@@ -33,16 +39,16 @@
                     <button
                         class="bg-nav-bg  flex items-center text-primary font-semibold py-1 px-5 rounded-full text-sm leading-[30px]">20-30%
                         <i class="pi pi-angle-down"></i>
-                    </button>
+                    </button> -->
                 </div>
-                <div class="relative">
-                    <i class="pi pi-align-center text-primary"></i>
-                    <select
-                        class="appearance-none font-semibold text-primary bg-[#F5F5F5] py-1 px-3 rounded-full focus:outline-none focus:shadow-outline-nav-bg focus:border-nav-bg-300">
-                        <option class="py-2 bg-nav-bg text-white appearance-none">Newest (23)</option>
-                        <option class="py-2 bg-nav-bg text-white appearance-none">Oldest</option>
-                    </select>
-                    <i class="pi pi-angle-down"></i>
+                <div class="relative flex items-center">
+                    <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                        <i class="pi pi-align-center text-primary"></i>
+                    </div>
+
+                    <p-dropdown [options]="sortOrderOpt" [(ngModel)]="sortOrder" optionLabel="name"
+                        [style]="{ 'width': 'auto' }" class="custom-new-old-dropdown"></p-dropdown>
+                    <!-- <i class="pi pi-angle-down"></i> -->
                     <!-- <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <svg class="fill-current h-4 w-4" viewBox="0 0 20 20">
                             <path d="M10 12l-6-6 1.41-1.41L10 9.17l4.59-4.58L16 6l-6 6z" />
@@ -65,8 +71,7 @@
                 <div class="py-4 px-5">
                     <div class="flex h-full justify-between items-start">
                         <div class="flex flex-col justify-between h-full">
-                            <h2 class="font-bold text-lg text-gray-800">{{product.name}}
-                                Inc</h2>
+                            <h2 class="font-bold text-lg text-gray-800">{{product.name}}</h2>
                             <p class="text-sm text-help font-normal">{{product.flavour}}</p>
                             <p class="text-sm text-[#262626] font-normal">Strain Type: <span
                                     class="text-side">{{product.strainType}}</span>
