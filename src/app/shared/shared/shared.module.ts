@@ -13,7 +13,6 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { RatingModule } from 'primeng/rating';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 @NgModule({
   declarations: [],
@@ -33,7 +32,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     ConfirmDialogModule,
     ToastModule,
     RatingModule,
-    NgxIntlTelInputModule
+    DropdownModule
   ],
   exports: [
     CommonModule,
@@ -50,8 +49,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     SidebarModule,
     ConfirmDialogModule,
     ToastModule,
-    RatingModule,
-    NgxIntlTelInputModule
+    RatingModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
