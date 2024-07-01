@@ -2,7 +2,7 @@
     <div class=" lg:ps-16 sm:ps-4 ps-2 pt-4">
         <nav class="flex justify-between" aria-label="Breadcrumb">
             <ol class="inline-flex items-center w-full space-x-1 justify-start">
-                <li class="inline-flex items-center">
+                <li class="inline-flex items-center"routerLink="../profile-details">
                     <div class="twitter-icon w-8 h-8 bg-nav-bg rounded-full flex justify-center items-center">
                         <i class="pi pi-arrow-left text-primary"></i>
                     </div>
@@ -221,6 +221,26 @@
                                 <button
                                     class="Save bg-primary text-secondary text-md rounded-md py-2 px-12 w-full">Save</button>
                             </div>
+                        </div>
+                        <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
+                            <div class="mt-6 w-full relative">
+                                <p class="text-xl leading-8 font-medium text-[#737373]">Do you have a company ? </p>
+                                   
+                            </div>
+                            <div class="mt-6 w-full relative">
+                                <div class="flex flex-row">
+                                    <div class="flex align-items-center mr-4">
+                                        <p-radioButton name="pizza" value="yes"[(ngModel)]="ingredient" inputId="ingredient1"></p-radioButton>
+                                        <label for="ingredient1" class="ml-2 text-[#737373]">Yes</label>
+                                    </div>
+                                    
+                                    <div class="flex align-items-center">
+                                        <p-radioButton name="pizza" value="no"[(ngModel)]="ingredient" inputId="ingredient2"></p-radioButton>
+                                        <label for="ingredient2" class="ml-2 text-[#737373]">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

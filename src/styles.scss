@@ -80,6 +80,10 @@ app-home {
                     background: #ECFEE6;
                 }
             }
+            .p-dropdown .p-dropdown-label.p-placeholder{
+                color:#3A5C41!important;
+
+            }
         }
     }
 }
@@ -286,16 +290,21 @@ app-contact {
     .iti {
         display: flex;
         flex-direction: row-reverse;
-        justify-content: space-between;
+        justify-content: flex-end;
         background-color: #F5F5F5;
         border: 0px;
         padding: 10px;
         border-radius: 5px;
     }
+    .iti--allow-dropdown input{
+        padding-left: 0px!important;
+    }
 
     .iti__flag-container {
         display: flex;
         align-items: center;
+        right:0!important;
+        left:auto!important;
     }
 
     ngx-intl-tel-input {
@@ -308,7 +317,9 @@ app-contact {
             outline: white;
         }
     }
-
+    .dropdown-menu{
+        inset: 100% auto auto -337px!important;
+    }
     .dropdown-menu.show {
         overflow: scroll;
         max-height: 200px;

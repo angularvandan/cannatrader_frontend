@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/shared/services/user.service';
 
 interface Dropdown {
   name: string;
@@ -26,6 +27,8 @@ export class HomeComponent implements OnInit {
 
   searchWithin!: Dropdown[]
   selectedSearchWithin: Dropdown = { name: '--Select (km)--', code: 'none' }
+
+
   ngOnInit() {
     this.strainTypes = [
       { name: 'Indica', code: 'Indica' },
@@ -67,7 +70,6 @@ export class HomeComponent implements OnInit {
       { name: '15Km', code: '15Km' },
       { name: '20Km', code: '20Km' },
     ];
-
   }
 
 }

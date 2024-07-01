@@ -5,6 +5,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UserAuthRoutingModule } from './user-auth-routing.module';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
   imports: [
     SharedModule,
     UserAuthRoutingModule,
+    NgxIntlTelInputModule
   ]
 })
 export class UserAuthModule { }

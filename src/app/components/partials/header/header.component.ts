@@ -1,16 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
   isMenuOpen = false;
   sidebarVisible: boolean = false;
   scrollPosition = 0;
+  loginStatus:boolean=true;
 
+  constructor(private userService:UserService){}
+  
+  ngOnInit(): void {
+      this.userService.isVisible.subscribe((status:boolean)=>{
+        this.loginStatus=!status;
+        console.log(status);
+      })
+  }
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   //   if (this.isMenuOpen) {

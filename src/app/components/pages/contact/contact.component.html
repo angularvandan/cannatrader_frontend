@@ -35,11 +35,11 @@
                         <label for="phone" class="block text-sm font-custom">Phone Number</label>
                         <!-- <span class="p-input-icon-right w-full">
                             <i class="pi pi-phone text-[#fafafa]"></i> -->
-                        <ngx-intl-tel-input [cssClass]="'custom'" 
+                        <ngx-intl-tel-input [cssClass]="'custom'"
                             [preferredCountries]="[CountryISO.Canada, CountryISO.UnitedStates]"
                             [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
                             [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
-                            [selectedCountryISO]="CountryISO.Canada" [phoneValidation]="true" name="phone"
+                            [selectedCountryISO]="CountryISO.Canada" [phoneValidation]="true"[separateDialCode]="true" name="phone"
                             formControlName="phone" [customPlaceholder]="'Enter your phone number'">
                         </ngx-intl-tel-input>
                         <!-- </span> -->

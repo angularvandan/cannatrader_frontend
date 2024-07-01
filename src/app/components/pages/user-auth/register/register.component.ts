@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 export class RegisterComponent {
   selectedFile: File | null = null;
 
+  
+
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {

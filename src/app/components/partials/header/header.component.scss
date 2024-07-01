@@ -16,11 +16,27 @@ $secondary: #FFE175;
                 a {
                     line-height: 30px;
                     color: white;
+                    position:relative;
                 }
+                
 
                 a:hover {
                     color: $secondary;
                 }
+                .active-link{
+                    color:$secondary;
+                }
+                .active-link::after {
+                    content: '';
+                    display: block;
+                    width: 25px;
+                    height: 3px; 
+                    background-color: $secondary; 
+                    position: absolute;
+                    bottom: -5px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                  }
             }
         }
 

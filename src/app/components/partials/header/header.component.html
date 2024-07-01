@@ -22,10 +22,10 @@
         </div>
         <div class="nav-link hidden lg:block">
             <nav class="space-x-9 flex">
-                <a routerLink="/home" class="hover:color-primary text-xl font-medium">Home</a>
-                <a routerLink="/addProduct" class="hover:color-secondary  text-xl font-medium">Add Products</a>
-                <a routerLink="/wishlist" class="hover:text-secondary  text-xl font-medium">Wish List</a>
-                <a routerLink="/contact-us" class="hover:text-secondary  text-xl font-medium">Contact</a>
+                <a routerLink="/home"routerLinkActive="active-link" class="hover:color-primary text-xl font-medium">Home</a>
+                <a routerLink="/addProduct"routerLinkActive="active-link" class="hover:color-secondary  text-xl font-medium">Add Products</a>
+                <a routerLink="/wishlist"routerLinkActive="active-link" class="hover:text-secondary  text-xl font-medium">Wish List</a>
+                <a routerLink="/contact-us"routerLinkActive="active-link" class="hover:text-secondary  text-xl font-medium">Contact</a>
             </nav>
         </div>
         <div class="flex items-center space-x-6 md:space-x-9 icon-profile-container">
@@ -52,7 +52,7 @@
                         stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </a>
-            <a routerLink="/login" (click)="toggleMenu()" class="hover:text-secondary  text-xl font-medium">Sign in</a>
+            <a routerLink="/login"*ngIf="loginStatus" (click)="toggleMenu()" class="hover:text-secondary  text-xl font-medium">Sign in</a>
 
             <a routerLink="/profile/profile-details">
                 <svg class="w-8 h-8 text-white user-profile" fill="currentColor" viewBox="0 0 24 24"

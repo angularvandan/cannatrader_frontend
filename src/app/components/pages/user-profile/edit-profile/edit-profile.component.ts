@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class EditProfileComponent implements OnInit{
 
   selectedLicense:File[]=[];
+  ingredient:string='yes';
   constructor(){
 
   }
