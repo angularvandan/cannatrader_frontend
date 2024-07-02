@@ -36,21 +36,63 @@ export class EditProductComponent {
   };
 
   strainTypes = [
-    { name: 'Type1' },
-    { name: 'Type2' },
-    { name: 'Type3' }
+    { name: 'Indica' },
+    { name: 'Sativa' },
+    { name: 'Hybrid' }
   ];
+  thcRange=[
+    { name: '0 - 10%' },
+    { name: '10 - 20%' },
+    { name: '20 - 30%' },
+    { name: '30% Plus' },
+  ]
 
   categories = [
-    { name: 'Category1' },
-    { name: 'Category2' },
-    { name: 'Category3' }
+    { name: 'Flower' },
+    { name: 'Bio mass' },
+    { name: 'Hemp' },
+    { name: 'Fresh frozen' },
+    { name: 'Genetics' },
+    { name: 'Extracts-concentrates' },
+    { name: 'Edibles' },
+    { name: 'Topicals' },
+    { name: 'Services' },
+    { name: 'Materials' },
+    { name: 'Equipments' }
   ];
 
+  growthMethod=[
+    {name:'Standard'},
+    {name:'Micro'},
+    {name:'Indoor'},
+    {name:'Outdoor'},
+    {name:'Greenhouse'},
+
+  ]
+  growMedia=[
+    {name:'Coco'},
+    {name:'Soiless Mix'},
+    {name:'Perlite'},
+    {name:'Vermiculite'},
+    {name:'Hydroponic'},
+  ]
+
+  dryMethod=[
+    {name:'Hang'},
+    {name:'Tray'}
+  ]
+  trimMethod=[
+    {name:'Machine'},
+    {name:'Hand'},
+    {name:'Machine-Hand'},
+    {name:'Not Trimmed'}
+  ]
+
   subCategories = [
-    { name: 'SubCategory1' },
-    { name: 'SubCategory2' },
-    { name: 'SubCategory3' }
+    { name: 'Clones' },
+    { name: 'Teens' },
+    { name: 'Mothers' },
+    { name: 'Seeds' }
   ];
 
   selectedLicenseFile: File | null = null;

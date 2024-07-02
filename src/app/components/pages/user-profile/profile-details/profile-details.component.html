@@ -3,8 +3,8 @@
         <h1 class="text-center font-semibold text-[32px] leading-10 text-primary mt-8">Profile</h1>
     </div>
     <div class="profile-details lg:p-16 sm:p-4 ">
-        <div class="grid lg:grid-cols-5 lg:grid-flow-col grid-flow-row gap-4">
-            <div class="h-[410px] lg:h-[410px] sm:h-[250px] shadow-md lg:p-8 sm:p-6 p-4 lg:col-span-1">
+        <div class="flex flex-row lg:flex-nowrap flex-wrap gap-4 justify-center">
+            <div class="h-[410px] lg:h-[410px] sm:h-[250px]  lg:p-8 sm:p-6 p-4 lg:col-span-1 rounded-md"style="min-width:275px;box-shadow: 0px 0px 5px #cfc6c0;">
                 <div class="block sm:hidden lg:block">
                     <div class="flex flex-col items-center">
                         <div class="user-img w-36 h-36 flex overflow-hidded mb-4">
@@ -89,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            <div class="h-[900px] lg:col-span-4 shadow-md sm:p-8 p-4">
+            <div class="h-[900px] w-full lg:w-[70vw] rounded-md m:p-8 p-4"style="box-shadow: 0px 0px 5px #cfc6c0;">
                 <div class="flex flex-col">
                     <div class="recent-listing mb-5">
                         <div class="table-heading mb-2">
@@ -98,13 +98,13 @@
                         <div class="w-[86vw] lg:w-[64vw]">
                             <div class="overflow-x-auto ">
                                 <table class=" min-w-[580px] w-full border-spacing-x-4">
-                                    <caption class="caption-bottom ">
+                                    <!-- <caption class="caption-bottom ">
                                         <div class="pt-6" routerLink="/profile/recentlisting">
                                             <a
                                                 class="font-lg leading-4 cursor-pointer font-semibold bg-[#D1DACF] text-primary rounded-lg py-1 px-2">View
                                                 More</a>
                                         </div>
-                                    </caption>
+                                    </caption> -->
                                     <thead class="h-[50px]">
                                         <tr class="border-y">
                                             <th>Product Image</th>
@@ -208,19 +208,20 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="pt-6 flex justify-center">
+                            <a routerLink="../subscribed-listing"
+                                class="font-lg cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
+                                More</a>
+                        </div>
                     </div>
                     <div class="recent-subscribed">
                         <div class="table-heading mb-2 border-b " style="padding-bottom:10px;">
-                            <h1 class=" text-primary text-start text-2xl leading-8 font-semibold">Recent Listings</h1>
+                            <h1 class=" text-primary text-start text-2xl leading-8 font-semibold">Subscribed</h1>
                         </div>
                         <table class="w-full border-spacing-x-4">
-                            <caption class="caption-bottom ">
-                                <div class="pt-6">
-                                    <a routerLink="../subscribed-listing"
-                                        class="font-lg cursor-pointer leading-4 font-semibold bg-[#D1DACF] text-primary rounded-lg py-1 px-2">View
-                                        More</a>
-                                </div>
-                            </caption>
+                            <!-- <caption class="caption-bottom ">
+                                
+                            </caption> -->
                             <tbody>
                                 <tr style="height:10px"></tr>
                                 <tr>
@@ -276,6 +277,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="pt-6 flex justify-center">
+                            <a routerLink="../subscribed-listing"
+                                class="font-lg cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
+                                More</a>
+                        </div>
                     </div>
                 </div>
             </div>
