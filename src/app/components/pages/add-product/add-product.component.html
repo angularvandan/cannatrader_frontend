@@ -1,17 +1,16 @@
 <div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay">
     <div class="max-w-3xl w-full pb-8">
         <div class="pt-8 pb-4">
-            <nav class="flex mb-8" aria-label="Breadcrumb">
-                <div class="w-full cursor-pointer" routerLink="/home">
+            <nav class="flex sm:mb-8" aria-label="Breadcrumb">
+                <div class="w-full hidden sm:block cursor-pointer" routerLink="/home">
                     <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                         <i class="pi pi-arrow-left text-primary"></i>
                     </div>
                 </div>
-                <a
-                    class="m text-primary w-full text-center inline-flex text-[22px] font-medium  md:ml-2">
+                <a class="m text-primary w-full text-center  text-[22px] font-medium  md:ml-2">
                     Add Product Details
                 </a>
-                <a class="w-full"></a>
+                <a class="w-full hidden sm:block"></a>
             </nav>
         </div>
         <form (ngSubmit)="onSubmit()">
@@ -28,9 +27,9 @@
                         <div class="mt-6 w-full relative">
                             <label for="strainTypes" class="block text-sm text-gray-700 font-custom">Strain Types <span
                                     class="text-red">*</span></label>
-                            <p-dropdown [required]="true" class="w-full"placeholder="Select strain type" [options]="strainTypes"
-                                [(ngModel)]="productDetails.selectedStrainType" optionLabel="name"
-                                name="strainTypes"></p-dropdown>
+                            <p-dropdown [required]="true" class="w-full" placeholder="Select strain type"
+                                [options]="strainTypes" [(ngModel)]="productDetails.selectedStrainType"
+                                optionLabel="name" name="strainTypes"></p-dropdown>
 
                         </div>
 
@@ -45,8 +44,8 @@
                         <div class="mt-6 w-full relative">
                             <label for="categories" class="block text-sm text-gray-700 font-custom">Categories <span
                                     class="text-red">*</span></label>
-                            <p-dropdown [required]="true" class="w-full"placeholder="Select category" [options]="categories"
-                                [(ngModel)]="productDetails.selectedCategory" optionLabel="name"
+                            <p-dropdown [required]="true" class="w-full" placeholder="Select category"
+                                [options]="categories" [(ngModel)]="productDetails.selectedCategory" optionLabel="name"
                                 name="categories"></p-dropdown>
 
                         </div>
@@ -62,9 +61,9 @@
                         <div class="mt-6 w-full relative">
                             <label for="subCategory" class="block text-sm text-gray-700 font-custom">Sub-Category <span
                                     class="text-red">*</span></label>
-                            <p-dropdown [required]="true" class="w-full"placeholder="Select sub-category" [options]="subCategories"
-                                [(ngModel)]="productDetails.selectedSubCategory" optionLabel="name"
-                                name="subCategory"></p-dropdown>
+                            <p-dropdown [required]="true" class="w-full" placeholder="Select sub-category"
+                                [options]="subCategories" [(ngModel)]="productDetails.selectedSubCategory"
+                                optionLabel="name" name="subCategory"></p-dropdown>
 
                         </div>
                     </div>
@@ -123,16 +122,17 @@
                         <div class="mt-6 w-full relative">
                             <label for="growMedia" class="block text-sm text-gray-700 font-custom">Grow Media <span
                                     class="text-red">*</span></label>
-                            <p-dropdown [required]="true" class="w-full"placeholder="Select grow media" [options]="growMedia"
-                                [(ngModel)]="productDetails.growMedia" optionLabel="name" name="growMedia"></p-dropdown>
+                            <p-dropdown [required]="true" class="w-full" placeholder="Select grow media"
+                                [options]="growMedia" [(ngModel)]="productDetails.growMedia" optionLabel="name"
+                                name="growMedia"></p-dropdown>
 
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="growthMethod" class="block text-sm text-gray-700 font-custom">Growth Method
                                 <span class="text-red">*</span></label>
 
-                            <p-dropdown [required]="true" class="w-full"placeholder="Select growth method" [options]="growthMethod"
-                                [(ngModel)]="productDetails.growthMethod" optionLabel="name"
+                            <p-dropdown [required]="true" class="w-full" placeholder="Select growth method"
+                                [options]="growthMethod" [(ngModel)]="productDetails.growthMethod" optionLabel="name"
                                 name="growthMethod"></p-dropdown>
 
                         </div>
@@ -158,8 +158,8 @@
                             <label for="dryMethod" class="block text-sm text-gray-700 font-custom">Dry Method <span
                                     class="text-red">*</span></label>
 
-                                <p-dropdown [required]="true" class="w-full"placeholder="Select dry method" [options]="dryMethod"
-                                [(ngModel)]="productDetails.dryMethod" optionLabel="name"
+                            <p-dropdown [required]="true" class="w-full" placeholder="Select dry method"
+                                [options]="dryMethod" [(ngModel)]="productDetails.dryMethod" optionLabel="name"
                                 name="dryMethod"></p-dropdown>
 
                         </div>
@@ -177,8 +177,8 @@
                             <label for="trimMethod" class="block text-sm text-gray-700 font-custom">Trim Method <span
                                     class="text-red">*</span></label>
 
-                                <p-dropdown [required]="true" class="w-full"placeholder="Select trim method" [options]="trimMethod"
-                                [(ngModel)]="productDetails.trimMethod" optionLabel="name"
+                            <p-dropdown [required]="true" class="w-full" placeholder="Select trim method"
+                                [options]="trimMethod" [(ngModel)]="productDetails.trimMethod" optionLabel="name"
                                 name="trimMethod"></p-dropdown>
 
                         </div>
@@ -229,7 +229,7 @@
                             </div>
                         </div>
 
-                        <div class="mt-6 w-full relative">
+                        <div class="mt-6 w-full relative hidden sm:block">
                             <!-- upload product image show in below div of class "product-image-container" -->
                             <label for="productImages" class="block text-sm text-gray-700 font-custom">Upload Product
                                 Images (Max 5 images) </label>
@@ -268,10 +268,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="mt-6 w-full relative block sm:hidden">
+                                <!-- upload product image show in below div of class "product-image-container" -->
+                                <label for="productImages" class="block text-sm text-gray-700 font-custom">Upload
+                                    Product
+                                    Images (Max 5 images) </label>
+                                <div class="file-upload-container">
+                                    <label for="file-upload-images" class="file-upload-label">
+                                        <i class="pi pi-cloud-upload"></i>
+                                        <p>Upload Images</p>
+                                        <input type="file" id="file-upload-images"
+                                            (change)="onImageSelected($event, 'images')" accept="image/*" multiple />
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="w-full product-image-container">
                             <!-- Here is the code of upload product imgae of products -->
-                            <div class="mb-4 flex flex-wrap justify-between gap-4" *ngIf="imagePreviews.length > 0">
+                            <div class="my-4 sm:mb-4 flex flex-wrap justify-between gap-4"
+                                *ngIf="imagePreviews.length > 0">
                                 <div *ngFor="let preview of imagePreviews; let i = index" class="relative">
                                     <img [src]="preview" alt="Preview" class="h-40 w-40 object-cover rounded-md">
                                     <div
@@ -285,9 +300,11 @@
                     </div>
                 </div>
             </div>
-            <button type="submit"
-                class="w-full font-bold py-2 px-4 rounded-md font-custom bg-secondary text-primary-btn">Add
+            <div class="p-6 md:p-0 ">
+                <button type="submit"
+                class="w-full font-bold py-2 px-4 text-lg rounded-md font-custom bg-secondary text-primary-btn">Add
                 Product</button>
+            </div>
         </form>
     </div>
 </div>

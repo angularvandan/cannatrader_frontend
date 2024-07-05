@@ -21,8 +21,14 @@ i {
         line-height: 27px;
         font-weight: 500;
         font-family: 'Poppins';
-        span{
+
+        span {
             color: red;
+        }
+
+        @media (max-width:768px) {
+            font-size: 16px;
+            line-height: 24px;
         }
     }
 
@@ -31,7 +37,9 @@ i {
         background-color: #F5F5F5;
         border: 0px;
     }
-    .p-inputtext::placeholder,.p-dropdown-label{
+
+    .p-inputtext::placeholder,
+    .p-dropdown-label {
         font-size: 16px;
         line-height: 24px;
         font-weight: 500;
@@ -44,7 +52,7 @@ i {
     position: relative;
     display: inline-block;
     width: 100%;
-    max-width: 400px;
+    // max-width: 400px;
     padding: 30px;
     border: 2px dashed #ccc;
     border-radius: 10px;
