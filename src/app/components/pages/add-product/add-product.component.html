@@ -1,4 +1,4 @@
-<div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay">
+<div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay"*ngIf="!companyDocumentStatus">
     <div class="max-w-3xl w-full pb-8">
         <div class="pt-8 pb-4">
             <nav class="flex sm:mb-8" aria-label="Breadcrumb">
@@ -306,5 +306,28 @@
                 Product</button>
             </div>
         </form>
+    </div>
+</div>
+<div class="w-full h-full relative"*ngIf="companyDocumentStatus">
+    <div class="mt-4 flex items-start justify-center min-h-screen">
+        <!--  -->
+        <div class="text-center max-w-md w-full">
+            
+            <div class="mx-auto mb-4 flex items-center justify-center">
+                <img src="../../../../assets/product/add_product_requirement.png" alt="">
+                    
+                <!-- Replace with the path to your sad leaf image -->
+            </div>
+            <p class="text-3xl font-semibold text-green-800">Complete Company Details
+            </p>
+            <p class="text-help mb-6">You're nearly there! Finish entering <br>your company information to add your products.</p>
+            <button (click)="companyDocumentStatus=false" class="bg-secondary text-primary font-bold py-2 px-4 rounded-md ">Add Company Details</button>
+        </div>
+    </div>
+    <div class="image-container">
+        <img class="absolute top-16 left-0 w-36" src="../../../../assets/wishlist/left_leaf_wishlist.png" alt="">
+        <img class="absolute -top-16 right-0 w-36 rotate-90" src="../../../../assets/wishlist/left_leaf_wishlist.png" alt="">
+        <img class="absolute bottom-16 right-0 w-36" src="../../../../assets/wishlist/right_leaf_wishlist.png" alt="">
+        <img class="absolute -bottom-10 left-16 w-36" src="../../../../assets/wishlist/bottom_leaf_wishlist.png" alt="">
     </div>
 </div>

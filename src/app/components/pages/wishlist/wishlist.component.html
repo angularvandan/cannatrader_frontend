@@ -1,6 +1,6 @@
-<div class="relative z-10 container mx-auto p-4 flex items-center justify-center">
+<div class="relative z-10 container mx-auto p-4 flex items-center justify-center"*ngIf="products.length<0">
     <!-- Heading -->
-    <div *ngIf="products.length>0" class="max-w-full">
+    <div class="max-w-full">
         <div class="bg-gray-100 py-4 md:py-8 text-center">
             <p class=" text-primary inline-flex text-[22px] font-medium text-gray-800 md:ml-2">
                 Wish List
@@ -9,20 +9,6 @@
 
         <!-- Product Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-            <!-- Skeleton -->
-            <!-- <div class="p-4 bg-white rounded shadow w-[400px]">
-                <div class="animate-pulse flex space-x-4">
-                    <div class="rounded-full bg-nav-bg h-12 w-12"></div>
-                    <div class="flex-1 space-y-4 py-1">
-                        <div class="h-4 bg-nav-bg rounded w-3/4"></div>
-                        <div class="space-y-2">
-                            <div class="h-4 bg-nav-bg rounded"></div>
-                            <div class="h-4 bg-nav-bg rounded w-5/6"></div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <div routerLink="/products/productDetails" *ngFor="let product of products"
                 class="max-w-sm cursor-pointer mx-auto bg-white rounded-lg justify-around overflow-hidden flex my-0 md:my-4">
                 <div class="relative">
@@ -55,11 +41,15 @@
 
         </div>
         <div class="flex justify-center mt-8">
-            <button class="bg-gray-200 text-gray-700 py-2 px-4 rounded">View More</button>
+            <button class="font-lg cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View More</button>
         </div>
     </div>
+    <!-- View More Button -->
 
-    <div *ngIf="products.length<0" class="bg-gray-50 flex items-start justify-center min-h-screen">
+</div>
+<!-- this is for when wish list is empty  -->
+<div class="w-full h-full relative" *ngIf="products.length">
+    <div class="mt-4 flex items-start justify-center min-h-screen">
         <!--  -->
         <div class="text-center max-w-md w-full">
             <p class=" text-primary inline-flex text-[22px] font-medium text-gray-800 md:ml-2">
@@ -98,15 +88,16 @@
                 <!-- Replace with the path to your sad leaf image -->
             </div>
             <p class="text-lg font-semibold text-green-800">Your Wishlist is <span
-                    class="text-primary text-[32px]">Empty</span>
+                    class="text-primary text-[28px]">Empty</span>
             </p>
             <p class="text-help mb-6">No items in your wishlist yet. <br> Explore more and add some favorites!</p>
             <button class="bg-secondary text-primary font-bold py-2 px-4 rounded-md w-40">Explore</button>
         </div>
     </div>
-    <!-- View More Button -->
-
-    <img *ngIf="products.length<0" src="../../../../assets/wishlist/leaf.svg" alt="Leaf"
-        class="absolute top-0 left-0 object-cover h-full w-full -z-10">
-
+    <div class="image-container">
+        <img class="absolute top-16 left-0 w-36" src="../../../../assets/wishlist/left_leaf_wishlist.png" alt="">
+        <img class="absolute -top-16 right-0 w-36 rotate-90" src="../../../../assets/wishlist/left_leaf_wishlist.png" alt="">
+        <img class="absolute bottom-16 right-0 w-36" src="../../../../assets/wishlist/right_leaf_wishlist.png" alt="">
+        <img class="absolute -bottom-10 left-16 w-36" src="../../../../assets/wishlist/bottom_leaf_wishlist.png" alt="">
+    </div>
 </div>

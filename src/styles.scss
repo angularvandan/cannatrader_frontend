@@ -75,13 +75,14 @@ app-home {
                 width: 100%;
                 background: #ECFEE6;
                 border: none;
-
+                box-shadow: none;
                 .p-dropdown-panel {
                     background: #ECFEE6;
                 }
             }
-            .p-dropdown .p-dropdown-label.p-placeholder{
-                color:#3A5C41!important;
+
+            .p-dropdown .p-dropdown-label.p-placeholder {
+                color: #3A5C41 !important;
 
             }
         }
@@ -186,6 +187,16 @@ app-header {
 
     .p-sidebar-header {
         justify-content: space-between;
+    }
+
+    .p-sidebar-right {
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+
+        @media(max-width:768px) {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
     }
 }
 
@@ -296,15 +307,16 @@ app-contact {
         padding: 10px;
         border-radius: 5px;
     }
-    .iti--allow-dropdown input{
-        padding-left: 0px!important;
+
+    .iti--allow-dropdown input {
+        padding-left: 0px !important;
     }
 
     .iti__flag-container {
         display: flex;
         align-items: center;
-        right:0!important;
-        left:auto!important;
+        right: 0 !important;
+        left: auto !important;
     }
 
     ngx-intl-tel-input {
@@ -317,9 +329,11 @@ app-contact {
             outline: white;
         }
     }
-    .dropdown-menu{
-        inset: 100% auto auto -337px!important;
+
+    .dropdown-menu {
+        inset: 100% auto auto -337px !important;
     }
+
     .dropdown-menu.show {
         overflow: scroll;
         max-height: 200px;

@@ -98,6 +98,8 @@ export class AddProductComponent implements OnInit {
   selectedLicenseFile: File | null = null;
   selectedImageFiles: File[] = [];
 
+  companyDocumentStatus:boolean=true;
+
   constructor() { }
 
   ngOnInit(): void {
