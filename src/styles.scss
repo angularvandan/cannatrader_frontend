@@ -244,7 +244,7 @@ app-product-listing {
             color: $bg-primary;
         }
     }
-
+    
     .custom-new-old-dropdown {
         .p-dropdown {
             background: transparent;
@@ -259,6 +259,9 @@ app-product-listing {
 
         .p-dropdown .p-dropdown-trigger {
             color: $bg-primary;
+        }
+        .p-dropdown-panel{
+            border-radius: 20px;
         }
     }
 

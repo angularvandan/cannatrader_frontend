@@ -102,7 +102,7 @@ export class ProductListingComponent implements OnInit {
   selectedStrainType: Dropdown = { name: 'Indica', code: 'Indica' };
 
   categories: Dropdown[] = [];
-  selectedCategory: Dropdown = { name: 'Edibles', code: 'Edibles' };
+  selectedCategory: Dropdown = { name: 'Edible', code: 'Edible' };
 
   subCategories: Dropdown[] = [];
   selectedSubCategory: Dropdown = { name: 'Chocolate', code: 'Chocolate' };
@@ -133,7 +133,7 @@ export class ProductListingComponent implements OnInit {
       { name: 'Fresh frozen', code: 'Fresh frozen' },
       { name: 'Genetics', code: 'Genetics' },
       { name: 'Extracts-concentrates', code: 'Extracts-concentrates' },
-      { name: 'Edibles', code: 'Edibles' },
+      { name: 'Edible', code: 'Edible' },
       { name: 'Topicals', code: 'Topicals' },
       { name: 'Services', code: 'Services' },
       { name: 'Materials', code: 'Materials' },

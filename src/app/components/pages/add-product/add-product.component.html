@@ -18,11 +18,11 @@
                 <div class="input-container flex flex-col p-6 md:p-0">
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                         <div class="mt-6 w-full relative">
-                            <label for="name" class="block text-sm text-gray-700 font-custom">Lot ID <span
+                            <label for="name" class="block text-sm text-gray-700 font-custom">Product Name <span
                                     class="text-red">*</span></label>
-                            <input required pInputText id="lotId" type="text" placeholder="Enter Lot ID"
+                            <input required pInputText id="name" type="text" placeholder="Enter Product Name"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.lotId" name="lotId">
+                                [(ngModel)]="productDetails.lotId" name="name">
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="strainTypes" class="block text-sm text-gray-700 font-custom">Strain Types <span
