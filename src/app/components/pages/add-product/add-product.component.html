@@ -30,9 +30,7 @@
                             <p-dropdown [required]="true" class="w-full" placeholder="Select strain type"
                                 [options]="strainTypes" [(ngModel)]="productDetails.selectedStrainType"
                                 optionLabel="name" name="strainTypes"></p-dropdown>
-
                         </div>
-
                     </div>
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                         <div class="mt-6 w-full relative">
@@ -137,7 +135,7 @@
 
                         </div>
                     </div>
-                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
+                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 irradiated">
                         <div class="mt-6 w-full relative">
                             <label for="irradiated" class="block text-sm text-gray-700 font-custom">Irradiated <span
                                     class="text-red">*</span></label>
@@ -326,8 +324,8 @@
     </div>
     <div class="image-container">
         <img class="absolute top-16 left-0 w-36" src="../../../../assets/wishlist/left_leaf_wishlist.png" alt="">
-        <img class="absolute -top-16 right-0 w-36 rotate-90" src="../../../../assets/wishlist/left_leaf_wishlist.png" alt="">
-        <img class="absolute bottom-16 right-0 w-36" src="../../../../assets/wishlist/right_leaf_wishlist.png" alt="">
-        <img class="absolute -bottom-10 left-16 w-36" src="../../../../assets/wishlist/bottom_leaf_wishlist.png" alt="">
+        <img class="absolute -top-16 right-0 w-36 rotate-90 hidden" src="../../../../assets/wishlist/left_leaf_wishlist.png" alt="">
+        <img class="absolute bottom-16 right-0 w-36 hidden sm:block" src="../../../../assets/wishlist/right_leaf_wishlist.png" alt="">
+        <img class="absolute -bottom-10 left-16 w-36 hidden sm:block" src="../../../../assets/wishlist/bottom_leaf_wishlist.png" alt="">
     </div>
 </div>

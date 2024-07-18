@@ -76,6 +76,7 @@ app-home {
                 background: #ECFEE6;
                 border: none;
                 box-shadow: none;
+
                 .p-dropdown-panel {
                     background: #ECFEE6;
                 }
@@ -119,6 +120,27 @@ app-add-product {
 
         .p-button:hover {
             background: #F5F5F5;
+        }
+    }
+
+    .irradiated {
+        .p-radiobutton .p-radiobutton-box.p-highlight {
+            border: 2px solid;
+            border-color: $bg-primary;
+            background-color: unset;
+
+        }
+
+        .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
+            background-color: $bg-primary;
+        }
+        .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+            border-color: unset; 
+            background: unset;
+            color: none;
+        }
+        .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
+            box-shadow: none;
         }
     }
 }
@@ -244,7 +266,7 @@ app-product-listing {
             color: $bg-primary;
         }
     }
-    
+
     .custom-new-old-dropdown {
         .p-dropdown {
             background: transparent;
@@ -260,7 +282,8 @@ app-product-listing {
         .p-dropdown .p-dropdown-trigger {
             color: $bg-primary;
         }
-        .p-dropdown-panel{
+
+        .p-dropdown-panel {
             border-radius: 20px;
         }
     }
