@@ -47,35 +47,32 @@
                 <div class="input-container flex flex-col p-6 md:p-0">
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                         <div class="mt-6 w-full relative">
-                            <label for="name" class="block text-sm text-gray-700 font-custom">Lot ID <span
+                            <label for="name" class="block text-sm text-gray-700 font-custom">Product Name <span
                                     class="text-red">*</span></label>
-                            <input required pInputText id="lotId" type="text" placeholder="Enter Lot ID"
+                            <input required pInputText id="name" type="text" placeholder="Enter Product Name"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.lotId" name="lotId">
+                                [(ngModel)]="productDetails.lotId" name="name">
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="strainTypes" class="block text-sm text-gray-700 font-custom">Strain Types <span
                                     class="text-red">*</span></label>
-                            <p-dropdown [required]="true" class="w-full" [options]="strainTypes"
-                                [(ngModel)]="productDetails.selectedStrainType" optionLabel="name"
-                                name="strainTypes"></p-dropdown>
-
+                            <p-dropdown [required]="true" class="w-full" placeholder="Select strain type"
+                                [options]="strainTypes" [(ngModel)]="productDetails.selectedStrainType"
+                                optionLabel="name" name="strainTypes"></p-dropdown>
                         </div>
-
                     </div>
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                         <div class="mt-6 w-full relative">
                             <label for="thcRange" class="block text-sm text-gray-700 font-custom">THC Range <span
                                     class="text-red">*</span></label>
-                            <p-dropdown [required]="true" class="w-full" [options]="strainTypes"
-                                [(ngModel)]="productDetails.selectedStrainType" optionLabel="name"
-                                name="thcRange"></p-dropdown>
+                            <p-dropdown [required]="true" class="w-full" [options]="thcRange"
+                                [(ngModel)]="productDetails.thcRange" optionLabel="name" name="thcRange"></p-dropdown>
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="categories" class="block text-sm text-gray-700 font-custom">Categories <span
                                     class="text-red">*</span></label>
-                            <p-dropdown [required]="true" class="w-full" [options]="categories"
-                                [(ngModel)]="productDetails.selectedCategory" optionLabel="name"
+                            <p-dropdown [required]="true" class="w-full" placeholder="Select category"
+                                [options]="categories" [(ngModel)]="productDetails.selectedCategory" optionLabel="name"
                                 name="categories"></p-dropdown>
 
                         </div>
@@ -91,9 +88,9 @@
                         <div class="mt-6 w-full relative">
                             <label for="subCategory" class="block text-sm text-gray-700 font-custom">Sub-Category <span
                                     class="text-red">*</span></label>
-                            <p-dropdown [required]="true" class="w-full" [options]="subCategories"
-                                [(ngModel)]="productDetails.selectedSubCategory" optionLabel="name"
-                                name="subCategory"></p-dropdown>
+                            <p-dropdown [required]="true" class="w-full" placeholder="Select sub-category"
+                                [options]="subCategories" [(ngModel)]="productDetails.selectedSubCategory"
+                                optionLabel="name" name="subCategory"></p-dropdown>
 
                         </div>
                     </div>
@@ -152,20 +149,22 @@
                         <div class="mt-6 w-full relative">
                             <label for="growMedia" class="block text-sm text-gray-700 font-custom">Grow Media <span
                                     class="text-red">*</span></label>
-                            <input required pInputText id="growMedia" type="text" placeholder="Enter Grow Media"
-                                class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.growMedia" name="growMedia">
+                            <p-dropdown [required]="true" class="w-full" placeholder="Select grow media"
+                                [options]="growMedia" [(ngModel)]="productDetails.growMedia" optionLabel="name"
+                                name="growMedia"></p-dropdown>
+
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="growthMethod" class="block text-sm text-gray-700 font-custom">Growth Method
                                 <span class="text-red">*</span></label>
-                            <input required pInputText id="growthMethod" type="text" placeholder="Enter Growth Method"
-                                class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.growthMethod" name="growthMethod">
+
+                            <p-dropdown [required]="true" class="w-full" placeholder="Select growth method"
+                                [options]="growthMethod" [(ngModel)]="productDetails.growthMethod" optionLabel="name"
+                                name="growthMethod"></p-dropdown>
 
                         </div>
                     </div>
-                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
+                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 irradiated">
                         <div class="mt-6 w-full relative">
                             <label for="irradiated" class="block text-sm text-gray-700 font-custom">Irradiated <span
                                     class="text-red">*</span></label>
@@ -185,9 +184,10 @@
                         <div class="mt-6 w-full relative">
                             <label for="dryMethod" class="block text-sm text-gray-700 font-custom">Dry Method <span
                                     class="text-red">*</span></label>
-                            <input required pInputText id="dryMethod" type="text" placeholder="Enter Dry Method"
-                                class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.dryMethod" name="dryMethod">
+
+                            <p-dropdown [required]="true" class="w-full" placeholder="Select dry method"
+                                [options]="dryMethod" [(ngModel)]="productDetails.dryMethod" optionLabel="name"
+                                name="dryMethod"></p-dropdown>
 
                         </div>
                     </div>
@@ -198,13 +198,15 @@
                             <input required pInputText id="budSize" type="text" placeholder="Enter Bud Size"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
                                 [(ngModel)]="productDetails.budSize" name="budSize">
+
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="trimMethod" class="block text-sm text-gray-700 font-custom">Trim Method <span
                                     class="text-red">*</span></label>
-                            <input required pInputText id="trimMethod" type="text" placeholder="Enter Trim Method"
-                                class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.trimMethod" name="trimMethod">
+
+                            <p-dropdown [required]="true" class="w-full" placeholder="Select trim method"
+                                [options]="trimMethod" [(ngModel)]="productDetails.trimMethod" optionLabel="name"
+                                name="trimMethod"></p-dropdown>
 
                         </div>
                     </div>
@@ -254,10 +256,10 @@
                             </div>
                         </div>
 
-                        <div class="mt-6 w-full relative">
+                        <div class="mt-6 w-full relative hidden sm:block">
                             <!-- upload product image show in below div of class "product-image-container" -->
                             <label for="productImages" class="block text-sm text-gray-700 font-custom">Upload Product
-                                Images</label>
+                                Images (Max 5 images) </label>
                             <div class="file-upload-container">
                                 <label for="file-upload-images" class="file-upload-label">
                                     <i class="pi pi-cloud-upload"></i>
@@ -293,10 +295,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="mt-6 w-full relative block sm:hidden">
+                                <!-- upload product image show in below div of class "product-image-container" -->
+                                <label for="productImages" class="block text-sm text-gray-700 font-custom">Upload
+                                    Product
+                                    Images (Max 5 images) </label>
+                                <div class="file-upload-container">
+                                    <label for="file-upload-images" class="file-upload-label">
+                                        <i class="pi pi-cloud-upload"></i>
+                                        <p>Upload Images</p>
+                                        <input type="file" id="file-upload-images"
+                                            (change)="onImageSelected($event, 'images')" accept="image/*" multiple />
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="w-full product-image-container">
                             <!-- Here is the code of upload product imgae of products -->
-                            <div class="mb-4 flex flex-wrap justify-between gap-4" *ngIf="imagePreviews.length > 0">
+                            <div class="my-4 sm:mb-4 flex flex-wrap justify-between gap-4"
+                                *ngIf="imagePreviews.length > 0">
                                 <div *ngFor="let preview of imagePreviews; let i = index" class="relative">
                                     <img [src]="preview" alt="Preview" class="h-40 w-40 object-cover rounded-md">
                                     <div
@@ -310,9 +327,11 @@
                     </div>
                 </div>
             </div>
-            <button type="submit"
-                class="w-full font-bold py-2 px-4 rounded-md font-custom bg-secondary text-primary-btn">Edit
+            <div class="p-6 md:p-0 ">
+                <button type="submit"
+                class="w-full font-bold py-2 px-4 text-lg rounded-md font-custom bg-secondary text-primary-btn">Add
                 Product</button>
+            </div>
         </form>
     </div>
 </div>

@@ -29,10 +29,12 @@ export class ChatDetailsComponent implements OnInit{
 
     {content:"You're welcome!",time:'09:13',id:'1'}
   ];
+
   activeUserChats:any[]=[
     {image:'../../../../../assets/chats/user.jpg',name:'Jayden',content:'Checkout our new products...',time:'09:09 AM',count:'2'}
   ];
  
+  showMobileViewChats:boolean=false;
   
   constructor(){
 
@@ -41,6 +43,11 @@ export class ChatDetailsComponent implements OnInit{
       
   }
   showChats(user:any){
+    this.activeUserChats.pop();
+    this.activeUserChats.push(user);
+  }
+  showChatsMobile(user:any){
+    this.showMobileViewChats=true;
     this.activeUserChats.pop();
     this.activeUserChats.push(user);
   }

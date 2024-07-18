@@ -96,6 +96,11 @@ $bg-primary: #3A5C41;
                             font-weight: 500;
                             font-size: 20px;
                             line-height: 20px;
+                            
+                            @media(max-width:768px){
+                                font-size: 14px;
+                                line-height: 18px;
+                            }
     
                         }
                         .p-inputtext:enabled:focus ,.p-inputtext:enabled:hover{
@@ -111,6 +116,12 @@ $bg-primary: #3A5C41;
                         }
                     }
                 }
+            }
+        }
+        .mobile-view{
+            display: none;
+            @media(max-width:768px){
+                display: block;
             }
         }
     }

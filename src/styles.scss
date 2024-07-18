@@ -137,7 +137,7 @@ app-add-product {
         .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
             border-color: unset; 
             background: unset;
-            color: none;
+            color: unset;
         }
         .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
             box-shadow: none;
@@ -199,7 +199,26 @@ app-edit-product {
         width: 100%;
         text-align: center;
     }
+    .irradiated {
+        .p-radiobutton .p-radiobutton-box.p-highlight {
+            border: 2px solid;
+            border-color: $bg-primary;
+            background-color: unset;
 
+        }
+
+        .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
+            background-color: $bg-primary;
+        }
+        .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+            border-color: unset; 
+            background: unset;
+            color: unset;
+        }
+        .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
+            box-shadow: none;
+        }
+    }
 }
 
 app-header {
@@ -296,6 +315,9 @@ app-product-listing {
             color: white;
             padding: 0.75rem 0 0.75rem 0.75rem;
             text-align: center;
+            @media(max-width:768px){
+                font-size: 12px;
+            }
         }
 
         .p-dropdown-items-wrapper::-webkit-scrollbar {

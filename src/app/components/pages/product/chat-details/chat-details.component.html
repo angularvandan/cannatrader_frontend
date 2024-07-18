@@ -1,19 +1,19 @@
-<div class="w-full h-full">
+<div class="w-full">
     <div class="chats-container bg-[#EDEDED] ">
         <div
             class="chats w-full h-full flex flex-row flex-wrap md:flex-nowrap gap-4 lg:gap-8 p-4 sm:p-8 overflow-hidden">
             <div class="users-container w-full md:w-2/5 lg:w-[33%] bg-[#FFFFFF] z-10 rounded-lg">
                 <div class="users-listing lg:px-4">
-                    <div class="title mt-2 p-2 text-2xl text-primary leading-9 font-semibold">Chats</div>
-                    <div class="users-search  p-2">
+                    <div class="title mt-2 p-2 text-2xl text-primary leading-9 font-semibold"*ngIf="!showMobileViewChats">Chats</div>
+                    <div class="users-search  p-2"*ngIf="!showMobileViewChats">
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-search"></i>
                             <input type="text" pInputText placeholder="Search here" />
                         </span>
                     </div>
-                    <div class="users-chats-container p-2 max-h-[430px] overflow-y-auto">
+                    <div class="users-chats-container p-2 max-h-[430px] overflow-y-auto hidden md:block">
                         <div class="users-chats mt-4 " *ngFor="let user of users">
-                            <div class="users-image-container flex flex-row cursor-pointer"(click)="showChats(user)">
+                            <div class="users-image-container flex flex-row cursor-pointer" (click)="showChats(user)">
                                 <div class="flex-none user-image overflow-hidden rounded-full self-center mr-3">
                                     <img class=" " src="{{user.image}}" alt="">
                                 </div>
@@ -34,6 +34,34 @@
                             </div>
                         </div>
                     </div>
+                    <ng-container *ngIf="!showMobileViewChats">
+                        <div class="users-chats-container p-2 max-h-[430px] overflow-y-auto mobile-view"
+                            >
+                            <div class="users-chats mt-4 " *ngFor="let user of users">
+                                <div class="users-image-container flex flex-row cursor-pointer"
+                                    (click)="showChatsMobile(user)">
+                                    <div class="flex-none user-image overflow-hidden rounded-full self-center mr-3">
+                                        <img class=" " src="{{user.image}}" alt="">
+                                    </div>
+                                    <div class="grow user-contents self-center">
+                                        <div class="user-title text-lg leading-5 font-medium text-primary">{{user.name}}
+                                        </div>
+                                        <div class="user-message text-sm leading-5 font-medium text-[#737373]">
+                                            {{user.content}}</div>
+                                    </div>
+                                    <div class="flex-none user-notification relative">
+                                        <div class="content-time text-[15px] leading-5 text-semibold">{{user.time}}
+                                        </div>
+                                        <div
+                                            class="content-count bg-primary absolute right-0 bottom-0 rounded-full w-6 h-6 flex justify-center items-center">
+                                            <span
+                                                class="text-white text-[15px] leading-5 text-semibold">{{user.count}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
                 </div>
             </div>
             <div class="user-chats-container w-full md:w-3/5 lg:w-[67%] bg-[#FFFFFF] z-10 rounded-lg hidden md:block">
@@ -43,7 +71,8 @@
                             <img class="" src="{{activeUserChats[0].image}}" alt="">
                         </div>
                         <div class="name flex flex-col">
-                            <span class="text-xl leading-7 font-semibold text-primary">{{activeUserChats[0].name}}</span>
+                            <span
+                                class="text-xl leading-7 font-semibold text-primary">{{activeUserChats[0].name}}</span>
                             <span class="texl-sm leading-5 font-medium">Customer</span>
                         </div>
                     </div>
@@ -58,14 +87,91 @@
                         <div class="user-chats max-h-[350px] overflow-y-auto pe-4">
                             <ng-container *ngFor="let msg of userChatLeftMessage">
 
-                                <div class="flex justify-start mb-2"*ngIf="msg.id==='1'">
+                                <div class="flex justify-start mb-2" *ngIf="msg.id==='1'">
                                     <div class="left-message flex items-start flex-col">
                                         <span
                                             class=" py-2 px-4 bg-secondary text-primary text-sm leading-5 font-medium">{{msg.content}}</span>
                                         <p class="mt-1">{{msg.time}}</p>
                                     </div>
                                 </div>
-                                <div class="flex justify-end"*ngIf="msg.id==='2'">
+                                <div class="flex justify-end" *ngIf="msg.id==='2'">
+                                    <div class="right-message flex items-end flex-col">
+                                        <span
+                                            class="self-right py-2 px-4 bg-primary text-secondary text-sm leading-5 font-medium">{{msg.content}}</span>
+                                        <p class="mt-1">{{msg.time}}</p>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                        </div>
+                    </div>
+                    <div class="user-chat-send-btn">
+                        <div class="user-send">
+                            <span class="p-input-icon-left w-full">
+                                <i class="pi ">
+                                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M17.95 17.7875C17.1144 18.4612 16.0734 18.8286 15 18.8286C13.9266 18.8286 12.8856 18.4612 12.05 17.7875C11.7947 17.5753 11.4656 17.4732 11.1351 17.5037C10.8046 17.5342 10.4997 17.6947 10.2875 17.95C10.0753 18.2053 9.97325 18.5344 10.0037 18.8649C10.0342 19.1954 10.1947 19.5003 10.45 19.7125C11.7267 20.7783 13.337 21.362 15 21.362C16.6631 21.362 18.2733 20.7783 19.55 19.7125C19.8053 19.5003 19.9658 19.1954 19.9963 18.8649C20.0268 18.5344 19.9247 18.2053 19.7125 17.95C19.6074 17.8236 19.4785 17.7191 19.3331 17.6426C19.1877 17.566 19.0286 17.5188 18.8649 17.5037C18.5344 17.4732 18.2053 17.5753 17.95 17.7875ZM11.25 13.75C11.4972 13.75 11.7389 13.6767 11.9445 13.5393C12.15 13.402 12.3102 13.2068 12.4049 12.9784C12.4995 12.7499 12.5242 12.4986 12.476 12.2561C12.4278 12.0137 12.3087 11.7909 12.1339 11.6161C11.9591 11.4413 11.7363 11.3222 11.4939 11.274C11.2514 11.2258 11.0001 11.2505 10.7717 11.3451C10.5432 11.4398 10.348 11.6 10.2107 11.8055C10.0733 12.0111 10 12.2528 10 12.5C10 12.8315 10.1317 13.1495 10.3661 13.3839C10.6005 13.6183 10.9185 13.75 11.25 13.75ZM18.75 11.25C18.5028 11.25 18.2611 11.3233 18.0555 11.4607C17.85 11.598 17.6898 11.7932 17.5952 12.0216C17.5005 12.2501 17.4758 12.5014 17.524 12.7439C17.5723 12.9863 17.6913 13.2091 17.8661 13.3839C18.0409 13.5587 18.2637 13.6778 18.5061 13.726C18.7486 13.7742 19 13.7495 19.2284 13.6549C19.4568 13.5602 19.652 13.4 19.7893 13.1945C19.9267 12.9889 20 12.7472 20 12.5C20 12.1685 19.8683 11.8505 19.6339 11.6161C19.3995 11.3817 19.0815 11.25 18.75 11.25ZM15 2.5C12.5277 2.5 10.111 3.23311 8.05538 4.60663C5.99976 5.98015 4.39761 7.93238 3.45151 10.2165C2.50542 12.5005 2.25787 15.0139 2.74019 17.4386C3.2225 19.8634 4.41301 22.0907 6.16117 23.8388C7.90933 25.587 10.1366 26.7775 12.5614 27.2598C14.9861 27.7421 17.4995 27.4946 19.7836 26.5485C22.0676 25.6024 24.0199 24.0002 25.3934 21.9446C26.7669 19.889 27.5 17.4723 27.5 15C27.5 13.3585 27.1767 11.733 26.5485 10.2165C25.9203 8.69989 24.9996 7.3219 23.8388 6.16117C22.6781 5.00043 21.3001 4.07969 19.7836 3.45151C18.267 2.82332 16.6415 2.5 15 2.5ZM15 25C13.0222 25 11.0888 24.4135 9.4443 23.3147C7.79981 22.2159 6.51809 20.6541 5.76121 18.8268C5.00433 16.9996 4.8063 14.9889 5.19215 13.0491C5.57801 11.1093 6.53041 9.32746 7.92894 7.92893C9.32746 6.53041 11.1093 5.578 13.0491 5.19215C14.9889 4.8063 16.9996 5.00433 18.8268 5.7612C20.6541 6.51808 22.2159 7.79981 23.3147 9.4443C24.4135 11.0888 25 13.0222 25 15C25 17.6522 23.9464 20.1957 22.0711 22.0711C20.1957 23.9464 17.6522 25 15 25Z"
+                                            fill="#FFE175" />
+                                    </svg>
+
+                                </i>
+                                <input type="text" pInputText placeholder="Type Message here..." />
+                                <i class="pi p-input-icon-right cursor-pointer">
+                                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_759_7098)">
+                                            <path
+                                                d="M25.2932 7.10773C25.8332 5.61398 24.3857 4.16648 22.8919 4.70773L4.63569 11.3102C3.13694 11.8527 2.95569 13.8977 4.33444 14.6965L10.1619 18.0702L15.3657 12.8665C15.6014 12.6388 15.9172 12.5128 16.2449 12.5156C16.5727 12.5185 16.8862 12.65 17.118 12.8817C17.3497 13.1135 17.4812 13.427 17.484 13.7547C17.4869 14.0825 17.3609 14.3982 17.1332 14.634L11.9294 19.8377L15.3044 25.6652C16.1019 27.044 18.1469 26.8615 18.6894 25.364L25.2932 7.10773Z"
+                                                fill="#FFE175" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_759_7098">
+                                                <rect width="30" height="30" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </i>
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- this is for mobile  -->
+            <div class="user-chats-container w-full md:w-3/5 lg:w-[67%] bg-[#FFFFFF] z-10 rounded-lg mobile-view"
+                *ngIf="showMobileViewChats">
+                <div class="user-chats p-4 mt-2 ">
+                    <div class="user-chats-heading flex flex-row">
+                        <div class="img-container overflow-hidden rounded-full mr-4">
+                            <img class="" src="{{activeUserChats[0].image}}" alt="">
+                        </div>
+                        <div class="name flex flex-col">
+                            <span
+                                class="text-xl leading-7 font-semibold text-primary">{{activeUserChats[0].name}}</span>
+                            <span class="texl-sm leading-5 font-medium">Customer</span>
+                        </div>
+                    </div>
+                    <div class="user-chats-day">
+                        <div class="flex justify-center align-items-center">
+                            <p
+                                class="bg-[#D1DACF] text-sm leading-5 font-semibold text-primary px-3 py-1 rounded-[30px]">
+                                Today</p>
+                        </div>
+                    </div>
+                    <div class="user-chats-messages my-4">
+                        <div class="user-chats max-h-[350px] overflow-y-auto pe-4">
+                            <ng-container *ngFor="let msg of userChatLeftMessage">
+
+                                <div class="flex justify-start mb-2" *ngIf="msg.id==='1'">
+                                    <div class="left-message flex items-start flex-col">
+                                        <span
+                                            class=" py-2 px-4 bg-secondary text-primary text-sm leading-5 font-medium">{{msg.content}}</span>
+                                        <p class="mt-1">{{msg.time}}</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end" *ngIf="msg.id==='2'">
                                     <div class="right-message flex items-end flex-col">
                                         <span
                                             class="self-right py-2 px-4 bg-primary text-secondary text-sm leading-5 font-medium">{{msg.content}}</span>

@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class SubscribedDetailsComponent {
 
+
+  btn:any[]= [
+    true,true,true,true,true
+  ];
+  constructor(){}
+
+  toggleBtn(index:number) {
+    this.btn[index] = !this.btn[index]
+  }
+
 }

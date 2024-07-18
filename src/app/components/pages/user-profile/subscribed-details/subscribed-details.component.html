@@ -41,7 +41,12 @@
                     <td></td>
                     <td>
                         <span class="subscribed-btn-container">
-                            <button class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
+                            <button (click)="toggleBtn(0)" *ngIf="btn[0]"
+                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded">Subscribe</button>
+
+                            <button (click)="toggleBtn(0)" *ngIf="!btn[0]"
+                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded">Subscribed
+                                ✓</button>
 
                         </span>
                     </td>
@@ -57,7 +62,12 @@
                     <td></td>
                     <td>
                         <span class="subscribed-btn-container">
-                            <button class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
+                            <button (click)="toggleBtn(1)" *ngIf="btn[1]"
+                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded">Subscribe</button>
+
+                            <button (click)="toggleBtn(1)" *ngIf="!btn[1]"
+                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded">Subscribed
+                                ✓</button>
 
                         </span>
                     </td>
@@ -73,7 +83,12 @@
                     <td></td>
                     <td>
                         <span class="subscribed-btn-container">
-                            <button class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
+                            <button (click)="toggleBtn(2)" *ngIf="btn[2]"
+                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded">Subscribe</button>
+
+                            <button (click)="toggleBtn(2)" *ngIf="!btn[2]"
+                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded">Subscribed
+                                ✓</button>
 
                         </span>
                     </td>
@@ -89,7 +104,12 @@
                     <td></td>
                     <td>
                         <span class="subscribed-btn-container">
-                            <button class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
+                            <button (click)="toggleBtn(3)" *ngIf="btn[3]"
+                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded">Subscribe</button>
+
+                            <button (click)="toggleBtn(3)" *ngIf="!btn[3]"
+                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded">Subscribed
+                                ✓</button>
 
                         </span>
                     </td>
@@ -105,7 +125,12 @@
                     <td></td>
                     <td>
                         <span class="subscribed-btn-container">
-                            <button class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
+                            <button (click)="toggleBtn(4)" *ngIf="btn[4]"
+                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded">Subscribe</button>
+
+                            <button (click)="toggleBtn(4)" *ngIf="!btn[4]"
+                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded">Subscribed
+                                ✓</button>
 
                         </span>
                     </td>

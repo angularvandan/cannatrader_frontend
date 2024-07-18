@@ -4,7 +4,8 @@
     </div>
     <div class="profile-details lg:p-16 sm:p-4 ">
         <div class="flex flex-row lg:flex-nowrap flex-wrap gap-4 justify-center">
-            <div class="h-[410px] lg:h-[410px] sm:h-[250px]  lg:p-8 sm:p-6 p-4 lg:col-span-1 rounded-md"style="min-width:275px;box-shadow: 0px 0px 5px #cfc6c0;">
+            <div class="user-card h-[410px] lg:h-[410px] sm:h-[250px]  lg:p-8 sm:p-6 p-4 lg:col-span-1 rounded-md"
+                style="min-width:275px;box-shadow: 0px 0px 5px #cfc6c0;">
                 <div class="block sm:hidden lg:block">
                     <div class="flex flex-col items-center">
                         <div class="user-img w-36 h-36 flex overflow-hidded mb-4">
@@ -28,7 +29,8 @@
                                     </button>
                                 </div>
                                 <div class="logout w-full ">
-                                    <button class="w-full flex justify-center bg-secondary text-primary rounded-lg"routerLink="/login" (click)="onLogout()">Log
+                                    <button class="w-full flex justify-center bg-secondary text-primary rounded-lg"
+                                        routerLink="/login" (click)="onLogout()">Log
                                         Out
                                         <svg width="21" height="25" class="ml-2" viewBox="0 0 30 31" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -60,7 +62,7 @@
                             <div class="buttons flex flex-col items-center w-36">
                                 <div class="edit-profile w-full">
                                     <button [routerLink]="['../edit-profile']"
-                                     class="w-full flex justify-center mb-3 bg-primary text-secondary rounded-lg">Edit
+                                        class="w-full flex justify-center mb-3 bg-primary text-secondary rounded-lg">Edit
                                         Profile
                                         <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" height="24px"
                                             viewBox="0 -960 960 960" width="24px" fill="#5f6368">
@@ -89,9 +91,10 @@
                     </div>
                 </div>
             </div>
-            <div class="h-[1000px] w-full lg:w-[70vw] rounded-md m:p-8 p-4"style="box-shadow: 0px 0px 5px #cfc6c0;">
+            <div class="h-[1000px] w-full lg:w-[70vw] rounded-md m:p-8 p-4" style="box-shadow: 0px 0px 5px #cfc6c0;">
                 <div class="flex flex-col">
-                    <div class="recent-listing mb-5">
+                    <!-- //this is for not a mobile -->
+                    <div class="recent-listing mb-5 hidden sm:block">
                         <div class="table-heading mb-2">
                             <h1 class=" text-primary text-start text-2xl leading-8 font-semibold">Recent Listings</h1>
                         </div>
@@ -118,7 +121,7 @@
                                         <tr style="height:10px"></tr>
                                         <tr>
                                             <td class="">
-                                                <a  class="img-container">
+                                                <a class="img-container">
                                                     <img src="../../../../../assets/profile/product_listing.png"
                                                         class="shadow-4" />
                                                 </a>
@@ -209,9 +212,67 @@
                             </div>
                         </div>
                         <div class="pt-6 flex justify-center">
-                            <a routerLink="../subscribed-listing"
+                            <a routerLink="/products"
                                 class="font-lg cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
                                 More</a>
+                        </div>
+                    </div>
+                    <!-- //this is for mobile view -->
+                    <div class="block sm:hidden">
+                        <div class="header flex justify-between items-center mb-6">
+                            <div class="mb-2">
+                                <h1 class=" text-primary text-start text-2xl leading-8 font-semibold">Recent Listings
+                                </h1>
+                            </div>
+                            <div class="">
+                                <a routerLink="/products"
+                                    class="font-lg cursor-pointer leading-4 font-medium  text-primary rounded-lg py-2 px-3">View
+                                    More</a>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 mb-4">
+                            <ng-container *ngFor="let product of products;let i=index;">
+                                <div *ngIf="i<3" routerLink="productDetails"
+                                    class="max-w-sm cursor-pointer mx-auto bg-white rounded-lg justify-around overflow-hidden flex">
+                                    <div class="relative">
+                                        <img [src]="product.image" alt="Canopy Growth" class="w-full h-32 object-cover">
+                                        <div
+                                            class="absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-lg posted">
+                                            Posted:
+                                            {{product.posted}}
+                                        </div>
+                                    </div>
+                                    <div class="px-5">
+                                        <div class="flex h-full justify-between items-center">
+                                            <div class="flex flex-col justify-center gap-1 h-full">
+                                                <h2 class="font-bold text-base text-gray-800">{{product.name}}</h2>
+                                                <p class="text-xs text-help font-normal">{{product.flavour}}</p>
+                                                <p class="text-xs text-[#262626] font-normal">Strain Type: <span
+                                                        class="text-side">{{product.strainType}}</span>
+                                                </p>
+                                                <p class="text-xs text-[#262626] font-normal">THC Range: <span
+                                                        class="text-side">{{product.thcRange}}</span>
+                                                </p>
+                                                <p class="text-xs text-[#262626] flex items-center">
+                                                    <i class="pi pi-map-marker mr-1 text-side font-bold"></i>
+                                                    {{product.location}}
+                                                </p>
+                                            </div>
+                                            <div class="flex items-center" routerLink="/profile/editProduct">
+                                                <svg width="30" height="30" viewBox="0 0 33 34" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="16.5" cy="17" r="16.5" transform="rotate(180 16.5 17)"
+                                                        fill="black" fill-opacity="0.04" />
+                                                    <path
+                                                        d="M10.1667 23.3333H11.3542L19.5 15.1875L18.3125 14L10.1667 22.1458V23.3333ZM8.5 25V21.4583L19.5 10.4792C19.6667 10.3264 19.8508 10.2083 20.0525 10.125C20.2542 10.0417 20.4658 10 20.6875 10C20.9097 10 21.125 10.0417 21.3333 10.125C21.5417 10.2083 21.7222 10.3333 21.875 10.5L23.0208 11.6667C23.1875 11.8194 23.3092 12 23.3858 12.2083C23.4625 12.4167 23.5006 12.625 23.5 12.8333C23.5 13.0556 23.4619 13.2675 23.3858 13.4692C23.3097 13.6708 23.1881 13.8547 23.0208 14.0208L12.0417 25H8.5ZM18.8958 14.6042L18.3125 14L19.5 15.1875L18.8958 14.6042Z"
+                                                        fill="#3A5C41" />
+                                                </svg>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
                         </div>
                     </div>
                     <div class="recent-subscribed">
@@ -235,8 +296,12 @@
                                     <td></td>
                                     <td>
                                         <span class="subscribed-btn-container">
-                                            <button
-                                                class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
+                                            <button (click)="toggleBtn(0)" *ngIf="btn[0]"
+                                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded">Subscribe</button>
+
+                                            <button (click)="toggleBtn(0)" *ngIf="!btn[0]"
+                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded">Subscribed
+                                                ✓</button>
 
                                         </span>
                                     </td>
@@ -252,8 +317,12 @@
                                     <td></td>
                                     <td>
                                         <span class="subscribed-btn-container">
-                                            <button
-                                                class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
+                                            <button (click)="toggleBtn(1)" *ngIf="btn[1]"
+                                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded">Subscribe</button>
+
+                                            <button (click)="toggleBtn(1)" *ngIf="!btn[1]"
+                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded">Subscribed
+                                                ✓</button>
 
                                         </span>
                                     </td>
@@ -269,8 +338,12 @@
                                     <td></td>
                                     <td>
                                         <span class="subscribed-btn-container">
-                                            <button
-                                                class="bg-primary text-secondary px-4 py-2 rounded-md">Subscribed</button>
+                                            <button (click)="toggleBtn(2)" *ngIf="btn[2]"
+                                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded">Subscribe</button>
+
+                                            <button (click)="toggleBtn(2)" *ngIf="!btn[2]"
+                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded">Subscribed
+                                                ✓</button>
 
                                         </span>
                                     </td>
