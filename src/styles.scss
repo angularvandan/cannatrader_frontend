@@ -57,6 +57,78 @@ h2 {
     font-size: 40px;
 }
 
+app-login {
+    .p-password {
+        background: none;
+    }
+
+    .p-inputtext {
+        background: #FFFFFF3D;
+        backdrop-filter: blur(10.9px);
+        border: 0;
+        color: #fafafa;
+    }
+
+    .p-inputtext:enabled:focus {
+        outline: none;
+        outline-offset: 0;
+        box-shadow: none;
+        border-color: unset;
+    }
+
+    .p-input-icon-right>.p-icon-wrapper {
+        color: whitesmoke;
+    }
+}
+
+app-register {
+    .p-password {
+        background: none;
+    }
+
+    .p-inputtext {
+        background: #FFFFFF3D;
+        backdrop-filter: blur(10.9px);
+        border: 0;
+        color: #fafafa;
+    }
+
+    .p-inputtext:enabled:focus {
+        outline: none;
+        outline-offset: 0;
+        box-shadow: none;
+        border-color: unset;
+    }
+
+    .p-input-icon-right>.p-icon-wrapper {
+        color: whitesmoke;
+    }
+}
+
+app-reset-password {
+    .p-password {
+        background: none;
+    }
+
+    .p-inputtext {
+        background: #FFFFFF3D;
+        backdrop-filter: blur(10.9px);
+        border: 0;
+        color: #fafafa;
+    }
+
+    .p-inputtext:enabled:focus {
+        outline: none;
+        outline-offset: 0;
+        box-shadow: none;
+        border-color: unset;
+    }
+
+    .p-input-icon-right>.p-icon-wrapper {
+        color: whitesmoke;
+    }
+}
+
 app-home {
     .filter-button {
         .p-button {
@@ -87,6 +159,14 @@ app-home {
 
             }
         }
+    }
+
+    .p-inputtext {
+        font-family: "Poppins";
+    }
+
+    .p-component {
+        font-family: "Poppins";
     }
 }
 
@@ -134,15 +214,48 @@ app-add-product {
         .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
             background-color: $bg-primary;
         }
+
         .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
-            border-color: unset; 
+            border-color: unset;
             background: unset;
             color: unset;
         }
+
         .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
             box-shadow: none;
         }
     }
+}
+
+app-edit-profile {
+    .p-radiobutton .p-radiobutton-box.p-highlight {
+        border: 2px solid;
+        border-color: $bg-primary;
+        background-color: unset;
+
+    }
+
+    .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
+        background-color: $bg-primary;
+    }
+
+    .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+        border-color: unset;
+        background: unset;
+        color: unset;
+    }
+
+    .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
+        box-shadow: none;
+        border-color: unset;
+    }
+    .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover{
+        border-color: $bg-primary;
+    }
+    .p-radiobutton .p-radiobutton-box.p-highlight {
+        background: unset;
+    }
+
 }
 
 app-edit-product {
@@ -199,6 +312,7 @@ app-edit-product {
         width: 100%;
         text-align: center;
     }
+
     .irradiated {
         .p-radiobutton .p-radiobutton-box.p-highlight {
             border: 2px solid;
@@ -210,11 +324,13 @@ app-edit-product {
         .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
             background-color: $bg-primary;
         }
+
         .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
-            border-color: unset; 
+            border-color: unset;
             background: unset;
             color: unset;
         }
+
         .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
             box-shadow: none;
         }
@@ -315,7 +431,8 @@ app-product-listing {
             color: white;
             padding: 0.75rem 0 0.75rem 0.75rem;
             text-align: center;
-            @media(max-width:768px){
+
+            @media(max-width:768px) {
                 font-size: 12px;
             }
         }
@@ -426,7 +543,7 @@ body {
 
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    // font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 /* Importing Bootstrap SCSS file. */

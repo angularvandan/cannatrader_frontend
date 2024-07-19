@@ -7,17 +7,23 @@ $bg-primary: #3A5C41;
             tbody {
     
                 tr {
-                    height: 80px;
+                    height: 100px;
     
                     td {
                         text-align: start;
                         color: $text-primary;
+                        font-weight: 600;
+                        font-size: 24px;
+                        line-height: 36px;
     
                         span {
                             display: flex;
                             justify-content: end;
                             height: 40px;
                         }
+                    }
+                    td:first-child{
+                        width: 120px;
                     }
     
                     .img-container {
@@ -26,8 +32,8 @@ $bg-primary: #3A5C41;
     
                         img {
                             border-radius: 100%;
-                            width:65px;
-                            height:65px;
+                            width:80px;
+                            height:80px;
                         }
                     }
     

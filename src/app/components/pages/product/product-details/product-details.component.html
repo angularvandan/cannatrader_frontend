@@ -142,10 +142,8 @@
 
             <h2 class="text-xl font-semibold pt-10">Description</h2>
 
-            <p class="mt-4 text-help">
-                Our premium cannabis dried flower is cultivated from top-quality strains, ensuring a potent and aromatic
-                experience Our premium cannabis dried flower is cultivated from top-quality strains, ensuring Read
-                more...
+            <p class="mt-4 text-help">{{ showAll ? paragraph : (paragraph | slice:0:charLimit) + '...' }}
+                <span class="text-[#698AFD] cursor-pointer"(click)="toggleViewMore()">{{ showAll ? 'View Less' : 'View More' }}</span>
             </p>
 
             <div class="w-full h-[0.5px] border border-primary mt-10 mb-8"></div>

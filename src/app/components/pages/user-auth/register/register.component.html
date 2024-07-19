@@ -1,4 +1,4 @@
-<div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay">
+<div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay"*ngIf="section!='otp'">
     <div class=" bg-opacity-90 p-4 rounded-lg shadow-lg max-w-3xl w-full">
         <h2 class="font-semibold mb-6 text-center font-custom text-secondary font-Poppins">Sign Up</h2>
         <p class="text-center mb-6 font-custom text-[#fafafa] leading-7">Sign up to enjoy the convenience of shopping
@@ -48,21 +48,8 @@
                         <label for="password" class="block text-sm  font-custom">Password</label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-lock text-[#fafafa]"></i>
-                            <input pPassword id="password" type="password" [feedback]="false"
-                                placeholder="Enter your password"
-                                class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
-                            <div class="absolute top-2 right-0 pr-2">
-                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M15 23.4375C7.7125 23.4375 4.2875 15.7 4.1375 15.375C4.08799 15.2562 4.0625 15.1287 4.0625 15C4.0625 14.8713 4.08799 14.7438 4.1375 14.625C4.2875 14.3 7.7125 6.5625 15 6.5625C22.2875 6.5625 25.7125 14.3 25.8625 14.625C25.912 14.7438 25.9375 14.8713 25.9375 15C25.9375 15.1287 25.912 15.2562 25.8625 15.375C25.7125 15.7 22.2875 23.4375 15 23.4375ZM6.0375 15C6.775 16.4375 9.7875 21.5625 15 21.5625C20.2125 21.5625 23.225 16.4375 23.9625 15C23.225 13.5625 20.2125 8.4375 15 8.4375C9.7875 8.4375 6.775 13.5625 6.0375 15Z"
-                                        fill="#DCDCDC" />
-                                    <path
-                                        d="M15 19.0625C14.1965 19.0625 13.4111 18.8242 12.743 18.3778C12.0749 17.9315 11.5542 17.297 11.2467 16.5547C10.9393 15.8123 10.8588 14.9955 11.0156 14.2074C11.1723 13.4194 11.5592 12.6955 12.1274 12.1274C12.6955 11.5592 13.4194 11.1723 14.2074 11.0156C14.9955 10.8588 15.8123 10.9393 16.5547 11.2467C17.297 11.5542 17.9315 12.0749 18.3778 12.743C18.8242 13.4111 19.0625 14.1965 19.0625 15C19.0592 16.0764 18.6301 17.1078 17.869 17.869C17.1078 18.6301 16.0764 19.0592 15 19.0625ZM15 12.8125C14.5674 12.8125 14.1444 12.9408 13.7847 13.1812C13.425 13.4215 13.1446 13.7632 12.979 14.1629C12.8134 14.5626 12.7701 15.0024 12.8545 15.4268C12.9389 15.8511 13.1473 16.2409 13.4532 16.5468C13.7591 16.8527 14.1489 17.0611 14.5732 17.1455C14.9976 17.2299 15.4374 17.1866 15.8371 17.021C16.2368 16.8554 16.5785 16.575 16.8188 16.2153C17.0592 15.8556 17.1875 15.4326 17.1875 15C17.1842 14.4209 16.9527 13.8664 16.5432 13.4568C16.1336 13.0473 15.5792 12.8158 15 12.8125Z"
-                                        fill="#DCDCDC" />
-                                </svg>
+                                <p-password [toggleMask]="true"[feedback]="false"placeholder="Enter your password"></p-password>
 
-                            </div>
                         </span>
                     </div>
                     <div class="mb-4 ">
@@ -70,21 +57,8 @@
                             Password</label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-lock text-[#fafafa]"></i>
-                            <input pPassword id="confirmPassword" [feedback]="false" type="password"
-                                placeholder="Confirm your password"
-                                class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
-                            <div class="absolute top-2 right-0 pr-2">
-                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M15 23.4375C7.7125 23.4375 4.2875 15.7 4.1375 15.375C4.08799 15.2562 4.0625 15.1287 4.0625 15C4.0625 14.8713 4.08799 14.7438 4.1375 14.625C4.2875 14.3 7.7125 6.5625 15 6.5625C22.2875 6.5625 25.7125 14.3 25.8625 14.625C25.912 14.7438 25.9375 14.8713 25.9375 15C25.9375 15.1287 25.912 15.2562 25.8625 15.375C25.7125 15.7 22.2875 23.4375 15 23.4375ZM6.0375 15C6.775 16.4375 9.7875 21.5625 15 21.5625C20.2125 21.5625 23.225 16.4375 23.9625 15C23.225 13.5625 20.2125 8.4375 15 8.4375C9.7875 8.4375 6.775 13.5625 6.0375 15Z"
-                                        fill="#DCDCDC" />
-                                    <path
-                                        d="M15 19.0625C14.1965 19.0625 13.4111 18.8242 12.743 18.3778C12.0749 17.9315 11.5542 17.297 11.2467 16.5547C10.9393 15.8123 10.8588 14.9955 11.0156 14.2074C11.1723 13.4194 11.5592 12.6955 12.1274 12.1274C12.6955 11.5592 13.4194 11.1723 14.2074 11.0156C14.9955 10.8588 15.8123 10.9393 16.5547 11.2467C17.297 11.5542 17.9315 12.0749 18.3778 12.743C18.8242 13.4111 19.0625 14.1965 19.0625 15C19.0592 16.0764 18.6301 17.1078 17.869 17.869C17.1078 18.6301 16.0764 19.0592 15 19.0625ZM15 12.8125C14.5674 12.8125 14.1444 12.9408 13.7847 13.1812C13.425 13.4215 13.1446 13.7632 12.979 14.1629C12.8134 14.5626 12.7701 15.0024 12.8545 15.4268C12.9389 15.8511 13.1473 16.2409 13.4532 16.5468C13.7591 16.8527 14.1489 17.0611 14.5732 17.1455C14.9976 17.2299 15.4374 17.1866 15.8371 17.021C16.2368 16.8554 16.5785 16.575 16.8188 16.2153C17.0592 15.8556 17.1875 15.4326 17.1875 15C17.1842 14.4209 16.9527 13.8664 16.5432 13.4568C16.1336 13.0473 15.5792 12.8158 15 12.8125Z"
-                                        fill="#DCDCDC" />
-                                </svg>
+                                <p-password [toggleMask]="true"[feedback]="false"placeholder="Enter your confirm password"></p-password>
 
-                            </div>
                         </span>
                     </div>
                 </div>
@@ -134,19 +108,53 @@
                         </div>
                     </label>
                     <div>
-                        By continuing, you agree to cannatrader 
-                        <a href="#" class="hover:underline text-secondary"
-                            routerLink="/terms-conditions">Terms of Use</a> and <a href="#"
-                            class="hover:underline text-secondary" routerLink="/privacy-policy">Privacy
+                        By continuing, you agree to cannatrader
+                        <a href="#" class="hover:underline text-secondary" routerLink="/terms-conditions">Terms of
+                            Use</a> and <a href="#" class="hover:underline text-secondary"
+                            routerLink="/privacy-policy">Privacy
                             Policy</a>.
                     </div>
                 </div>
             </div>
-            <button routerLink="/home" type="submit"
-                class="w-full font-bold py-2 px-4 rounded-md font-custom bg-secondary text-primary-btn">Sign
+            <button  type="submit"
+                class="w-full font-bold py-2 px-4 rounded-md font-custom bg-secondary text-primary-btn"(click)="onSignup()">Sign
                 Up</button>
         </form>
         <p class="mt-4 text-center font-custom text-[#fafafa]">Already have an account? &nbsp; &nbsp;<a
                 routerLink="/login" class="hover:underline text-secondary">Sign In</a></p>
+    </div>
+</div>
+<!-- this is for email verification -->
+<div class="email-verification min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay"*ngIf="section==='otp'">
+
+    <div class="text-[#fafafa] bg-opacity-90 p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-2xl font-bold mb-6 text-center text-secondary">Email Verification</h2>
+        <p class="text-center mb-6 text-[#fafafa]">Please enter the verification code sent 
+            <br>to your email to verify.</p>
+        <form>
+            <div class="mb-8">
+                <div id="otp" class="flex flex-row justify-center text-center px-2 mt-5">
+                    <input #otpInput (input)="handleInput($event, 0)" (keydown)="handleKeyDown($event, 0)"
+                        class="m-2 border border-secondary h-10 w-10 focus:outline-none focus:ring focus:ring-secondary text-center form-control rounded"
+                        type="text" id="first" maxlength="1" />
+                    <input #otpInput (input)="handleInput($event, 1)" (keydown)="handleKeyDown($event, 1)"
+                        class="m-2 border border-secondary h-10 w-10 focus:outline-none focus:ring focus:ring-secondary text-center form-control rounded"
+                        type="text" id="second" maxlength="1" />
+                    <input #otpInput (input)="handleInput($event, 2)" (keydown)="handleKeyDown($event, 2)"
+                        class="m-2 border border-secondary h-10 w-10 focus:outline-none focus:ring focus:ring-secondary text-center form-control rounded"
+                        type="text" id="third" maxlength="1" />
+                    <input #otpInput (input)="handleInput($event, 3)" (keydown)="handleKeyDown($event, 3)"
+                        class="m-2 border border-secondary h-10 w-10 focus:outline-none focus:ring focus:ring-secondary text-center form-control rounded"
+                        type="text" id="fourth" maxlength="1" />
+                </div>
+            </div>
+            <button  type="button"(click)="verifyEmail()"
+                class="w-full bg-secondary text-primary-btn justify-center font-bold py-2 px-4 rounded-md">
+                <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
+                <span *ngIf="!loading">Verify & Continue</span>
+            </button>
+        </form>
+        <p class="mt-4 text-center mx-4">Didn’t receive the OTP?<a 
+                class="hover:underline text-secondary mx-4">Resend</a></p>
     </div>
 </div>

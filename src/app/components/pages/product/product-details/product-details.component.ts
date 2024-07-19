@@ -10,8 +10,16 @@ export class ProductDetailsComponent {
   rate: number = 0
 
   btn = true
-
+  paragraph: string = `Our premium cannabis dried flower is cultivated from top-quality strains, ensuring a potent and aromatic
+                experience Our premium cannabis dried flower is cultivated from top-quality strains, ensuring `;
+  charLimit: number = 100;
+  showAll: boolean = false;
+  
   toggleBtn() {
     this.btn = !this.btn
+  }
+
+  toggleViewMore() {
+    this.showAll = !this.showAll;
   }
 }

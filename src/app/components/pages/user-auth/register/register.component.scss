@@ -121,3 +121,42 @@ i {
         background-color: #FFE175;
     }
 }
+.email-verification{
+    .bg-gradient-overlay {
+        background: url('../../../../../assets/resetpass.png');
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .p-button {
+        border: none;
+        width: 100%;
+        justify-content: center;
+        --tw-bg-opacity: 1;
+        background: black;
+    }
+    
+    i {
+        z-index: 1;
+    }
+    
+    .p-inputtext,
+    input {
+        background: #FFFFFF3D;
+        backdrop-filter: blur(10.9px);
+        border: 0;
+        color: #fafafa;
+    }
+    
+    .p-input-icon-left>.p-icon-wrapper.p-icon,
+    .p-input-icon-left>i:first-of-type {
+        color: #DCDCDCDC;
+    }
+    
+    .p-inputtext:enabled:focus {
+        outline: 0 none;
+        outline-offset: 0;
+        box-shadow: none;
+        border-color: none;
+    }
+}
