@@ -1,30 +1,26 @@
-<div class="container mx-auto p-4 flex items-center justify-center">
+<div class="wish-list-container w-screen p-4 flex items-center justify-center">
     <!-- Filters -->
     <div class="max-w-full">
 
-        <div class="bg-gray-100 py-8">
-            <nav class="flex mb-8 justify-between items-center" aria-label="Breadcrumb">
-                <ol class="inline-flex items-center sm:w-full space-x-1 ">
+        <div class="bg-gray-100 py-8 flex">
+            <div routerLink="../profile-details" class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                <i class="pi pi-arrow-left text-primary"></i>
+            </div>
+            <div class="flex justify-center mb-1 sm:mb-8 w-full" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 ">
                     <li class="inline-flex items-center">
-                        <div routerLink="../profile-details" class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center ">
-                            <i class="pi pi-arrow-left text-primary"></i>
-                        </div>
-                        <a class="text-primary inline-flex text-[22px] font-medium text-gray-800 hover:underline md:ml-2 hidden sm:block">
-                            Home / Productslisting
+                        <a 
+                            class="m text-primary inline-flex text-[22px] font-medium text-gray-800 hover:underline md:ml-2">
+                            Recent Listing
                         </a>
                     </li>
                 </ol>
-                <div class="heading w-full">
-                    <p class="text-center text-primary text-[22px] sm:text-[32px] font-semibold">Recent Listing</p>
-                </div>
-                <div class="heading sm:w-full"></div>
-            </nav>
+            </div>
         </div>
 
         <!-- Product Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-
-            <div routerLink="/products/productDetails" *ngFor="let product of products"
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div *ngFor="let product of products" routerLink="productDetails"
                 class="max-w-sm cursor-pointer mx-auto bg-white rounded-lg justify-around overflow-hidden flex">
                 <div class="relative">
                     <img [src]="product.image" alt="Canopy Growth" class="w-full h-48 object-cover">
@@ -35,8 +31,7 @@
                 <div class="py-4 px-5">
                     <div class="flex h-full justify-between items-start">
                         <div class="flex flex-col justify-between h-full">
-                            <h2 class="font-bold text-lg text-gray-800">{{product.name}}
-                                Inc</h2>
+                            <h2 class="font-bold text-lg text-gray-800">{{product.name}}</h2>
                             <p class="text-sm text-help font-normal">{{product.flavour}}</p>
                             <p class="text-sm text-[#262626] font-normal">Strain Type: <span
                                     class="text-side">{{product.strainType}}</span>
@@ -49,8 +44,7 @@
                                 {{product.location}}
                             </p>
                         </div>
-                        <button routerLink="/profile/editProduct" class="text-gray-500"><i
-                                class="pi pi-pencil text-side"></i></button>
+                        <button class="text-gray-500"><i class="pi pi-heart text-side"></i></button>
                     </div>
                 </div>
             </div>

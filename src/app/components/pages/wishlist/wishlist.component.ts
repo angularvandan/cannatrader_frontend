@@ -8,15 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class WishlistComponent implements OnInit {
   products = [
     {
-      name: 'Aurora Cannabia Inc',
-      description: 'Chocolate',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      imageUrl: '../../../../../assets/product/product.png',
-      posted: 'a Day ago'
-    },
-    {
       name: 'Canopy Growth',
       description: 'Vanilla',
       strainType: 'Sativa',

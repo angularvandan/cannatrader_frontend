@@ -249,9 +249,11 @@ app-edit-profile {
         box-shadow: none;
         border-color: unset;
     }
-    .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover{
+
+    .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
         border-color: $bg-primary;
     }
+
     .p-radiobutton .p-radiobutton-box.p-highlight {
         background: unset;
     }
@@ -288,6 +290,14 @@ app-edit-product {
 
         .p-button:hover {
             background: #F5F5F5;
+        }
+    }
+
+    .p-dialog {
+        width: 350px;
+
+        @media(max-width:500px) {
+            width: auto;
         }
     }
 
@@ -347,12 +357,19 @@ app-header {
     }
 
     .p-sidebar-right {
+
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
 
         @media(max-width:768px) {
             border-top-left-radius: 10px;
             border-bottom-left-radius: 10px;
+        }
+
+        @media (max-width:370px) {
+            width: 100%;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
         }
     }
 }
@@ -458,6 +475,38 @@ app-product-listing {
 
     .p-dropdown-trigger {
         justify-content: normal;
+    }
+}
+
+app-profile-details {
+
+    .p-dialog {
+        width: 350px;
+
+        @media(max-width:500px) {
+            width: auto;
+        }
+    }
+
+    .p-dialog-header {
+        justify-content: center;
+    }
+
+    .pi {
+        font-size: 1.5rem;
+    }
+
+    .p-dialog .p-dialog-footer {
+        display: flex;
+
+        button {
+            width: 100%;
+        }
+    }
+
+    .p-dialog.p-confirm-dialog .p-confirm-dialog-message {
+        margin-left: 0;
+        width: 100%;
     }
 }
 

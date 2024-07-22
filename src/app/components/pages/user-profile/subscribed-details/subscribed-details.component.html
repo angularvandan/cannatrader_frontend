@@ -1,21 +1,16 @@
 <div class="subscribed-listing-container">
 
-    <div class=" py-4">
-        <nav class="flex justify-between" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center w-full space-x-1 justify-end">
-                <li class="inline-flex items-center cursor-pointer"routerLink="../profile-details">
-                    <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
-                        <i class="pi pi-arrow-left text-primary"></i>
-                    </div>
-                    <a class="m text-primary inline-flex text-[22px] font-medium  hover:underline md:ml-2">
-                        Home / Subscribed
-                    </a>
-                </li>
-            </ol>
-            <div class="heading w-[79%]">
-                <p class="text-center text-primary text-[32px] font-semibold">Subscribed</p>
+    <div class=" py-4 flex">
+        <div class="cursor-pointer ms-2">
+            <div routerLink="../profile-details" class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                <i class="pi pi-arrow-left text-primary"></i>
             </div>
-            <div class="heading w-full"></div>
+        </div>
+        <nav class="flex justify-center items-center sm:mb-8 w-full" aria-label="Breadcrumb">
+            <a
+                class="m text-primary text-center inline-flex text-[22px] font-medium text-gray-800 hover:underline md:ml-8">
+                Subscribed
+            </a>
         </nav>
     </div>
 

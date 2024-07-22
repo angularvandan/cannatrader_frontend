@@ -1,8 +1,8 @@
 <div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay">
     <div class="max-w-3xl w-full pb-8">
         <div class="py-8">
-            <nav class="flex justify-between items-center mb-8" aria-label="Breadcrumb">
-                <div class="cursor-pointer">
+            <nav class="flex justify-between items-center sm:mb-8" aria-label="Breadcrumb">
+                <div class="cursor-pointer ms-2">
                     <div routerLink="../profile-details" class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                         <i class="pi pi-arrow-left text-primary"></i>
                     </div>
@@ -11,10 +11,15 @@
                     class="m text-primary text-center inline-flex text-[22px] font-medium text-gray-800 hover:underline md:ml-8">
                     Edit Product Details
                 </a>
-                <button class="bg-nav-bg font-bold py-2 px-4 rounded-xl font-custom text-primary-btn">
+                <button class="hidden sm:block bg-nav-bg font-bold py-2 px-4 rounded-xl font-custom text-primary-btn">
                     <div (click)="confirm1()" class=" flex justify-around items-center">
                         <i class="pi pi-trash me-3"></i>
                         Delete Product
+                    </div>
+                </button>
+                <button class="block sm:hidden bg-nav-bg font-bold py-2 px-2 rounded-full font-custom text-primary-btn me-2">
+                    <div (click)="confirm1()" class=" flex justify-around items-center">
+                        <i class="pi pi-trash"></i>
                     </div>
                 </button>
 
@@ -22,7 +27,7 @@
             </nav>
             <div class="card flex justify-content-center">
                 <p-toast position="bottom-center"></p-toast>
-                <p-confirmDialog p-dialog-titlebar-icon="pi pi-times" #cd [style]="{width: '22vw'}">
+                <p-confirmDialog p-dialog-titlebar-icon="pi pi-times" #cd >
                     <ng-template pTemplate="header">
                         <div class="twitter-icon w-16 h-16 bg-nav-bg rounded-full flex justify-center items-center">
                             <i class="pi pi-trash text-primary"></i>

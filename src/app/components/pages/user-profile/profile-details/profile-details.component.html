@@ -2,6 +2,27 @@
     <div class="heading">
         <h1 class="text-center font-semibold text-[32px] leading-10 text-primary mt-8">Profile</h1>
     </div>
+    <div class="card flex justify-content-center">
+        <p-toast position="bottom-center"></p-toast>
+        <p-confirmDialog p-dialog-titlebar-icon="pi pi-times"  #cd>
+            <ng-template pTemplate="header">
+                <div class="twitter-icon w-16 h-16 bg-nav-bg rounded-full flex justify-center items-center">
+                    <i class="pi pi-trash text-primary"></i>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+                Are you sure you want to delete <br>
+                the product details?
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <button class="w-full font-bold py-2 px-4 rounded-md font-custom bg-[#F24463] text-white"
+                    type="button" icon="pi pi-times" label="No" (click)="cd.reject()">No</button>
+                <button class="w-full font-bold py-2 px-4 rounded-md font-custom bg-[#5BB318] text-white"
+                    type="button" icon="pi pi-check" label="Yes" (click)="cd.accept()">Yes</button>
+            </ng-template>
+        </p-confirmDialog>
+        <!-- <p-button  icon="pi pi-check" label="Confirm"></p-button> -->
+    </div>
     <div class="profile-details lg:p-16 sm:p-4 ">
         <div class="flex flex-row lg:flex-nowrap flex-wrap gap-4 justify-center">
             <div class="user-card h-[410px] lg:h-[410px] sm:h-[250px]  lg:p-8 sm:p-6 p-4 lg:col-span-1 rounded-md"
@@ -30,7 +51,7 @@
                                 </div>
                                 <div class="logout w-full ">
                                     <button class="w-full flex justify-center bg-secondary text-primary rounded-lg"
-                                        routerLink="/login" (click)="onLogout()">Log
+                                         (click)="onLogout()">Log
                                         Out
                                         <svg width="21" height="25" class="ml-2" viewBox="0 0 30 31" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +112,7 @@
                     </div>
                 </div>
             </div>
-            <div class="h-[1000px] w-full lg:w-[70vw] rounded-md m:p-8 p-4" style="box-shadow: 0px 0px 5px #cfc6c0;">
+            <div class="h-full w-full lg:w-[70vw] rounded-md m:p-8 p-4" style="box-shadow: 0px 0px 5px #cfc6c0;">
                 <div class="flex flex-col">
                     <!-- //this is for not a mobile -->
                     <div class="recent-listing mb-5 hidden sm:block">
