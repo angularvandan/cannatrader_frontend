@@ -35,16 +35,39 @@
                         <label for="phone" class="block text-sm font-custom">Phone Number</label>
                         <!-- <span class="p-input-icon-right w-full">
                             <i class="pi pi-phone text-[#fafafa]"></i> -->
-                        <ngx-intl-tel-input [cssClass]="'custom'"
+                        <!-- <ngx-intl-tel-input [cssClass]="'custom'"
                             [preferredCountries]="[CountryISO.Canada, CountryISO.UnitedStates]"
                             [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
                             [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
                             [selectedCountryISO]="CountryISO.Canada" [phoneValidation]="true"[separateDialCode]="true" name="phone"
                             formControlName="phone" [customPlaceholder]="'Enter your phone number'">
-                        </ngx-intl-tel-input>
+                        </ngx-intl-tel-input> -->
                         <!-- </span> -->
+                        <!-- <label for="phone" class="block text-sm  font-custom">Phone Number</label> -->
+                        <span class="p-input-icon-right w-full">
+                            <input pInputText id="phone" type="text" placeholder="Enter your phone number"
+                                class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
+                            <div class="absolute top-[10px] right-3 ">
+                                <svg width="25" height="25" viewBox="0 0 30 30" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_759_6116)">
+                                        <path
+                                            d="M3.33333 4.16699C2.44928 4.16699 1.60143 4.51818 0.976311 5.1433C0.35119 5.76842 0 6.61627 0 7.50033L0 22.5003C0 23.3844 0.35119 24.2322 0.976311 24.8573C1.60143 25.4825 2.44928 25.8337 3.33333 25.8337H8.33333V4.16699H3.33333ZM26.6667 4.16699H21.6667V25.8337H26.6667C27.5507 25.8337 28.3986 25.4825 29.0237 24.8573C29.6488 24.2322 30 23.3844 30 22.5003V7.50033C30 6.61627 29.6488 5.76842 29.0237 5.1433C28.3986 4.51818 27.5507 4.16699 26.6667 4.16699Z"
+                                            fill="#D52B1E" />
+                                        <path d="M8.33301 4.16699H21.6663V25.8337H8.33301V4.16699Z" fill="#EEEEEE" />
+                                        <path
+                                            d="M15.5129 18.4276C16.5112 18.5435 17.4062 18.6476 18.4037 18.7618L18.1495 17.9268C18.1308 17.8549 18.1334 17.7792 18.1569 17.7088C18.1804 17.6384 18.2239 17.5763 18.282 17.5301L21.1812 15.1685L20.5812 14.886C20.317 14.7918 20.3895 14.6426 20.4854 14.2843L20.9279 12.671L19.2437 13.0268C19.0795 13.0518 18.9704 12.9476 18.9454 12.8476L18.7279 12.0885L17.3962 13.5835C17.207 13.8235 16.8237 13.8235 16.9429 13.2701L17.512 10.2418L16.7479 10.6376C16.5337 10.7576 16.3195 10.7776 16.2004 10.5635L15.1462 8.5918L14.092 10.5635C13.972 10.7776 13.7579 10.7576 13.5437 10.6376L12.7804 10.2418L13.3495 13.2701C13.4695 13.8235 13.0854 13.8235 12.8962 13.5835L11.5645 12.0893L11.3479 12.8485C11.3229 12.9485 11.2129 13.0526 11.0487 13.0276L9.36452 12.6718L9.80702 14.2851C9.90118 14.6435 9.97452 14.7926 9.71035 14.8868L9.11035 15.1693L12.0095 17.531C12.1245 17.6201 12.1829 17.781 12.1412 17.9276L11.887 18.7626L14.7787 18.4285C14.867 18.4285 14.9254 18.4776 14.9245 18.5793L14.7462 21.666H15.5429L15.3654 18.5793C15.367 18.4768 15.4245 18.4276 15.5129 18.4276Z"
+                                            fill="#D52B1E" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_759_6116">
+                                            <rect width="30" height="30" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </div>
+                        </span>
                     </div>
-                    <!-- <button (click)="onSubmit()" class="btn btn-primary">Submit</button> -->
 
                     <div class="mb-8">
                         <label for="description" class="block text-sm font-custom text-help">Message</label>
