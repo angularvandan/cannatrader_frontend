@@ -55,6 +55,9 @@ $secondary: #FFE175;
             @media (max-width:$breakpoint-lg) {
                 padding-right: 20px;
             }
+            @media (max-width:768px) {
+                padding-right: 0px;
+            }
         }
     }
     .mobile-nav-link {

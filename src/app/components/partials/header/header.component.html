@@ -59,9 +59,9 @@
                 </svg>
             </a>
             <a routerLink="/login" *ngIf="loginStatus" (click)="toggleMenu()"
-                class="hover:text-secondary  text-xl font-medium cursor-pointer">Log in</a>
+                class="hover:text-secondary text-base sm:text-xl font-medium cursor-pointer whitespace-nowrap">Log in</a>
             <a routerLink="/signup" *ngIf="loginStatus" (click)="toggleMenu()"
-                class="hover:text-white text-primary bg-secondary rounded-xl text-xl font-medium cursor-pointer py-1 px-2">Sign up</a>
+                class="hover:text-white text-primary bg-secondary rounded-xl text-base sm:text-xl font-medium cursor-pointer py-1 px-2 whitespace-nowrap">Sign up</a>
 
             <a routerLink="/profile/profile-details" *ngIf="!loginStatus">
                 <img class="w-8 h-8 text-white user-profile rounded-full" src="../../../../assets/product/profile.jpg"
