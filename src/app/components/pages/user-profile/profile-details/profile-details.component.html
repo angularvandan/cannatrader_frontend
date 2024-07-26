@@ -23,7 +23,7 @@
         </p-confirmDialog>
         <!-- <p-button  icon="pi pi-check" label="Confirm"></p-button> -->
     </div>
-    <div class="profile-details lg:p-16 sm:p-4 ">
+    <div class="profile-details lg:p-16 sm:p-4 p-3">
         <div class="flex flex-row lg:flex-nowrap flex-wrap gap-4 justify-center">
             <div class="user-card h-[410px] lg:h-[410px] sm:h-[250px]  lg:p-8 sm:p-6 p-4 lg:col-span-1 rounded-md"
                 style="min-width:275px;box-shadow: 0px 0px 5px #cfc6c0;">
@@ -301,7 +301,7 @@
                                                 class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
 
                                             <button (click)="toggleBtn(0)" *ngIf="btn[0]"
-                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
+                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed ✓
                                                 </button>
 
                                         </span>
@@ -318,11 +318,11 @@
                                     <td></td>
                                     <td>
                                         <span class="subscribed-btn-container">
-                                            <button (click)="toggleBtn(0)" *ngIf="!btn[0]"
+                                            <button (click)="toggleBtn(1)" *ngIf="!btn[1]"
                                                 class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
 
-                                            <button (click)="toggleBtn(0)" *ngIf="btn[0]"
-                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
+                                            <button (click)="toggleBtn(1)" *ngIf="btn[1]"
+                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed ✓
                                                 </button>
 
                                         </span>
@@ -339,11 +339,11 @@
                                     <td></td>
                                     <td>
                                         <span class="subscribed-btn-container">
-                                            <button (click)="toggleBtn(0)" *ngIf="!btn[0]"
+                                            <button (click)="toggleBtn(2)" *ngIf="!btn[2]"
                                                 class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
 
-                                            <button (click)="toggleBtn(0)" *ngIf="btn[0]"
-                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
+                                            <button (click)="toggleBtn(2)" *ngIf="btn[2]"
+                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed ✓
                                                 </button>
 
                                         </span>
