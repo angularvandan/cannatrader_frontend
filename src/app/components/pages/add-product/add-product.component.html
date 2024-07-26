@@ -1,4 +1,5 @@
-<div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay"*ngIf="!companyDocumentStatus">
+<div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay"
+    *ngIf="!companyDocumentStatus">
     <div class="max-w-3xl w-full pb-8">
         <div class="pt-8 pb-1">
             <nav class="flex sm:mb-2" aria-label="Breadcrumb">
@@ -300,32 +301,37 @@
             </div>
             <div class="p-6 md:p-0 ">
                 <button type="submit"
-                class="w-full font-bold py-2 px-4 text-lg rounded-md font-custom bg-secondary text-primary-btn">Add
-                Product</button>
+                    class="w-full font-bold py-2 px-4 text-lg rounded-md font-custom bg-secondary text-primary-btn">Add
+                    Product</button>
             </div>
         </form>
     </div>
 </div>
-<div class="w-full h-full relative"*ngIf="companyDocumentStatus">
+<div class="w-full h-full relative" *ngIf="companyDocumentStatus">
     <div class="mt-4 flex items-start justify-center min-h-screen">
         <!--  -->
         <div class="text-center max-w-md w-full">
-            
+
             <div class="mx-auto mb-4 flex items-center justify-center">
                 <img src="../../../../assets/product/add_product_requirement.png" alt="">
-                    
+
                 <!-- Replace with the path to your sad leaf image -->
             </div>
             <p class="text-3xl font-bold text-green-800">Complete Company Details
             </p>
-            <p class="text-help mb-6">You're nearly there! Finish entering <br>your company information to add your products.</p>
-            <button (click)="companyDocumentStatus=false" class="bg-secondary text-primary font-bold py-2 px-4 rounded-md ">Add Company Details</button>
+            <p class="text-help mb-6">You're nearly there! Finish entering <br>your company information to add your
+                products.</p>
+            <button (click)="companyDocumentStatus=false" routerLink="/profile/edit-profile"
+                class="bg-secondary text-primary font-bold py-2 px-4 rounded-md ">Add Company Details</button>
         </div>
     </div>
     <div class="image-container">
         <img class="absolute top-16 left-0 w-36" src="../../../../assets/wishlist/left_leaf_wishlist.png" alt="">
-        <img class="absolute -top-16 right-0 w-36 rotate-90 hidden" src="../../../../assets/wishlist/left_leaf_wishlist.png" alt="">
-        <img class="absolute bottom-16 right-0 w-36 hidden sm:block" src="../../../../assets/wishlist/right_leaf_wishlist.png" alt="">
-        <img class="absolute -bottom-10 left-16 w-36 hidden sm:block" src="../../../../assets/wishlist/bottom_leaf_wishlist.png" alt="">
+        <img class="absolute -top-16 right-0 w-36 rotate-90 hidden"
+            src="../../../../assets/wishlist/left_leaf_wishlist.png" alt="">
+        <img class="absolute bottom-16 right-0 w-36 hidden sm:block"
+            src="../../../../assets/wishlist/right_leaf_wishlist.png" alt="">
+        <img class="absolute -bottom-10 left-16 w-36 hidden sm:block"
+            src="../../../../assets/wishlist/bottom_leaf_wishlist.png" alt="">
     </div>
 </div>

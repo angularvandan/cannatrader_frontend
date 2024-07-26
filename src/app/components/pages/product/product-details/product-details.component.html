@@ -4,7 +4,8 @@
     <nav class="flex mb-8" aria-label="Breadcrumb">
         <ol class="lg:inline-flex flex w-full items-center space-x-1 ">
             <li class="flex w-full lg:inline-flex items-center justify-between lg:justify-normal">
-                <div routerLink="../" class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                <div routerLink="../"
+                    class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                     <i class="pi pi-arrow-left text-primary"></i>
                 </div>
                 <a class="m text-primary hidden lg:inline-flex text-[22px] font-medium hover:underline md:ml-2">
@@ -143,7 +144,8 @@
             <h2 class="text-xl font-semibold pt-10">Description</h2>
 
             <p class="mt-4 text-help">{{ showAll ? paragraph : (paragraph | slice:0:charLimit) + '...' }}
-                <span class="text-[#698AFD] cursor-pointer"(click)="toggleViewMore()">{{ showAll ? 'View Less' : 'View More' }}</span>
+                <span class="text-[#698AFD] cursor-pointer"
+                    (click)="toggleViewMore()">{{ showAll ? 'View Less' : 'View More' }}</span>
             </p>
 
             <div class="w-full h-[0.5px] border border-primary mt-10 mb-8"></div>
@@ -342,7 +344,8 @@
                     <i style="font-size: 1.5rem;" class="pi pi-file place-content-center font-bold mr-4 text-2xl"></i>
                     COA Report.pdf
                 </span>
-                <a href="assets/COA_Report.pdf" class="py-2 px-4 rounded font-medium text-[12px] lg:text-[20px]">View
+                <a target="_blank" href="../../../../../assets/6daysplit.pdf"
+                    class="py-2 px-4 rounded font-medium text-[12px] lg:text-[20px]">View
                     Report</a>
             </div>
         </div>
