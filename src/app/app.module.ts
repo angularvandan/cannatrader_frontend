@@ -19,6 +19,9 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../app/shared/shared/shared.module';
 import { PrivacyPolicyComponent } from './components/pages/privacy-policy/privacy-policy.component';
 import { TermsConditionsComponent } from './components/pages/terms-conditions/terms-conditions.component';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
@@ -40,7 +43,8 @@ import { TermsConditionsComponent } from './components/pages/terms-conditions/te
     BrowserAnimationsModule,
     SharedModule,
     DropdownModule,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

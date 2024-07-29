@@ -7,6 +7,7 @@ import { UserAuthRoutingModule } from './user-auth-routing.module';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -17,7 +18,8 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
   imports: [
     SharedModule,
     UserAuthRoutingModule,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    
   ]
 })
 export class UserAuthModule { }

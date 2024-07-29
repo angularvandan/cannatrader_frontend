@@ -13,6 +13,9 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { RatingModule } from 'primeng/rating';
+import { ToastrModule } from 'ngx-toastr';
+import { InputNumberModule } from 'primeng/inputnumber';
+
 
 @NgModule({
   declarations: [],
@@ -32,7 +35,9 @@ import { RatingModule } from 'primeng/rating';
     ConfirmDialogModule,
     ToastModule,
     RatingModule,
-    DropdownModule
+    DropdownModule,
+    InputNumberModule,
+    ToastrModule.forRoot(),
   ],
   exports: [
     CommonModule,
@@ -49,7 +54,9 @@ import { RatingModule } from 'primeng/rating';
     SidebarModule,
     ConfirmDialogModule,
     ToastModule,
-    RatingModule
+    RatingModule,
+    ToastrModule,
+    InputNumberModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

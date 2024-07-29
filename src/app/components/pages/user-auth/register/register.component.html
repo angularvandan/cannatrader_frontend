@@ -1,25 +1,33 @@
-<div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay"*ngIf="section!='otp'">
+<div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay"
+    *ngIf="section!='otp'">
     <div class=" bg-opacity-90 p-4 rounded-lg shadow-lg max-w-3xl w-full">
-        <h2 class="font-semibold mb-6 text-center font-custom text-secondary font-Poppins">Sign Up</h2>
-        <p class="text-center mb-6 font-custom text-[#fafafa] leading-7">Sign up to enjoy the convenience of shopping
-            for a <br>
+        <h2 class="font-semibold mb-6 text-center font-custom text-secondary text-3xl sm:text-4xl font-Poppins">Sign Up
+        </h2>
+        <p class="text-center mb-6 font-custom text-[#fafafa] leading-7 text-[15px] sm:text-xl">Sign up to enjoy the
+            convenience of shopping
+            for a <br class="hidden sm:block">
             <span class="text-secondary">wide range of products.</span>
         </p>
-        <form class="text-[#fafafa]">
+        <form class="text-[#fafafa]" (ngSubmit)="onSignup()" [formGroup]="registerForm">
             <div class="flex flex-col lg:flex-row gap-8 justify-between ">
                 <div class="grid grid-cols-1 w-full gap-4">
                     <div class="mb-4">
                         <label for="name" class="block text-sm  font-custom">Name</label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-user text-[#fafafa]"></i>
-                            <input pInputText id="name" type="text" placeholder="Enter your name"
+                            <input pInputText id="name" type="text" placeholder="Enter your name" formControlName="name"
                                 class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
                         </span>
+                        <div class="text-red-400"
+                            *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.touched || registerForm.get('name')?.dirty)">
+                            Name is required.
+                        </div>
                     </div>
                     <div class="mb-4">
                         <label for="phone" class="block text-sm  font-custom">Phone Number</label>
                         <span class="p-input-icon-left w-full">
-                            <input pInputText id="phone" type="text" placeholder="Enter your phone number"
+                            <input pInputText mode="decimal" id="phone" type="text"
+                                placeholder="Enter your phone number" formControlName="phone_no"
                                 class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
                             <div class="absolute top-[10px] left-2 ">
                                 <svg width="25" height="25" viewBox="0 0 30 30" fill="none"
@@ -41,6 +49,13 @@
                                 </svg>
                             </div>
                         </span>
+                        <div class="text-red-400"
+                            *ngIf="registerForm.get('phone_no')?.invalid && (registerForm.get('phone_no')?.touched || registerForm.get('phone_no')?.dirty)">
+                            <div *ngIf="registerForm.get('phone_no')?.errors?.['required']">Phone number is required.
+                            </div>
+                            <div *ngIf="registerForm.get('phone_no')?.errors?.['pattern']">Invalid phone number. Must be
+                                10 digits.</div>
+                        </div>
 
                     </div>
 
@@ -48,7 +63,8 @@
                         <label for="password" class="block text-sm  font-custom">Password</label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-lock text-[#fafafa]"></i>
-                                <p-password [toggleMask]="true"[feedback]="false"placeholder="Enter your password"></p-password>
+                            <p-password [toggleMask]="true" [feedback]="false" placeholder="Enter your password"
+                                formControlName="password"></p-password>
 
                         </span>
                     </div>
@@ -57,9 +73,14 @@
                             Password</label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-lock text-[#fafafa]"></i>
-                                <p-password [toggleMask]="true"[feedback]="false"placeholder="Enter your confirm password"></p-password>
+                            <p-password [toggleMask]="true" [feedback]="false" placeholder="Enter your confirm password"
+                                formControlName="confirmPassword"></p-password>
 
                         </span>
+                        <div class="text-red-400"
+                            *ngIf="registerForm.hasError('passwordMismatch') && (registerForm.get('confirmPassword')?.touched || registerForm.get('confirmPassword')?.dirty)">
+                            Passwords do not match.
+                        </div>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 w-full gap-4">
@@ -68,8 +89,14 @@
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-envelope text-[#fafafa]"></i>
                             <input pInputText id="email" type="email" placeholder="Enter your email address"
+                                formControlName="email"
                                 class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
                         </span>
+                        <div class="text-red-400"
+                            *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)">
+                            <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</div>
+                            <div *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email address.</div>
+                        </div>
                     </div>
                     <div class="mb-4">
                         <label for="license" class="block text-sm  font-custom">Health Canada Site License
@@ -80,6 +107,10 @@
                                 <p class="text-[#fafafa]">Upload document</p>
                                 <input type="file" id="file-upload" (change)="onFileSelected($event)" accept=".pdf" />
                             </label>
+                        </div>
+                        <div
+                            *ngIf="registerForm.get('pdf')?.invalid && (registerForm.get('pdf')?.touched || registerForm.get('pdf')?.dirty)">
+                            PDF is required.
                         </div>
 
 
@@ -101,13 +132,13 @@
                     <!-- w-6 h-6 border-2 border-[#FFE175] flex justify-center items-center rounded-md -->
                     <label for="agree" class="text-sm  font-custom font-[Poppins] flex items-center">
                         <div class="custom-checkbox mr-4">
-                            <input type="checkbox" id="agree" name="agree" class="">
+                            <input type="checkbox" id="agree" name="agree" class="" formControlName="termsAccepted">
                             <!-- w-3 h-3 rounded-full bg-secondary -->
                             <div class="checkmark">
                             </div>
                         </div>
                     </label>
-                    <div>
+                    <div class="text-xs sm:text-base ">
                         By continuing, you agree to cannatrader
                         <a href="#" class="hover:underline text-secondary" routerLink="/terms-conditions">Terms of
                             Use</a> and <a href="#" class="hover:underline text-secondary"
@@ -115,22 +146,31 @@
                             Policy</a>.
                     </div>
                 </div>
+                <div class="text-red-400"
+                    *ngIf="registerForm.get('termsAccepted')?.invalid && (registerForm.get('termsAccepted')?.touched || registerForm.get('termsAccepted')?.dirty)">
+                    You must accept the terms and conditions.
+                </div>
             </div>
-            <button  type="submit"
-                class="w-full font-bold py-2 px-4 rounded-md font-custom bg-secondary text-primary-btn"(click)="onSignup()">Sign
-                Up</button>
+            <button type="submit"[disabled]="registerForm.invalid"
+                class="w-full font-bold py-2 px-4 rounded-md font-custom bg-secondary text-primary-btn">
+                <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
+                <span *ngIf="!loading">Sign
+                    Up</span>
+            </button>
         </form>
         <p class="mt-4 text-center font-custom text-[#fafafa]">Already have an account? &nbsp; &nbsp;<a
                 routerLink="/login" class="hover:underline text-secondary">Sign In</a></p>
     </div>
 </div>
 <!-- this is for email verification -->
-<div class="email-verification min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay"*ngIf="section==='otp'">
+<div class="email-verification min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay"
+    *ngIf="section==='otp'">
 
     <div class="text-[#fafafa] bg-opacity-90 p-8 rounded-lg shadow-lg max-w-md w-full">
         <h2 class="text-2xl font-bold mb-6 text-center text-secondary">Email Verification</h2>
-        <p class="text-center mb-6 text-[#fafafa]">Please enter the verification code sent 
-            <br>to your email to verify.</p>
+        <p class="text-center mb-6 text-[#fafafa]">Please enter the verification code sent
+            <br>to your email to verify.
+        </p>
         <form>
             <div class="mb-8">
                 <div id="otp" class="flex flex-row justify-center text-center px-2 mt-5">
@@ -148,13 +188,13 @@
                         type="text" id="fourth" maxlength="1" />
                 </div>
             </div>
-            <button  type="button"(click)="verifyEmail()"
+            <button type="button" (click)="verifyEmail()"
                 class="w-full bg-secondary text-primary-btn justify-center font-bold py-2 px-4 rounded-md">
                 <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
                 <span *ngIf="!loading">Verify & Continue</span>
             </button>
         </form>
-        <p class="mt-4 text-center mx-4">Didn’t receive the OTP?<a 
+        <p class="mt-4 text-center mx-4">Didn’t receive the OTP?<a
                 class="hover:underline text-secondary mx-4">Resend</a></p>
     </div>
 </div>
