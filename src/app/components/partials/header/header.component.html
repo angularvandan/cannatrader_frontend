@@ -23,13 +23,13 @@
         </div>
         <div class="nav-link hidden lg:block">
             <nav class="space-x-9 flex">
-                <a routerLink="/home" routerLinkActive="active-link" *ngIf="!loginStatus"
+                <a routerLink="/home" routerLinkActive="active-link" *ngIf="isAuth"
                     class="hover:color-primary text-xl font-medium">Home</a>
-                <a routerLink="/addProduct" routerLinkActive="active-link" *ngIf="!loginStatus"
+                <a routerLink="/addProduct" routerLinkActive="active-link" *ngIf="isAuth"
                     class="hover:color-secondary  text-xl font-medium">Add Products</a>
-                <a routerLink="/wishlist" routerLinkActive="active-link" *ngIf="!loginStatus"
+                <a routerLink="/wishlist" routerLinkActive="active-link" *ngIf="isAuth"
                     class="hover:text-secondary  text-xl font-medium">Wish List</a>
-                <a routerLink="/contact-us" routerLinkActive="active-link" *ngIf="!loginStatus"
+                <a routerLink="/contact-us" routerLinkActive="active-link" *ngIf="isAuth"
                     class="hover:text-secondary  text-xl font-medium">Contact</a>
             </nav>
         </div>
@@ -37,7 +37,7 @@
             <div class="relative inline-flex">
                 <!-- <div
               class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 rounded-full bg-pink-700 p-2.5 text-xs"></div> -->
-                <div (click)="sidebarVisible = true" *ngIf="!loginStatus"
+                <div (click)="sidebarVisible = true" *ngIf="isAuth"
                     class="cursor-pointer flex items-center justify-center rounded-lg text-center text-white dark:text-gray-200">
                     <span class="[&>svg]:h-6 [&>svg]:w-6">
                         <svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +50,7 @@
                     </span>
                 </div>
             </div>
-            <a routerLink="/products/chats" *ngIf="!loginStatus"
+            <a routerLink="/products/chats" *ngIf="isAuth"
                 class="chat hidden sm:block relative [&>svg]:h-6 [&>svg]:w-6">
                 <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -58,12 +58,12 @@
                         stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </a>
-            <a routerLink="/login" *ngIf="loginStatus" (click)="toggleMenu()"
+            <a routerLink="/login" *ngIf="!isAuth" (click)="toggleMenu()"
                 class="hover:text-secondary text-base sm:text-xl font-medium cursor-pointer whitespace-nowrap">Log in</a>
-            <a routerLink="/signup" *ngIf="loginStatus" (click)="toggleMenu()"
+            <a routerLink="/signup" *ngIf="!isAuth" (click)="toggleMenu()"
                 class="hover:text-white text-primary bg-secondary rounded-xl text-base sm:text-xl font-medium cursor-pointer py-1 px-2 whitespace-nowrap">Sign up</a>
 
-            <a routerLink="/profile/profile-details" *ngIf="!loginStatus">
+            <a routerLink="/profile/profile-details" *ngIf="isAuth">
                 <img class="w-8 h-8 text-white user-profile rounded-full" src="../../../../assets/product/profile.jpg"
                     alt="">
             </a>
@@ -81,13 +81,13 @@
             </a>
             <a routerLink="/home" class="hover:text-secondary text-lg leading-6 font-medium text-primary"
                 (click)="toggleMenu()">Home</a>
-            <a routerLink="/addProduct" *ngIf="!loginStatus"
+            <a routerLink="/addProduct" *ngIf="isAuth"
                 class="hover:text-secondary  text-lg leading-6  font-medium text-primary" (click)="toggleMenu()">Add
                 Products</a>
-            <a routerLink="/wishlist" *ngIf="!loginStatus"
+            <a routerLink="/wishlist" *ngIf="isAuth"
                 class="hover:text-secondary  text-lg leading-6 font-medium text-primary"
                 (click)="toggleMenu()">Wish List</a>
-            <a routerLink="/contact-us" *ngIf="!loginStatus"
+            <a routerLink="/contact-us" *ngIf="isAuth"
                 class="hover:text-secondary  text-lg leading-6 font-medium text-primary"
                 (click)="toggleMenu()">Contact</a>
         </nav>

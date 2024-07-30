@@ -113,8 +113,8 @@ export class ProfileDetailsComponent implements OnInit{
       message: 'Are you sure you want to logout?',
       accept: () => {
         this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
-        this.userService.isLogin(false);
         this.router.navigate(['/home']);
+        this.userService.logOut();
       },
       reject: (type: any) => {
         switch (type) {

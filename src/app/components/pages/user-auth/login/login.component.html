@@ -7,33 +7,50 @@
             range of items
             for <br class="hidden sm:block"> purchase.
         </p>
-        <form>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
             <div class="mb-4">
                 <label for="email" class="block text-sm font-medium">Email</label>
                 <span class="p-input-icon-left w-full">
                     <i class="pi pi-envelope text-[#fafafa]"></i>
                     <input pInputText id="email" type="email" placeholder="Enter your email address"
+                        formControlName="email"
                         class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm  sm:text-sm">
                 </span>
+                <div class="text-red-400"
+                    *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+                    <small *ngIf="loginForm.get('email')?.errors?.['required']" class="text-danger">Email is
+                        required</small>
+                    <small *ngIf="loginForm.get('email')?.errors?.['email']" class="text-danger">Invalid email
+                        id</small>
+                </div>
             </div>
             <div class="mb-4">
                 <label for="password" class="block text-sm font-medium">Password</label>
                 <span class="p-input-icon-left w-full">
                     <i class="pi pi-lock z-10  text-[#fafafa]"></i>
-                    <!-- <input pInputText id="password" type="password" placeholder="Enter your password"
-                        class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm  sm:text-sm"> -->
-
-                    <p-password [toggleMask]="true"[feedback]="false"placeholder="Enter your password"></p-password>
-                    
+                    <p-password [toggleMask]="true" [feedback]="false" placeholder="Enter your password"
+                        formControlName="password"></p-password>
                 </span>
+                <div class="text-red-400"
+                    *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+                    <small *ngIf="loginForm.get('password')?.errors?.['required']" class="text-danger">Password is
+                        required</small>
+                    <small *ngIf="loginForm.get('password')?.errors?.['minlength']" class="text-danger">Password must be
+                        at
+                        least 8 characters long</small>
+                </div>
             </div>
             <div class="mb-6 text-right">
                 <a routerLink="/reset-password" class="text-sm font-semibold hover:underline text-secondary">Forgot
                     Password?</a>
             </div>
-            <button routerLink="/home" (click)="onLogin()" type="submit"
-                class="w-full bg-secondary text-primary-btn justify-center font-bold py-2 px-4 rounded-md">Sign
-                In</button>
+            <button type="submit"
+                class="w-full bg-secondary text-primary-btn justify-center font-bold py-2 px-4 rounded-md"
+                [disabled]="loginForm.invalid">
+
+                <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
+                <span *ngIf="!loading">Sign In</span>
+            </button>
         </form>
         <p class="mt-4 text-center">Don't have an account? <a routerLink="/signup"
                 class="hover:underline text-secondary">Sign

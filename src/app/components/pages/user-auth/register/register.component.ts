@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren }
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { IUserRegister } from 'src/app/shared/interfaces/IUserRegister';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -18,7 +17,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
   @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
 
 
-  constructor(private router: Router, private fb: FormBuilder, private userService: UserService,private tostr:ToastrService) { }
+  constructor(private router: Router, private fb: FormBuilder, private userService: UserService, private tostr: ToastrService) { }
 
   registerForm!: FormGroup;
   formData = new FormData();
@@ -56,32 +55,56 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
   handleInput(event: Event, index: number): void {
     const inputs = this.otpInputs.toArray();
+    // console.log(inputs);
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.value.length === 1 && index < inputs.length - 1) {
       inputs[index + 1].nativeElement.focus();
     }
   }
   handleKeyDown(event: KeyboardEvent, index: number): void {
+
     const inputs = this.otpInputs.toArray();
+    // console.log(inputs);
+
     if (event.key === 'Backspace' && index !== 0) {
       inputs[index].nativeElement.value = '';
       inputs[index - 1].nativeElement.focus();
     }
   }
   verifyEmail() {
-    this.loading = true
-    setTimeout(() => {
-      // this.attachEventListeners();
-      this.loading = false;
-      this.router.navigate(['/login'])
-    }, 3000);
+    this.loading = true;
+    const inputs = this.otpInputs.toArray();
+    let otpString = ''
+    for (let i = 0; i < 4; i++) {
+      otpString += inputs[i].nativeElement.value;
+    }
+    const payloadForOtp = {
+      otp: otpString,
+      email: this.registerForm.value.email
+    }
+    // console.log(payloadForOtp);
+
+    this.userService.verifyOtpForEmail(payloadForOtp).subscribe({
+      next: (response: any) => {
+
+        // console.log(response);
+        this.loading = false;
+        this.router.navigate(['/login']);
+        this.tostr.success("Email Verifyed Successfully");
+
+      }, error: (err: any) => {
+        // console.log(err);
+        this.loading = false;
+        this.tostr.error(err.error.error.message);
+
+      }
+    });
+
   }
 
   onSignup() {
-    this.loading=true;
-
-    // this.section = 'otp';
-    console.log(this.registerForm);
+    this.loading = true;
+    // console.log(this.registerForm);
 
     if (this.registerForm.valid) {
       this.formData.append('name', this.registerForm.value.name);
@@ -89,22 +112,21 @@ export class RegisterComponent implements AfterViewInit, OnInit {
       this.formData.append('password', this.registerForm.value.password);
       this.formData.append('phone_no', this.registerForm.value.phone_no);
 
-      console.log(this.formData);
+      // console.log(this.formData);
 
       this.userService.register(this.formData).subscribe({
         next: (response: any) => {
           // console.log(response);
           this.formData = new FormData();
-          this.loading=false;
-
+          this.loading = false;
           this.tostr.success("Register Successfully");
-
-          this.router.navigate(['/login']);
+          // this.router.navigate(['/login']);
+          this.section = 'otp';
 
         },
         error: (err) => {
-          console.log(err);
-          this.loading=false;
+          // console.log(err);
+          this.loading = false;
           this.formData = new FormData();
           this.onAppendMethodFile(this.selectedFile);
 
@@ -114,10 +136,9 @@ export class RegisterComponent implements AfterViewInit, OnInit {
       });
     }
     else {
-      console.log("Invalid input data");
-      this.loading=false;
+      // console.log("Invalid input data");
+      this.loading = false;
       this.onAppendMethodFile(this.selectedFile);
-      
     }
   }
 
@@ -131,7 +152,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
     }
   }
 
-  onAppendMethodFile(selectedFile:any) {
+  onAppendMethodFile(selectedFile: any) {
     this.formData.append('pdf', selectedFile);
 
     this.registerForm.patchValue({ pdf: this.formData });
