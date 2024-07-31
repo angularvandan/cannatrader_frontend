@@ -11,8 +11,6 @@ export class HeaderComponent implements OnInit{
 
   isMenuOpen = false;
   sidebarVisible: boolean = false;
-  scrollPosition = 0;
-  loginStatus:boolean=true;
 
   user!:User;
 

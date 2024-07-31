@@ -66,23 +66,23 @@
         </div>
         <div class="flex right-side order-1 md:order-2 w-full md:w-3/5 justify-center">
             <div class="link-groups w-full flex-wrap flex justify-center sm:justify-start xl:justify-between p-0 lg:p-4 lg:pt-12 ">
-                <div class="me-14 mb-4 xl:me-8 explore-link">
+                <div class="me-14 mb-4 xl:me-8 explore-link"*ngIf="isAuth">
                     <h2 class="sm:text-xl text-base text-secondary font-medium">Explore</h2>
                     <ul class="mt-2">
-                        <li><a href="/home" class="sm:text-lg text-base text-[#D1DACF]  leading-9">Home</a></li>
-                        <li><a href="/addProduct" class="sm:text-lg text-base text-[#D1DACF]  leading-9">Add Products</a></li>
-                        <li><a href="/wishlist" class="sm:text-lg text-base text-[#D1DACF]  leading-9">Wish List</a></li>
-                        <li><a href="contact-us" class="sm:text-lg text-base text-[#D1DACF]  leading-9">Contact</a></li>
+                        <li><a routerLink="/home" class="sm:text-lg text-base text-[#D1DACF]  leading-9">Home</a></li>
+                        <li><a routerLink="/addProduct" class="sm:text-lg text-base text-[#D1DACF]  leading-9">Add Products</a></li>
+                        <li><a routerLink="/wishlist" class="sm:text-lg text-base text-[#D1DACF]  leading-9">Wish List</a></li>
+                        <li><a routerLink="contact-us" class="sm:text-lg text-base text-[#D1DACF]  leading-9">Contact</a></li>
                     </ul>
                 </div>
 
                 <div class=" sm:me-14 mb-4 xl:me-8">
-                    <h2 class="text-secondary sm:text-xl text-base font-medium">My Account</h2>
-                    <ul class="mt-2">
-                        <li><a href="/login" class="sm:text-lg text-base text-[#D1DACF] leading-9">Log In</a></li>
-                        <li><a href="/signup" class="sm:text-lg text-base text-[#D1DACF] leading-9">Sign Up</a></li>
+                    <h2 class="text-secondary sm:text-xl text-base font-medium"*ngIf="!isAuth">My Account</h2>
+                    <ul class="mt-2 mb-4"*ngIf="!isAuth">
+                        <li><a routerLink="/login" class="sm:text-lg text-base text-[#D1DACF] leading-9">Log In</a></li>
+                        <li><a routerLink="/signup" class="sm:text-lg text-base text-[#D1DACF] leading-9">Sign Up</a></li>
                     </ul>
-                    <div class="mt-4">
+                    <div class="">
                         <h2 class="text-secondary text-base sm:text-xl font-medium">Company</h2>
                         <ul class="mt-2">
                             <li><a href="/privacy-policy" class="text-sm sm:text-lg text-[#D1DACF] leading-9">Privacy policy</a></li>

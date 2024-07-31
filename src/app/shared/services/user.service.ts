@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { IUserLogin } from '../interfaces/IUserLogin';
-import { IUserRegister } from '../interfaces/IUserRegister';
 import { User } from '../models/user';
 import { ToastrService } from 'ngx-toastr';
 
@@ -13,10 +11,8 @@ const USER_KEY='cannatrader_user';
 })
 export class UserService {
 
-
   private baseUrl="https://cannatrader.onrender.com";
 
-  public isVisible: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private userSubject =new BehaviorSubject<User>(this.getuserFromLocalStorage());
   public userObservable:Observable<User>;
 
