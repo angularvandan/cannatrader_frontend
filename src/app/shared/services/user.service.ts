@@ -66,4 +66,16 @@ export class UserService {
     return this.http.post<any>(`${this.baseUrl}/api/users/verifyOTP`, data);
   }
 
+  resetPassword(email: string): Observable<any> {
+    const body = { email: email };
+    return this.http.post<any>(`${this.baseUrl}/api/users/forgotPassword`, body);
+  }
+  verifyOtpForResetPassword(payload:any): Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}/api/users/verifyOTP`, payload);
+  }
+  updatePassword(userId: string, newPassword: string, confirmPassword: string): Observable<any> {
+    const body = { userId, newPassword, confirmPassword };
+    return this.http.put<any>(`${this.baseUrl}/api/users/resetpassword`, body);
+  }
+
 }
