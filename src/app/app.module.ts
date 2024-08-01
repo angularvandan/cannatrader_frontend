@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 
 
@@ -43,7 +42,6 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     SharedModule,
     DropdownModule,
-    NgxIntlTelInputModule,
     HttpClientModule,
   ],
   providers: [],
