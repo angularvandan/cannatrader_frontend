@@ -5,6 +5,7 @@ import { AddProductComponent } from './components/pages/add-product/add-product.
 import { TermsConditionsComponent } from './components/pages/terms-conditions/terms-conditions.component';
 import { PrivacyPolicyComponent } from './components/pages/privacy-policy/privacy-policy.component';
 import { ContactComponent } from './components/pages/contact/contact.component';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,7 +16,7 @@ const routes: Routes = [
     path: 'products', loadChildren: () => import('./components/pages/product/product.module').then(m => m.ProductModule)
   },
   {
-    path: 'profile', loadChildren: () => import('./components/pages/user-profile/user-profile.module').then(m => m.UserProfileModule)
+    path: 'profile', loadChildren: () => import('./components/pages/user-profile/user-profile.module').then(m => m.UserProfileModule),canActivate: [AuthGuard] 
   },
   {
     path: 'addProduct', component: AddProductComponent

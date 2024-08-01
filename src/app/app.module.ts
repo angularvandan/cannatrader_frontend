@@ -18,7 +18,8 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../app/shared/shared/shared.module';
 import { PrivacyPolicyComponent } from './components/pages/privacy-policy/privacy-policy.component';
 import { TermsConditionsComponent } from './components/pages/terms-conditions/terms-conditions.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 
 
 
@@ -44,7 +45,13 @@ import { HttpClientModule } from '@angular/common/http';
     DropdownModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

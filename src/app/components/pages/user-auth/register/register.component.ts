@@ -24,6 +24,11 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
 
   ngOnInit(): void {
+
+    if(this.userService.currentUser.token){
+      this.router.navigate(['/home']);
+    }
+
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -82,7 +87,6 @@ export class RegisterComponent implements AfterViewInit, OnInit {
       otp: otpString,
       email: this.registerForm.value.email
     }
-    // console.log(payloadForOtp);
 
     this.userService.verifyOtpForEmail(payloadForOtp).subscribe({
       next: (response: any) => {
@@ -93,7 +97,6 @@ export class RegisterComponent implements AfterViewInit, OnInit {
         this.tostr.success("Email Verifyed Successfully");
 
       }, error: (err: any) => {
-        // console.log(err);
         this.loading = false;
         this.tostr.error(err.error.error.message);
 
@@ -104,7 +107,6 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
   onSignup() {
     this.loading = true;
-    // console.log(this.registerForm);
 
     if (this.registerForm.valid) {
       this.formData.append('name', this.registerForm.value.name);
@@ -112,6 +114,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
       this.formData.append('password', this.registerForm.value.password);
       this.formData.append('phone_no', this.registerForm.value.phone_no);
 
+      // console.log(this.registerForm);
       // console.log(this.formData);
 
       this.userService.register(this.formData).subscribe({
@@ -125,20 +128,14 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
         },
         error: (err) => {
-          // console.log(err);
           this.loading = false;
           this.formData = new FormData();
-          this.onAppendMethodFile(this.selectedFile);
 
+          this.onAppendMethodFile(this.selectedFile);
           this.tostr.error(err.error.error.message);
 
         }
       });
-    }
-    else {
-      // console.log("Invalid input data");
-      this.loading = false;
-      this.onAppendMethodFile(this.selectedFile);
     }
   }
 
@@ -147,15 +144,15 @@ export class RegisterComponent implements AfterViewInit, OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
-
       this.onAppendMethodFile(this.selectedFile);
     }
   }
-
+  
   onAppendMethodFile(selectedFile: any) {
+    
     this.formData.append('pdf', selectedFile);
-
-    this.registerForm.patchValue({ pdf: this.formData });
+    // console.log(this.formData);
+    this.registerForm.patchValue({ pdf: selectedFile });
   }
 
   removeFile(): void {

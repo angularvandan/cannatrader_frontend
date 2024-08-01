@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { User } from '../models/user';
+import { User, UserDetails } from '../models/user';
 import { ToastrService } from 'ngx-toastr';
+import { IUserLogin } from '../interfaces/IUserLogin';
+import { Router } from '@angular/router';
 
 const USER_KEY='cannatrader_user';
 
@@ -16,7 +18,7 @@ export class UserService {
   private userSubject =new BehaviorSubject<User>(this.getuserFromLocalStorage());
   public userObservable:Observable<User>;
 
-  constructor(private http:HttpClient,private tostr:ToastrService) {
+  constructor(private http:HttpClient,private tostr:ToastrService,private router:Router) {
     this.userObservable=this.userSubject.asObservable();
 
   }
@@ -24,7 +26,7 @@ export class UserService {
     return this.userSubject.value;//it will give latest value of subject;
   }
 
-  login(login:any): Observable<any> {
+  login(login:IUserLogin): Observable<User> {
     return this.http.post<User>(`${this.baseUrl}/api/users/login`, login).pipe(
       tap({
         next:(response)=>{
@@ -45,6 +47,7 @@ export class UserService {
   logOut(){
     this.userSubject.next(new User());
     localStorage.removeItem(USER_KEY);
+    this.router.navigate(['/login']);
 
   }
 
@@ -77,5 +80,24 @@ export class UserService {
     const body = { userId, newPassword, confirmPassword };
     return this.http.put<any>(`${this.baseUrl}/api/users/resetpassword`, body);
   }
+  getUserProfile(): Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}/api/users/profile`).pipe(
+      tap({
+        next:(response)=>{
+          console.log(response);
+          
+          this.setUserToLocalStorage({...this.getuserFromLocalStorage(),user:response.user});
+          this.userSubject.next(this.getuserFromLocalStorage());
 
+        },error:(err)=>{
+          console.log(err);
+          this.tostr.error(err.error.error.message);
+        }
+      })
+    );;
+  }
+  updateUserProfile(userData:any){
+    return this.http.put<any>(`${this.baseUrl}/api/users/profile`,userData);
+
+  }
 }

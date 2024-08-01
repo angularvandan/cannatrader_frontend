@@ -30,11 +30,11 @@
                 <div class="block sm:hidden lg:block">
                     <div class="flex flex-col items-center">
                         <div class="user-img w-36 h-36 flex overflow-hidded mb-4">
-                            <img class="rounded-full" src="../../../../../assets/profile/user.jpg" alt="">
+                            <img class="rounded-full"  [src]="user.avatar"loading="lazy" alt="user image">
                         </div>
                         <div class="user-details flex flex-col items-center mb-8">
-                            <div class="name font-bold text-xl">Vandan</div>
-                            <div class="email">vandan@gmail.com</div>
+                            <div class="name font-bold text-xl">{{user.name}}</div>
+                            <div class="email">{{user.email}}</div>
                         </div>
                         <div class="user-action flex ">
                             <div class="buttons flex flex-col items-center w-40">
@@ -74,10 +74,10 @@
                     <div class="flex  items-center flex-row justify-center">
                         <div class="user-img flex overflow-hidded flex-col mr-12 justify-center items-center">
 
-                            <img class="rounded-full w-32 h-32" src="../../../../../assets/profile/user.jpg" alt="">
+                            <img class="rounded-full w-32 h-32" [src]="user.avatar"loading="lazy" alt="user image">
                             <div class="user-details flex flex-col items-center ">
-                                <div class="name font-bold text-xl">Vandan</div>
-                                <div class="email">vandan@gmail.com</div>
+                                <div class="name font-bold text-xl">{{user.name}}</div>
+                                <div class="email">{{user.email}}</div>
                             </div>
                         </div>
                         <div class="user-action flex ">

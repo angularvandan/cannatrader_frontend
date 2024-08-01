@@ -10,11 +10,6 @@ $bg-primary: #3A5C41;
                 }
             }
         }
-        .user-card{
-            @media(max-width:768px){
-                box-shadow: none!important;
-            }
-        }
 
         .recent-listing {
             @media(min-width:1024px){

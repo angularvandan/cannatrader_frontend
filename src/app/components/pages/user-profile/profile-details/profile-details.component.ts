@@ -3,6 +3,7 @@ import { Product } from 'src/app/shared/models/product';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
 import { Router } from '@angular/router';
+import { UserDetails } from 'src/app/shared/models/user';
 
 
 
@@ -100,13 +101,33 @@ export class ProfileDetailsComponent implements OnInit{
 
   ];
 
+  user:UserDetails={
+    avatar: '',
+    email: '',
+    health_license: '',
+    id: '',
+    is_company: false,
+    name: '',
+    phone_no: '',
+    role: '',
+    is_verified: false
+  };
+
   btn:any[]= [
     true,true,true
   ];
 
+
   constructor(private router:Router, private userService:UserService,private confirmationService: ConfirmationService, private messageService: MessageService){}
   ngOnInit(): void {
-      
+      this.userService.getUserProfile().subscribe({
+        next:(response)=>{
+          this.user=response.user;
+          console.log(this.user);
+        },error:(err)=>{
+          console.log(err);
+        }
+      })
   }
   confirm1() {
     this.confirmationService.confirm({
@@ -136,4 +157,5 @@ export class ProfileDetailsComponent implements OnInit{
   toggleBtn(index:number) {
     this.btn[index] = !this.btn[index]
   }
+
 }
