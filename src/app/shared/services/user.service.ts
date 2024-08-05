@@ -104,6 +104,10 @@ export class UserService {
   getRegisterCompany(){
     return this.http.get<any>(`${this.baseUrl}/api/company/getCompanyInfo`);
   }
+  updateCompany(companyInfo:any){
+    return this.http.put<any>(`${this.baseUrl}/api/company/update-company-info`,companyInfo);
+
+  }
   changePassword(passwordData:any){
     return this.http.put<any>(`${this.baseUrl}/api/users/changePassword`,passwordData);
   }

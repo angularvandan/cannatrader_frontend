@@ -159,6 +159,8 @@ export class RegisterComponent implements AfterViewInit, OnInit {
   removeFile(): void {
     this.selectedFile = null;
     this.registerForm.patchValue({ pdf: this.selectedFile });
+    this.formData.delete('pdf');
+    console.log(this.registerForm);
   }
 
 }

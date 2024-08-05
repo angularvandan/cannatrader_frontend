@@ -167,35 +167,67 @@ export class EditProfileComponent implements OnInit {
 
   //for company
   onCompanyDocUpdateSave() {
-    this.loadingForCompany = true;
+    if (this.companyInfo.pdf) {
+      this.updateCompayInfo();
+    }
+    else {
+      this.loadingForCompany = true;
 
-    const formData = new FormData();
+      const formData = new FormData();
 
-    formData.append('company_name', this.companyForm.get('company_name')?.value);
-    formData.append('business_type', this.companyForm.get('business_type')?.value);
-    formData.append('contact_no', this.companyForm.get('contact_no')?.value);
-    formData.append('business_id_no', this.companyForm.get('business_id_no')?.value);
-    formData.append('location', this.companyForm.get('location')?.value);
-    formData.append('latitude', this.companyForm.get('latitude')?.value);
-    formData.append('longitude', this.companyForm.get('longitude')?.value);
-    formData.append('pdf', this.companyForm.get('pdf')?.value);
+      formData.append('company_name', this.companyForm.get('company_name')?.value);
+      formData.append('business_type', this.companyForm.get('business_type')?.value);
+      formData.append('contact_no', this.companyForm.get('contact_no')?.value);
+      formData.append('business_id_no', this.companyForm.get('business_id_no')?.value);
+      formData.append('location', this.companyForm.get('location')?.value);
+      formData.append('latitude', this.companyForm.get('latitude')?.value);
+      formData.append('longitude', this.companyForm.get('longitude')?.value);
+      formData.append('pdf', this.companyForm.get('pdf')?.value);
 
-    console.log(this.companyForm);
+      console.log(this.companyForm);
 
-    this.userService.registerCompany(formData).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.loadingForCompany = false;
-        this.tostr.success('Company Details has Saved.')
-      }, error: (err) => {
-        this.tostr.error(err.error.error.message);
-        this.loadingForCompany = false;
-        console.log(err);
-      }
-    })
+      this.userService.registerCompany(formData).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.loadingForCompany = false;
+          this.tostr.success('Company Details has Saved.')
+        }, error: (err) => {
+          this.tostr.error(err.error.error.message);
+          this.loadingForCompany = false;
+          console.log(err);
+        }
+      })
+
+    }
 
   }
-//this is for patch the value of company
+  //this is for update company info
+  private updateCompayInfo() {
+    this.loadingForCompany=true;
+
+    this.companyInfo = {
+      company_name: this.companyForm.get('company_name')?.value,
+      business_type: this.companyForm.get('business_type')?.value,
+      contact_no: this.companyForm.get('contact_no')?.value,
+      business_id_no: this.companyForm.get('business_id_no')?.value,
+      location: 'patna',
+      pdf: this.companyForm.get('pdf')?.value,
+    }
+
+    this.userService.updateCompany(this.companyInfo).subscribe({
+      next:(response)=>{
+        console.log(response);
+        this.loadingForCompany=false;
+
+        this.tostr.success('Updated Successfully');
+      },error:(err)=>{
+        console.log(err.error.error.message);
+        this.loadingForCompany=false;
+
+      }
+    })
+  }
+  //this is for patch the value of company
   getCompanyInfo() {
     this.userService.getRegisterCompany().subscribe({
       next: (response) => {
@@ -219,7 +251,7 @@ export class EditProfileComponent implements OnInit {
   }
   //this is for patch value of file
   preloadFile() {
-    this.selectedLicense=[];
+    this.selectedLicense = [];
     const blob = new Blob(['file content'], { type: 'application/pdf' });
     const file = new File([blob], this.companyInfo.pdf, { type: 'application/pdf' });
     this.companyForm.patchValue({
@@ -227,7 +259,7 @@ export class EditProfileComponent implements OnInit {
     });
     this.selectedLicense.push(file);
   }
-//this is for select file
+  //this is for select file
   onSelectLicense(event: Event) {
     console.log(event);
     const files: FileList | null = (event.target as HTMLInputElement).files;
@@ -255,24 +287,24 @@ export class EditProfileComponent implements OnInit {
   }
 
   //for change passowrd
-  onChangePassword(){
-    this.loadingForPassword=true;
+  onChangePassword() {
+    this.loadingForPassword = true;
 
     console.log(this.passwordForm.value);
     if (this.passwordForm.valid) {
       this.userService.changePassword(this.passwordForm.value).subscribe({
-        next:(response)=>{
-          this.loadingForPassword=false;
+        next: (response) => {
+          this.loadingForPassword = false;
           this.tostr.success(response.message)
         },
-        error:(err)=>{
-          this.loadingForPassword=false;
+        error: (err) => {
+          this.loadingForPassword = false;
           this.tostr.error(err.error.error.message);
         }
       })
     }
   }
-  onCanclePassword(){
+  onCanclePassword() {
     this.passwordForm.reset();
   }
 
