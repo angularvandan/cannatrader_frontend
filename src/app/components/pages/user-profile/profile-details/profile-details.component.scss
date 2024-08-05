@@ -88,12 +88,14 @@ $bg-primary: #3A5C41;
                                 display: flex;
                                 justify-content: center;
                                 height: 40px;
+                                min-width:135px;
                             }
                         }
 
                         .img-container {
                             display: flex;
                             justify-content: center;
+                            min-width: 55px;
 
                             img {
                                 border-radius: 100%;
