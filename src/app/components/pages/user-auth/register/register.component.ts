@@ -35,7 +35,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
       phone_no: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
-      pdf: [null, Validators.required],
+      pdf: [null],
       termsAccepted: [false, Validators.requiredTrue]
     }, { validator: this.passwordMatchValidator });
   }
@@ -107,14 +107,15 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
   onSignup() {
     this.loading = true;
+    // console.log(this.registerForm.value.email.toLowerCase());
+
 
     if (this.registerForm.valid) {
       this.formData.append('name', this.registerForm.value.name);
-      this.formData.append('email', this.registerForm.value.email);
+      this.formData.append('email', this.registerForm.value.email.toLowerCase());
       this.formData.append('password', this.registerForm.value.password);
       this.formData.append('phone_no', this.registerForm.value.phone_no);
 
-      // console.log(this.registerForm);
       // console.log(this.formData);
 
       this.userService.register(this.formData).subscribe({

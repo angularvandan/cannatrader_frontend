@@ -10,17 +10,17 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
   loading: boolean = false;
 
 
-  constructor(private userService:UserService,private fb: FormBuilder,private tostr: ToastrService,private router:Router,){}
+  constructor(private userService: UserService, private fb: FormBuilder, private tostr: ToastrService, private router: Router,) { }
 
 
   ngOnInit(): void {
-    if(this.userService.currentUser.token){
+    if (this.userService.currentUser.token) {
       this.router.navigate(['/home']);
     }
     this.loginForm = this.fb.group({
@@ -29,21 +29,23 @@ export class LoginComponent implements OnInit{
     });
   }
 
-  onLogin(){
-    this.loading=true;
+  onLogin() {
+    this.loading = true;
 
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
 
-      this.userService.login(this.loginForm.value).subscribe({
-        next:(res)=>{
-          this.loading=true;
+      let payload = { email: this.loginForm.value.email.toLowerCase(), password: this.loginForm.value.password }
+
+      this.userService.login(payload).subscribe({
+        next: (res) => {
+          this.loading = true;
           this.router.navigate(['/home']);
-          
-          this.tostr.success('Login Successfully',res.user.name);
-        },error:(err)=>{
+
+          this.tostr.success('Login Successfully', res.user.name);
+        }, error: (err) => {
           this.tostr.error(err.error.error.message);
-          this.loading=false;
+          this.loading = false;
         }
       });
     }
