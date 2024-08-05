@@ -40,5 +40,9 @@ export class HeaderComponent implements OnInit{
       this.renderer.removeClass(document.body, 'no-scroll');
     }
   }
+  logOut(){
+    this.toggleMenu();
+    this.userService.logOut();
+  }
 
 }

@@ -59,13 +59,14 @@
                 </svg>
             </a>
             <a routerLink="/login" *ngIf="!isAuth" (click)="toggleMenu()"
-                class="hover:text-secondary text-base sm:text-xl font-medium cursor-pointer whitespace-nowrap">Log in</a>
+                class="hover:text-secondary text-base sm:text-xl font-medium cursor-pointer whitespace-nowrap">Log
+                in</a>
             <a routerLink="/signup" *ngIf="!isAuth" (click)="toggleMenu()"
-                class="hover:text-white text-primary bg-secondary rounded-xl text-base sm:text-xl font-medium cursor-pointer py-1 px-2 whitespace-nowrap">Sign up</a>
+                class="hover:text-white text-primary bg-secondary rounded-xl text-base sm:text-xl font-medium cursor-pointer py-1 px-2 whitespace-nowrap">Sign
+                up</a>
 
             <a routerLink="/profile/profile-details" *ngIf="isAuth">
-                <img class="w-8 h-8 text-white user-profile rounded-full" [src]="user.user.avatar"
-                    alt="">
+                <img class="w-8 h-8 text-white user-profile rounded-full" [src]="user.user.avatar" alt="">
             </a>
 
         </div>
@@ -85,18 +86,21 @@
                 class="hover:text-secondary  text-lg leading-6  font-medium text-primary" (click)="toggleMenu()">Add
                 Products</a>
             <a routerLink="/wishlist" *ngIf="isAuth"
-                class="hover:text-secondary  text-lg leading-6 font-medium text-primary"
-                (click)="toggleMenu()">Wish List</a>
+                class="hover:text-secondary  text-lg leading-6 font-medium text-primary" (click)="toggleMenu()">Wish
+                List</a>
             <a routerLink="/contact-us" *ngIf="isAuth"
                 class="hover:text-secondary  text-lg leading-6 font-medium text-primary"
                 (click)="toggleMenu()">Contact</a>
+            <a *ngIf="isAuth"
+                class="cursor-pointer hover:text-secondary  text-lg leading-6 font-medium text-primary"
+                (click)="logOut()">Log Out</a>
         </nav>
     </div>
 </div>
 
 
 <div class="card flex justify-content-center">
-    <p-sidebar (click)="showAndHideScroll()"  [(visible)]="sidebarVisible" position="right">
+    <p-sidebar (click)="showAndHideScroll()" [(visible)]="sidebarVisible" position="right">
         <ng-template pTemplate="header" class="p-8 flex justify-between">
             <div (click)="sidebarVisible = false"
                 class="twitter-icon w-10 h-10 bg-nav-bg cursor-pointer rounded-full flex justify-center items-center">

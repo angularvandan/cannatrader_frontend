@@ -24,7 +24,7 @@
     </div>
     <div class="profile-details lg:p-16 sm:p-4 p-3">
         <div class="flex flex-row lg:flex-nowrap flex-wrap gap-4 justify-center">
-            <div class="user-card h-[455px] lg:h-[455px] sm:h-[250px]  lg:p-8 sm:p-6 p-4 lg:col-span-1 rounded-md"
+            <div class="user-card h-[410px] lg:h-[455px] sm:h-[250px]  lg:p-8 sm:p-6 p-4 lg:col-span-1 rounded-md"
                 style="min-width:275px;box-shadow: 0px 0px 5px #cfc6c0;">
                 <div class="block sm:hidden lg:block">
                     <div class="flex flex-col items-center">
@@ -49,7 +49,7 @@
                                         <span class="w-3 h-3 bg-[#EDAB00] rounded-full absolute -top-1 -right-1"></span>
                                     </button>
                                 </div>
-                                <div class="logout w-full ">
+                                <div class="logout w-full hidden lg:block">
                                     <button class="w-full flex justify-center bg-secondary text-primary rounded-lg"
                                         (click)="onLogout()">Log
                                         Out
@@ -65,7 +65,7 @@
 
                                     </button>
                                 </div>
-                                <div (click)="removeUserAccount()" class="cursor-pointer delete-account flex justify-center items-center w-full mt-8">
+                                <div (click)="removeUserAccount()" class="cursor-pointer delete-account flex justify-center items-center w-full mt-6">
                                     <svg width="25" height="25" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M3.5 7H5.83333H24.5" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M22.1673 7.00065V23.334C22.1673 23.9528 21.9215 24.5463 21.4839 24.9839C21.0463 25.4215 20.4528 25.6673 19.834 25.6673H8.16732C7.54848 25.6673 6.95499 25.4215 6.5174 24.9839C6.07982 24.5463 5.83398 23.9528 5.83398 23.334V7.00065M9.33398 7.00065V4.66732C9.33398 4.04848 9.57982 3.45499 10.0174 3.0174C10.455 2.57982 11.0485 2.33398 11.6673 2.33398H16.334C16.9528 2.33398 17.5463 2.57982 17.9839 3.0174C18.4215 3.45499 18.6673 4.04848 18.6673 4.66732V7.00065" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -104,7 +104,7 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <div class="logout w-full ">
+                                <div class="logout w-full hidden lg:block">
                                     <button (click)="onLogout()"
                                         class="w-full flex justify-center bg-secondary text-primary rounded-lg">Log
                                         Out
@@ -120,7 +120,7 @@
 
                                     </button>
                                 </div>
-                                <div (click)="removeUserAccount()" class=" cursor-pointer delete-account flex justify-center items-center w-full mt-8">
+                                <div (click)="removeUserAccount()" class=" cursor-pointer delete-account flex justify-center items-center w-full mt-6">
                                     <svg width="25" height="25" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M3.5 7H5.83333H24.5" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M22.1673 7.00065V23.334C22.1673 23.9528 21.9215 24.5463 21.4839 24.9839C21.0463 25.4215 20.4528 25.6673 19.834 25.6673H8.16732C7.54848 25.6673 6.95499 25.4215 6.5174 24.9839C6.07982 24.5463 5.83398 23.9528 5.83398 23.334V7.00065M9.33398 7.00065V4.66732C9.33398 4.04848 9.57982 3.45499 10.0174 3.0174C10.455 2.57982 11.0485 2.33398 11.6673 2.33398H16.334C16.9528 2.33398 17.5463 2.57982 17.9839 3.0174C18.4215 3.45499 18.6673 4.04848 18.6673 4.66732V7.00065" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
