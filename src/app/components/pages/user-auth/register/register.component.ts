@@ -63,17 +63,22 @@ export class RegisterComponent implements AfterViewInit, OnInit {
     // console.log(inputs);
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.value.length === 1 && index < inputs.length - 1) {
-      inputs[index + 1].nativeElement.focus();
+      if(index!=3){
+        inputs[index + 1].nativeElement.focus();
+      }
     }
   }
   handleKeyDown(event: KeyboardEvent, index: number): void {
 
     const inputs = this.otpInputs.toArray();
-    // console.log(inputs);
+    console.log(index);
 
     if (event.key === 'Backspace' && index !== 0) {
       inputs[index].nativeElement.value = '';
-      inputs[index - 1].nativeElement.focus();
+      setTimeout(()=>{
+        inputs[index - 1].nativeElement.focus();
+
+      },0)
     }
   }
   verifyEmail() {

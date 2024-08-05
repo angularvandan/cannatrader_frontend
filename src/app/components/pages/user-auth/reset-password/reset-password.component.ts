@@ -17,9 +17,9 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
 
   resetPasswordForm!: FormGroup;
   updatePasswordForm!: FormGroup;
-  userId!:string;
+  userId!: string;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private tostr: ToastrService,private router:Router) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private tostr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.resetPasswordForm = this.fb.group({
@@ -61,7 +61,9 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
     const inputs = this.otpInputs.toArray();
     if (event.key === 'Backspace' && index !== 0) {
       inputs[index].nativeElement.value = '';
-      inputs[index - 1].nativeElement.focus();
+      setTimeout(() => {
+        inputs[index - 1].nativeElement.focus();
+      }, 0)
     }
   }
 
@@ -107,37 +109,37 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
     // console.log(payloadForOtp);
 
     this.userService.verifyOtpForResetPassword(payloadForOtp).subscribe({
-      next:(response)=>{
+      next: (response) => {
         // console.log(response);
-        
-        this.section=section;
+
+        this.section = section;
         this.tostr.success(response.message);
         this.loading = false;
 
-        this.userId=response.userId;
+        this.userId = response.userId;
 
-      },error:(err)=>{
-        
+      }, error: (err) => {
+
         this.loading = false;
         this.tostr.error(err.error.error.message);
       }
     })
 
   }
-  changePassword(){
-    this.loading=true;
+  changePassword() {
+    this.loading = true;
     if (this.updatePasswordForm.valid) {
       const newPassword = this.updatePasswordForm.get('newPassword')?.value;
       const confirmPassword = this.updatePasswordForm.get('confirmPassword')?.value;
 
       this.userService.updatePassword(this.userId, newPassword, confirmPassword).subscribe({
-        next:(response)=>{
+        next: (response) => {
           this.tostr.success(response.message);
-          this.loading=false;
+          this.loading = false;
           this.router.navigate(['/login']);
-          
-        },error:(err)=>{
-          this.loading=false;
+
+        }, error: (err) => {
+          this.loading = false;
           this.tostr.error(err.error.message);
         }
       });
