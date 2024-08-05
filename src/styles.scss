@@ -49,6 +49,10 @@
 $bg-primary: #3A5C41;
 $secondary: #FFE175;
 
+body.no-scroll {
+    overflow: hidden;
+}
+
 button {
     font-family: 'Quicksand';
 }
@@ -379,11 +383,6 @@ app-header {
         border-bottom-left-radius: 20px;
 
         @media(max-width:768px) {
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-        }
-
-        @media (max-width:370px) {
             width: 100%;
             border-top-left-radius: 0px;
             border-bottom-left-radius: 0px;

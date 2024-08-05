@@ -37,7 +37,7 @@
             <div class="relative inline-flex">
                 <!-- <div
               class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 rounded-full bg-pink-700 p-2.5 text-xs"></div> -->
-                <div (click)="sidebarVisible = true" *ngIf="isAuth"
+                <div (click)="notificationOpenClick()" *ngIf="isAuth"
                     class="cursor-pointer flex items-center justify-center rounded-lg text-center text-white dark:text-gray-200">
                     <span class="[&>svg]:h-6 [&>svg]:w-6">
                         <svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -96,7 +96,7 @@
 
 
 <div class="card flex justify-content-center">
-    <p-sidebar [(visible)]="sidebarVisible" position="right">
+    <p-sidebar (click)="showAndHideScroll()"  [(visible)]="sidebarVisible" position="right">
         <ng-template pTemplate="header" class="p-8 flex justify-between">
             <div (click)="sidebarVisible = false"
                 class="twitter-icon w-10 h-10 bg-nav-bg cursor-pointer rounded-full flex justify-center items-center">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit{
 
   user!:User;
 
-  constructor(private userService:UserService){}
+  constructor(private userService:UserService,private renderer:Renderer2){}
   
   ngOnInit(): void {
       this.userService.userObservable.subscribe(newUser=>{
@@ -27,6 +27,18 @@ export class HeaderComponent implements OnInit{
   
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+  notificationOpenClick() {
+    this.sidebarVisible=true;
+    this.showAndHideScroll();
+  }
+  showAndHideScroll(){
+    console.log('hi');
+    if (this.sidebarVisible) {
+      this.renderer.addClass(document.body, 'no-scroll');
+    } else {
+      this.renderer.removeClass(document.body, 'no-scroll');
+    }
   }
 
 }
