@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-chat-details',
@@ -41,6 +41,16 @@ export class ChatDetailsComponent implements OnInit{
   }
   ngOnInit(): void {
       
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.checkWindowWidth();
+  }
+  private checkWindowWidth(){
+    if (window.innerWidth > 768) {
+      this.showMobileViewChats=false;
+
+    }
   }
   showChats(user:any){
     this.activeUserChats.pop();

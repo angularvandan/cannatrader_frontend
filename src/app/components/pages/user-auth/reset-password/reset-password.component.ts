@@ -102,7 +102,7 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
     }
     const payloadForOtp = {
       otp: otpString,
-      email: this.resetPasswordForm.value.email
+      email: this.resetPasswordForm.value.email.toLowerCase()
     }
     // console.log(payloadForOtp);
 
