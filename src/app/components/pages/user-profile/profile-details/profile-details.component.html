@@ -11,8 +11,8 @@
                 </div>
             </ng-template>
             <ng-template pTemplate="content">
-                Are you sure you want to delete <br>
-                the product details?
+                Are you sure you want to Logout <br>
+                ?
             </ng-template>
             <ng-template pTemplate="footer">
                 <button class="w-full font-bold py-2 px-4 rounded-md font-custom bg-[#F24463] text-white"
@@ -21,16 +21,15 @@
                     type="button" icon="pi pi-check" label="Yes" (click)="cd.accept()">Yes</button>
             </ng-template>
         </p-confirmDialog>
-        <!-- <p-button  icon="pi pi-check" label="Confirm"></p-button> -->
     </div>
     <div class="profile-details lg:p-16 sm:p-4 p-3">
         <div class="flex flex-row lg:flex-nowrap flex-wrap gap-4 justify-center">
-            <div class="user-card h-[410px] lg:h-[410px] sm:h-[250px]  lg:p-8 sm:p-6 p-4 lg:col-span-1 rounded-md"
+            <div class="user-card h-[455px] lg:h-[455px] sm:h-[250px]  lg:p-8 sm:p-6 p-4 lg:col-span-1 rounded-md"
                 style="min-width:275px;box-shadow: 0px 0px 5px #cfc6c0;">
                 <div class="block sm:hidden lg:block">
                     <div class="flex flex-col items-center">
                         <div class="user-img w-36 h-36 flex overflow-hidded mb-4">
-                            <img class="rounded-full"  [src]="user.avatar"loading="lazy" alt="user image">
+                            <img class="rounded-full" [src]="user.avatar" loading="lazy" alt="user image">
                         </div>
                         <div class="user-details flex flex-col items-center mb-8">
                             <div class="name font-bold text-xl">{{user.name}}</div>
@@ -52,7 +51,7 @@
                                 </div>
                                 <div class="logout w-full ">
                                     <button class="w-full flex justify-center bg-secondary text-primary rounded-lg"
-                                         (click)="onLogout()">Log
+                                        (click)="onLogout()">Log
                                         Out
                                         <svg width="21" height="25" class="ml-2" viewBox="0 0 30 31" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -66,6 +65,18 @@
 
                                     </button>
                                 </div>
+                                <div (click)="removeUserAccount()" class="cursor-pointer delete-account flex justify-center items-center w-full mt-8">
+                                    <svg width="25" height="25" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.5 7H5.83333H24.5" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M22.1673 7.00065V23.334C22.1673 23.9528 21.9215 24.5463 21.4839 24.9839C21.0463 25.4215 20.4528 25.6673 19.834 25.6673H8.16732C7.54848 25.6673 6.95499 25.4215 6.5174 24.9839C6.07982 24.5463 5.83398 23.9528 5.83398 23.334V7.00065M9.33398 7.00065V4.66732C9.33398 4.04848 9.57982 3.45499 10.0174 3.0174C10.455 2.57982 11.0485 2.33398 11.6673 2.33398H16.334C16.9528 2.33398 17.5463 2.57982 17.9839 3.0174C18.4215 3.45499 18.6673 4.04848 18.6673 4.66732V7.00065" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M11.666 12.834V19.834" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M16.334 12.834V19.834" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        
+                                    <a class="w-full flex justify-center text-primary rounded-lg font-bold ml-2 sm:ml-3 whitespace-nowrap"
+                                        >Delete Account
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -74,14 +85,14 @@
                     <div class="flex  items-center flex-row justify-center">
                         <div class="user-img flex overflow-hidded flex-col mr-12 justify-center items-center">
 
-                            <img class="rounded-full w-32 h-32" [src]="user.avatar"loading="lazy" alt="user image">
+                            <img class="rounded-full w-32 h-32" [src]="user.avatar" loading="lazy" alt="user image">
                             <div class="user-details flex flex-col items-center ">
                                 <div class="name font-bold text-xl">{{user.name}}</div>
                                 <div class="email">{{user.email}}</div>
                             </div>
                         </div>
                         <div class="user-action flex ">
-                            <div class="buttons flex flex-col items-center w-36">
+                            <div class="buttons flex flex-col items-center w-40">
                                 <div class="edit-profile w-full">
                                     <button [routerLink]="['../edit-profile']"
                                         class="w-full flex justify-center mb-3 bg-primary text-secondary rounded-lg">Edit
@@ -94,7 +105,8 @@
                                     </button>
                                 </div>
                                 <div class="logout w-full ">
-                                    <button (click)="onLogout()" class="w-full flex justify-center bg-secondary text-primary rounded-lg">Log
+                                    <button (click)="onLogout()"
+                                        class="w-full flex justify-center bg-secondary text-primary rounded-lg">Log
                                         Out
                                         <svg width="21" height="25" class="ml-2" viewBox="0 0 30 31" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -108,6 +120,19 @@
 
                                     </button>
                                 </div>
+                                <div (click)="removeUserAccount()" class=" cursor-pointer delete-account flex justify-center items-center w-full mt-8">
+                                    <svg width="25" height="25" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.5 7H5.83333H24.5" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M22.1673 7.00065V23.334C22.1673 23.9528 21.9215 24.5463 21.4839 24.9839C21.0463 25.4215 20.4528 25.6673 19.834 25.6673H8.16732C7.54848 25.6673 6.95499 25.4215 6.5174 24.9839C6.07982 24.5463 5.83398 23.9528 5.83398 23.334V7.00065M9.33398 7.00065V4.66732C9.33398 4.04848 9.57982 3.45499 10.0174 3.0174C10.455 2.57982 11.0485 2.33398 11.6673 2.33398H16.334C16.9528 2.33398 17.5463 2.57982 17.9839 3.0174C18.4215 3.45499 18.6673 4.04848 18.6673 4.66732V7.00065" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M11.666 12.834V19.834" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M16.334 12.834V19.834" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        
+                                    <a class="w-full flex justify-center text-primary rounded-lg font-bold whitespace-nowrap ml-2"
+                                        >Delete Account
+
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -118,7 +143,8 @@
                     <!-- //this is for not a mobile -->
                     <div class="recent-listing mb-5 hidden sm:block">
                         <div class="table-heading mb-2">
-                            <h1 class=" text-primary text-start sm:text-2xl leading-8 font-semibold">Recent Listings</h1>
+                            <h1 class=" text-primary text-start sm:text-2xl leading-8 font-semibold">Recent Listings
+                            </h1>
                         </div>
                         <div class="w-[86vw] lg:w-[64vw]">
                             <div class="overflow-x-auto ">
@@ -141,7 +167,7 @@
                                     </thead>
                                     <tbody>
                                         <tr style="height:10px"></tr>
-                                        
+
                                         <tr>
                                             <td class="">
                                                 <a href="" class="img-container">
@@ -222,7 +248,8 @@
                     <div class="block sm:hidden">
                         <div class="header flex justify-between items-center mb-6">
                             <div class="mb-2">
-                                <h1 class=" text-primary text-start text-base  sm:text-2xl leading-8 font-semibold">Recent Listings
+                                <h1 class=" text-primary text-start text-base  sm:text-2xl leading-8 font-semibold">
+                                    Recent Listings
                                 </h1>
                             </div>
                             <div class="">
@@ -301,8 +328,9 @@
                                                 class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
 
                                             <button (click)="toggleBtn(0)" *ngIf="btn[0]"
-                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed ✓
-                                                </button>
+                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
+                                                ✓
+                                            </button>
 
                                         </span>
                                     </td>
@@ -322,8 +350,9 @@
                                                 class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
 
                                             <button (click)="toggleBtn(1)" *ngIf="btn[1]"
-                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed ✓
-                                                </button>
+                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
+                                                ✓
+                                            </button>
 
                                         </span>
                                     </td>
@@ -343,8 +372,9 @@
                                                 class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
 
                                             <button (click)="toggleBtn(2)" *ngIf="btn[2]"
-                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed ✓
-                                                </button>
+                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
+                                                ✓
+                                            </button>
 
                                         </span>
                                     </td>

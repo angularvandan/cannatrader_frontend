@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { UserDetails } from 'src/app/shared/models/user';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-add-product',
@@ -98,11 +100,15 @@ export class AddProductComponent implements OnInit {
   selectedLicenseFile: File | null = null;
   selectedImageFiles: File[] = [];
 
-  companyDocumentStatus:boolean=true;
+  user!:UserDetails;
 
-  constructor() { }
+  companyDocumentStatus:boolean=false;
+
+  constructor(private userService:UserService) { }
 
   ngOnInit(): void {
+    this.user=this.userService.currentUser.user;
+    this.companyDocumentStatus=this.user.is_company;
   }
 
   imagePreviews: string[] = [];

@@ -86,14 +86,16 @@ app-register {
         background: none;
     }
 
-    .p-inputtext , .p-inputnumber{
+    .p-inputtext,
+    .p-inputnumber {
         background: #FFFFFF3D;
         backdrop-filter: blur(10.9px);
         border: 0;
         color: #fafafa;
     }
 
-    .p-inputtext:enabled:focus,.p-inputnumber:enabled:focus  {
+    .p-inputtext:enabled:focus,
+    .p-inputnumber:enabled:focus {
         outline: none;
         outline-offset: 0;
         box-shadow: none;
@@ -256,6 +258,21 @@ app-edit-profile {
 
     .p-radiobutton .p-radiobutton-box.p-highlight {
         background: unset;
+    }
+
+    .change-password-container {
+        p-password .p-inputtext {
+            background: #F5F5F5;
+            border: 0px;
+        }
+
+        .p-inputtext:enabled:focus {
+            box-shadow: none;
+        }
+
+        .p-inputtext {
+            font-size: 14px;
+        }
     }
 
 }

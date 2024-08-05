@@ -104,7 +104,7 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
       otp: otpString,
       email: this.resetPasswordForm.value.email
     }
-    console.log(payloadForOtp);
+    // console.log(payloadForOtp);
 
     this.userService.verifyOtpForResetPassword(payloadForOtp).subscribe({
       next:(response)=>{

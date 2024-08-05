@@ -34,11 +34,8 @@ export class UserService {
           this.setUserToLocalStorage(response);
           this.userSubject.next(response);
 
-          this.tostr.success('Login Successfully',response.user.name);
-
         },error:(err)=>{
           console.log(err);
-          this.tostr.error(err.error.error.message);
         }
       })
     );
@@ -47,7 +44,7 @@ export class UserService {
   logOut(){
     this.userSubject.next(new User());
     localStorage.removeItem(USER_KEY);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
 
   }
 
@@ -66,7 +63,7 @@ export class UserService {
   }
 
   verifyOtpForEmail(data:any){
-    return this.http.post<any>(`${this.baseUrl}/api/users/verifyOTP`, data);
+    return this.http.post<any>(`${this.baseUrl}/api/users/verify-registerOtp`, data);
   }
 
   resetPassword(email: string): Observable<any> {
@@ -98,6 +95,20 @@ export class UserService {
   }
   updateUserProfile(userData:any){
     return this.http.put<any>(`${this.baseUrl}/api/users/profile`,userData);
+
+  }
+  registerCompany(companyInfo:any){
+    return this.http.post<any>(`${this.baseUrl}/api/company/register`,companyInfo);
+
+  }
+  getRegisterCompany(){
+    return this.http.get<any>(`${this.baseUrl}/api/company/getCompanyInfo`);
+  }
+  changePassword(passwordData:any){
+    return this.http.put<any>(`${this.baseUrl}/api/users/changePassword`,passwordData);
+  }
+  deleteUserAccount(){
+    return this.http.delete<any>(`${this.baseUrl}/api/users/delete`);
 
   }
 }

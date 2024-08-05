@@ -1,5 +1,5 @@
 <div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay"
-    *ngIf="!companyDocumentStatus">
+    *ngIf="companyDocumentStatus">
     <div class="max-w-3xl w-full pb-8">
         <div class="pt-8 pb-1">
             <nav class="flex sm:mb-2" aria-label="Breadcrumb">
@@ -307,7 +307,7 @@
         </form>
     </div>
 </div>
-<div class="w-full h-full relative" *ngIf="companyDocumentStatus">
+<div class="w-full h-full relative" *ngIf="!companyDocumentStatus">
     <div class="mt-4 flex items-start justify-center min-h-screen">
         <!--  -->
         <div class="text-center max-w-md w-full">
@@ -321,7 +321,7 @@
             </p>
             <p class="text-help mb-6">You're nearly there! Finish entering <br>your company information to add your
                 products.</p>
-            <button (click)="companyDocumentStatus=false" routerLink="/add-product"
+            <button (click)="companyDocumentStatus=false" routerLink="/profile/edit-profile"
                 class="bg-secondary text-primary font-bold py-2 px-4 rounded-md ">Add Company Details</button>
         </div>
     </div>

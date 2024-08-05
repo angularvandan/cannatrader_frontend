@@ -35,10 +35,16 @@ export class LoginComponent implements OnInit{
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
 
-      this.userService.login(this.loginForm.value).subscribe((res:any)=>{
-        this.loading=true;
-        this.router.navigate(['/home']);
-
+      this.userService.login(this.loginForm.value).subscribe({
+        next:(res)=>{
+          this.loading=true;
+          this.router.navigate(['/home']);
+          
+          this.tostr.success('Login Successfully',res.user.name);
+        },error:(err)=>{
+          this.tostr.error(err.error.error.message);
+          this.loading=false;
+        }
       });
     }
 
