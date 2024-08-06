@@ -262,7 +262,7 @@
                     </div>
                     <!-- //this is for mobile view -->
                     <div class="block sm:hidden">
-                        <div class="header flex justify-between items-center mb-6">
+                        <div class="header flex justify-between items-start mb-6">
                             <div class="mb-2">
                                 <h1 class=" text-primary text-start text-base  sm:text-2xl leading-8 font-semibold">
                                     Recent Listings
@@ -270,7 +270,7 @@
                             </div>
                             <div class="">
                                 <a routerLink="/profile/recentlisting"
-                                    class="font-lg cursor-pointer leading-4 font-medium  text-primary rounded-lg py-2 px-3">View
+                                    class="font-lg cursor-pointer leading-4 font-medium  text-primary rounded-lg pb-2 pt-0 px-3">View
                                     More</a>
                             </div>
                         </div>
@@ -279,7 +279,7 @@
                                 <div *ngIf="i<3" routerLink="productDetails"
                                     class="max-w-sm cursor-pointer mx-auto bg-white rounded-lg justify-around overflow-hidden flex">
                                     <div class="relative">
-                                        <img [src]="product.image" alt="Canopy Growth" class="w-full h-32 object-cover">
+                                        <img [src]="product.image" alt="Canopy Growth" class="w-full h-28 object-cover">
                                         <div
                                             class="absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-lg posted">
                                             Posted:
@@ -324,7 +324,7 @@
                             <h1 class=" text-primary text-start text-2xl leading-8 font-semibold">Subscribed</h1>
                         </div>
                         <div class="block sm:hidden m-auto ">
-                            <div class="header flex justify-between items-center mt-6">
+                            <div class="header flex justify-between items-start mt-6">
                                 <div class="mb-2">
                                     <h1 class=" text-primary text-start text-base  sm:text-2xl leading-8 font-semibold">
                                         Subscribed
@@ -332,7 +332,7 @@
                                 </div>
                                 <div class="">
                                     <a routerLink="/profile/subscribed-listing"
-                                        class="font-lg cursor-pointer leading-4 font-medium  text-primary rounded-lg py-2 px-3">View
+                                        class="font-lg cursor-pointer leading-4 font-medium  text-primary rounded-lg pb-2 pt-0 px-3">View
                                         More</a>
                                 </div>
                             </div>

@@ -25,7 +25,7 @@ export class EditProfileComponent implements OnInit {
   radioForm!: FormGroup;
 
   companyForm!: FormGroup;
-  showCompanyForm: boolean = true;
+  showCompanyForm: boolean = false;
   companyInfo: any = {};
 
   passwordForm!: FormGroup;
@@ -52,7 +52,7 @@ export class EditProfileComponent implements OnInit {
 
     //for show companny or not
     this.radioForm = this.fb.group({
-      companyDecision: ['yes']
+      companyDecision: ['no']
     });
 
     this.radioForm.get('companyDecision')?.valueChanges.subscribe(value => {
@@ -251,8 +251,17 @@ export class EditProfileComponent implements OnInit {
         this.companyForm.patchValue(this.companyInfo);
         this.preloadFile();
 
+        //radio for company info
+        this.radioForm.patchValue({
+          companyDecision:'yes'
+        })
+
       }, error: (err) => {
         console.log(err);
+        this.showCompanyForm=false;
+        this.radioForm.patchValue({
+          companyDecision:'no'
+        })
       }
     });
   }
