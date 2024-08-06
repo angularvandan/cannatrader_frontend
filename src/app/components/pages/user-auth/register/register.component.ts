@@ -47,6 +47,12 @@ export class RegisterComponent implements AfterViewInit, OnInit {
     return password === confirmPassword ? null : { 'passwordMismatch': true };
   }
 
+  onPhoneInput(event: any): void {
+    const input = event.target as HTMLInputElement;
+    const sanitized = input.value.replace(/[^0-9]/g, ''); // Remove non-digits
+    input.value = sanitized.slice(0, 10); // Limit to 10 digits
+  }
+
   ngAfterViewInit() {
     this.attachEventListeners();
   }
@@ -139,7 +145,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
         },
         error: (err) => {
-          
+
           this.loading = false;
           this.formData = new FormData();
 

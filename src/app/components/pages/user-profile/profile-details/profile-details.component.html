@@ -4,7 +4,7 @@
     </div>
     <div class="card flex justify-content-center">
         <p-toast position="bottom-center"></p-toast>
-        <p-confirmDialog p-dialog-titlebar-icon="pi pi-times"  #cd>
+        <p-confirmDialog p-dialog-titlebar-icon="pi pi-times" #cd>
             <ng-template pTemplate="header">
                 <div class="twitter-icon w-16 h-16 bg-nav-bg rounded-full flex justify-center items-center">
                     <i class="pi pi-trash text-primary"></i>
@@ -15,10 +15,10 @@
                 ?
             </ng-template>
             <ng-template pTemplate="footer">
-                <button class="w-full font-bold py-2 px-4 rounded-md font-custom bg-[#F24463] text-white"
-                    type="button" icon="pi pi-times" label="No" (click)="cd.reject()">No</button>
-                <button class="w-full font-bold py-2 px-4 rounded-md font-custom bg-[#5BB318] text-white"
-                    type="button" icon="pi pi-check" label="Yes" (click)="cd.accept()">Yes</button>
+                <button class="w-full font-bold py-2 px-4 rounded-md font-custom bg-[#F24463] text-white" type="button"
+                    icon="pi pi-times" label="No" (click)="cd.reject()">No</button>
+                <button class="w-full font-bold py-2 px-4 rounded-md font-custom bg-[#5BB318] text-white" type="button"
+                    icon="pi pi-check" label="Yes" (click)="cd.accept()">Yes</button>
             </ng-template>
         </p-confirmDialog>
     </div>
@@ -29,7 +29,8 @@
                 <div class="block sm:hidden lg:block">
                     <div class="flex flex-col items-center">
                         <div class="user-img w-36 h-36 flex overflow-hidded mb-4">
-                            <img *ngIf="!loadingUserImage" class="rounded-full" [src]="user.avatar" loading="lazy" alt="user image">
+                            <img *ngIf="!loadingUserImage" class="rounded-full" [src]="user.avatar" loading="lazy"
+                                alt="user image">
                         </div>
                         <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loadingUserImage"></i>
                         <div class="user-details flex flex-col items-center mb-8">
@@ -66,16 +67,25 @@
 
                                     </button>
                                 </div>
-                                <div (click)="removeUserAccount()" class="cursor-pointer delete-account flex justify-center items-center w-full mt-6">
-                                    <svg width="25" height="25" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M3.5 7H5.83333H24.5" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M22.1673 7.00065V23.334C22.1673 23.9528 21.9215 24.5463 21.4839 24.9839C21.0463 25.4215 20.4528 25.6673 19.834 25.6673H8.16732C7.54848 25.6673 6.95499 25.4215 6.5174 24.9839C6.07982 24.5463 5.83398 23.9528 5.83398 23.334V7.00065M9.33398 7.00065V4.66732C9.33398 4.04848 9.57982 3.45499 10.0174 3.0174C10.455 2.57982 11.0485 2.33398 11.6673 2.33398H16.334C16.9528 2.33398 17.5463 2.57982 17.9839 3.0174C18.4215 3.45499 18.6673 4.04848 18.6673 4.66732V7.00065" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M11.666 12.834V19.834" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M16.334 12.834V19.834" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                        
-                                    <a class="w-full flex justify-center text-primary rounded-lg font-bold ml-2 sm:ml-3 whitespace-nowrap"
-                                        >Delete Account
+                                <div (click)="removeUserAccount()"
+                                    class="cursor-pointer delete-account flex justify-center items-center w-full mt-6">
+                                    <svg width="25" height="25" viewBox="0 0 28 28" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.5 7H5.83333H24.5" stroke="#3A5C41" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path
+                                            d="M22.1673 7.00065V23.334C22.1673 23.9528 21.9215 24.5463 21.4839 24.9839C21.0463 25.4215 20.4528 25.6673 19.834 25.6673H8.16732C7.54848 25.6673 6.95499 25.4215 6.5174 24.9839C6.07982 24.5463 5.83398 23.9528 5.83398 23.334V7.00065M9.33398 7.00065V4.66732C9.33398 4.04848 9.57982 3.45499 10.0174 3.0174C10.455 2.57982 11.0485 2.33398 11.6673 2.33398H16.334C16.9528 2.33398 17.5463 2.57982 17.9839 3.0174C18.4215 3.45499 18.6673 4.04848 18.6673 4.66732V7.00065"
+                                            stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M11.666 12.834V19.834" stroke="#3A5C41" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M16.334 12.834V19.834" stroke="#3A5C41" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+
+                                    <a
+                                        class="w-full flex justify-center text-primary rounded-lg font-bold ml-2 sm:ml-3 whitespace-nowrap">Delete
+                                        Account
                                     </a>
                                 </div>
                             </div>
@@ -86,7 +96,8 @@
                     <div class="flex  items-center flex-row justify-center">
                         <div class="user-img flex overflow-hidded flex-col mr-12 justify-center items-center">
 
-                            <img *ngIf="!loadingUserImage" class="rounded-full w-32 h-32" [src]="user.avatar" loading="lazy" alt="user image">
+                            <img *ngIf="!loadingUserImage" class="rounded-full w-32 h-32" [src]="user.avatar"
+                                loading="lazy" alt="user image">
                             <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loadingUserImage"></i>
 
                             <div class="user-details flex flex-col items-center ">
@@ -122,16 +133,25 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <div (click)="removeUserAccount()" class=" cursor-pointer delete-account flex justify-center items-center w-full mt-6">
-                                    <svg width="25" height="25" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M3.5 7H5.83333H24.5" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M22.1673 7.00065V23.334C22.1673 23.9528 21.9215 24.5463 21.4839 24.9839C21.0463 25.4215 20.4528 25.6673 19.834 25.6673H8.16732C7.54848 25.6673 6.95499 25.4215 6.5174 24.9839C6.07982 24.5463 5.83398 23.9528 5.83398 23.334V7.00065M9.33398 7.00065V4.66732C9.33398 4.04848 9.57982 3.45499 10.0174 3.0174C10.455 2.57982 11.0485 2.33398 11.6673 2.33398H16.334C16.9528 2.33398 17.5463 2.57982 17.9839 3.0174C18.4215 3.45499 18.6673 4.04848 18.6673 4.66732V7.00065" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M11.666 12.834V19.834" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M16.334 12.834V19.834" stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                        
-                                    <a class="w-full flex justify-center text-primary rounded-lg font-bold whitespace-nowrap ml-2"
-                                        >Delete Account
+                                <div (click)="removeUserAccount()"
+                                    class=" cursor-pointer delete-account flex justify-center items-center w-full mt-6">
+                                    <svg width="25" height="25" viewBox="0 0 28 28" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.5 7H5.83333H24.5" stroke="#3A5C41" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path
+                                            d="M22.1673 7.00065V23.334C22.1673 23.9528 21.9215 24.5463 21.4839 24.9839C21.0463 25.4215 20.4528 25.6673 19.834 25.6673H8.16732C7.54848 25.6673 6.95499 25.4215 6.5174 24.9839C6.07982 24.5463 5.83398 23.9528 5.83398 23.334V7.00065M9.33398 7.00065V4.66732C9.33398 4.04848 9.57982 3.45499 10.0174 3.0174C10.455 2.57982 11.0485 2.33398 11.6673 2.33398H16.334C16.9528 2.33398 17.5463 2.57982 17.9839 3.0174C18.4215 3.45499 18.6673 4.04848 18.6673 4.66732V7.00065"
+                                            stroke="#3A5C41" stroke-width="2.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M11.666 12.834V19.834" stroke="#3A5C41" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M16.334 12.834V19.834" stroke="#3A5C41" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+
+                                    <a
+                                        class="w-full flex justify-center text-primary rounded-lg font-bold whitespace-nowrap ml-2">Delete
+                                        Account
 
                                     </a>
                                 </div>
@@ -151,13 +171,6 @@
                         <div class="w-[86vw] lg:w-[64vw]">
                             <div class="overflow-x-auto ">
                                 <table class=" min-w-[580px] w-full border-spacing-x-4">
-                                    <!-- <caption class="caption-bottom ">
-                                        <div class="pt-6" routerLink="/profile/recentlisting">
-                                            <a
-                                                class="font-lg leading-4 cursor-pointer font-semibold bg-[#D1DACF] text-primary rounded-lg py-1 px-2">View
-                                                More</a>
-                                        </div>
-                                    </caption> -->
                                     <thead class="h-[50px]">
                                         <tr class="border-y">
                                             <th>Product Image</th>
@@ -243,7 +256,8 @@
                         <div class="pt-6 flex justify-center">
                             <a routerLink="/profile/recentlisting"
                                 class="font-lg cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
-                                More</a>
+                                More
+                            </a>
                         </div>
                     </div>
                     <!-- //this is for mobile view -->
@@ -306,8 +320,22 @@
                         </div>
                     </div>
                     <div class="recent-subscribed">
-                        <div class="table-heading mb-2 border-b " style="padding-bottom:10px;">
+                        <div class="table-heading mb-2 border-b hidden sm:block" style="padding-bottom:10px;">
                             <h1 class=" text-primary text-start text-2xl leading-8 font-semibold">Subscribed</h1>
+                        </div>
+                        <div class="block sm:hidden m-auto ">
+                            <div class="header flex justify-between items-center mt-6">
+                                <div class="mb-2">
+                                    <h1 class=" text-primary text-start text-base  sm:text-2xl leading-8 font-semibold">
+                                        Subscribed
+                                    </h1>
+                                </div>
+                                <div class="">
+                                    <a routerLink="/profile/subscribed-listing"
+                                        class="font-lg cursor-pointer leading-4 font-medium  text-primary rounded-lg py-2 px-3">View
+                                        More</a>
+                                </div>
+                            </div>
                         </div>
                         <table class="w-full border-spacing-x-4">
                             <!-- <caption class="caption-bottom ">
@@ -383,10 +411,12 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="pt-6 flex justify-center">
-                            <a routerLink="../subscribed-listing"
-                                class="font-lg cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
-                                More</a>
+                        <div class="hidden sm:block">
+                            <div class="pt-6 flex justify-center">
+                                <a routerLink="../subscribed-listing"
+                                    class="font-lg cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
+                                    More</a>
+                            </div>
                         </div>
                     </div>
                 </div>

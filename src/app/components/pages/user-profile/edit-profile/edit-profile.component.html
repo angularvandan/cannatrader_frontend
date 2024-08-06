@@ -122,7 +122,8 @@
                                     <a (click)="scrollToSection('companyInfo')"
                                         class="cursor-pointer flex items-center text-xl leading-9 font-normal text-primary">Company
                                         Information
-                                        <img class="ml-2" src="../../../../../assets/profile/edit_profile/complete.png" style="width:35px;height:35px;"alt="icon">
+                                        <img class="ml-2" src="../../../../../assets/profile/edit_profile/complete.png"
+                                            style="width:35px;height:35px;" alt="icon">
                                     </a>
                                 </div>
                                 <div class="change-password-link w-full py-2 border-b">
@@ -179,7 +180,8 @@
                                     <div class="mt-6 w-full relative">
                                         <label for="phone" class="block text-md text-gray-700 font-custom">Phone Number
                                             <span class="text-red">*</span>
-                                            <input formControlName="phone_no" required pInputText type="number"
+                                            <input formControlName="phone_no" required pInputText type="tel"
+                                                maxlength="10" pattern="[0-9]*" (input)="onPhoneInput($event)"
                                                 id="phone" placeholder="Enter Your Phone Number"
                                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
                                                 name="lotId">
@@ -266,6 +268,10 @@
                                         <input required pInputText id="companyname" type="text"
                                             formControlName="company_name" placeholder="Enter Your Company Name"
                                             class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm">
+                                        <div *ngIf="companyForm.get('company_name')?.errors"
+                                            class="text-red-400 text-sm">
+                                            Company Name is required.
+                                        </div>
                                     </div>
                                     <div class="mt-6 w-full">
                                         <label for="businesstype"
@@ -275,35 +281,49 @@
                                             formControlName="business_type"
                                             placeholder="Enter your business type or service"
                                             class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm">
+                                        <div *ngIf="companyForm.get('business_type')?.errors"
+                                            class="text-red-400 text-sm">
+                                            Business Type is required.
+                                        </div>
                                     </div>
 
                                 </div>
 
                                 <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
 
-                                    <div class="mt-6 w-full relative">
-                                        <label for="businessmobile" class="block text-md leading-6 font-custom">Business
-                                            Shop Mobile Number <span class="text-red">*</span></label>
-                                        <input required pInputText id="businessmobile" type="number"
-                                            formControlName="contact_no" placeholder="Enter Your Mobile Number"
-                                            class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm">
-                                        <span class=" absolute bottom-[10px] right-4">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1.66602 5.66699H22.3327V18.3337H1.66602V5.66699Z"
-                                                    fill="white" />
-                                                <path
-                                                    d="M1.66602 5.66699H7.33268V18.3337H1.66602V5.66699ZM16.666 5.66699H22.3327V18.3337H16.666V5.66699Z"
-                                                    fill="#D22F27" />
-                                                <path
-                                                    d="M11.9993 15.3337V13.667V15.3337ZM11.9993 13.667H14.266L13.9994 13.0003L15.3327 11.667V10.667H14.3327L12.9994 12.0003V9.66699L11.9993 8.66699M11.9993 13.667H9.73268L9.99935 13.0003L8.66602 11.667V10.667H9.66602L10.9993 12.0003V9.66699L11.9993 8.66699"
-                                                    fill="#D22F27" />
-                                                <path
-                                                    d="M11.9993 15.3337V13.667M11.9993 13.667H14.266L13.9994 13.0003L15.3327 11.667V10.667H14.3327L12.9993 12.0003V9.66699L11.9993 8.66699L10.9993 9.66699V12.0003L9.66602 10.667H8.66602V11.667L9.99935 13.0003L9.73268 13.667H11.9993Z"
-                                                    stroke="#D22F27" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
+                                    <div class="mt-6 w-full ">
+                                        <label for="businessmobile"
+                                            class="block text-md leading-6 font-custom relative">Business
+                                            Shop Mobile Number <span class="text-red">*</span>
+                                            <input required pInputText id="businessmobile" type="tel" maxlength="10"
+                                                pattern="[0-9]*" (input)="onPhoneInput($event)"
+                                                formControlName="contact_no" placeholder="Enter Your Mobile Number"
+                                                class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm">
+                                            <span class=" absolute bottom-[10px] right-4">
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1.66602 5.66699H22.3327V18.3337H1.66602V5.66699Z"
+                                                        fill="white" />
+                                                    <path
+                                                        d="M1.66602 5.66699H7.33268V18.3337H1.66602V5.66699ZM16.666 5.66699H22.3327V18.3337H16.666V5.66699Z"
+                                                        fill="#D22F27" />
+                                                    <path
+                                                        d="M11.9993 15.3337V13.667V15.3337ZM11.9993 13.667H14.266L13.9994 13.0003L15.3327 11.667V10.667H14.3327L12.9994 12.0003V9.66699L11.9993 8.66699M11.9993 13.667H9.73268L9.99935 13.0003L8.66602 11.667V10.667H9.66602L10.9993 12.0003V9.66699L11.9993 8.66699"
+                                                        fill="#D22F27" />
+                                                    <path
+                                                        d="M11.9993 15.3337V13.667M11.9993 13.667H14.266L13.9994 13.0003L15.3327 11.667V10.667H14.3327L12.9993 12.0003V9.66699L11.9993 8.66699L10.9993 9.66699V12.0003L9.66602 10.667H8.66602V11.667L9.99935 13.0003L9.73268 13.667H11.9993Z"
+                                                        stroke="#D22F27" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                </svg>
+                                            </span>
+                                        </label>
+                                        <div *ngIf="companyForm.get('contact_no')?.errors" class="error text-red-400">
+                                            <div *ngIf="companyForm.get('contact_no')?.errors?.['required']">Phone
+                                                number
+                                                is required.</div>
+                                            <div *ngIf="companyForm.get('contact_no')?.errors?.['pattern']">Phone number
+                                                is invalid.</div>
+                                        </div>
                                     </div>
                                     <div class="mt-6 w-full">
                                         <label for="businessid" class="block text-md text-gray-700 font-custom">Business
@@ -313,6 +333,10 @@
                                         <input required pInputText type="number" id="businessid"
                                             formControlName="business_id_no" placeholder="Enter your business ID number"
                                             class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm">
+                                        <div *ngIf="companyForm.get('business_id_no')?.errors"
+                                            class="text-red-400 text-sm">
+                                            Business ID No is required.
+                                        </div>
                                     </div>
 
                                 </div>
@@ -403,7 +427,7 @@
                                 <div class="btn-container flex gap-4 w-full">
                                     <button (click)="onCancleUpdateCompany()"
                                         class="cancel text-primary font-medium text-md py-2 px-12 border-[#3A5C41] border-2 rounded-md w-full">Cancel</button>
-                                    <button (click)="onCompanyDocUpdateSave()"[disabled]="this.companyForm.invalid"
+                                    <button (click)="onCompanyDocUpdateSave()" [disabled]="this.companyForm.invalid"
                                         class="Save bg-primary text-secondary text-md rounded-md py-2 px-12 w-full"><i
                                             class="pi pi-spin pi-spinner" style="font-size: 1.25rem"
                                             *ngIf="loadingForCompany"></i>

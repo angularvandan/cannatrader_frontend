@@ -65,7 +65,7 @@ export class EditProfileComponent implements OnInit {
     this.companyForm = this.fb.group({
       company_name: ['', Validators.required],
       business_type: ['', Validators.required],
-      contact_no: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      contact_no: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       business_id_no: ['', Validators.required],
       location: ['', Validators.required],
       latitude: ['2312322', [Validators.required, Validators.pattern(/^-?\d+(\.\d+)?$/)]],
@@ -79,6 +79,13 @@ export class EditProfileComponent implements OnInit {
     });
 
   }
+
+  onPhoneInput(event: any): void {
+    const input = event.target as HTMLInputElement;
+    const sanitized = input.value.replace(/[^0-9]/g, '');
+    input.value = sanitized.slice(0, 10);
+  }
+
   fetchProfileData(): void {
     //get user details
     this.user = this.userService.currentUser.user;
