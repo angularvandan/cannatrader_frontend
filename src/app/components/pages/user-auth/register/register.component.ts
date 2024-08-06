@@ -139,6 +139,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
         },
         error: (err) => {
+          
           this.loading = false;
           this.formData = new FormData();
 

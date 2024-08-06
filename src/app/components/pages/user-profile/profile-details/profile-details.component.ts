@@ -118,15 +118,20 @@ export class ProfileDetailsComponent implements OnInit {
     true, true, true
   ];
 
+  loadingUserImage:boolean=true;
+
 
   constructor(private router: Router, private tostr: ToastrService, private userService: UserService, private confirmationService: ConfirmationService, private messageService: MessageService) { }
   ngOnInit(): void {
+    this.loadingUserImage=true;
     this.userService.getUserProfile().subscribe({
       next: (response) => {
+        this.loadingUserImage=false;
         this.user = response.user;
         console.log(this.user);
       }, error: (err) => {
         console.log(err);
+        this.loadingUserImage=false;
       }
     })
   }

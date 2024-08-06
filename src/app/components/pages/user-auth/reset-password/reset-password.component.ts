@@ -26,8 +26,8 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
       email: ['', [Validators.required, Validators.email]]
     });
     this.updatePasswordForm = this.fb.group({
-      newPassword: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]]
+      newPassword: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required,Validators.minLength(8)]]
     }, { validator: this.passwordMatchValidator });
   }
 
