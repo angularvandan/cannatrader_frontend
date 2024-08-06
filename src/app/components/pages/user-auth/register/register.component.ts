@@ -13,6 +13,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
   selectedFile: File | null = null;
   section: string = '';
   loading: boolean = false;
+  loadingOtp:boolean=false;
 
   @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
 
@@ -82,7 +83,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
     }
   }
   verifyEmail() {
-    this.loading = true;
+    this.loadingOtp = true;
     const inputs = this.otpInputs.toArray();
     let otpString = ''
     for (let i = 0; i < 4; i++) {
@@ -90,30 +91,33 @@ export class RegisterComponent implements AfterViewInit, OnInit {
     }
     const payloadForOtp = {
       otp: otpString,
-      email: this.registerForm.value.email
+      email: this.registerForm.value.email.toLowerCase()
     }
+    console.log(payloadForOtp);
 
     this.userService.verifyOtpForEmail(payloadForOtp).subscribe({
       next: (response: any) => {
 
         // console.log(response);
-        this.loading = false;
+        this.loadingOtp = false;
         this.router.navigate(['/login']);
         this.tostr.success("Email Verifyed Successfully");
 
       }, error: (err: any) => {
-        this.loading = false;
+        this.loadingOtp = false;
         this.tostr.error(err.error.error.message);
-
+        console.log(err);
       }
     });
 
+  }
+  resendOtpForVerifyEmail(){
+    this.onSignup();
   }
 
   onSignup() {
     this.loading = true;
     // console.log(this.registerForm.value.email.toLowerCase());
-
 
     if (this.registerForm.valid) {
       this.formData.append('name', this.registerForm.value.name);
@@ -127,9 +131,10 @@ export class RegisterComponent implements AfterViewInit, OnInit {
         next: (response: any) => {
           // console.log(response);
           this.formData = new FormData();
+          this.onAppendMethodFile(this.selectedFile);
+
           this.loading = false;
-          this.tostr.success("Register Successfully");
-          // this.router.navigate(['/login']);
+          this.tostr.success(response.message);
           this.section = 'otp';
 
         },

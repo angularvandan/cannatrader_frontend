@@ -198,11 +198,12 @@
             </div>
             <button type="button" (click)="verifyEmail()"
                 class="w-full bg-secondary text-primary-btn justify-center font-bold py-2 px-4 rounded-md">
-                <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
-                <span *ngIf="!loading">Verify & Continue</span>
+                <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loadingOtp"></i>
+                <span *ngIf="!loadingOtp">Verify & Continue</span>
             </button>
         </form>
         <p class="mt-4 text-center mx-4">Didn’t receive the OTP?<a
-                class="hover:underline text-secondary mx-4">Resend</a></p>
+                class="hover:underline text-secondary mx-4 cursor-pointer"(click)="resendOtpForVerifyEmail()"><i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
+                <span *ngIf="!loading">Resend</span></a></p>
     </div>
 </div>
