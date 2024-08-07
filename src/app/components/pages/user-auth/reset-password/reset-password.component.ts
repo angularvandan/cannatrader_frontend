@@ -19,6 +19,8 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
   updatePasswordForm!: FormGroup;
   userId!: string;
 
+  loadingOtp:boolean=false;
+
   constructor(private fb: FormBuilder, private userService: UserService, private tostr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
@@ -78,18 +80,20 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
   getOtpOnEmail(section: string) {
     const email = this.resetPasswordForm.get('email')?.value.toLowerCase();
     // console.log(email);
-
+    this.loadingOtp=true;
     this.userService.resetPassword(email).subscribe({
       next: (respose) => {
 
         // console.log(respose);
-        this.loading = false;
+        this.loadingOtp = false;
+        this.loading=false;
         this.section = section;
 
         this.tostr.success(respose.message);
       }, error: (err) => {
         // console.log(err);
-        this.loading = false;
+        this.loadingOtp = false;
+        this.loading=false;
         this.tostr.error(err.error.error.message);
       }
     });

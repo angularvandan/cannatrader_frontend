@@ -311,7 +311,9 @@ export class EditProfileComponent implements OnInit {
       this.userService.changePassword(this.passwordForm.value).subscribe({
         next: (response) => {
           this.loadingForPassword = false;
-          this.tostr.success(response.message)
+          this.tostr.success(response.message);
+          this.passwordForm.reset();
+
         },
         error: (err) => {
           this.loadingForPassword = false;

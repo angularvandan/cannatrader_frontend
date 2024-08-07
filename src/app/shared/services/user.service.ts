@@ -61,6 +61,9 @@ export class UserService {
     if(userJson) return JSON.parse(userJson)as User;
     return new User();
   }
+  getOtpForEmailVerify(data:any){
+    return this.http.post<any>(`${this.baseUrl}/api/users/resentOTP`, data);
+  }
 
   verifyOtpForEmail(data:any){
     return this.http.post<any>(`${this.baseUrl}/api/users/verify-registerOtp`, data);

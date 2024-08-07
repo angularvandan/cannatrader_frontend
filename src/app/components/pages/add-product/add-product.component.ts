@@ -12,7 +12,7 @@ export class AddProductComponent implements OnInit {
 
   date!: Date
   productDetails = {
-    lotId: '',
+    name: '',
     thcRange: '',
     lineage: '',
     thcTotal: null,

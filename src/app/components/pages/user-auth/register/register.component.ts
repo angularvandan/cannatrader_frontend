@@ -118,7 +118,21 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
   }
   resendOtpForVerifyEmail(){
-    this.onSignup();
+    this.loading=true;
+    console.log(this.registerForm.value.email.toLowerCase());
+    this.userService.getOtpForEmailVerify({email: this.registerForm.value.email.toLowerCase()}).subscribe({
+      next:(response)=>{
+        console.log(response);
+        this.tostr.success(response.message);
+        this.loading=false;
+
+      },error:(err)=>{
+        // console.log(err);
+        this.tostr.error(err.error.error.message);
+        this.loading=false;
+
+      }
+    })
   }
 
   onSignup() {
