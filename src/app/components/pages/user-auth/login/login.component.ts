@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    this.loading = true;
-
+    
     if (this.loginForm.valid) {
+      this.loading = true;
       console.log(this.loginForm.value);
 
       let payload = { email: this.loginForm.value.email.toLowerCase(), password: this.loginForm.value.password }
@@ -50,6 +50,9 @@ export class LoginComponent implements OnInit {
 
         }
       });
+    }
+    else{
+      this.loginForm.markAllAsTouched();
     }
 
   }

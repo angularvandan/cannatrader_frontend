@@ -26,3 +26,9 @@ i {
     box-shadow: none;
     border-color: none;
 }
+button{
+    opacity: 1;
+}
+button:enabled:active{
+    opacity: 0.8;
+}

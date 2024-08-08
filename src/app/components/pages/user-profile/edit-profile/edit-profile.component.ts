@@ -304,10 +304,10 @@ export class EditProfileComponent implements OnInit {
 
   //for change passowrd
   onChangePassword() {
-    this.loadingForPassword = true;
-
+    
     console.log(this.passwordForm.value);
     if (this.passwordForm.valid) {
+      this.loadingForPassword = true;
       this.userService.changePassword(this.passwordForm.value).subscribe({
         next: (response) => {
           this.loadingForPassword = false;
@@ -320,6 +320,9 @@ export class EditProfileComponent implements OnInit {
           this.tostr.error(err.error.error.message);
         }
       })
+    }
+    else{
+      this.passwordForm.markAllAsTouched();
     }
   }
   onCanclePassword() {

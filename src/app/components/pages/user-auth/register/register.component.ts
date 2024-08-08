@@ -10,7 +10,6 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements AfterViewInit, OnInit {
-  selectedFile: File | null = null;
   section: string = '';
   loading: boolean = false;
   loadingOtp:boolean=false;
@@ -36,7 +35,6 @@ export class RegisterComponent implements AfterViewInit, OnInit {
       phone_no: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
-      pdf: [null],
       termsAccepted: [false, Validators.requiredTrue]
     }, { validator: this.passwordMatchValidator });
   }
@@ -136,10 +134,10 @@ export class RegisterComponent implements AfterViewInit, OnInit {
   }
 
   onSignup() {
-    this.loading = true;
     // console.log(this.registerForm.value.email.toLowerCase());
-
+    
     if (this.registerForm.valid) {
+      this.loading = true;
       this.formData.append('name', this.registerForm.value.name);
       this.formData.append('email', this.registerForm.value.email.toLowerCase());
       this.formData.append('password', this.registerForm.value.password);
@@ -151,7 +149,6 @@ export class RegisterComponent implements AfterViewInit, OnInit {
         next: (response: any) => {
           // console.log(response);
           this.formData = new FormData();
-          this.onAppendMethodFile(this.selectedFile);
 
           this.loading = false;
           this.tostr.success(response.message);
@@ -163,35 +160,14 @@ export class RegisterComponent implements AfterViewInit, OnInit {
           this.loading = false;
           this.formData = new FormData();
 
-          this.onAppendMethodFile(this.selectedFile);
           this.tostr.error(err.error.error.message);
 
         }
       });
     }
-  }
-
-
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
-      this.onAppendMethodFile(this.selectedFile);
+    else{
+      this.registerForm.markAllAsTouched();
     }
-  }
-  
-  onAppendMethodFile(selectedFile: any) {
-    
-    this.formData.append('pdf', selectedFile);
-    // console.log(this.formData);
-    this.registerForm.patchValue({ pdf: selectedFile });
-  }
-
-  removeFile(): void {
-    this.selectedFile = null;
-    this.registerForm.patchValue({ pdf: this.selectedFile });
-    this.formData.delete('pdf');
-    console.log(this.registerForm);
   }
 
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { User, UserDetails } from '../models/user';
+import { User } from '../models/user';
 import { ToastrService } from 'ngx-toastr';
 import { IUserLogin } from '../interfaces/IUserLogin';
 import { Router } from '@angular/router';
@@ -94,7 +94,7 @@ export class UserService {
           this.tostr.error(err.error.error.message);
         }
       })
-    );;
+    );
   }
   updateUserProfile(userData:any){
     return this.http.put<any>(`${this.baseUrl}/api/users/profile`,userData);
@@ -105,7 +105,20 @@ export class UserService {
 
   }
   getRegisterCompany(){
-    return this.http.get<any>(`${this.baseUrl}/api/company/getCompanyInfo`);
+    return this.http.get<any>(`${this.baseUrl}/api/company/getCompanyInfo`).pipe(
+      tap({
+        next:(response)=>{
+          console.log(response);
+          
+          this.setUserToLocalStorage({...this.getuserFromLocalStorage(),user:response.company.user});
+          this.userSubject.next(this.getuserFromLocalStorage());
+
+        },error:(err)=>{
+          console.log(err);
+          this.tostr.error(err.error.error.message);
+        }
+      })
+    );
   }
   updateCompany(companyInfo:any){
     return this.http.put<any>(`${this.baseUrl}/api/company/update-company-info`,companyInfo);

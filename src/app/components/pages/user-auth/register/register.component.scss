@@ -15,6 +15,12 @@
 i {
     z-index: 1;
 }
+button{
+    opacity: 1;
+}
+button:enabled:active{
+    opacity: 0.8;
+}
 
 .p-input-icon-left>.p-icon-wrapper.p-icon,
 .p-input-icon-left>i:first-of-type {

@@ -6,6 +6,12 @@ i {
 .p-input-icon-left>i:first-of-type {
     color: #DCDCDCDC;
 }
+button{
+    opacity: 1;
+}
+button:enabled:active{
+    opacity: 0.8;
+}
 
 .p-inputtext:enabled:focus {
     outline: 0 none;

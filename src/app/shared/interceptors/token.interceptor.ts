@@ -25,7 +25,7 @@ export class TokenInterceptor implements HttpInterceptor {
     console.log(token);
     return next.handle(authReq).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 401 || error.status === 403) {
+        if (error.status === 403) {
           // Redirect to login if token is invalid or expired
           this.userService.logOut();
         }

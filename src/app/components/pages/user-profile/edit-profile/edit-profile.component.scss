@@ -1,6 +1,13 @@
 $text-primary: #3A5C41;
 $bg-primary: #3A5C41;
 
+button{
+    opacity: 1;
+}
+button:enabled:active{
+    opacity: 0.8;
+}
+
 .profile-edit-container {
     .profile-details {
         label{

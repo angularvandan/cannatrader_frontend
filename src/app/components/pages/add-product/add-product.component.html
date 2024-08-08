@@ -8,13 +8,14 @@
                         <i class="pi pi-arrow-left text-primary"></i>
                     </div>
                 </div>
-                <a class="m text-primary w-full text-center  text-[22px] font-semibold  md:ml-2">
+                <a
+                    class="text-primary w-full text-center text-[22px] leading-6 whitespace-nowrap sm:leading-8 sm:text-[32px] font-semibold  md:ml-2">
                     Add Product Details
                 </a>
                 <a class="w-full hidden sm:block"></a>
             </nav>
         </div>
-        <form (ngSubmit)="onSubmit()">
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
             <div>
                 <div class="input-container flex flex-col p-6 md:p-0">
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
@@ -23,14 +24,21 @@
                                     class="text-red">*</span></label>
                             <input required pInputText id="name" type="text" placeholder="Enter Product Name"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.name" name="name">
+                                formControlName="name">
+                            <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched"
+                                class="text-red-600 text-sm">
+                                Product Name is required.
+                            </div>
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="strainTypes" class="block text-sm text-gray-700 font-custom">Strain Types <span
                                     class="text-red">*</span></label>
                             <p-dropdown [required]="true" class="w-full" placeholder="Select strain type"
-                                [options]="strainTypes" [(ngModel)]="productDetails.selectedStrainType"
-                                optionLabel="name" name="strainTypes"></p-dropdown>
+                                [options]="strainTypes" optionLabel="type" formControlName="strain_type"></p-dropdown>
+                            <div *ngIf="productForm.get('strain_type')?.invalid && productForm.get('strain_type')?.touched"
+                                class="text-red-600 text-sm">
+                                Strain Type is required.
+                            </div>
                         </div>
                     </div>
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
@@ -38,30 +46,42 @@
                             <label for="thcRange" class="block text-sm text-gray-700 font-custom">THC Range <span
                                     class="text-red">*</span></label>
                             <p-dropdown [required]="true" class="w-full" [options]="thcRange"
-                                [(ngModel)]="productDetails.thcRange" optionLabel="name" name="thcRange"></p-dropdown>
+                                placeholder="Select THC range" optionLabel="range"
+                                formControlName="thc_range"></p-dropdown>
+                            <div *ngIf="productForm.get('thc_range')?.invalid && productForm.get('thc_range')?.touched"
+                                class="text-red-600 text-sm">
+                                THC Range is required.
+                            </div>
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="categories" class="block text-sm text-gray-700 font-custom">Categories <span
                                     class="text-red">*</span></label>
                             <p-dropdown [required]="true" class="w-full" placeholder="Select category"
-                                [options]="categories" [(ngModel)]="productDetails.selectedCategory" optionLabel="name"
-                                name="categories"></p-dropdown>
+                                [options]="categories" optionLabel="name" formControlName="category"></p-dropdown>
+                            <div *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched"
+                                class="text-red-600 text-sm">
+                                Category is required.
+                            </div>
 
                         </div>
                     </div>
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                         <div class="mt-6 w-full relative">
                             <label for="lineage" class="block text-sm text-gray-700 font-custom">Lineage</label>
-                            <input required pInputText id="lineage" type="text" placeholder="Enter Lineage"
+                            <input pInputText id="lineage" type="text" placeholder="Enter Lineage"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.lineage" name="lineage">
+                                formControlName="lineage">
+                            <div *ngIf="productForm.get('lineage')?.invalid && productForm.get('lineage')?.touched"
+                                class="text-red-600 text-sm">
+                                Lineage is required.
+                            </div>
                         </div>
                         <div class="mt-6 w-full relative">
-                            <label for="subCategory" class="block text-sm text-gray-700 font-custom">Sub-Category <span
-                                    class="text-red">*</span></label>
+                            <label for="subCategory"
+                                class="block text-sm text-gray-700 font-custom">Sub-Category</label>
                             <p-dropdown [required]="true" class="w-full" placeholder="Select sub-category"
-                                [options]="subCategories" [(ngModel)]="productDetails.selectedSubCategory"
-                                optionLabel="name" name="subCategory"></p-dropdown>
+                                [options]="subCategories" optionLabel="name"
+                                formControlName="sub_category"></p-dropdown>
 
                         </div>
                     </div>
@@ -72,12 +92,25 @@
                             <input required pInputText id="thcTotal" type="number" step="0.01"
                                 placeholder="Enter THC Total"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.thcTotal" name="thcTotal">
+                                formControlName="thc_total">
+                            <div *ngIf="productForm.get('thc_total')?.invalid && productForm.get('thc_total')?.touched"
+                                class="text-red-600 text-sm">
+                                <span *ngIf="productForm.get('thc_total')?.errors?.['required']">THC Total is
+                                    required.</span>
+                                <span *ngIf="productForm.get('thc_total')?.errors?.['min']">THC Total must be at least
+                                    0.</span>
+                                <span *ngIf="productForm.get('thc_total')?.errors?.['max']">THC Total must be at most
+                                    100.</span>
+                            </div>
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="harvestDate" class="block text-sm text-gray-700 font-custom">Harvest Date <span
                                     class="text-red">*</span></label>
-                            <p-calendar [showIcon]="true" [(ngModel)]="date"></p-calendar>
+                            <p-calendar [showIcon]="true" formControlName="harvest_date"></p-calendar>
+                            <div *ngIf="productForm.get('harvest_date')?.invalid && productForm.get('harvest_date')?.touched"
+                                class="text-red-600 text-sm">
+                                Harvest Date is required.
+                            </div>
 
                         </div>
                     </div>
@@ -88,14 +121,29 @@
                             <input required pInputText id="terpene" type="number" step="0.01"
                                 placeholder="Enter Terpene"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.terpene" name="terpene">
+                                formControlName="terpene">
+                            <div *ngIf="productForm.get('terpene')?.invalid && productForm.get('terpene')?.touched"
+                                class="text-red-600 text-sm">
+                                <span *ngIf="productForm.get('terpene')?.errors?.['required']">Terpene is
+                                    required.</span>
+                                <span *ngIf="productForm.get('terpene')?.errors?.['min']">Terpene must be at least
+                                    0.</span>
+                                <span *ngIf="productForm.get('terpene')?.errors?.['max']">Terpene must be at most
+                                    100.</span>
+                            </div>
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="cbd" class="block text-sm text-gray-700 font-custom">CBD (%) <span
                                     class="text-red">*</span></label>
                             <input required pInputText id="cbd" type="number" step="0.01" placeholder="Enter CBD"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.cbd" name="cbd">
+                                formControlName="cbd">
+                            <div *ngIf="productForm.get('cbd')?.invalid && productForm.get('cbd')?.touched"
+                                class="text-red-600 text-sm">
+                                <span *ngIf="productForm.get('cbd')?.errors?.['required']">CBD is required.</span>
+                                <span *ngIf="productForm.get('cbd')?.errors?.['min']">CBD must be at least 0.</span>
+                                <span *ngIf="productForm.get('cbd')?.errors?.['max']">CBD must be at most 100.</span>
+                            </div>
 
                         </div>
                     </div>
@@ -105,14 +153,26 @@
                                     class="text-red">*</span></label>
                             <input required pInputText id="grade" type="text" placeholder="Enter Grade"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.grade" name="grade">
+                                formControlName="grade">
+                            <div *ngIf="productForm.get('grade')?.invalid && productForm.get('grade')?.touched"
+                                class="text-red-600 text-sm">
+                                Grade is required.
+                            </div>
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="available" class="block text-sm text-gray-700 font-custom">Available (grams)
                                 <span class="text-red">*</span></label>
                             <input required pInputText id="available" type="number" placeholder="Enter Available Grams"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.available" name="available">
+                                formControlName="available">
+                            <div *ngIf="productForm.get('available')?.invalid && productForm.get('available')?.touched"
+                                class="text-red-600 text-sm">
+                                <span *ngIf="productForm.get('available')?.errors?.['required']">Available amount is
+                                    required.</span>
+                                <span *ngIf="productForm.get('available')?.errors?.['min']">Available amount must be at
+                                    least
+                                    0.</span>
+                            </div>
 
                         </div>
                     </div>
@@ -121,8 +181,11 @@
                             <label for="growMedia" class="block text-sm text-gray-700 font-custom">Grow Media <span
                                     class="text-red">*</span></label>
                             <p-dropdown [required]="true" class="w-full" placeholder="Select grow media"
-                                [options]="growMedia" [(ngModel)]="productDetails.growMedia" optionLabel="name"
-                                name="growMedia"></p-dropdown>
+                                [options]="growMedia" optionLabel="media" formControlName="grow_media"></p-dropdown>
+                            <div *ngIf="productForm.get('grow_media')?.invalid && productForm.get('grow_media')?.touched"
+                                class="text-red-600 text-sm">
+                                Grow Media is required.
+                            </div>
 
                         </div>
                         <div class="mt-6 w-full relative">
@@ -130,9 +193,12 @@
                                 <span class="text-red">*</span></label>
 
                             <p-dropdown [required]="true" class="w-full" placeholder="Select growth method"
-                                [options]="growthMethod" [(ngModel)]="productDetails.growthMethod" optionLabel="name"
-                                name="growthMethod"></p-dropdown>
-
+                                [options]="growthMethod" optionLabel="method"
+                                formControlName="growth_method"></p-dropdown>
+                            <div *ngIf="productForm.get('growth_method')?.invalid && productForm.get('growth_method')?.touched"
+                                class="text-red-600 text-sm">
+                                Growth Method is required.
+                            </div>
                         </div>
                     </div>
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 irradiated">
@@ -141,12 +207,12 @@
                                     class="text-red">*</span></label>
                             <div class="flex flex-wrap gap-3">
                                 <div class="flex align-items-center">
-                                    <p-radioButton name="irradiated" ngDefaultControl value="Yes"
-                                        [(ngModel)]="productDetails.irradiated" inputId="irradiatedYes"></p-radioButton>
+                                    <p-radioButton formControlName="irradiated" ngDefaultControl value="yes"
+                                        inputId="irradiatedYes"></p-radioButton>
                                     <label for="irradiatedYes" class="ml-2">Yes</label>
                                 </div>
                                 <div class="flex align-items-center">
-                                    <p-radioButton name="irradiated" value="No" [(ngModel)]="productDetails.irradiated"
+                                    <p-radioButton formControlName="irradiated" value="no"
                                         inputId="irradiatedNo"></p-radioButton>
                                     <label for="irradiatedNo" class="ml-2">No</label>
                                 </div>
@@ -157,8 +223,11 @@
                                     class="text-red">*</span></label>
 
                             <p-dropdown [required]="true" class="w-full" placeholder="Select dry method"
-                                [options]="dryMethod" [(ngModel)]="productDetails.dryMethod" optionLabel="name"
-                                name="dryMethod"></p-dropdown>
+                                [options]="dryMethod" optionLabel="method" formControlName="dry_method"></p-dropdown>
+                            <div *ngIf="productForm.get('dry_method')?.invalid && productForm.get('dry_method')?.touched"
+                                class="text-red-600 text-sm">
+                                Dry Method is required.
+                            </div>
 
                         </div>
                     </div>
@@ -168,7 +237,11 @@
                                     class="text-red">*</span></label>
                             <input required pInputText id="budSize" type="text" placeholder="Enter Bud Size"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.budSize" name="budSize">
+                                formControlName="bud_size">
+                            <div *ngIf="productForm.get('bud_size')?.invalid && productForm.get('bud_size')?.touched"
+                                class="text-red-600 text-sm">
+                                Bud Size is required.
+                            </div>
 
                         </div>
                         <div class="mt-6 w-full relative">
@@ -176,8 +249,11 @@
                                     class="text-red">*</span></label>
 
                             <p-dropdown [required]="true" class="w-full" placeholder="Select trim method"
-                                [options]="trimMethod" [(ngModel)]="productDetails.trimMethod" optionLabel="name"
-                                name="trimMethod"></p-dropdown>
+                                [options]="trimMethod" optionLabel="method" formControlName="trim_method"></p-dropdown>
+                            <div *ngIf="productForm.get('trim_method')?.invalid && productForm.get('trim_method')?.touched"
+                                class="text-red-600 text-sm">
+                                Trim Method is required.
+                            </div>
 
                         </div>
                     </div>
@@ -188,14 +264,30 @@
                                         class="text-red">*</span></label>
                                 <input required pInputText id="tops" type="number" step="0.01" placeholder="Enter Tops"
                                     class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                    [(ngModel)]="productDetails.tops" name="tops">
+                                    formControlName="tops">
+                                <div *ngIf="productForm.get('tops')?.invalid && productForm.get('tops')?.touched"
+                                    class="text-red-600 text-sm">
+                                    <span *ngIf="productForm.get('tops')?.errors?.['required']">Tops is required.</span>
+                                    <span *ngIf="productForm.get('tops')?.errors?.['min']">Tops must be at least
+                                        0.</span>
+                                    <span *ngIf="productForm.get('tops')?.errors?.['max']">Tops must be at most
+                                        100.</span>
+                                </div>
                             </div>
                             <div class="mt-6 w-full relative">
                                 <label for="mids" class="block text-sm text-gray-700 font-custom">Mids (%) <span
                                         class="text-red">*</span></label>
                                 <input required pInputText id="mids" type="number" step="0.01" placeholder="Enter Mids"
                                     class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                    [(ngModel)]="productDetails.mids" name="mids">
+                                    formControlName="mids">
+                                <div *ngIf="productForm.get('mids')?.invalid && productForm.get('mids')?.touched"
+                                    class="text-red-600 text-sm">
+                                    <span *ngIf="productForm.get('mids')?.errors?.['required']">Mids is required.</span>
+                                    <span *ngIf="productForm.get('mids')?.errors?.['min']">Mids must be at least
+                                        0.</span>
+                                    <span *ngIf="productForm.get('mids')?.errors?.['max']">Mids must be at most
+                                        100.</span>
+                                </div>
                             </div>
                         </div>
 
@@ -204,7 +296,11 @@
                                     class="text-red">*</span></label>
                             <textarea required pInputTextarea id="description" rows="6" placeholder="Enter Description"
                                 class="mt-1 block bg-[#F5F5F5] w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.description" name="description"></textarea>
+                                formControlName="description"></textarea>
+                            <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched"
+                                class="text-red-600 text-sm">
+                                Description is required.
+                            </div>
 
                         </div>
                     </div>
@@ -216,14 +312,22 @@
                                 <input required pInputText id="lowers" type="number" step="0.01"
                                     placeholder="Enter Lowers"
                                     class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                    [(ngModel)]="productDetails.lowers" name="lowers">
+                                    formControlName="lowers">
+                                <div *ngIf="productForm.get('lowers')?.invalid && productForm.get('lowers')?.touched"
+                                    class="text-red-600 text-sm">
+                                    <span *ngIf="productForm.get('lowers')?.errors?.['required']">Lowers is
+                                        required.</span>
+                                    <span *ngIf="productForm.get('lowers')?.errors?.['min']">Lowers must be at least
+                                        0.</span>
+                                    <span *ngIf="productForm.get('lowers')?.errors?.['max']">Lowers must be at most
+                                        100.</span>
+                                </div>
                             </div>
                             <div class="mt-6 w-full relative">
                                 <label for="location" class="block text-sm text-gray-700 font-custom">Location <span
                                         class="text-red">*</span></label>
                                 <input required pInputText id="location" type="text" placeholder="Enter Location"
-                                    class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                    [(ngModel)]="productDetails.location" name="location">
+                                    class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm">
                             </div>
                         </div>
 
@@ -238,7 +342,12 @@
                                     <input type="file" id="file-upload-images"
                                         (change)="onImageSelected($event, 'images')" accept="image/*" multiple />
                                 </label>
+                                <div *ngIf="productForm.get('images')?.invalid && productForm.get('images')?.touched"
+                                    class="text-red-600 text-sm">
+                                    Images are required.
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
@@ -251,7 +360,12 @@
                                         <p>Upload document</p>
                                         <input type="file" id="file-upload-license" (change)="onFileSelected($event)"
                                             accept=".pdf" />
+
                                     </label>
+                                    <div *ngIf="productForm.get('pdf')?.invalid && productForm.get('pdf')?.touched"
+                                        class="text-red-600 text-sm">
+                                        CoA is required.
+                                    </div>
                                 </div>
                             </div>
                             <div class="mt-6 w-full relative">
@@ -277,6 +391,10 @@
                                         <p>Upload Images</p>
                                         <input type="file" id="file-upload-images"
                                             (change)="onImageSelected($event, 'images')" accept="image/*" multiple />
+                                        <div *ngIf="productForm.get('images')?.invalid && productForm.get('images')?.touched"
+                                            class="text-red-600 text-sm">
+                                            Images are required.
+                                        </div>
                                     </label>
                                 </div>
                             </div>
@@ -300,8 +418,10 @@
             </div>
             <div class="p-6 md:p-0 ">
                 <button type="submit"
-                    class="w-full font-bold py-2 px-4 text-lg rounded-md font-custom bg-secondary text-primary-btn">Add
-                    Product</button>
+                    class="w-full font-bold py-2 px-4 text-lg rounded-md font-custom bg-secondary text-primary-btn"><i
+                    class="pi pi-spin pi-spinner" style="font-size: 1.25rem"
+                    *ngIf="loading"></i>
+                <span *ngIf="!loading">Add product</span></button>
             </div>
         </form>
     </div>

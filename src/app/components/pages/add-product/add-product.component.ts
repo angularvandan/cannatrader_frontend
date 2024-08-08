@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { UserDetails } from 'src/app/shared/models/user';
+import { ProductService } from 'src/app/shared/services/product.service';
 import { UserService } from 'src/app/shared/services/user.service';
+
+interface ApiResponse {
+  success: boolean;
+  data: any[]; // Adjust 'any' to a more specific type if possible
+}
 
 @Component({
   selector: 'app-add-product',
@@ -10,108 +17,111 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class AddProductComponent implements OnInit {
 
-  date!: Date
-  productDetails = {
-    name: '',
-    thcRange: '',
-    lineage: '',
-    thcTotal: null,
-    terpene: null,
-    grade: '',
-    growMedia: '',
-    irradiated: 'Yes',
-    budSize: '',
-    tops: null,
-    mids: null,
-    lowers: null,
-    location: '',
-    selectedStrainType: null,
-    selectedCategory: null,
-    selectedSubCategory: null,
-    harvestDate: null,
-    cbd: null,
-    available: null,
-    growthMethod: '',
-    dryMethod: '',
-    trimMethod: '',
-    description: ''
-  };
+  date!: Date;
 
   strainTypes = [
-    { name: 'Indica' },
-    { name: 'Sativa' },
-    { name: 'Hybrid' }
+    
   ];
   thcRange=[
-    { name: '0 - 10%' },
-    { name: '10 - 20%' },
-    { name: '20 - 30%' },
-    { name: '30% Plus' },
+    
   ]
 
   categories = [
-    { name: 'Flower' },
-    { name: 'Bio mass' },
-    { name: 'Hemp' },
-    { name: 'Fresh frozen' },
-    { name: 'Genetics' },
-    { name: 'Extracts-concentrates' },
-    { name: 'Edibles' },
-    { name: 'Topicals' },
-    { name: 'Services' },
-    { name: 'Materials' },
-    { name: 'Equipments' }
+    
   ];
 
   growthMethod=[
-    {name:'Standard'},
-    {name:'Micro'},
-    {name:'Indoor'},
-    {name:'Outdoor'},
-    {name:'Greenhouse'},
+    
 
   ]
   growMedia=[
-    {name:'Coco'},
-    {name:'Soiless Mix'},
-    {name:'Perlite'},
-    {name:'Vermiculite'},
-    {name:'Hydroponic'},
+    
   ]
 
   dryMethod=[
-    {name:'Hang'},
-    {name:'Tray'}
+    
   ]
   trimMethod=[
-    {name:'Machine'},
-    {name:'Hand'},
-    {name:'Machine-Hand'},
-    {name:'Not Trimmed'}
+    
   ]
 
   subCategories = [
-    { name: 'Clones' },
-    { name: 'Teens' },
-    { name: 'Mothers' },
-    { name: 'Seeds' }
+    
   ];
 
   selectedLicenseFile: File | null = null;
   selectedImageFiles: File[] = [];
+  imagePreviews: string[] = [];
+  selectedFile: File | null = null;
+  loading:boolean=false;
+
 
   user!:UserDetails;
 
   companyDocumentStatus:boolean=false;
 
-  constructor(private userService:UserService) { }
+  productForm!: FormGroup;
+
+  constructor(private userService:UserService,private fb: FormBuilder,private productService:ProductService,private tostr:ToastrService) { }
 
   ngOnInit(): void {
     this.user=this.userService.currentUser.user;
     this.companyDocumentStatus=this.user.is_company;
-  }
 
-  imagePreviews: string[] = [];
+    this.productForm = this.fb.group({
+      name: ['', Validators.required],
+      strain_type: ['', Validators.required],
+      thc_range: ['', Validators.required],
+      category: ['', Validators.required],
+      lineage: [''],
+      sub_category: [''],
+      thc_total: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      harvest_date: ['', Validators.required],
+      terpene: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      cbd: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      grade: ['', Validators.required],
+      available: ['', [Validators.required, Validators.min(0)]],
+      grow_media: ['', Validators.required],
+      growth_method: ['', Validators.required],
+      irradiated: ['yes', Validators.required],
+      dry_method: ['', Validators.required],
+      bud_size: ['', Validators.required],
+      trim_method: ['', Validators.required],
+      tops: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      mids: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      description: ['', Validators.required],
+      lowers: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      latitude: ['12312', Validators.required],
+      longitude: ['12312', Validators.required],
+
+      // For file inputs, you will need to handle them separately
+      images: ['',Validators.required],
+      pdf: ['',Validators.required]
+    });
+
+    this.productService.getAllValueForAddProduct().subscribe((response:any) => {
+      console.log(response);
+      this.categories=response[0].data;
+      this.thcRange=response[1].data;
+      this.strainTypes=response[2].data;
+      this.growMedia=response[3].data;
+      this.growthMethod=response[4].data;
+      this.trimMethod=response[5].data;
+      this.dryMethod=response[6].data;
+    });
+
+    this.productForm.get('category')?.valueChanges.subscribe(categoryId => {
+      // console.log(categoryId);
+      this.getSubCategoryById(categoryId.id);
+    });
+
+  }
+  getSubCategoryById(id:any){
+    this.productService.getSubCategory(id).subscribe((response:any)=>{
+      // console.log(response);
+        this.subCategories=response.data;
+    })
+  }
 
   onImageSelected(event: any, type: string) {
     const files = event.target.files;
@@ -123,26 +133,37 @@ export class AddProductComponent implements OnInit {
 
       for (let file of files) {
         this.selectedImageFiles.push(file);
+        //below code for show  image in add product
         const reader = new FileReader();
         reader.onload = (e: any) => {
           this.imagePreviews.push(e.target.result);
         };
         reader.readAsDataURL(file);
       }
+      //here patch the value of image
+      this.productForm.patchValue({
+        images:this.selectedImageFiles
+      })
     }
   }
 
-  selectedFile: File | null = null;
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
+
+      this.productForm.patchValue({
+        pdf:this.selectedFile
+      })
     }
   }
 
   removeFile(): void {
     this.selectedFile = null;
+    this.productForm.patchValue({
+      pdf:this.selectedFile
+    })
   }
 
   removeImg(type: string, file: File) {
@@ -151,14 +172,64 @@ export class AddProductComponent implements OnInit {
       if (index > -1) {
         this.selectedImageFiles.splice(index, 1);
         this.imagePreviews.splice(index, 1);
+
+        this.productForm.patchValue({
+          images:this.selectedImageFiles
+        })
       }
     }
   }
 
   onSubmit(): void {
-    console.log(this.productDetails);
-    console.log(this.selectedLicenseFile);
-    console.log(this.selectedImageFiles);
-    // Perform the form submission to the backend or further processing here
+
+    if(this.productForm.valid){ 
+      // console.log(this.productForm);
+      this.loading=true;
+
+      //append data into formData
+      const formData = new FormData();      
+
+      Object.keys(this.productForm.controls).forEach(key => {
+        const control = this.productForm.get(key);
+        if (key=='pdf'||key=='images') {
+          // console.log(control?.value);
+          for (let i = 0; i < control?.value.length; i++) {
+            formData.append(key, control?.value[i]);
+            // console.log(control?.value[i])
+          }
+          if(key=='pdf'){
+            formData.append(key,control?.value);
+          }
+        } else if (key === 'harvest_date') {
+
+          const date = new Date(control?.value);
+          const formattedDate = date.toISOString().split('T')[0]; // Convert to yyyy-mm-dd format
+          formData.append(key, formattedDate);
+
+        } else if (typeof control?.value === 'object' && control.value !== null) {
+          formData.append(key, control.value.id);
+        } else {
+          formData.append(key, control?.value);
+        }
+      });
+      
+      //api call for add product
+      this.productService.addProduct(formData).subscribe({
+        next:(response)=>{
+          // console.log(response);
+          this.tostr.success('Product added successfully');
+          this.loading=false;
+        },error:(err)=>{
+          // console.log(err);
+          this.tostr.error(err.error.error.message);
+          this.loading=false;
+        }
+      });
+      
+    }
+    else{
+      this.productForm.markAllAsTouched();
+    }
+
   }
 }

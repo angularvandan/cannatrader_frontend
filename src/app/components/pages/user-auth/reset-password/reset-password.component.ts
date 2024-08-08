@@ -131,8 +131,8 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
 
   }
   changePassword() {
-    this.loading = true;
     if (this.updatePasswordForm.valid) {
+      this.loading = true;
       const newPassword = this.updatePasswordForm.get('newPassword')?.value;
       const confirmPassword = this.updatePasswordForm.get('confirmPassword')?.value;
 
@@ -147,6 +147,9 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
           this.tostr.error(err.error.message);
         }
       });
+    }
+    else{
+      this.updatePasswordForm.markAllAsTouched();
     }
   }
 }

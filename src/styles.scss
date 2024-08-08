@@ -60,6 +60,12 @@ button {
 h2 {
     font-size: 40px;
 }
+.p-button{
+    opacity: 1;
+}
+.p-button:enabled:active{
+    opacity: 0.8;
+}
 
 app-login , app-register {
     input:-webkit-autofill {

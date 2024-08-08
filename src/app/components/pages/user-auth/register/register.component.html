@@ -1,18 +1,18 @@
 <div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay"
     *ngIf="section!='otp'">
-    <div class=" bg-opacity-90 p-4 rounded-lg shadow-lg max-w-3xl w-full">
+    <div class=" bg-opacity-90 p-4 rounded-lg shadow-lg max-w-3xl w-full max-w-[400px]">
         <h2 class="font-semibold mb-6 text-center font-custom text-secondary text-3xl sm:text-4xl font-Poppins">Sign Up
         </h2>
         <p class="text-center mb-6 font-custom text-[#fafafa] leading-7 text-[15px] sm:text-xl">Sign up to enjoy the
             convenience of shopping
-            for a <br class="hidden sm:block">
+            for a
             <span class="text-secondary">wide range of products.</span>
         </p>
         <form class="text-[#fafafa]" (ngSubmit)="onSignup()" [formGroup]="registerForm">
             <div class="flex flex-col justify-between w-full flex-wrap md:flex-nowrap">
 
-                <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
-                    <div class="mb-4 w-full">
+                <div class="flex flex-row w-full flex-wrap gap-0 ">
+                    <div class="mb-6 w-full">
                         <label for="name" class="block text-sm  font-custom">Name</label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-user text-[#fafafa]"></i>
@@ -24,7 +24,7 @@
                             Name is required.
                         </div>
                     </div>
-                    <div class="mb-4 w-full">
+                    <div class="mb-6 w-full">
                         <label for="email" class="block text-sm  font-custom">Email</label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-envelope text-[#fafafa]"></i>
@@ -38,124 +38,83 @@
                             <div *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email address.</div>
                         </div>
                     </div>
-                </div>
-                <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
-                    <div class="flex flex-col w-full ">
-                        <div class="mb-4 w-full">
-                            <label for="phone" class="block text-sm  font-custom">Phone Number</label>
-                            <span class="p-input-icon-left w-full">
-                                <input pInputText id="phone" type="tel" maxlength="10" pattern="[0-9]*"
-                                    (input)="onPhoneInput($event)" placeholder="Enter your phone number"
-                                    formControlName="phone_no"
-                                    class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
-                                <div class="absolute top-[10px] left-2 ">
-                                    <svg width="25" height="25" viewBox="0 0 30 30" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_759_6116)">
-                                            <path
-                                                d="M3.33333 4.16699C2.44928 4.16699 1.60143 4.51818 0.976311 5.1433C0.35119 5.76842 0 6.61627 0 7.50033L0 22.5003C0 23.3844 0.35119 24.2322 0.976311 24.8573C1.60143 25.4825 2.44928 25.8337 3.33333 25.8337H8.33333V4.16699H3.33333ZM26.6667 4.16699H21.6667V25.8337H26.6667C27.5507 25.8337 28.3986 25.4825 29.0237 24.8573C29.6488 24.2322 30 23.3844 30 22.5003V7.50033C30 6.61627 29.6488 5.76842 29.0237 5.1433C28.3986 4.51818 27.5507 4.16699 26.6667 4.16699Z"
-                                                fill="#D52B1E" />
-                                            <path d="M8.33301 4.16699H21.6663V25.8337H8.33301V4.16699Z"
-                                                fill="#EEEEEE" />
-                                            <path
-                                                d="M15.5129 18.4276C16.5112 18.5435 17.4062 18.6476 18.4037 18.7618L18.1495 17.9268C18.1308 17.8549 18.1334 17.7792 18.1569 17.7088C18.1804 17.6384 18.2239 17.5763 18.282 17.5301L21.1812 15.1685L20.5812 14.886C20.317 14.7918 20.3895 14.6426 20.4854 14.2843L20.9279 12.671L19.2437 13.0268C19.0795 13.0518 18.9704 12.9476 18.9454 12.8476L18.7279 12.0885L17.3962 13.5835C17.207 13.8235 16.8237 13.8235 16.9429 13.2701L17.512 10.2418L16.7479 10.6376C16.5337 10.7576 16.3195 10.7776 16.2004 10.5635L15.1462 8.5918L14.092 10.5635C13.972 10.7776 13.7579 10.7576 13.5437 10.6376L12.7804 10.2418L13.3495 13.2701C13.4695 13.8235 13.0854 13.8235 12.8962 13.5835L11.5645 12.0893L11.3479 12.8485C11.3229 12.9485 11.2129 13.0526 11.0487 13.0276L9.36452 12.6718L9.80702 14.2851C9.90118 14.6435 9.97452 14.7926 9.71035 14.8868L9.11035 15.1693L12.0095 17.531C12.1245 17.6201 12.1829 17.781 12.1412 17.9276L11.887 18.7626L14.7787 18.4285C14.867 18.4285 14.9254 18.4776 14.9245 18.5793L14.7462 21.666H15.5429L15.3654 18.5793C15.367 18.4768 15.4245 18.4276 15.5129 18.4276Z"
-                                                fill="#D52B1E" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_759_6116">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </div>
-                            </span>
-                            <div class="text-red-400"
-                                *ngIf="registerForm.get('phone_no')?.invalid && (registerForm.get('phone_no')?.touched || registerForm.get('phone_no')?.dirty)">
-                                <div *ngIf="registerForm.get('phone_no')?.errors?.['required']">Phone number is
-                                    required.
-                                </div>
-                                <div *ngIf="registerForm.get('phone_no')?.errors?.['pattern']">Invalid phone number.
-                                    Must be
-                                    10 digits.</div>
-                            </div>
-
-                        </div>
-                        <div class="mb-4 w-full">
-                            <label for="password" class="block text-sm  font-custom">Password</label>
-                            <span class="p-input-icon-left w-full">
-                                <i class="pi pi-lock text-[#fafafa]"></i>
-                                <p-password [toggleMask]="true" [feedback]="false" placeholder="Enter your password"
-                                    formControlName="password"></p-password>
-                            </span>
-                            <div class="text-red-400"
-                                *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
-                                <div *ngIf="registerForm.get('password')?.errors?.['required']" class="text-danger">
-                                    Password
-                                    is
-                                    required</div>
-                                <div *ngIf="registerForm.get('password')?.errors?.['minlength']" class="text-danger">
-                                    Password must be at
-                                    least 8 characters long</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-6 w-full block sm:hidden">
-                        <label for="confirmPassword" class="block text-sm  font-custom">Confirm
-                            Password</label>
+                    <div class="mb-6 w-full ">
+                        <label for="phone" class="block text-sm  font-custom">Phone Number</label>
                         <span class="p-input-icon-left w-full">
-                            <i class="pi pi-lock text-[#fafafa]"></i>
-                            <p-password [toggleMask]="true" [feedback]="false" placeholder="Enter your confirm password"
-                                formControlName="confirmPassword"></p-password>
-
+                            <input pInputText id="phone" type="tel" maxlength="10" pattern="[0-9]*"
+                                (input)="onPhoneInput($event)" placeholder="Enter your phone number"
+                                formControlName="phone_no"
+                                class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
+                            <div class="absolute top-[10px] left-2 ">
+                                <svg width="25" height="25" viewBox="0 0 30 30" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_759_6116)">
+                                        <path
+                                            d="M3.33333 4.16699C2.44928 4.16699 1.60143 4.51818 0.976311 5.1433C0.35119 5.76842 0 6.61627 0 7.50033L0 22.5003C0 23.3844 0.35119 24.2322 0.976311 24.8573C1.60143 25.4825 2.44928 25.8337 3.33333 25.8337H8.33333V4.16699H3.33333ZM26.6667 4.16699H21.6667V25.8337H26.6667C27.5507 25.8337 28.3986 25.4825 29.0237 24.8573C29.6488 24.2322 30 23.3844 30 22.5003V7.50033C30 6.61627 29.6488 5.76842 29.0237 5.1433C28.3986 4.51818 27.5507 4.16699 26.6667 4.16699Z"
+                                            fill="#D52B1E" />
+                                        <path d="M8.33301 4.16699H21.6663V25.8337H8.33301V4.16699Z" fill="#EEEEEE" />
+                                        <path
+                                            d="M15.5129 18.4276C16.5112 18.5435 17.4062 18.6476 18.4037 18.7618L18.1495 17.9268C18.1308 17.8549 18.1334 17.7792 18.1569 17.7088C18.1804 17.6384 18.2239 17.5763 18.282 17.5301L21.1812 15.1685L20.5812 14.886C20.317 14.7918 20.3895 14.6426 20.4854 14.2843L20.9279 12.671L19.2437 13.0268C19.0795 13.0518 18.9704 12.9476 18.9454 12.8476L18.7279 12.0885L17.3962 13.5835C17.207 13.8235 16.8237 13.8235 16.9429 13.2701L17.512 10.2418L16.7479 10.6376C16.5337 10.7576 16.3195 10.7776 16.2004 10.5635L15.1462 8.5918L14.092 10.5635C13.972 10.7776 13.7579 10.7576 13.5437 10.6376L12.7804 10.2418L13.3495 13.2701C13.4695 13.8235 13.0854 13.8235 12.8962 13.5835L11.5645 12.0893L11.3479 12.8485C11.3229 12.9485 11.2129 13.0526 11.0487 13.0276L9.36452 12.6718L9.80702 14.2851C9.90118 14.6435 9.97452 14.7926 9.71035 14.8868L9.11035 15.1693L12.0095 17.531C12.1245 17.6201 12.1829 17.781 12.1412 17.9276L11.887 18.7626L14.7787 18.4285C14.867 18.4285 14.9254 18.4776 14.9245 18.5793L14.7462 21.666H15.5429L15.3654 18.5793C15.367 18.4768 15.4245 18.4276 15.5129 18.4276Z"
+                                            fill="#D52B1E" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_759_6116">
+                                            <rect width="30" height="30" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </div>
                         </span>
                         <div class="text-red-400"
-                            *ngIf="registerForm.hasError('passwordMismatch') && (registerForm.get('confirmPassword')?.touched || registerForm.get('confirmPassword')?.dirty)">
-                            Passwords do not match.
+                            *ngIf="registerForm.get('phone_no')?.invalid && (registerForm.get('phone_no')?.touched || registerForm.get('phone_no')?.dirty)">
+                            <div *ngIf="registerForm.get('phone_no')?.errors?.['required']">Phone number is
+                                required.
+                            </div>
+                            <div *ngIf="registerForm.get('phone_no')?.errors?.['pattern']">Invalid phone number.
+                                Must be
+                                10 digits.</div>
                         </div>
-                    </div>
-                    <div class="mb-4 w-full">
-                        <label for="license" class="block text-sm  font-custom">Health Canada Site License
-                        </label>
-                        <div class="file-upload-container">
-                            <label for="file-upload" class="file-upload-label">
-                                <i class="pi pi-cloud-upload"></i>
-                                <p class="text-[#fafafa]">Upload document</p>
-                                <input type="file" id="file-upload" (change)="onFileSelected($event)" accept=".pdf" />
-                            </label>
-                        </div>
-                        <div
-                            *ngIf="registerForm.get('pdf')?.invalid && (registerForm.get('pdf')?.touched || registerForm.get('pdf')?.dirty)">
-                            PDF is required.
-                        </div>
-
 
                     </div>
-
                 </div>
-                <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
-                    <div class="mb-6 w-full hidden sm:block">
-                        <label for="confirmPassword" class="block text-sm  font-custom">Confirm
-                            Password</label>
-                        <span class="p-input-icon-left w-full">
-                            <i class="pi pi-lock text-[#fafafa]"></i>
-                            <p-password [toggleMask]="true" [feedback]="false" placeholder="Enter your confirm password"
-                                formControlName="confirmPassword"></p-password>
+                <div class="flex flex-row w-full flex-wrap gap-0 ">
 
-                        </span>
-                        <div class="text-red-400"
-                            *ngIf="registerForm.hasError('passwordMismatch') && (registerForm.get('confirmPassword')?.touched || registerForm.get('confirmPassword')?.dirty)">
-                            Passwords do not match.
-                        </div>
-                    </div>
                     <div class="mb-6 w-full">
-                        <div class="file-details relative text-slate cursor-pointer" *ngIf="selectedFile">
-                            <div class="file-name flex">
-                                <i class="pi pi-file place-content-center font-medium mr-4 text-2xl"></i>
-                                <p class="text-black">{{ selectedFile.name }}</p>
-                            </div>
-                            <i class="pi pi-times top-2 right-2 absolute font-medium " (click)="removeFile()"></i>
+                        <label for="password" class="block text-sm  font-custom">Password</label>
+                        <span class="p-input-icon-left w-full">
+                            <i class="pi pi-lock text-[#fafafa]"></i>
+                            <p-password [toggleMask]="true" [feedback]="false" placeholder="Enter your password"
+                                formControlName="password"></p-password>
+                        </span>
+                        <div class="text-red-400"
+                            *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
+                            <div *ngIf="registerForm.get('password')?.errors?.['required']" class="text-danger">
+                                Password
+                                is
+                                required</div>
+                            <div *ngIf="registerForm.get('password')?.errors?.['minlength']" class="text-danger">
+                                Password must be at
+                                least 8 characters long</div>
                         </div>
                     </div>
+
+                </div>
+                <div class="flex flex-row w-full flex-wrap gap-0 ">
+                    <div class="mb-6 w-full">
+                        <label for="confirmPassword" class="block text-sm  font-custom">Confirm
+                            Password</label>
+                        <span class="p-input-icon-left w-full">
+                            <i class="pi pi-lock text-[#fafafa]"></i>
+                            <p-password [toggleMask]="true" [feedback]="false" placeholder="Enter your confirm password"
+                                formControlName="confirmPassword"></p-password>
+
+                        </span>
+                        <div class="text-red-400"
+                            *ngIf="registerForm.hasError('passwordMismatch') && (registerForm.get('confirmPassword')?.touched || registerForm.get('confirmPassword')?.dirty)">
+                            Passwords do not match.
+                        </div>
+                    </div>
+                    
                 </div>
 
                 <!-- <div class="grid grid-cols-1 w-full gap-4">
@@ -305,14 +264,14 @@
                     You must accept the terms and conditions.
                 </div>
             </div>
-            <button type="submit" [disabled]="registerForm.invalid"
+            <button type="submit"
                 class="w-full font-bold py-2 px-4 rounded-md font-custom bg-secondary text-primary-btn">
                 <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
                 <span *ngIf="!loading">Sign
                     Up</span>
             </button>
         </form>
-        <p class="mt-4 text-center font-custom text-[#fafafa]">Already have an account? &nbsp; &nbsp;<a
+        <p class="mt-4 text-center text-sm font-custom text-[#fafafa]">Already have an account? &nbsp; &nbsp;<a
                 routerLink="/login" class="hover:underline text-secondary">Sign In</a></p>
     </div>
 </div>

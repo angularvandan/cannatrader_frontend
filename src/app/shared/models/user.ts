@@ -4,7 +4,6 @@ export interface UserDetails {
     email: string;
     phone_no: string;
     avatar: string;
-    health_license: string;
     is_company: boolean;
     is_verified: boolean;
     role: string;

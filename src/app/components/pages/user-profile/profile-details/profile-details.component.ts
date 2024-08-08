@@ -105,7 +105,6 @@ export class ProfileDetailsComponent implements OnInit {
   user: UserDetails = {
     avatar: '',
     email: '',
-    health_license: '',
     id: '',
     is_company: false,
     name: '',
