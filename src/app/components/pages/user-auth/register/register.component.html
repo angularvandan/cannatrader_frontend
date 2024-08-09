@@ -253,8 +253,8 @@
                     </label>
                     <div class="text-xs sm:text-base ">
                         By continuing, you agree to cannatrader
-                        <a href="#" class="hover:underline text-secondary" routerLink="/terms-conditions">Terms of
-                            Use</a> and <a href="#" class="hover:underline text-secondary"
+                        <a class="hover:underline text-secondary" routerLink="/terms-conditions">Terms of
+                            Use</a> and <a class="hover:underline text-secondary"
                             routerLink="/privacy-policy">Privacy
                             Policy</a>.
                     </div>
@@ -264,7 +264,7 @@
                     You must accept the terms and conditions.
                 </div>
             </div>
-            <button type="submit"
+            <button type="submit"[disabled]="loading"
                 class="w-full font-bold py-2 px-4 rounded-md font-custom bg-secondary text-primary-btn">
                 <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
                 <span *ngIf="!loading">Sign
@@ -301,7 +301,7 @@
                         type="text" id="fourth" maxlength="1" />
                 </div>
             </div>
-            <button type="button" (click)="verifyEmail()"
+            <button type="button" (click)="verifyEmail()"[disabled]="loadingOtp"
                 class="w-full bg-secondary text-primary-btn justify-center font-bold py-2 px-4 rounded-md">
                 <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loadingOtp"></i>
                 <span *ngIf="!loadingOtp">Verify & Continue</span>

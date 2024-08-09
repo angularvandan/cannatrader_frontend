@@ -46,7 +46,7 @@
             </div>
             <button type="submit"
                 class="w-full bg-secondary text-primary-btn justify-center font-bold py-2 px-4 rounded-md"
-                [disabled]="loginForm.invalid">
+                [disabled]="loginForm.invalid || loading">
 
                 <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
                 <span *ngIf="!loading">Sign In</span>

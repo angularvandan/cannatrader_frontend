@@ -60,66 +60,78 @@ button {
 h2 {
     font-size: 40px;
 }
-.p-button{
+
+.p-button {
     opacity: 1;
 }
-.p-button:enabled:active{
+
+.p-button:enabled:active {
     opacity: 0.8;
 }
 
-app-login , app-register {
+button {
+    opacity: 1;
+}
+
+button:enabled:active {
+    opacity: 0.8;
+}
+
+app-login,
+app-register {
     input:-webkit-autofill {
         background-color: transparent !important;
         transition: background-color 5000s ease-in-out 0s;
         color: #fafafa !important;
         -webkit-text-fill-color: #fafafa !important;
         caret-color: #fafafa !important;
-    
-    
+
+
     }
-    
+
     input:-moz-autofill {
         background-color: transparent !important;
         transition: background-color 5000s ease-in-out 0s;
         color: #fafafa !important;
         -webkit-text-fill-color: #fafafa !important;
-    
+
     }
-    
+
     input:-webkit-autofill:focus {
         background-color: transparent !important;
         transition: background-color 5000s ease-in-out 0s;
         color: #fafafa !important;
         -webkit-text-fill-color: #fafafa !important;
-    
+
     }
-    
+
     input:-webkit-autofill:active {
         background-color: transparent !important;
         transition: background-color 5000s ease-in-out 0s;
         color: #fafafa !important;
         -webkit-text-fill-color: #fafafa !important;
     }
+
     //for crome
-    
+
     input[type="number"]::-ms-clear,
     input[type="number"]::-ms-reveal {
         display: none;
         width: 0;
         height: 0;
     }
-    
+
     input[type="number"]::-webkit-outer-spin-button,
     input[type="number"]::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
-    
+
     /* For Firefox */
     input[type="number"] {
         -moz-appearance: textfield;
     }
-    
+
     /* For Internet Explorer and old Edge */
     input[type="number"]::-ms-clear,
     input[type="number"]::-ms-reveal {
@@ -527,6 +539,20 @@ app-product-listing {
 
         .p-dropdown-panel {
             border-radius: 20px;
+        }
+
+    }
+
+    .custom-dropdown {
+        .p-dropdown-label.p-placeholder {
+            color: #fff;
+            text-align: center;
+            font-family: 'Poppins';
+
+        }
+        .p-dropdown .p-dropdown-trigger {
+            margin-left: 10px;
+
         }
     }
 

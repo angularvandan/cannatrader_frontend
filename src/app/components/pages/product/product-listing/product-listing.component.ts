@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/shared/models/product';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IProduct, Product } from 'src/app/shared/models/product';
+import { ProductService } from 'src/app/shared/services/product.service';
 
-interface Dropdown {
-  name: string;
-  code: string;
-}
 
 @Component({
   selector: 'app-product-listing',
@@ -13,148 +12,170 @@ interface Dropdown {
 })
 export class ProductListingComponent implements OnInit {
 
-  products: Product[] = [
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
+  products: IProduct[] = [];
 
-  ];
+  strainTypes: any[] = [];
+  selectedStrainType = { id: '', type: 'Indica' };
 
-  strainTypes: Dropdown[] = [];
-  selectedStrainType: Dropdown = { name: 'Indica', code: 'Indica' };
+  categories: any[] = [];
+  selectedCategory = { id: '', name: 'Edible' };
 
-  categories: Dropdown[] = [];
-  selectedCategory: Dropdown = { name: 'Edible', code: 'Edible' };
+  subCategories: any[] = [{
+    id:'',name:'Sub Category'
+  }];
 
-  subCategories: Dropdown[] = [];
-  selectedSubCategory: Dropdown = { name: 'Chocolate', code: 'Chocolate' };
+  selectedSubCategory = { id: '', name: 'Chocolate' };
 
-  thcRanges: Dropdown[] = [];
-  selectedThcRange: Dropdown = { name: '20 - 30%', code: '20 - 30%' };
+  thcRanges: any[] = [];
+  selectedThcRange = { id: '', range: '20 - 30%' };
 
-  newOld: Dropdown[] = [];
-  selectedNewOld: Dropdown = { name: 'Newest (23)', code: 'Newest (23)' };
 
   sortOrder: any = { name: 'Newest (23)', code: 'Newest (23)' };
   sortOrderOpt: any[] = [{ name: 'Newest (23)', code: 'Newest (23)' }, { name: 'Oldest', code: 'Oldest' }];
   showSortOptions: boolean = false;
 
-  constructor() { }
+  params!: any;
+  filterform!: FormGroup;
+
+  loadingForProduct: boolean = false;
+  loadingError: boolean = false;
+
+  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.strainTypes = [
-      { name: 'Indica', code: 'Indica' },
-      { name: 'Sativa', code: 'Sativa' },
-      { name: 'Hybrid', code: 'Hybrid' },
-    ];
 
-    this.categories = [
-      { name: 'Flower', code: 'Flower' },
-      { name: 'Bio mass', code: 'Bio mass' },
-      { name: 'Hemp', code: 'Hemp' },
-      { name: 'Fresh frozen', code: 'Fresh frozen' },
-      { name: 'Genetics', code: 'Genetics' },
-      { name: 'Extracts-concentrates', code: 'Extracts-concentrates' },
-      { name: 'Edible', code: 'Edible' },
-      { name: 'Topicals', code: 'Topicals' },
-      { name: 'Services', code: 'Services' },
-      { name: 'Materials', code: 'Materials' },
-      { name: 'Equipments', code: 'Equipments' }
-    ];
+    this.filterform = this.fb.group({
+      strain_type: [''],
+      category: [''],
+      sub_category: [''],
+      thc_range: ['']
+    });
 
-    this.subCategories = [
-      { name: 'Clones', code: 'Clones' },
-      { name: 'Teens', code: 'Teens' },
-      { name: 'Mothers', code: 'Mothers' },
-      { name: 'Seeds', code: 'Seeds' },
-      { name: 'Chocolate', code: 'Chocolate' },
-    ];
+    this.activatedRoute.queryParams.subscribe({
+      next: (params) => {
 
-    this.thcRanges = [
-      { name: '0 - 10%', code: '0 - 10%' },
-      { name: '10 - 20%', code: '10 - 20%' },
-      { name: '20 - 30%', code: '20 - 30%' },
-      { name: '30% Plus', code: '30% Plus' },
-    ];
+        this.params = params;
+        console.log(this.params);
+        this.getSubCategoryById(this.params.category);
+        this.getProductsOnFilter();
 
+
+      }, error: (err) => {
+        console.log(err);
+      }
+    });
+
+    //this is for filter product
+    this.filterform.valueChanges.subscribe(values => {
+      this.onFormValuesChanged(values);
+    });
+
+    this.filterform.get('category')?.valueChanges.subscribe(categoryId => {
+      this.getSubCategoryById(categoryId?.id || '');
+    });
+
+
+    //this is for view all products drop down value
+    this.productService.getAllValueForAddProduct().subscribe((response: any) => {
+      console.log(response);
+      this.categories = response[0].data;
+      this.thcRanges = response[1].data;
+      this.strainTypes = response[2].data;
+
+      setTimeout(() => {
+        this.filterform.patchValue({
+          strain_type: this.strainTypes.find((item: any) => {
+            if(item.id == this.params.strain_type){
+              return item;
+            }
+          }),
+          category: this.categories.find((item: any) => {
+            if(item.id == this.params.category){
+              return item;
+            }
+          }),
+          sub_category: this.subCategories.find((item: any) => {
+            
+            if(item.id == this.params.sub_category){
+              return item;
+            }
+          }),
+          thc_range: this.thcRanges.find((item: any) => {
+            
+            if(item.id == this.params.thc_range){
+              return item;
+            }
+          })
+        });
+        console.log(this.subCategories);
+        console.log(this.filterform);
+      }, 0);
+    });
+
+    //when refress then patch the value of filter dropdownn
+
+  }
+  // this is coll for sub category
+  getSubCategoryById(id: any) {
+    if (id != '') {
+      this.productService.getSubCategory(id).subscribe((response: any) => {
+        console.log(response.data);
+        //this is added when category has no sub category;
+        this.subCategories=[{
+          id:'',name:'Sub Category'
+        }];
+        this.subCategories = this.subCategories.concat(response.data);
+
+      },(err:any)=>{
+        //when sub category not found
+        this.filterform.patchValue({
+          sub_category: {
+            id:'',name:'Sub Category'
+          }
+        });
+      })
+    }
+  }
+
+  //filter in product listing page
+
+  onFormValuesChanged(valuesforFilter: any) {
+
+    console.log(valuesforFilter);
+    this.params = {
+      ...this.params,
+      category: valuesforFilter.category?.id || '',
+      sub_category: valuesforFilter.sub_category?.id || '',
+      strain_type: valuesforFilter.strain_type?.id || '',
+      thc_range: valuesforFilter.thc_range?.id || '',
+    }
+    this.router.navigate(['/products'], { queryParams: this.params });
+
+  }
+  // this is for api call of get products
+  getProductsOnFilter() {
+    this.loadingForProduct = true;
+
+    this.productService.getAllProducts(this.params).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this.products = response.products;
+        console.log(this.products);
+        this.loadingForProduct = false;
+
+      }, error: (err) => {
+        console.log(err);
+
+        this.loadingError = true;
+        this.loadingForProduct = false;
+
+      }
+    })
+  }
+  // when click on view more product
+  viewMoreProducts() {
+    this.params = { ...this.params, limit: parseInt(this.params.limit) + 9 }
+    this.router.navigate(['/products'], { queryParams: this.params });
   }
 
   toggleSortOrder() {

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin } from 'rxjs';
 
@@ -30,6 +30,24 @@ export class ProductService {
   }
   getSubCategory(id: any) {
     return this.http.get(`${this.baseUrl}/api/category/getSubCategories/${id}`);
+  }
+
+  getAllProducts(params: any) {
+
+    let queryParams = new HttpParams();
+
+    // Add form values to queryParams
+    Object.keys(params).forEach((key) => {
+      if (params[key] !== null && params[key] !== '') {
+        queryParams = queryParams.append(key, params[key]);
+      }
+    });
+
+    return this.http.get(`${this.baseUrl}/api/product/get-products`, {params:queryParams});
+  }
+
+  getRecentListingProducts(){
+    
   }
 
 }
