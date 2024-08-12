@@ -21,7 +21,7 @@ export class ProductListingComponent implements OnInit {
   selectedCategory = { id: '', name: 'Edible' };
 
   subCategories: any[] = [{
-    id:'',name:'Sub Category'
+    id: '', name: 'Sub Category'
   }];
 
   selectedSubCategory = { id: '', name: 'Chocolate' };
@@ -66,9 +66,11 @@ export class ProductListingComponent implements OnInit {
     });
 
     //this is for filter product
-    this.filterform.valueChanges.subscribe(values => {
-      this.onFormValuesChanged(values);
-    });
+    setTimeout(() => {
+      this.filterform.valueChanges.subscribe(values => {
+        this.onFormValuesChanged(values);
+      });
+    }, 0);
 
     this.filterform.get('category')?.valueChanges.subscribe(categoryId => {
       this.getSubCategoryById(categoryId?.id || '');
@@ -82,55 +84,53 @@ export class ProductListingComponent implements OnInit {
       this.thcRanges = response[1].data;
       this.strainTypes = response[2].data;
 
-      setTimeout(() => {
-        this.filterform.patchValue({
-          strain_type: this.strainTypes.find((item: any) => {
-            if(item.id == this.params.strain_type){
-              return item;
-            }
-          }),
-          category: this.categories.find((item: any) => {
-            if(item.id == this.params.category){
-              return item;
-            }
-          }),
-          sub_category: this.subCategories.find((item: any) => {
-            
-            if(item.id == this.params.sub_category){
-              return item;
-            }
-          }),
-          thc_range: this.thcRanges.find((item: any) => {
-            
-            if(item.id == this.params.thc_range){
-              return item;
-            }
-          })
-        });
-        console.log(this.subCategories);
-        console.log(this.filterform);
-      }, 0);
+      this.filterform.patchValue({
+        strain_type: this.strainTypes.find((item: any) => {
+          if (item.id == this.params.strain_type) {
+            return item;
+          }
+        }),
+        category: this.categories.find((item: any) => {
+          if (item.id == this.params.category) {
+            return item;
+          }
+        }),
+        sub_category: this.subCategories.find((item: any) => {
+
+          if (item.id == this.params.sub_category) {
+            return item;
+          }
+        }),
+        thc_range: this.thcRanges.find((item: any) => {
+
+          if (item.id == this.params.thc_range) {
+            return item;
+          }
+        })
+      });
+      console.log(this.subCategories);
+      console.log(this.filterform);
     });
 
     //when refress then patch the value of filter dropdownn
 
   }
-  // this is coll for sub category
+  // this is call for sub category
   getSubCategoryById(id: any) {
     if (id != '') {
       this.productService.getSubCategory(id).subscribe((response: any) => {
         console.log(response.data);
         //this is added when category has no sub category;
-        this.subCategories=[{
-          id:'',name:'Sub Category'
+        this.subCategories = [{
+          id: '', name: 'Sub Category'
         }];
         this.subCategories = this.subCategories.concat(response.data);
 
-      },(err:any)=>{
+      }, (err: any) => {
         //when sub category not found
         this.filterform.patchValue({
           sub_category: {
-            id:'',name:'Sub Category'
+            id: '', name: 'Sub Category'
           }
         });
       })

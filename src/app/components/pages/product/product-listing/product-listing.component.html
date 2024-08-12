@@ -54,7 +54,7 @@
             <div *ngFor="let product of products" routerLink="productDetails"
                 class="max-w-sm cursor-pointer mx-auto bg-white rounded-lg justify-around overflow-hidden flex">
                 <div class="relative">
-                    <img [src]="product.images[0]" alt="Canopy Growth"loadig="lazy"
+                    <img [src]="product.images[0]" alt="Canopy Growth"loadig="lazy"style="border-radius:8px;"
                         class=" h-36 md:h-40 lg:h-44 w-28 md:w-32 lg:w-36 object-cover">
                     <div class="absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-lg posted">Posted:
                         {{product.created_at | date: 'EEEE'}}
@@ -82,9 +82,11 @@
             </div>
         </div>
 
-        <div *ngIf="!products.length && loadingError " class="flex justify-center items-center text-primary text-base sm:text-lg leading-5 font-semibold py-2 sm:px-4 px-3 ">
-            Product Not Found
-        </div>
+        <ng-container *ngIf="!loadingForProduct">
+            <div *ngIf="!products.length || loadingError " class="flex justify-center items-center text-primary text-base sm:text-lg leading-5 font-semibold py-2 sm:px-4 px-3 ">
+                Product Not Found
+            </div>
+        </ng-container>
 
         <div class="flex justify-center mt-8" *ngIf="!loadingForProduct && products.length">
             <button (click)="viewMoreProducts()"

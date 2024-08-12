@@ -1,19 +1,30 @@
+.filter-container {
+    .filters {
+        .filter>* {
+            min-width: 212px;
+        }
 
-.filter-container{
-    .filters{
-        .filter > *{
-            min-width:212px;
-        }
-        .filter{
-            .p-input-icon-right>i{
-                top:44%;
+        .filter {
+            .p-input-icon-right>i {
+                top: 44%;
             }
-            .p-inputtext{
-                background:#ECFEE6;
+
+            .p-inputtext {
+                background: #ECFEE6;
             }
         }
-        @media (max-width:360px){
-            padding: 1rem!important;
+
+        .svg-icon {
+            fill: #3A5C41;
+            transition: fill 0.3s ease;
+        }
+
+        .svg-icon:hover {
+            fill: #FFE175;
+        }
+
+        @media (max-width:360px) {
+            padding: 1rem !important;
         }
     }
 }

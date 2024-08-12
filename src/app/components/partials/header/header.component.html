@@ -32,7 +32,7 @@
                     class="hover:text-secondary  text-xl font-medium">Contact</a>
             </nav>
         </div>
-        <div class="flex items-center space-x-6 md:space-x-9 icon-profile-container">
+        <div class="flex items-center space-x-6 md:space-x-8 icon-profile-container">
             <div class="relative inline-flex">
                 <!-- <div
               class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 rounded-full bg-pink-700 p-2.5 text-xs"></div> -->
@@ -58,10 +58,10 @@
                 </svg>
             </a>
             <a routerLink="/login" *ngIf="!isAuth" (click)="toggleMenu()"
-                class="hover:text-secondary text-base sm:text-xl font-medium cursor-pointer whitespace-nowrap">Log
+                class="hover:bg-secondary rounded-xl text-base sm:text-xl font-medium cursor-pointer py-1 px-3 whitespace-nowrap">Log
                 in</a>
             <a routerLink="/signup" *ngIf="!isAuth" (click)="toggleMenu()"
-                class="hover:text-white text-primary bg-secondary rounded-xl text-base sm:text-xl font-medium cursor-pointer py-1 px-2 whitespace-nowrap">Sign
+                class="hover:bg-secondary  rounded-xl text-base sm:text-xl font-medium cursor-pointer py-1 px-2 whitespace-nowrap">Sign
                 up</a>
 
             <a routerLink="/profile/profile-details" *ngIf="isAuth">

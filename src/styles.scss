@@ -65,17 +65,26 @@ h2 {
     opacity: 1;
 }
 
-.p-button:enabled:active {
+.p-button:hover {
     opacity: 0.8;
+}
+
+.p-button:enabled:active {
+    opacity: 0.9;
 }
 
 button {
     opacity: 1;
 }
 
-button:enabled:active {
+button:hover {
     opacity: 0.8;
 }
+
+button:enabled:active {
+    opacity: 0.9;
+}
+
 
 app-login,
 app-register {
@@ -223,6 +232,8 @@ app-home {
         .p-button {
             width: 100% !important;
             background-color: $bg-primary;
+            border: unset;
+
         }
 
         .p-button:hover {
@@ -256,6 +267,11 @@ app-home {
 
     .p-component {
         font-family: "Poppins";
+    }
+
+    .p-inputtext:enabled:focus {
+        box-shadow: unset;
+        border-color: $bg-primary;
     }
 }
 
@@ -550,6 +566,7 @@ app-product-listing {
             font-family: 'Poppins';
 
         }
+
         .p-dropdown .p-dropdown-trigger {
             margin-left: 10px;
 
@@ -679,7 +696,7 @@ app-contact {
 }
 
 .p-input-icon-left>p-password>div>input {
-    padding-left: 2.5rem;
+    padding-left: 2rem;
 }
 
 .p-inputtext,

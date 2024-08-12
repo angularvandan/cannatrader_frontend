@@ -1,7 +1,8 @@
 <div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay">
     <div class="text-[#fafafa] bg-opacity-90 p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h2 class="text-2xl font-bold mb-6 text-center text-secondary">Sign In</h2>
-        <p class="text-center mb-6 text-[#fafafa]">Sign in to access exclusive <span class=" text-secondary">deals &
+        <h2 class=" font-semibold mb-4 text-center text-secondary text-3xl sm:text-[40px]">Sign In</h2>
+        <p class="text-center mb-4 text-[#fafafa] text-[15px] ">Sign in to access exclusive <span
+                class=" text-secondary">deals &
                 discounts.</span>
             <br class="hidden sm:block"> access a comprehensive
             range of items
@@ -16,7 +17,7 @@
                         formControlName="email"
                         class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm  sm:text-sm">
                 </span>
-                <div class="text-red-400"
+                <div class="text-red-400 text-sm"
                     *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
                     <small *ngIf="loginForm.get('email')?.errors?.['required']" class="text-danger">Email is
                         required</small>
@@ -24,14 +25,14 @@
                         id</small>
                 </div>
             </div>
-            <div class="mb-4">
+            <div class="mb-2">
                 <label for="password" class="block text-sm font-medium">Password</label>
                 <span class="p-input-icon-left w-full">
                     <i class="pi pi-lock z-10  text-[#fafafa]"></i>
                     <p-password [toggleMask]="true" [feedback]="false" placeholder="Enter your password"
                         formControlName="password"></p-password>
                 </span>
-                <div class="text-red-400"
+                <div class="text-red-400 text-sm"
                     *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
                     <small *ngIf="loginForm.get('password')?.errors?.['required']" class="text-danger">Password is
                         required</small>
@@ -40,20 +41,20 @@
                         least 8 characters long</small>
                 </div>
             </div>
-            <div class="mb-6 text-right">
+            <div class="mb-4 text-right">
                 <a routerLink="/reset-password" class="text-sm font-semibold hover:underline text-secondary">Forgot
                     Password?</a>
             </div>
             <button type="submit"
-                class="w-full bg-secondary text-primary-btn justify-center font-bold py-2 px-4 rounded-md"
+                class="w-full bg-secondary text-primary-btn justify-center font-bold py-2 px-4 rounded-md "
                 [disabled]="loginForm.invalid || loading">
 
                 <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
                 <span *ngIf="!loading">Sign In</span>
             </button>
         </form>
-        <p class="mt-4 text-center">Don't have an account? <a routerLink="/signup"
-                class="hover:underline text-secondary">Sign
+        <p class="mt-4 text-center text-sm">Don't have an account? <a routerLink="/signup"
+                class="hover:underline text-secondary font-semibold">Sign
                 Up</a>
         </p>
     </div>

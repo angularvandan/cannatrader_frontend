@@ -12,7 +12,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class RegisterComponent implements AfterViewInit, OnInit {
   section: string = '';
   loading: boolean = false;
-  loadingOtp:boolean=false;
+  loadingOtp: boolean = false;
 
   @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
 
@@ -25,7 +25,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
 
-    if(this.userService.currentUser.token){
+    if (this.userService.currentUser.token) {
       this.router.navigate(['/home']);
     }
 
@@ -37,6 +37,12 @@ export class RegisterComponent implements AfterViewInit, OnInit {
       confirmPassword: ['', Validators.required],
       termsAccepted: [false, Validators.requiredTrue]
     }, { validator: this.passwordMatchValidator });
+
+    //this is for save data for future
+    const savedData = JSON.parse(localStorage.getItem('signupFormData') || '{}');
+    if (Object.keys(savedData).length) {
+      this.registerForm.patchValue(savedData);
+    }
   }
 
   passwordMatchValidator(group: FormGroup): { [key: string]: boolean } | null {
@@ -53,6 +59,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.attachEventListeners();
+
   }
 
   attachEventListeners() {
@@ -68,7 +75,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
     // console.log(inputs);
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.value.length === 1 && index < inputs.length - 1) {
-      if(index!=3){
+      if (index != 3) {
         inputs[index + 1].nativeElement.focus();
       }
     }
@@ -80,10 +87,10 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
     if (event.key === 'Backspace' && index !== 0) {
       inputs[index].nativeElement.value = '';
-      setTimeout(()=>{
+      setTimeout(() => {
         inputs[index - 1].nativeElement.focus();
 
-      },0)
+      }, 0)
     }
   }
   verifyEmail() {
@@ -115,19 +122,19 @@ export class RegisterComponent implements AfterViewInit, OnInit {
     });
 
   }
-  resendOtpForVerifyEmail(){
-    this.loading=true;
+  resendOtpForVerifyEmail() {
+    this.loading = true;
     console.log(this.registerForm.value.email.toLowerCase());
-    this.userService.getOtpForEmailVerify({email: this.registerForm.value.email.toLowerCase()}).subscribe({
-      next:(response)=>{
+    this.userService.getOtpForEmailVerify({ email: this.registerForm.value.email.toLowerCase() }).subscribe({
+      next: (response) => {
         console.log(response);
         this.tostr.success(response.message);
-        this.loading=false;
+        this.loading = false;
 
-      },error:(err)=>{
+      }, error: (err) => {
         // console.log(err);
         this.tostr.error(err.error.error.message);
-        this.loading=false;
+        this.loading = false;
 
       }
     })
@@ -135,8 +142,10 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
   onSignup() {
     // console.log(this.registerForm.value.email.toLowerCase());
-    
+
+
     if (this.registerForm.valid) {
+      localStorage.removeItem('signupFormData');
       this.loading = true;
       this.formData.append('name', this.registerForm.value.name);
       this.formData.append('email', this.registerForm.value.email.toLowerCase());
@@ -165,8 +174,21 @@ export class RegisterComponent implements AfterViewInit, OnInit {
         }
       });
     }
-    else{
+    else {
       this.registerForm.markAllAsTouched();
+    }
+  }
+
+  onNavigateToPrivacyPolicyTermCondition(value: string) {
+    localStorage.setItem('signupFormData', JSON.stringify(this.registerForm.value));
+    // Navigate to privacy policy page
+    if (value != 'terms-condition') {
+
+      this.router.navigate(['/privacy-policy']);
+    }
+    else{
+
+      this.router.navigate(['/terms-conditions']);
     }
   }
 

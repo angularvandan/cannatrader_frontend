@@ -36,44 +36,90 @@ $secondary: #FFE175;
                     white-space: nowrap;
                     border: 1px solid $secondary;
 
-                    @media(max-width:768px){
+                    @media(max-width:768px) {
                         font-size: 16px;
                     }
-                    @media(max-width:350px){
+
+                    @media(max-width:350px) {
                         font-size: 12px;
                     }
                 }
             }
         }
     }
-    .right-side{
-        .link-groups{
-            .explore-link{
-                @media (max-width:360px){
-                    margin-right: 10px!important;
+
+    .right-side {
+        .link-groups {
+            .explore-link {
+                @media (max-width:360px) {
+                    margin-right: 10px !important;
                 }
             }
-            li{
+
+            li {
                 margin-bottom: 15px;
+
+                a:hover {
+                    color: $secondary;
+                }
             }
-            @media (max-width:360px){
-                justify-content: start!important;
+
+            .phone:hover {
+                @keyframes vibrate {
+                    0% {
+                        transform: rotate(-5deg) translateX(0);
+                    }
+
+                    25% {
+                        transform: rotate(5deg) translateX(-1px);
+                    }
+
+                    50% {
+                        transform: rotate(-5deg) translateX(0);
+                    }
+
+                    75% {
+                        transform: rotate(5deg) translateX(1px);
+                    }
+
+                    100% {
+                        transform: rotate(-5deg) translateX(0);
+                    }
+                }
+
+
+                .vibrate-icon {
+                    animation: vibrate 0.3s linear infinite;
+                }
+
+                svg {
+                    scale: 1.2;
+                    transition: scale 0.5s ease;
+                }
+
+                
+            }
+
+            @media (max-width:360px) {
+                justify-content: start !important;
             }
         }
     }
-    .p-button.p-button-outlined{
-        color:cyan!important;
+
+    .p-button.p-button-outlined {
+        color: cyan !important;
     }
 
     @media(max-width: $breakpoint-sm) {
         padding-left: 50px;
-        padding-right:20px;
+        padding-right: 20px;
         padding-top: 37px;
         padding-bottom: 60px;
     }
+
     @media(max-width: 500px) {
         padding-left: 20px;
-        padding-right:20px;
+        padding-right: 20px;
         padding-top: 37px;
         padding-bottom: 0px;
     }
