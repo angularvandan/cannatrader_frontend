@@ -17,7 +17,7 @@ const routes: Routes = [
         path: 'recentlisting', component: RecentProductListingComponent
     },
     {
-        path: 'editProduct', component: EditProductComponent
+        path: 'editProduct/:id', component: EditProductComponent
     },
     {
         path: 'subscribed-listing', component: SubscribedDetailsComponent

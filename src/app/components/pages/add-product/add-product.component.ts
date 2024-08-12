@@ -5,10 +5,6 @@ import { UserDetails } from 'src/app/shared/models/user';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
-interface ApiResponse {
-  success: boolean;
-  data: any[]; // Adjust 'any' to a more specific type if possible
-}
 
 @Component({
   selector: 'app-add-product',

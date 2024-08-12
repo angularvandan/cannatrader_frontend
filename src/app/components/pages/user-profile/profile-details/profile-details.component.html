@@ -170,7 +170,7 @@
                         </div>
                         <div class="w-[86vw] lg:w-[64vw]">
                             <div class="overflow-x-auto ">
-                                <table class=" min-w-[580px] w-full border-spacing-x-4">
+                                <table class=" min-w-[580px] min-height-[400px] w-full border-spacing-x-4 ">
                                     <thead class="h-[50px]">
                                         <tr class="border-y">
                                             <th>Product Image</th>
@@ -180,65 +180,21 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="w-full">
+
                                         <tr style="height:10px"></tr>
 
-                                        <tr>
+                                        <tr *ngFor="let product of products1;let i=index">
                                             <td class="">
-                                                <a href="" class="img-container">
-                                                    <img src="../../../../../assets/profile/product_listing.png"
-                                                        class="shadow-4" />
+                                                <a class="img-container">
+                                                    <img [src]="product.images[0]" class="shadow-4" />
                                                 </a>
                                             </td>
-                                            <td>Chocolate</td>
-                                            <td>01-01-2024</td>
-                                            <td>Indica</td>
+                                            <td>{{product.name}}</td>
+                                            <td>{{product.created_at | date: 'dd-MM-yyyy'}}</td>
+                                            <td>{{product.strain_types.type}}</td>
                                             <td class="action">
-                                                <a routerLink="../editProduct">
-                                                    <svg width="36" height="35" viewBox="0 0 36 35" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M9.88624 25.2222H11.5864L23.2492 14.0896L21.549 12.4667L9.88624 23.5993V25.2222ZM7.5 27.5V22.6597L23.2492 7.65486C23.4878 7.44606 23.7515 7.28472 24.0402 7.17083C24.329 7.05694 24.632 7 24.9494 7C25.2676 7 25.5758 7.05694 25.8741 7.17083C26.1723 7.28472 26.4308 7.45556 26.6496 7.68333L28.2901 9.27778C28.5288 9.48657 28.703 9.73333 28.8127 10.0181C28.9225 10.3028 28.977 10.5875 28.9762 10.8722C28.9762 11.1759 28.9217 11.4656 28.8127 11.7412C28.7037 12.0168 28.5295 12.2681 28.2901 12.4951L12.5708 27.5H7.5ZM22.3842 13.2924L21.549 12.4667L23.2492 14.0896L22.3842 13.2924Z"
-                                                            fill="#3A5C41" />
-                                                    </svg>
-
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="">
-                                                <a href="" class="img-container">
-                                                    <img src="../../../../../assets/profile/product_listing.png"
-                                                        class="shadow-4" />
-                                                </a>
-                                            </td>
-                                            <td>Chocolate</td>
-                                            <td>01-01-2024</td>
-                                            <td>Indica</td>
-                                            <td class="action">
-                                                <a routerLink="../editProduct">
-                                                    <svg width="36" height="35" viewBox="0 0 36 35" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M9.88624 25.2222H11.5864L23.2492 14.0896L21.549 12.4667L9.88624 23.5993V25.2222ZM7.5 27.5V22.6597L23.2492 7.65486C23.4878 7.44606 23.7515 7.28472 24.0402 7.17083C24.329 7.05694 24.632 7 24.9494 7C25.2676 7 25.5758 7.05694 25.8741 7.17083C26.1723 7.28472 26.4308 7.45556 26.6496 7.68333L28.2901 9.27778C28.5288 9.48657 28.703 9.73333 28.8127 10.0181C28.9225 10.3028 28.977 10.5875 28.9762 10.8722C28.9762 11.1759 28.9217 11.4656 28.8127 11.7412C28.7037 12.0168 28.5295 12.2681 28.2901 12.4951L12.5708 27.5H7.5ZM22.3842 13.2924L21.549 12.4667L23.2492 14.0896L22.3842 13.2924Z"
-                                                            fill="#3A5C41" />
-                                                    </svg>
-
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="">
-                                                <a href="" class="img-container">
-                                                    <img src="../../../../../assets/profile/product_listing.png"
-                                                        class="shadow-4" />
-                                                </a>
-                                            </td>
-                                            <td>Chocolate</td>
-                                            <td>01-01-2024</td>
-                                            <td>Indica</td>
-                                            <td class="action">
-                                                <a routerLink="../editProduct">
+                                                <a [routerLink]="['../editProduct',product.id]">
                                                     <svg width="36" height="35" viewBox="0 0 36 35" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -251,13 +207,27 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div class="min-height-[400px]" *ngIf="!products1.length">
+                                    <div class="flex flex-col items-center justify-center">
+                                        <div class="img-container"><img
+                                                src="../../../../../assets/profile/not_products.png"
+                                                alt="Empty product"></div>
+                                        <div
+                                            class="emply-title text-[#262626] text-[15px] sm:text-[20px] leading-7 font-custom">
+                                            No Recent Listing</div>
+                                        <div
+                                            class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
+                                            Add some products
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="pt-6 flex justify-center">
-                            <button routerLink="/profile/recentlisting"
+                            <button routerLink="/profile/recentlisting"*ngIf="products1.length "
                                 class="font-lg view-more cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
                                 More
-                        </button>
+                            </button>
                         </div>
                     </div>
                     <!-- //this is for mobile view -->
@@ -269,7 +239,7 @@
                                 </h1>
                             </div>
                             <div class="">
-                                <a routerLink="/profile/recentlisting"
+                                <a routerLink="/profile/recentlisting"*ngIf="products1.length" 
                                     class="font-lg view-more cursor-pointer leading-4 font-medium  text-primary rounded-lg pb-2 pt-0 px-3">View
                                     More</a>
                             </div>
@@ -411,6 +381,20 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="min-height-[400px]" *ngIf="false">
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="img-container"><img
+                                        src="../../../../../assets/profile/not_products.png"
+                                        alt="Empty product"></div>
+                                <div
+                                    class="emply-title text-[#262626] text-[15px] sm:text-[20px] leading-7 font-custom">
+                                    No Subscribe</div>
+                                <div
+                                    class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
+                                    Subscribe your favorite cannabis shop!
+                                </div>
+                            </div>
+                        </div>
                         <div class="hidden sm:block">
                             <div class="pt-6 flex justify-center">
                                 <button routerLink="../subscribed-listing"

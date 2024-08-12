@@ -15,24 +15,18 @@ export class ProductListingComponent implements OnInit {
   products: IProduct[] = [];
 
   strainTypes: any[] = [];
-  selectedStrainType = { id: '', type: 'Indica' };
 
   categories: any[] = [];
-  selectedCategory = { id: '', name: 'Edible' };
 
   subCategories: any[] = [{
     id: '', name: 'Sub Category'
   }];
 
-  selectedSubCategory = { id: '', name: 'Chocolate' };
 
   thcRanges: any[] = [];
-  selectedThcRange = { id: '', range: '20 - 30%' };
 
-
-  sortOrder: any = { name: 'Newest (23)', code: 'Newest (23)' };
-  sortOrderOpt: any[] = [{ name: 'Newest (23)', code: 'Newest (23)' }, { name: 'Oldest', code: 'Oldest' }];
-  showSortOptions: boolean = false;
+  sortOrder: any = { name: 'Newest', code: 'Newest' };
+  sortOrderOpt: any[] = [{ name: 'Newest', code: 'Newest' }, { name: 'Oldest', code: 'Oldest' }];
 
   params!: any;
   filterform!: FormGroup;
@@ -162,6 +156,7 @@ export class ProductListingComponent implements OnInit {
         this.products = response.products;
         console.log(this.products);
         this.loadingForProduct = false;
+        this.sortByAscendingAndDeceding({code:'Newest'});
 
       }, error: (err) => {
         console.log(err);
@@ -178,14 +173,16 @@ export class ProductListingComponent implements OnInit {
     this.router.navigate(['/products'], { queryParams: this.params });
   }
 
-  toggleSortOrder() {
-    this.showSortOptions = !this.showSortOptions;
-  }
+  sortByAscendingAndDeceding(value:any) {
+    console.log(value);
+    if(value.code!='Newest'){
 
-  setSortOrder(order: string) {
-    this.sortOrder = order;
-    this.showSortOptions = false;
-  }
+      this.products.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+    }
+    else{
+      this.products.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
+    }
+  }
 
 }

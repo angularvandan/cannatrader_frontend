@@ -162,7 +162,7 @@ export class EditProfileComponent implements OnInit {
 
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      console.log('Selected file:', file);
+      // console.log('Selected file:', file);
 
       this.profileForm.patchValue({
         avatar: file

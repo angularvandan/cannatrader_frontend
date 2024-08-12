@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/shared/models/product';
+import { IProduct, Product } from 'src/app/shared/models/product';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
 import { Router } from '@angular/router';
 import { UserDetails } from 'src/app/shared/models/user';
 import { ToastrService } from 'ngx-toastr';
+import { ProductService } from 'src/app/shared/services/product.service';
 
 
 
@@ -101,6 +102,7 @@ export class ProfileDetailsComponent implements OnInit {
     },
 
   ];
+  products1: IProduct[] = [];
 
   user: UserDetails = {
     avatar: '',
@@ -118,9 +120,11 @@ export class ProfileDetailsComponent implements OnInit {
   ];
 
   loadingUserImage:boolean=true;
+  recentProductStatus:boolean=false;
 
 
-  constructor(private router: Router, private tostr: ToastrService, private userService: UserService, private confirmationService: ConfirmationService, private messageService: MessageService) { }
+  constructor(private router: Router, private tostr: ToastrService, private userService: UserService, private confirmationService: ConfirmationService, private messageService: MessageService,private productService:ProductService) { }
+
   ngOnInit(): void {
     this.loadingUserImage=true;
     this.userService.getUserProfile().subscribe({
@@ -131,6 +135,21 @@ export class ProfileDetailsComponent implements OnInit {
       }, error: (err) => {
         console.log(err);
         this.loadingUserImage=false;
+      }
+    });
+    //for recent listing products
+    this.productService.getRecentListingProducts({limit:3,page:1}).subscribe({
+      next:(response:any)=>{
+        
+        //for newest
+        console.log(response.products);
+        this.products1=response.products.sort((a:any, b:any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        this.recentProductStatus=true;
+
+        console.log(this.products1);
+
+      },error:(err)=>{
+        this.recentProductStatus=false;
       }
     })
   }

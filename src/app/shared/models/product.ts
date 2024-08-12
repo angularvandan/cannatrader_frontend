@@ -48,6 +48,7 @@ export interface IProduct {
     trim_methods: TrimMethod;
     updated_at: string;
     user_id: string;
+
   }
   
   export interface Category {

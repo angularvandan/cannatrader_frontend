@@ -43,11 +43,27 @@ export class ProductService {
       }
     });
 
-    return this.http.get(`${this.baseUrl}/api/product/get-products`, {params:queryParams});
+    return this.http.get(`${this.baseUrl}/api/product/get-products`, { params: queryParams });
   }
 
-  getRecentListingProducts(){
-    
+  getRecentListingProducts(params: any) {
+
+    let queryParams = new HttpParams();
+
+    Object.keys(params).forEach((key) => {
+      if (params[key] !== null && params[key] !== '') {
+        queryParams = queryParams.append(key, params[key]);
+      }
+    });
+    return this.http.get(`${this.baseUrl}/api/product/get-recent-listing`, { params: queryParams });
+  }
+
+  getProductById(id: string) {
+    return this.http.post(`${this.baseUrl}/api/product/${id}`, {
+      lng: "1.8674654",
+      lat: "1.68465",
+      userId: "61e5e90c-6b8a-4053-86ad-6d8b291f674d"
+    });
   }
 
 }

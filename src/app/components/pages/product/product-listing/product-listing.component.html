@@ -1,6 +1,9 @@
 <div class="wish-list-container p-4 flex items-center justify-center">
     <!-- Filters -->
-    <div class="max-w-full">
+    <div class="flex justify-center items-center mb-6" *ngIf="loadingForProduct">
+        <i class="pi pi-spin pi-spinner text-[#3A5C41]" style="font-size: 2rem"></i>
+    </div>
+    <div class=""*ngIf="!loadingForProduct">
 
         <div class="bg-gray-100 sm:py-8">
             <nav class="flex sm:mb-8 mb-2" aria-label="Breadcrumb">
@@ -17,7 +20,7 @@
                     </li>
                 </ol>
             </nav>
-            <div class="flex-col lg:flex-row flex items-start sm:items-center justify-between mb-4 space-y-2">
+            <div class=" w-full flex-col lg:flex-row flex items-start sm:items-center justify-between mb-4 space-y-2">
                 <form [formGroup]="filterform" >
                     <div class="flex flex-wrap justify-center gap-4">
                         <p-dropdown [options]="strainTypes" optionLabel="type"placeholder="Strain Type"formControlName="strain_type"
@@ -40,24 +43,21 @@
                         </svg>
                     </div>
 
-                    <p-dropdown [options]="sortOrderOpt" [(ngModel)]="sortOrder" optionLabel="name"
+                    <p-dropdown [options]="sortOrderOpt" [(ngModel)]="sortOrder"(onChange)="sortByAscendingAndDeceding(sortOrder)" optionLabel="name"
                         [style]="{ 'width': 'auto' }" class="custom-new-old-dropdown"></p-dropdown>
                 </div>
             </div>
         </div>
 
         <!-- Product Cards -->
-        <div class="flex justify-center items-center mb-6" *ngIf="loadingForProduct">
-            <i class="pi pi-spin pi-spinner text-[#3A5C41]" style="font-size: 2rem"></i>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" *ngIf="!loadingForProduct">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" >
             <div *ngFor="let product of products" routerLink="productDetails"
                 class="max-w-sm cursor-pointer mx-auto bg-white rounded-lg justify-around overflow-hidden flex">
                 <div class="relative">
                     <img [src]="product.images[0]" alt="Canopy Growth"loadig="lazy"style="border-radius:8px;"
                         class=" h-36 md:h-40 lg:h-44 w-28 md:w-32 lg:w-36 object-cover">
                     <div class="absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-lg posted">Posted:
-                        {{product.created_at | date: 'EEEE'}}
+                        {{product.created_at | date: 'dd-MM-yyyy'}}
                     </div>
                 </div>
                 <div class="py-4 px-5">

@@ -521,6 +521,7 @@ app-product-details {
 
 app-product-listing {
 
+
     .custom-last-dropdown {
         .p-dropdown {
             background: #D1DACF;
@@ -536,6 +537,7 @@ app-product-listing {
             color: $bg-primary;
             margin-left: 10px;
         }
+       
     }
 
     .custom-new-old-dropdown {
@@ -603,6 +605,10 @@ app-product-listing {
     .p-dropdown:not(.p-disabled):hover {
         border-color: $bg-primary;
         box-shadow: rgba(245, 245, 245, 1);
+    }
+    .p-dropdown:not(.p-disabled).p-focus{
+        box-shadow: unset;
+        border-color: unset;
     }
 
     .p-dropdown .p-dropdown-trigger {

@@ -1,16 +1,23 @@
-<div class="wish-list-container w-screen p-4 flex items-center justify-center">
+<div class="wish-list-container p-4 flex items-center justify-center">
     <!-- Filters -->
     <div class="max-w-full">
 
-        <div class="bg-gray-100 py-8 flex">
-            <div routerLink="../profile-details" class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
-                <i class="pi pi-arrow-left text-primary"></i>
+        <div class="bg-gray-100 py-8 flex justify-start">
+            <div class="w-[40%] flex items-center">
+                <div routerLink="../profile-details"
+                    class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                    <i class="pi pi-arrow-left text-primary"></i>
+                </div>
+                <a
+                    class=" hidden cursor-pointer text-primary md:inline-flex text-[22px] font-medium text-gray-800 md:ml-2">
+                    <span routerLink="/profile/profile-details">Profile</span> / Recentlisting
+                </a>
             </div>
-            <div class="flex justify-center mb-1 sm:mb-8 w-full" aria-label="Breadcrumb">
+            <div class="flex justify-start mb-1  w-[60%]" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 ">
                     <li class="inline-flex items-center">
-                        <a 
-                            class="m text-primary inline-flex text-[22px] font-medium text-gray-800 hover:underline md:ml-2">
+                        <a
+                            class="m text-primary inline-flex text-[22px] sm:text-[32px] font-medium text-gray-800 hover:underline md:ml-2">
                             Recent Listing
                         </a>
                     </li>
@@ -50,7 +57,8 @@
             </div>
         </div>
         <div class="flex justify-center mt-8">
-            <button class="bg-[#D1DACF] text-primary text-lg leading-5 font-semibold py-2 px-4 rounded-lg">View More</button>
+            <button class="bg-[#D1DACF] text-primary text-lg leading-5 font-semibold py-2 px-4 rounded-lg">View
+                More</button>
         </div>
     </div>
     <!-- View More Button -->
