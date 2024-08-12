@@ -239,6 +239,9 @@ app-home {
         .p-button:hover {
             background-color: $bg-primary;
         }
+        .p-button:focus{
+            box-shadow: unset;
+        }
     }
 
     .filters {

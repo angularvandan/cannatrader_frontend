@@ -1,4 +1,4 @@
-<div class="wish-list-container w-screen p-4 flex items-center justify-center">
+<div class="wish-list-container p-4 flex items-center justify-center">
     <!-- Filters -->
     <div class="max-w-full">
 
@@ -48,7 +48,7 @@
 
         <!-- Product Cards -->
         <div class="flex justify-center items-center mb-6" *ngIf="loadingForProduct">
-            <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+            <i class="pi pi-spin pi-spinner text-[#3A5C41]" style="font-size: 2rem"></i>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" *ngIf="!loadingForProduct">
             <div *ngFor="let product of products" routerLink="productDetails"

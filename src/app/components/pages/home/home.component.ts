@@ -79,15 +79,6 @@ export class HomeComponent implements OnInit {
     }
     console.log(payload);
     this.router.navigate(['/products'], { queryParams: payload });
-    // this.productService.getAllProducts(payload).subscribe({
-    //   next: (response) => {
-    //     console.log(response);
-    //     this.router.navigate(['/products']);
-    //   },
-    //   error: (err) => {
-    //     console.log(err.error.error.message);
-    //   }
-    // });
 
   }
 
