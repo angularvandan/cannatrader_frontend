@@ -1,6 +1,6 @@
 <div class="profile-details-container w-full ">
     <div class="heading">
-        <h1 class="text-center font-semibold text-[32px] leading-10 text-primary mt-8">Profile</h1>
+        <h1 class="text-center font-semibold text-[32px] leading-10 text-primary ">Profile</h1>
     </div>
     <div class="card flex justify-content-center">
         <p-toast position="bottom-center"></p-toast>
@@ -184,7 +184,7 @@
 
                                         <tr style="height:10px"></tr>
 
-                                        <tr *ngFor="let product of products1;let i=index">
+                                        <tr *ngFor="let product of products;let i=index">
                                             <td class="">
                                                 <a class="img-container">
                                                     <img [src]="product.images[0]" class="shadow-4" />
@@ -207,7 +207,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="min-height-[400px]" *ngIf="!products1.length">
+                                <div class="min-height-[400px]" *ngIf="!products.length">
                                     <div class="flex flex-col items-center justify-center">
                                         <div class="img-container"><img
                                                 src="../../../../../assets/profile/not_products.png"
@@ -224,7 +224,7 @@
                             </div>
                         </div>
                         <div class="pt-6 flex justify-center">
-                            <button routerLink="/profile/recentlisting"*ngIf="products1.length "
+                            <button routerLink="/profile/recentlisting"*ngIf="products.length "
                                 class="font-lg view-more cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
                                 More
                             </button>
@@ -239,7 +239,7 @@
                                 </h1>
                             </div>
                             <div class="">
-                                <a routerLink="/profile/recentlisting"*ngIf="products1.length" 
+                                <a routerLink="/profile/recentlisting"*ngIf="products.length" 
                                     class="font-lg view-more cursor-pointer leading-4 font-medium  text-primary rounded-lg pb-2 pt-0 px-3">View
                                     More</a>
                             </div>
@@ -249,30 +249,29 @@
                                 <div *ngIf="i<3" routerLink="productDetails"
                                     class="max-w-sm cursor-pointer mx-auto bg-white rounded-lg justify-around overflow-hidden flex">
                                     <div class="relative">
-                                        <img [src]="product.image" alt="Canopy Growth" class="w-full h-28 object-cover">
+                                        <img [src]="product.images[0]" alt="Canopy Growth" class="h-28  w-24 object-cover"style="border-radius:8px;">
                                         <div
                                             class="absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-lg posted">
                                             Posted:
-                                            {{product.posted}}
+                                            {{product.created_at | date: 'dd-MM-yyyy'}}
                                         </div>
                                     </div>
                                     <div class="px-5">
                                         <div class="flex h-full justify-between items-center">
                                             <div class="flex flex-col justify-center gap-1 h-full">
                                                 <h2 class="font-bold text-base text-gray-800">{{product.name}}</h2>
-                                                <p class="text-xs text-help font-normal">{{product.flavour}}</p>
                                                 <p class="text-xs text-[#262626] font-normal">Strain Type: <span
-                                                        class="text-side">{{product.strainType}}</span>
+                                                        class="text-side">{{product.strain_types.type}}</span>
                                                 </p>
                                                 <p class="text-xs text-[#262626] font-normal">THC Range: <span
-                                                        class="text-side">{{product.thcRange}}</span>
+                                                        class="text-side">{{product.thc_ranges.range}}</span>
                                                 </p>
                                                 <p class="text-xs text-[#262626] flex items-center">
                                                     <i class="pi pi-map-marker mr-1 text-side font-bold"></i>
-                                                    {{product.location}}
+                                                    pune
                                                 </p>
                                             </div>
-                                            <div class="flex items-center" routerLink="/profile/editProduct">
+                                            <div class="flex items-center" [routerLink]="['../editProduct',product.id]">
                                                 <svg width="30" height="30" viewBox="0 0 33 34" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <circle cx="16.5" cy="17" r="16.5" transform="rotate(180 16.5 17)"

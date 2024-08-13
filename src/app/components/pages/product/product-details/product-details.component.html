@@ -1,15 +1,19 @@
 <!-- app.component.html -->
-<div class="max-w-screen-xl mx-auto p-4">
+<div class="flex justify-center items-center my-6" *ngIf="loading">
+    <i class="pi pi-spin pi-spinner text-[#3A5C41]" style="font-size: 2rem"></i>
+</div>
+
+<div class="max-w-screen-xl mx-auto p-4"*ngIf="!loading">
     <!-- Breadcrumb -->
     <nav class="flex mb-8" aria-label="Breadcrumb">
         <ol class="lg:inline-flex flex w-full items-center space-x-1 ">
             <li class="flex w-full lg:inline-flex items-center justify-between lg:justify-normal">
-                <div routerLink="../"
+                <div routerLink="/products"
                     class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                     <i class="pi pi-arrow-left text-primary"></i>
                 </div>
                 <a class="m text-primary hidden lg:inline-flex text-[22px] font-medium hover:underline md:ml-2">
-                    Home / Productslisting / Canopygrowth
+                    Home / Productslisting / {{product.name}}
                 </a>
                 <div class="flex gap-4 lg:hidden">
                     <div routerLink="../chats"
@@ -33,17 +37,14 @@
     <div class="flex flex-col lg:flex-row mt-4">
         <!-- Image Section -->
         <div class="flex-1">
-            <img src="../../../../../assets/product/prod-detail.jpg" alt="Product Image"
+            <img src="{{product.images[0]}}" alt="Product Image"
                 class="w-full max-h-[650px] h-full rounded-lg">
             <div class="grid grid-cols-4 lg:grid-cols-4 justify-between mt-8">
-                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 1"
+                <ng-container *ngFor="let image of product.images">
+                    <img src="{{image}}" alt="Thumbnail 1"
                     class="lg:w-32 lg:h-28 w-20 h-20 rounded-lg">
-                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 2"
-                    class="lg:w-32 lg:h-28 w-20 h-20 rounded-lg">
-                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 3"
-                    class="lg:w-32 lg:h-28 w-20 h-20 rounded-lg">
-                <img src="../../../../../assets/product/prod-detail.jpg" alt="Thumbnail 3"
-                    class="lg:w-32 lg:h-28 w-20 h-20 rounded-lg">
+                
+                </ng-container>
             </div>
             <div class="p-6 rounded-lg w-full mx-auto mt-24 lg:block hidden">
                 <h2 class="text-[16px] lg:text-[32px] font-semibold mb-4">Contact Details</h2>
@@ -67,8 +68,8 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[20px]">Phone</div>
-                            <div class="text-lg font-semibold text-[20px] text-primary">xxxx-xxxx</div>
-                            <a href="#" class="text-inner hover:underline">Click here to enquire</a>
+                            <a href="{{user.phone_no}}"class="text-lg font-semibold text-[20px] text-primary mr-2">xxxx-xxxx</a>
+                            <a class="text-inner hover:underline">Click here to enquire</a>
                         </div>
                     </div>
                     <div class="flex items-center">
@@ -79,7 +80,7 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[20px]">E-Mail</div>
-                            <div class="text-lg font-semibold text-[24px]">cannabisshop@gmail.com</div>
+                            <div class="text-lg font-semibold text-[24px]">{{user.email}}</div>
                         </div>
                     </div>
                     <div class="flex items-center">
@@ -90,17 +91,17 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[20px]">Uploaded Date</div>
-                            <div class="text-lg font-semibold text-[24px]">01-01-2024</div>
+                            <div class="text-lg font-semibold text-[24px]">{{user.createdAt | date:'dd-MM-yyyy'}}</div>
                         </div>
                     </div>
                     <div class="flex items-center">
                         <div class="rounded-full p-2">
-                            <img src="../../../../../assets/product/profile.jpg" alt="Owner Image"
+                            <img src="{{user.avatar}}" alt="Owner Image"
                                 class="h-12 w-12 object-cover rounded-full">
                         </div>
                         <div class="ml-4">
                             <div class="text-gray-600">Owner</div>
-                            <div class="text-lg font-semibold">Shepardson</div>
+                            <div class="text-lg font-semibold">{{user.name}}</div>
                         </div>
                     </div>
                 </div>
@@ -110,7 +111,7 @@
         <!-- Details Section -->
         <div class="flex-1 lg:ml-8 mt-4 lg:mt-0 pt-4">
             <div class="flex pb-2 items-center justify-between">
-                <h1 class="text-5xl font-bold">Canopy Growth</h1>
+                <h1 class="text-5xl font-bold">{{product.name}}</h1>
                 <div class="lg:flex hidden gap-4">
                     <div routerLink="../chats"
                         class=" cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
@@ -131,7 +132,7 @@
                 <div class="flex gap-2 items-center">
                     <p-rating [(ngModel)]="value" [readonly]="true" [cancel]="false"></p-rating>
                 </div>
-                <span class="ml-2 text-gray-600">Ratings (1.5k)</span>
+                <span class="ml-2 text-gray-600">Ratings {{product.rating}}</span>
             </div>
 
             <button (click)="toggleBtn()" *ngIf="btn"
@@ -143,7 +144,7 @@
 
             <h2 class="text-xl font-semibold pt-10">Description</h2>
 
-            <p class="mt-4 text-help">{{ showAll ? paragraph : (paragraph | slice:0:charLimit) + '...' }}
+            <p class="mt-4 text-help">{{ showAll ? product.description : (product.description | slice:0:charLimit) + '...' }}
                 <span class="text-[#698AFD] cursor-pointer"
                     (click)="toggleViewMore()">{{ showAll ? 'View Less' : 'View More' }}</span>
             </p>
@@ -155,112 +156,112 @@
                 <div class="grid grid-cols-1 gap-4 mt-4 text-gray-700">
                     <div class="font-semibold w-full border-b leading-10">
                         Category: <span class=" text-help float-right">
-                            Edible
+                            {{product.categories.name}}
                         </span>
                     </div><div class="font-semibold w-full border-b leading-10">
                         Sub Category: <span class=" text-help float-right">
-                            Chocolate
+                            {{product.subCategory.name}}
                         </span>
                     </div>
                     <div class="font-semibold w-full border-b leading-10">
                         Strain Type: <span class=" text-help float-right">
-                            Indica
+                            {{product.strain_types.type}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         Lineage:
                         <span class=" text-help float-right">
-                            Indica
+                            {{product.lineage}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         Harvest Date:
                         <span class=" text-help float-right ">
-                            01-01-2024
+                            {{product.harvest_date | date:'dd-MM-yyyy'}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         THC Total:
                         <span class=" text-help float-right ">
-                            22%
+                            {{product.thc_total}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         CBD:
                         <span class=" text-help float-right ">
-                            3%
+                            {{product.cbd}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         Terpene:
                         <span class=" text-help float-right ">
-                            2.50%
+                            {{product.terpene}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         Available:
                         <span class=" text-help float-right ">
-                            500 grams
+                            {{product.available}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         Grade:
                         <span class=" text-help float-right ">
-                            A-AAAA
+                            {{product.grade}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         Growth Method:
                         <span class=" text-help float-right ">
-                            Green House
+                            {{product.growth_methods.method}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         Grow Media:
                         <span class=" text-help float-right ">
-                            Hydroponic
+                            {{product.grow_medias.media}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         Dry Method:
                         <span class=" text-help float-right ">
-                            Hang
+                            {{product.dry_methods.method}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         Trim Method:
                         <span class=" text-help float-right ">
-                            Machine-hand
+                            {{product.trim_methods.method}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         Irradiated:
                         <span class=" text-help float-right ">
-                            Yes
+                            {{product.irradiated?'Yes':'No'}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         Bud Size:
                         <span class=" text-help float-right ">
-                            Medium
+                            {{product.bud_size}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         Tops:
                         <span class=" text-help float-right ">
-                            20%
+                            {{product.tops}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10 border-b">
                         Mids:
                         <span class=" text-help float-right ">
-                            50%
+                            {{product.mids}}
                         </span>
                     </div>
                     <div class="font-semibold w-full leading-10">
                         Lowers:
                         <span class=" text-help float-right ">
-                            30%
+                            {{product.lowers}}
                         </span>
                     </div>
                 </div>
@@ -304,7 +305,7 @@
                     <div class="ml-4">
                         <div class="text-inner text-[10px] lg:text-[20px]">Phone</div>
                         <div class="text-lg lg:font-semibold text-[12px] lg:text-[20px] text-primary">xxxx-xxxx</div>
-                        <a href="#" class="text-inner hover:underline text-[10px] lg:text-[20px]">Click here to
+                        <a class="text-inner hover:underline text-[10px] lg:text-[20px]">Click here to
                             enquire</a>
                     </div>
                 </div>
@@ -316,7 +317,7 @@
                     </div>
                     <div class="ml-4">
                         <div class="text-inner text-[10px] lg:text-[20px]">E-Mail</div>
-                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">cannabisshop@gmail.com</div>
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">{{user.email}}</div>
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -327,17 +328,17 @@
                     </div>
                     <div class="ml-4">
                         <div class="text-inner text-[10px] lg:text-[20px]">Uploaded Date</div>
-                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">01-01-2024</div>
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">{{user.createdAt | date: 'dd-MM-yyyy'}}</div>
                     </div>
                 </div>
                 <div class="flex items-center">
                     <div class="rounded-full p-2">
-                        <img src="../../../../../assets/product/profile.jpg" alt="Owner Image"
+                        <img [src]="user.avatar" alt="Owner Image"
                             class="h-12 w-12 object-cover rounded-full">
                     </div>
                     <div class="ml-4">
                         <div class="text-gray-600 text-[10px] lg:text-[20px]">Owner</div>
-                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">Shepardson</div>
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">{{user.name}}</div>
                     </div>
                 </div>
             </div>
@@ -353,7 +354,7 @@
                     <i style="font-size: 1.5rem;" class="pi pi-file place-content-center font-bold mr-4 text-2xl"></i>
                     COA Report.pdf
                 </span>
-                <a target="_blank" href="../../../../../assets/6daysplit.pdf"
+                <a target="_blank" [href]="product.coa_document"
                     class="py-2 px-4 rounded font-medium text-[12px] lg:text-[20px]">View
                     Report</a>
             </div>

@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin } from 'rxjs';
+import { IProduct } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +65,12 @@ export class ProductService {
       lat: "1.68465",
       userId: "61e5e90c-6b8a-4053-86ad-6d8b291f674d"
     });
+  }
+  editProductById(id:string,body:any){
+    return this.http.put(`${this.baseUrl}/api/product/${id}`,body);
+  }
+  deleteProductById(id:string){
+    return this.http.delete(`${this.baseUrl}/api/product/${id}`);
   }
 
 }

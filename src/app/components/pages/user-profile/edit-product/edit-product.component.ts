@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
 import { IProduct } from 'src/app/shared/models/product';
@@ -40,23 +40,23 @@ export class EditProductComponent {
 
   ]
 
-  subCategories = [
+  subCategories: any[] = [{
+    id: '', name: 'Sub Category'
+  }];
 
-  ];
-
-  selectedLicenseFile: File | null = null;
-  selectedImageFiles: File[] = [];
-
+  selectedImageFiles: File[]  = [];
   imagePreviews: string[] = [];
   selectedFile: File | null = null;
+
   loading: boolean = false;
+  loadingForPatchValue:boolean=false;
   productId: string | null = '';
 
   productForm!: FormGroup;
   product!: IProduct;
 
 
-  constructor(private confirmationService: ConfirmationService, private messageService: MessageService, private productService: ProductService, private tostr: ToastrService, private fb: FormBuilder, private activatedRoute: ActivatedRoute) { }
+  constructor(private confirmationService: ConfirmationService, private messageService: MessageService, private productService: ProductService, private tostr: ToastrService, private fb: FormBuilder, private activatedRoute: ActivatedRoute,private router:Router) { }
 
   ngOnInit(): void {
 
@@ -101,13 +101,13 @@ export class EditProductComponent {
     this.productForm.get('category')?.valueChanges.subscribe(categoryId => {
       console.log(categoryId);
       if (categoryId.id) {
-        this.getSubCategoryById(categoryId.id);
+        this.getSubCategoryById(categoryId?.id || '');
       }
-      
+
     });
 
   }
-  getAllDropDownValue(){
+  getAllDropDownValue() {
     this.productService.getAllValueForAddProduct().subscribe((response: any) => {
       console.log(response);
       this.categories = response[0].data;
@@ -121,19 +121,41 @@ export class EditProductComponent {
 
       //when all sub category and category is loaded then patch
       this.patchValueOfProduct();
+      this.loadingForPatchValue=false;
 
     }, (err: any) => {
-
+      console.log(err);
+      this.loadingForPatchValue=false;
     });
   }
 
   getSubCategoryById(id: any) {
-    this.productService.getSubCategory(id).subscribe((response: any) => {
-      // console.log(response);
-      this.subCategories = response.data;
-    })
+    if (id != '') {
+      this.productService.getSubCategory(id).subscribe((response: any) => {
+        console.log(response.data);
+        //this is added when category has no sub category;
+        this.subCategories = [{
+          id: '', name: 'Sub Category'
+        }];
+        this.subCategories = this.subCategories.concat(response.data);
+
+      }, (err: any) => {
+        //when sub category not found
+        this.productForm.patchValue({
+          sub_category: {
+            id: '', name: 'Sub Category'
+          }
+        });
+        this.subCategories = [{
+          id: '', name: 'Sub Category'
+        }];
+      })
+    }
   }
   getProductByActivatedRoute() {
+    //this loading status will be false in patch value data;
+    this.loadingForPatchValue=true;
+
     if (this.productId != '' && this.productId != null) {
       this.productService.getProductById(this.productId).subscribe({
         next: (response: any) => {
@@ -149,80 +171,90 @@ export class EditProductComponent {
   patchValueOfProduct() {
     this.productForm.patchValue({
       name: this.product.name,
-      strain_type: this.strainTypes.find((item: any) => {
-        if (item.id == this.product.strain_type) {
-          return item;
-        }
-      }),
-      thc_range: this.thcRange.find((item: any) => {
-        if (item.id == this.product.thc_range) {
-          return item;
-        }
-      }),
-      category: this.categories.find((item: any) => {
-        if (item.id == this.product.category) {
-          return item;
-        }
-      }),
+      strain_type: this.product.strain_types,
+      thc_range: this.product.thc_ranges,
+      category: this.product.categories,
+      sub_category: { ...this.product.subCategory, category: this.product.categories },
       lineage: this.product.lineage,
       thc_total: this.product.thc_total,
-      harvest_date: this.product.harvest_date,
+      harvest_date: new Date(this.product.harvest_date),
       terpene: this.product.terpene,
       cbd: this.product.cbd,
       grade: this.product.grade,
       available: this.product.available,
-      grow_media: this.growMedia.find((item: any) => {
-        if (item.id == this.product.grow_media) {
-          return item;
-        }
-      }),
-      growth_method: this.growthMethod.find((item: any) => {
-        if (item.id == this.product.growth_method) {
-          return item;
-        }
-      }),
-      irradiated: this.product.irradiated,
-      dry_method: this.dryMethod.find((item: any) => {
-        if (item.id == this.product.dry_method) {
-          return item;
-        }
-      }),
+      grow_media: this.product.grow_medias,
+      growth_method: this.product.growth_methods,
+      irradiated: this.product.irradiated ? 'yes' : 'no',
+      dry_method: this.product.dry_methods,
       bud_size: this.product.bud_size,
-      trim_method: this.trimMethod.find((item: any) => {
-        if (item.id == this.product.trim_method) {
-          return item;
-        }
-      }),
+      trim_method: this.product.trim_methods,
       tops: this.product.tops,
       mids: this.product.mids,
       description: this.product.description,
       lowers: this.product.lowers,
       latitude: this.product.location.coordinates[0],
       longitude: this.product.location.coordinates[0],
-      pdf:this.product.coa_document,
-      images:this.product.images
 
     });
-    this.imagePreviews=this.product.images;
+    this.imagePreviews = [...this.product.images];
+    console.log(this.imagePreviews);
     // this.selectedFile=this.product.coa_document;
     this.preloadFile();
   }
-  preloadFile() {
+  async preloadFile() {
     this.selectedFile = null;
     const blob = new Blob(['file content'], { type: 'application/pdf' });
     const file = new File([blob], this.product.coa_document, { type: 'application/pdf' });
+
     this.productForm.patchValue({
       pdf: file
     });
-    this.selectedFile=file;
-  }
+    this.selectedFile = {...file,name:'COA document'};
 
+    // below code for images convert into  file;
+    this.selectedImageFiles=[];
+    this.selectedImageFiles = this.product.images.map((imageUrl: string) => {
+      // Extract the file extension to determine the MIME type
+      const extension = imageUrl.split('.').pop()?.toLowerCase();
+    
+      // Default MIME type to handle unknown extensions
+      let mimeType = 'image/jpeg'; 
+    
+      if (extension === 'png') {
+        mimeType = 'image/png';
+      } else if (extension === 'gif') {
+        mimeType = 'image/gif';
+      } else if (extension === 'bmp') {
+        mimeType = 'image/bmp';
+      } else if (extension === 'svg') {
+        mimeType = 'image/svg+xml';
+      } else if (extension === 'webp') {
+        mimeType = 'image/webp';
+      }
+      
+      // Create a blob and file with the determined MIME type
+      const blob = new Blob(['file content'], { type: mimeType });
+      return new File([blob], imageUrl.split('/').pop() || 'default-file-name', { type: mimeType });
+    });
+    this.productForm.patchValue({
+      images:this.selectedImageFiles
+    })
+  }
 
   confirm1() {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete the product details?',
       accept: () => {
-        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+        if(this.productId){
+          this.productService.deleteProductById(this.productId).subscribe({
+            next:()=>{
+              // this.router.navigate(['/profile/profile-details']);
+              this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+            },error:()=>{
+              this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+            }
+          });
+        }
       },
       reject: (type: any) => {
         switch (type) {
@@ -241,6 +273,7 @@ export class EditProductComponent {
   onImageSelected(event: any, type: string) {
     const files = event.target.files;
     if (type === 'images') {
+
       if (files.length + this.selectedImageFiles.length > 5) {
         alert('You can only upload a maximum of 5 images.');
         return;
@@ -258,7 +291,8 @@ export class EditProductComponent {
       //here patch the value of image
       this.productForm.patchValue({
         images: this.selectedImageFiles
-      })
+      });
+      console.log(this.selectedImageFiles);
     }
   }
 
@@ -294,17 +328,58 @@ export class EditProductComponent {
     }
   }
 
-  onSubmit(): void {
+  onSubmit() {
 
-    if(this.productForm.valid){
+    if (this.productForm.valid && this.productId != null) {
 
-      console.log(this.selectedLicenseFile);
-      console.log(this.selectedImageFiles);
       console.log(this.productForm);
+      this.loading = true;
+      //append data into formData
+      const formData = new FormData();
+
+      Object.keys(this.productForm.controls).forEach(key => {
+        const control = this.productForm.get(key);
+        if (key == 'pdf' || key == 'images') {
+          // console.log(control?.value);
+          for (let i = 0; i < control?.value.length; i++) {
+            formData.append(key, control?.value[i]);
+            // console.log(control?.value[i])
+          }
+          if (key == 'pdf') {
+            formData.append(key, control?.value);
+          }
+        } else if (key === 'harvest_date') {
+
+          const date = new Date(control?.value);
+          const formattedDate = date.toISOString().split('T')[0]; // Convert to yyyy-mm-dd format
+          formData.append(key, formattedDate);
+
+        } else if (typeof control?.value === 'object' && control.value !== null) {
+          formData.append(key, control.value.id);
+        } else {
+          formData.append(key, control?.value);
+        }
+      });
+      formData.delete('location');
+
+      this.productService.editProductById(this.productId, formData).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.loading = false;
+          this.tostr.success('Updated Successfully');
+          this.getProductByActivatedRoute();
+
+        }, error: (err) => {
+          console.log(err);
+          this.loading = false;
+          this.tostr.error(err.error.error.message);
+
+        }
+      });
+
     }
-    else{
+    else {
       this.productForm.markAllAsTouched();
-      console.log(this.productForm);
     }
   }
 }

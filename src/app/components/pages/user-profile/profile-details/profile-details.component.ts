@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct, Product } from 'src/app/shared/models/product';
+import { IProduct } from 'src/app/shared/models/product';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
 import { Router } from '@angular/router';
@@ -18,91 +18,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 })
 export class ProfileDetailsComponent implements OnInit {
 
-  products: Product[] = [
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-    {
-      name: 'Canopy Growth',
-      image: '../../../../assets/product/product.png',
-      strainType: 'Indica',
-      thcRange: '22%',
-      location: 'Ontario (5 Kilometer)',
-      posted: 'a Day ago',
-      flavour: 'chocolate'
-    },
-
-  ];
-  products1: IProduct[] = [];
+  products: IProduct[] = [];
 
   user: UserDetails = {
     avatar: '',
@@ -143,10 +59,10 @@ export class ProfileDetailsComponent implements OnInit {
         
         //for newest
         console.log(response.products);
-        this.products1=response.products.sort((a:any, b:any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        this.products=response.products.sort((a:any, b:any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
         this.recentProductStatus=true;
 
-        console.log(this.products1);
+        console.log(this.products);
 
       },error:(err)=>{
         this.recentProductStatus=false;

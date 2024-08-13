@@ -1,4 +1,4 @@
-<div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay">
+<div class="flex items-center justify-center bg-cover bg-center bg-gradient-overlay">
     <div class="max-w-3xl w-full pb-8">
         <div class="py-8">
             <nav class="flex justify-between items-center sm:mb-8" aria-label="Breadcrumb">
@@ -49,295 +49,10 @@
                 <!-- <p-button  icon="pi pi-check" label="Confirm"></p-button> -->
             </div>
         </div>
-        <!-- <form (ngSubmit)="onSubmit()">
-            <div>
-                <div class="input-container flex flex-col p-6 md:p-0">
-                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
-                        <div class="mt-6 w-full relative">
-                            <label for="name" class="block text-sm text-gray-700 font-custom">Product Name <span
-                                    class="text-red">*</span></label>
-                            <input required pInputText id="name" type="text" placeholder="Enter Product Name"
-                                class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.lotId" name="name">
-                        </div>
-                        <div class="mt-6 w-full relative">
-                            <label for="strainTypes" class="block text-sm text-gray-700 font-custom">Strain Types <span
-                                    class="text-red">*</span></label>
-                            <p-dropdown [required]="true" class="w-full" placeholder="Select strain type"
-                                [options]="strainTypes" [(ngModel)]="productDetails.selectedStrainType"
-                                optionLabel="name" name="strainTypes"></p-dropdown>
-                        </div>
-                    </div>
-                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
-                        <div class="mt-6 w-full relative">
-                            <label for="thcRange" class="block text-sm text-gray-700 font-custom">THC Range <span
-                                    class="text-red">*</span></label>
-                            <p-dropdown [required]="true" class="w-full" [options]="thcRange"
-                                [(ngModel)]="productDetails.thcRange" optionLabel="name" name="thcRange"></p-dropdown>
-                        </div>
-                        <div class="mt-6 w-full relative">
-                            <label for="categories" class="block text-sm text-gray-700 font-custom">Categories <span
-                                    class="text-red">*</span></label>
-                            <p-dropdown [required]="true" class="w-full" placeholder="Select category"
-                                [options]="categories" [(ngModel)]="productDetails.selectedCategory" optionLabel="name"
-                                name="categories"></p-dropdown>
-
-                        </div>
-                    </div>
-                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
-                        <div class="mt-6 w-full relative">
-                            <label for="lineage" class="block text-sm text-gray-700 font-custom">Lineage <span
-                                    class="text-red">*</span></label>
-                            <input required pInputText id="lineage" type="text" placeholder="Enter Lineage"
-                                class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.lineage" name="lineage">
-                        </div>
-                        <div class="mt-6 w-full relative">
-                            <label for="subCategory" class="block text-sm text-gray-700 font-custom">Sub-Category <span
-                                    class="text-red">*</span></label>
-                            <p-dropdown [required]="true" class="w-full" placeholder="Select sub-category"
-                                [options]="subCategories" [(ngModel)]="productDetails.selectedSubCategory"
-                                optionLabel="name" name="subCategory"></p-dropdown>
-
-                        </div>
-                    </div>
-                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
-                        <div class="mt-6 w-full relative">
-                            <label for="thcTotal" class="block text-sm text-gray-700 font-custom">THC Total (%) <span
-                                    class="text-red">*</span></label>
-                            <input required pInputText id="thcTotal" type="number" step="0.01"
-                                placeholder="Enter THC Total"
-                                class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.thcTotal" name="thcTotal">
-                        </div>
-                        <div class="mt-6 w-full relative">
-                            <label for="harvestDate" class="block text-sm text-gray-700 font-custom">Harvest Date <span
-                                    class="text-red">*</span></label>
-                            <p-calendar [showIcon]="true" [(ngModel)]="date"></p-calendar>
-
-                        </div>
-                    </div>
-                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
-                        <div class="mt-6 w-full relative">
-                            <label for="terpene" class="block text-sm text-gray-700 font-custom">Terpene (%) <span
-                                    class="text-red">*</span></label>
-                            <input required pInputText id="terpene" type="number" step="0.01"
-                                placeholder="Enter Terpene"
-                                class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.terpene" name="terpene">
-                        </div>
-                        <div class="mt-6 w-full relative">
-                            <label for="cbd" class="block text-sm text-gray-700 font-custom">CBD (%) <span
-                                    class="text-red">*</span></label>
-                            <input required pInputText id="cbd" type="number" step="0.01" placeholder="Enter CBD"
-                                class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.cbd" name="cbd">
-
-                        </div>
-                    </div>
-                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
-                        <div class="mt-6 w-full relative">
-                            <label for="grade" class="block text-sm text-gray-700 font-custom">Grade (like A-AAAA) <span
-                                    class="text-red">*</span></label>
-                            <input required pInputText id="grade" type="text" placeholder="Enter Grade"
-                                class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.grade" name="grade">
-                        </div>
-                        <div class="mt-6 w-full relative">
-                            <label for="available" class="block text-sm text-gray-700 font-custom">Available (grams)
-                                <span class="text-red">*</span></label>
-                            <input required pInputText id="available" type="number" placeholder="Enter Available Grams"
-                                class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.available" name="available">
-
-                        </div>
-                    </div>
-                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
-                        <div class="mt-6 w-full relative">
-                            <label for="growMedia" class="block text-sm text-gray-700 font-custom">Grow Media <span
-                                    class="text-red">*</span></label>
-                            <p-dropdown [required]="true" class="w-full" placeholder="Select grow media"
-                                [options]="growMedia" [(ngModel)]="productDetails.growMedia" optionLabel="name"
-                                name="growMedia"></p-dropdown>
-
-                        </div>
-                        <div class="mt-6 w-full relative">
-                            <label for="growthMethod" class="block text-sm text-gray-700 font-custom">Growth Method
-                                <span class="text-red">*</span></label>
-
-                            <p-dropdown [required]="true" class="w-full" placeholder="Select growth method"
-                                [options]="growthMethod" [(ngModel)]="productDetails.growthMethod" optionLabel="name"
-                                name="growthMethod"></p-dropdown>
-
-                        </div>
-                    </div>
-                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 irradiated">
-                        <div class="mt-6 w-full relative">
-                            <label for="irradiated" class="block text-sm text-gray-700 font-custom">Irradiated <span
-                                    class="text-red">*</span></label>
-                            <div class="flex flex-wrap gap-3">
-                                <div class="flex align-items-center">
-                                    <p-radioButton name="irradiated" ngDefaultControl value="Yes"
-                                        [(ngModel)]="productDetails.irradiated" inputId="irradiatedYes"></p-radioButton>
-                                    <label for="irradiatedYes" class="ml-2">Yes</label>
-                                </div>
-                                <div class="flex align-items-center">
-                                    <p-radioButton name="irradiated" value="No" [(ngModel)]="productDetails.irradiated"
-                                        inputId="irradiatedNo"></p-radioButton>
-                                    <label for="irradiatedNo" class="ml-2">No</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-6 w-full relative">
-                            <label for="dryMethod" class="block text-sm text-gray-700 font-custom">Dry Method <span
-                                    class="text-red">*</span></label>
-
-                            <p-dropdown [required]="true" class="w-full" placeholder="Select dry method"
-                                [options]="dryMethod" [(ngModel)]="productDetails.dryMethod" optionLabel="name"
-                                name="dryMethod"></p-dropdown>
-
-                        </div>
-                    </div>
-                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
-                        <div class="mt-6 w-full relative">
-                            <label for="budSize" class="block text-sm text-gray-700 font-custom">Bud Size <span
-                                    class="text-red">*</span></label>
-                            <input required pInputText id="budSize" type="text" placeholder="Enter Bud Size"
-                                class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.budSize" name="budSize">
-
-                        </div>
-                        <div class="mt-6 w-full relative">
-                            <label for="trimMethod" class="block text-sm text-gray-700 font-custom">Trim Method <span
-                                    class="text-red">*</span></label>
-
-                            <p-dropdown [required]="true" class="w-full" placeholder="Select trim method"
-                                [options]="trimMethod" [(ngModel)]="productDetails.trimMethod" optionLabel="name"
-                                name="trimMethod"></p-dropdown>
-
-                        </div>
-                    </div>
-                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
-                        <div class="flex flex-col w-full ">
-                            <div class="mt-6 w-full relative">
-                                <label for="tops" class="block text-sm text-gray-700 font-custom">Tops (%) <span
-                                        class="text-red">*</span></label>
-                                <input required pInputText id="tops" type="number" step="0.01" placeholder="Enter Tops"
-                                    class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                    [(ngModel)]="productDetails.tops" name="tops">
-                            </div>
-                            <div class="mt-6 w-full relative">
-                                <label for="mids" class="block text-sm text-gray-700 font-custom">Mids (%) <span
-                                        class="text-red">*</span></label>
-                                <input required pInputText id="mids" type="number" step="0.01" placeholder="Enter Mids"
-                                    class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                    [(ngModel)]="productDetails.mids" name="mids">
-                            </div>
-                        </div>
-
-                        <div class="mt-6 w-full relative">
-                            <label for="description" class="block text-sm text-gray-700 font-custom">Description <span
-                                    class="text-red">*</span></label>
-                            <textarea required pInputTextarea id="description" rows="6" placeholder="Enter Description"
-                                class="mt-1 block bg-[#F5F5F5] w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                [(ngModel)]="productDetails.description" name="description"></textarea>
-
-                        </div>
-                    </div>
-                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
-                        <div class="flex flex-col w-full ">
-                            <div class="mt-6 w-full relative">
-                                <label for="lowers" class="block text-sm text-gray-700 font-custom">Lowers (%) <span
-                                        class="text-red">*</span></label>
-                                <input required pInputText id="lowers" type="number" step="0.01"
-                                    placeholder="Enter Lowers"
-                                    class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                    [(ngModel)]="productDetails.lowers" name="lowers">
-                            </div>
-                            <div class="mt-6 w-full relative">
-                                <label for="location" class="block text-sm text-gray-700 font-custom">Location <span
-                                        class="text-red">*</span></label>
-                                <input required pInputText id="location" type="text" placeholder="Enter Location"
-                                    class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
-                                    [(ngModel)]="productDetails.location" name="location">
-                            </div>
-                        </div>
-
-                        <div class="mt-6 w-full relative hidden sm:block">
-                            <label for="productImages" class="block text-sm text-gray-700 font-custom">Upload Product
-                                Images (Max 5 images) </label>
-                            <div class="file-upload-container">
-                                <label for="file-upload-images" class="file-upload-label">
-                                    <i class="pi pi-cloud-upload"></i>
-                                    <p>Upload Images</p>
-                                    <input type="file" id="file-upload-images"
-                                        (change)="onImageSelected($event, 'images')" accept="image/*" multiple />
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
-                        <div class="flex flex-col w-full ">
-                            <div class="mt-6 w-full relative">
-                                <label for="license" class="block text-sm text-gray-700 font-custom">COA</label>
-                                <div class="file-upload-container">
-                                    <label for="file-upload-license" class="file-upload-label">
-                                        <i class="pi pi-cloud-upload"></i>
-                                        <p>Upload document</p>
-                                        <input type="file" id="file-upload-license" (change)="onFileSelected($event)"
-                                            accept=".pdf" />
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="mt-6 w-full relative">
-                                <div class="mb-4" *ngIf="selectedFile">
-                                    <div class="file-details relative text-slate cursor-pointer">
-                                        <div class="file-name flex">
-                                            <i class="pi pi-file place-content-center font-medium mr-4 text-2xl"></i>
-                                            <p class="text-black">{{ selectedFile.name }}</p>
-                                        </div>
-                                        <i class="pi pi-times top-2 right-2 absolute font-medium"
-                                            (click)="removeFile()"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-6 w-full relative block sm:hidden">
-                                <label for="productImages" class="block text-sm text-gray-700 font-custom">Upload
-                                    Product
-                                    Images (Max 5 images) </label>
-                                <div class="file-upload-container">
-                                    <label for="file-upload-images" class="file-upload-label">
-                                        <i class="pi pi-cloud-upload"></i>
-                                        <p>Upload Images</p>
-                                        <input type="file" id="file-upload-images"
-                                            (change)="onImageSelected($event, 'images')" accept="image/*" multiple />
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-full product-image-container">
-                            <div class="my-4 sm:mb-4 flex flex-wrap justify-between gap-4"
-                                *ngIf="imagePreviews.length > 0">
-                                <div *ngFor="let preview of imagePreviews; let i = index" class="relative">
-                                    <img [src]="preview" alt="Preview" class="h-40 w-40 object-cover rounded-md">
-                                    <div
-                                        class="remove-img w-6 h-6 absolute top-2 right-2 bg-[#808384] rounded-full flex justify-center items-center">
-                                        <i class="pi pi-times text-[0.6rem] text-white cursor-pointer"
-                                            (click)="removeImg('images', selectedImageFiles[i])"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="p-6 md:p-0 ">
-                <button type="submit"
-                class="w-full font-bold py-2 px-4 text-lg rounded-md font-custom bg-secondary text-primary-btn">Edit
-                Products</button>
-            </div>
-        </form> -->
-        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="flex justify-center items-center">
+            <i class="pi pi-spin pi-spinner" style="font-size: 2rem" *ngIf="loadingForPatchValue"></i>
+        </div>
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()"*ngIf="!loadingForPatchValue">
             <div>
                 <div class="input-container flex flex-col p-6 md:p-0">
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
@@ -401,9 +116,8 @@
                         <div class="mt-6 w-full relative">
                             <label for="subCategory"
                                 class="block text-sm text-gray-700 font-custom">Sub-Category</label>
-                            <p-dropdown [required]="true" class="w-full" placeholder="Select sub-category"
-                                [options]="subCategories" optionLabel="name"
-                                formControlName="sub_category"></p-dropdown>
+                            <p-dropdown class="w-full" placeholder="Select sub-category" [options]="subCategories"
+                                optionLabel="name" formControlName="sub_category"></p-dropdown>
 
                         </div>
                     </div>
@@ -648,7 +362,8 @@
                             <div class="mt-6 w-full relative">
                                 <label for="location" class="block text-sm text-gray-700 font-custom">Location <span
                                         class="text-red">*</span></label>
-                                <input required pInputText id="location" type="text" placeholder="Enter Location"formControlName="location"
+                                <input required pInputText id="location" type="text" placeholder="Enter Location"
+                                    formControlName="location"
                                     class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm">
                             </div>
                         </div>
@@ -739,7 +454,7 @@
                 </div>
             </div>
             <div class="p-6 md:p-0 ">
-                <button type="submit"
+                <button type="submit"[disabled]="loading"
                     class="w-full font-bold py-2 px-4 text-lg rounded-md font-custom bg-secondary text-primary-btn"><i
                         class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
                     <span *ngIf="!loading">Edit products</span></button>

@@ -94,6 +94,7 @@ export class ProductListingComponent implements OnInit {
           if (item.id == this.params.sub_category) {
             return item;
           }
+
         }),
         thc_range: this.thcRanges.find((item: any) => {
 
@@ -102,8 +103,8 @@ export class ProductListingComponent implements OnInit {
           }
         })
       });
-      console.log(this.subCategories);
-      console.log(this.filterform);
+      // console.log(this.subCategories);
+      // console.log(this.filterform);
     });
 
     //when refress then patch the value of filter dropdownn
@@ -127,6 +128,9 @@ export class ProductListingComponent implements OnInit {
             id: '', name: 'Sub Category'
           }
         });
+        this.subCategories = [{
+          id: '', name: 'Sub Category'
+        }];
       })
     }
   }
