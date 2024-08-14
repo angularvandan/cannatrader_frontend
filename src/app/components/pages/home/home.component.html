@@ -1,4 +1,8 @@
-<div class="w-full h-[1075px] sm:h-[705px] relative overflow-hidden ">
+<div class="flex justify-center items-center my-6" *ngIf="loading">
+    <i class="pi pi-spin pi-spinner text-[#3A5C41]" style="font-size: 2rem"></i>
+</div>
+
+<div class="w-full h-[1075px] sm:h-[705px] relative overflow-hidden "*ngIf="!loading">
     <div class="absolute">
         <img class="w-screen h-[400px] sm:h-[705px]" src="../../../../assets/home/background.png" alt="">
     </div>
@@ -16,8 +20,8 @@
                 fill="white" fill-opacity="0.08" />
         </svg>
     </div>
-    <div class="tree-img-right absolute -right-52 sm:-right-20 bottom-0 sm:bottom-0 hidden sm:block">
-        <img src="../../../../assets/home/right_background.png" class="h-[490px]" alt="">
+    <div class="tree-img-right hidden sm:block">
+        <img src="../../../../assets/home/right_background.png" class="h-[490px] absolute bottom-0 -right-0 "alt="">
     </div>
     <div class="mobile-tree-bottom absolute bottom-0 -left-24 block sm:hidden">
         <img src="../../../../assets/home/mobile_bottom_img.png" alt="" class="max-w-[75%] sm:max-w-full">
@@ -66,15 +70,7 @@
                                     placeholder="Select Sub-Categories" optionLabel="name"></p-dropdown>
                             </div>
                         </div>
-                        <div class="flex-1 mb-3 grow sm:w-[49%]">
-                            <div class="card flex flex-col justify-content-center">
-                                <label class="sm:text-xl text-base text-primary leading-6 font-medium">Search
-                                    Within</label>
-                                <p-dropdown [options]="searchWithin" formControlName="distance"
-                                    placeholder="Select (km)" optionLabel="name" optionValue="code"></p-dropdown>
-
-                            </div>
-                        </div>
+                        
                         <div class="flex-1 mb-3 grow sm:w-[49%]">
                             <div class="card flex flex-col justify-content-center">
                                 <label class="sm:text-xl text-base text-primary leading-6 font-medium">Location</label>
@@ -89,6 +85,15 @@
                                     <input type="text" pInputText placeholder="Select Your Location" />
 
                                 </span>
+                            </div>
+                        </div>
+                        <div class="flex-1 mb-3 grow sm:w-[49%]">
+                            <div class="card flex flex-col justify-content-center">
+                                <label class="sm:text-xl text-base text-primary leading-6 font-medium">Search
+                                    Within</label>
+                                <p-dropdown [options]="searchWithin" formControlName="distance"
+                                    placeholder="Select (km)" optionLabel="name" optionValue="code"></p-dropdown>
+
                             </div>
                         </div>
                         <div class="flex-1 mb-3 grow sm:w-[49%]">

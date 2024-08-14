@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   searchWithin:any[]=[];
 
   searchForm!: FormGroup;
+  loading:boolean=true;
 
   constructor(private fb: FormBuilder, private productService: ProductService, private router: Router) {
 
@@ -48,6 +49,9 @@ export class HomeComponent implements OnInit {
       this.categories = response[0].data;
       this.thcRange = response[1].data;
       this.strainTypes = response[2].data;
+      this.loading=false;
+    },(err)=>{
+      this.loading=false;
     });
     this.searchForm.get('category')?.valueChanges.subscribe(categoryId => {
       this.getSubCategoryById(categoryId.id);

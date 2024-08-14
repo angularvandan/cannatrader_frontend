@@ -48,7 +48,7 @@ export interface IProduct {
     trim_methods: TrimMethod;
     updated_at: string;
     user_id: string;
-    
+    vendor?:Vendor;
 
   }
   
@@ -113,6 +113,46 @@ export interface IProduct {
     method: string;
     createdAt: string;
     updatedAt: string;
+  }
+  
+
+  export interface Vendor {
+    id: string;
+    name: string;
+    phone_no: string;
+    email: string;
+    avatar: string;
+    company: Company;
+  }
+  
+  export interface Company {
+    id: string;
+    userId: string;
+    company_name: string;
+    business_type: string;
+    contact_no: string;
+    business_id_no: string;
+    health_license: string;
+    business_location: BusinessLocation;
+    createdAt: string;
+    updatedAt: string;
+    distance: number;
+    subscribed: boolean;
+  }
+  
+  export interface BusinessLocation {
+    crs: CRS;
+    type: string;
+    coordinates: number[];
+  }
+  
+  export interface CRS {
+    type: string;
+    properties: CRSProperties;
+  }
+  
+  export interface CRSProperties {
+    name: string;
   }
   
 

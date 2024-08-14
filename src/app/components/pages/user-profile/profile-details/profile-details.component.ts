@@ -125,7 +125,6 @@ export class ProfileDetailsComponent implements OnInit {
     });
   }
 
-
   toggleBtn(index: number) {
     this.btn[index] = !this.btn[index]
   }

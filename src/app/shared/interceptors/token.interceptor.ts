@@ -27,7 +27,7 @@ export class TokenInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Redirect to login if token is invalid or expired
-          this.userService.logOut();
+          // this.userService.logOut();
         }
         return throwError(() => error);
       })

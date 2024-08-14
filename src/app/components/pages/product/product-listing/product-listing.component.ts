@@ -29,7 +29,7 @@ export class ProductListingComponent implements OnInit {
   sortOrderOpt: any[] = [{ name: 'Newest', code: 'Newest' }, { name: 'Oldest', code: 'Oldest' }];
 
   params!: any;
-  filterform!: FormGroup;
+  // filterform!: FormGroup;
 
   loadingForProduct: boolean = false;
   loadingError: boolean = false;
@@ -38,19 +38,19 @@ export class ProductListingComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.filterform = this.fb.group({
-      strain_type: [''],
-      category: [''],
-      sub_category: [''],
-      thc_range: ['']
-    });
+    // this.filterform = this.fb.group({
+    //   strain_type: [''],
+    //   category: [''],
+    //   sub_category: [''],
+    //   thc_range: ['']
+    // });
 
     this.activatedRoute.queryParams.subscribe({
       next: (params) => {
 
         this.params = params;
         console.log(this.params);
-        this.getSubCategoryById(this.params.category);
+        // this.getSubCategoryById(this.params.category);
         this.getProductsOnFilter();
 
 
@@ -60,96 +60,97 @@ export class ProductListingComponent implements OnInit {
     });
 
     //this is for filter product
-    setTimeout(() => {
-      this.filterform.valueChanges.subscribe(values => {
-        this.onFormValuesChanged(values);
-      });
-    }, 0);
+    // setTimeout(() => {
+    //   this.filterform.valueChanges.subscribe(values => {
+    //     this.onFormValuesChanged(values);
+    //   });
+    // }, 0);
 
-    this.filterform.get('category')?.valueChanges.subscribe(categoryId => {
-      this.getSubCategoryById(categoryId?.id || '');
-    });
+    // this.filterform.get('category')?.valueChanges.subscribe(categoryId => {
+    //   this.getSubCategoryById(categoryId?.id || '');
+    // });
 
 
     //this is for view all products drop down value
-    this.productService.getAllValueForAddProduct().subscribe((response: any) => {
-      console.log(response);
-      this.categories = response[0].data;
-      this.thcRanges = response[1].data;
-      this.strainTypes = response[2].data;
+    // this.productService.getAllValueForAddProduct().subscribe((response: any) => {
+    //   console.log(response);
+    //   this.categories = response[0].data;
+    //   this.thcRanges = response[1].data;
+    //   this.strainTypes = response[2].data;
 
-      this.filterform.patchValue({
-        strain_type: this.strainTypes.find((item: any) => {
-          if (item.id == this.params.strain_type) {
-            return item;
-          }
-        }),
-        category: this.categories.find((item: any) => {
-          if (item.id == this.params.category) {
-            return item;
-          }
-        }),
-        sub_category: this.subCategories.find((item: any) => {
+    //   this.filterform.patchValue({
+    //     strain_type: this.strainTypes.find((item: any) => {
+    //       if (item.id == this.params.strain_type) {
+    //         return item;
+    //       }
+    //     }),
+    //     category: this.categories.find((item: any) => {
+    //       if (item.id == this.params.category) {
+    //         return item;
+    //       }
+    //     }),
+    //     sub_category: this.subCategories.find((item: any) => {
 
-          if (item.id == this.params.sub_category) {
-            return item;
-          }
+    //       if (item.id == this.params.sub_category) {
+    //         return item;
+    //       }
 
-        }),
-        thc_range: this.thcRanges.find((item: any) => {
+    //     }),
+    //     thc_range: this.thcRanges.find((item: any) => {
 
-          if (item.id == this.params.thc_range) {
-            return item;
-          }
-        })
-      });
+    //       if (item.id == this.params.thc_range) {
+    //         return item;
+    //       }
+    //     })
+    //   });
       // console.log(this.subCategories);
       // console.log(this.filterform);
-    });
+    // });
 
     //when refress then patch the value of filter dropdownn
 
   }
   // this is call for sub category
-  getSubCategoryById(id: any) {
-    if (id != '') {
-      this.productService.getSubCategory(id).subscribe((response: any) => {
-        console.log(response.data);
-        //this is added when category has no sub category;
-        this.subCategories = [{
-          id: '', name: 'Sub Category'
-        }];
-        this.subCategories = this.subCategories.concat(response.data);
+  // getSubCategoryById(id: any) {
+  //   if (id != '') {
+  //     this.productService.getSubCategory(id).subscribe((response: any) => {
+  //       console.log(response.data);
+  //       //this is added when category has no sub category;
+  //       this.subCategories = [{
+  //         id: '', name: 'Sub Category'
+  //       }];
+  //       this.subCategories = this.subCategories.concat(response.data);
 
-      }, (err: any) => {
-        //when sub category not found
-        this.filterform.patchValue({
-          sub_category: {
-            id: '', name: 'Sub Category'
-          }
-        });
-        this.subCategories = [{
-          id: '', name: 'Sub Category'
-        }];
-      })
-    }
-  }
+  //     }, (err: any) => {
+  //       //when sub category not found
+  //       this.filterform.patchValue({
+  //         sub_category: {
+  //           id: '', name: 'Sub Category'
+  //         }
+  //       });
+  //       this.subCategories = [{
+  //         id: '', name: 'Sub Category'
+  //       }];
+  //     })
+  //   }
+  // }
 
   //filter in product listing page
 
-  onFormValuesChanged(valuesforFilter: any) {
+  // onFormValuesChanged(valuesforFilter: any) {
 
-    console.log(valuesforFilter);
-    this.params = {
-      ...this.params,
-      category: valuesforFilter.category?.id || '',
-      sub_category: valuesforFilter.sub_category?.id || '',
-      strain_type: valuesforFilter.strain_type?.id || '',
-      thc_range: valuesforFilter.thc_range?.id || '',
-    }
-    this.router.navigate(['/products'], { queryParams: this.params });
+  //   console.log(valuesforFilter);
+  //   this.params = {
+  //     ...this.params,
+  //     category: valuesforFilter.category?.id || '',
+  //     sub_category: valuesforFilter.sub_category?.id || '',
+  //     strain_type: valuesforFilter.strain_type?.id || '',
+  //     thc_range: valuesforFilter.thc_range?.id || '',
+  //   }
+  //   this.router.navigate(['/products'], { queryParams: this.params });
 
-  }
+  // }
+  
   // this is for api call of get products
   getProductsOnFilter() {
     this.loadingForProduct = true;

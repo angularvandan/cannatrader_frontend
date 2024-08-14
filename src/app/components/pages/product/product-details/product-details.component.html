@@ -37,13 +37,12 @@
     <div class="flex flex-col lg:flex-row mt-4">
         <!-- Image Section -->
         <div class="flex-1">
-            <img src="{{product.images[0]}}" alt="Product Image"
+            <img src="{{bigImageForShowing}}" alt="Product Image"
                 class="w-full max-h-[650px] h-full rounded-lg">
-            <div class="grid grid-cols-4 lg:grid-cols-4 justify-between mt-8">
+            <div class="flex gap-2 justify-start mt-8 overflow-x-auto">
                 <ng-container *ngFor="let image of product.images">
-                    <img src="{{image}}" alt="Thumbnail 1"
-                    class="lg:w-32 lg:h-28 w-20 h-20 rounded-lg">
-                
+                    <img src="{{image}}" alt="image"(click)="showBigImageWhenClick(image)"[ngStyle]="{'border':image==bigImageForShowing ? '4px solid green':'none'}"
+                    class="lg:w-32 lg:h-28 w-20 h-20 rounded-lg cursor-pointer">
                 </ng-container>
             </div>
             <div class="p-6 rounded-lg w-full mx-auto mt-24 lg:block hidden">
@@ -68,8 +67,8 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[20px]">Phone</div>
-                            <a href="{{user.phone_no}}"class="text-lg font-semibold text-[20px] text-primary mr-2">xxxx-xxxx</a>
-                            <a class="text-inner hover:underline">Click here to enquire</a>
+                            <a href="tel:{{product.vendor?.phone_no}}"class="text-lg font-semibold text-[20px] text-primary mr-2">{{product.vendor?.phone_no}}</a>
+                            <a class="text-inner hover:underline cursor-pointer">Click here to enquire</a>
                         </div>
                     </div>
                     <div class="flex items-center">
@@ -80,7 +79,7 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[20px]">E-Mail</div>
-                            <div class="text-lg font-semibold text-[24px]">{{user.email}}</div>
+                            <div class="text-lg font-semibold text-[24px]">{{product.vendor?.email}}</div>
                         </div>
                     </div>
                     <div class="flex items-center">
@@ -91,17 +90,17 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[20px]">Uploaded Date</div>
-                            <div class="text-lg font-semibold text-[24px]">{{user.createdAt | date:'dd-MM-yyyy'}}</div>
+                            <div class="text-lg font-semibold text-[24px]">{{product.created_at | date:'dd-MM-yyyy'}}</div>
                         </div>
                     </div>
                     <div class="flex items-center">
                         <div class="rounded-full p-2">
-                            <img src="{{user.avatar}}" alt="Owner Image"
+                            <img src="{{product.vendor?.avatar}}" alt="Owner Image"
                                 class="h-12 w-12 object-cover rounded-full">
                         </div>
                         <div class="ml-4">
                             <div class="text-gray-600">Owner</div>
-                            <div class="text-lg font-semibold">{{user.name}}</div>
+                            <div class="text-lg font-semibold">{{product.vendor?.name}}</div>
                         </div>
                     </div>
                 </div>
@@ -113,7 +112,7 @@
             <div class="flex pb-2 items-center justify-between">
                 <h1 class="text-5xl font-bold">{{product.name}}</h1>
                 <div class="lg:flex hidden gap-4">
-                    <div routerLink="../chats"
+                    <div routerLink="/products/chats"
                         class=" cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                         <svg width="36" height="20" viewBox="0 0 39 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -121,18 +120,18 @@
                                 stroke="#3A5C41" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <div
+                    <div (click)="addProductToWishlit(product.id)"
                         class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
-                        <i class="pi pi-heart text-primary"></i>
+                        <i class="pi pi-heart text-primary" ></i>
                     </div>
                 </div>
             </div>
             <p class="text-2xl text-help pb-4">From Canopygrowth</p>
             <div class="flex items-center pb-4">
                 <div class="flex gap-2 items-center">
-                    <p-rating [(ngModel)]="value" [readonly]="true" [cancel]="false"></p-rating>
+                    <p-rating [(ngModel)]="totalRating" [readonly]="true" [cancel]="false"></p-rating>
                 </div>
-                <span class="ml-2 text-gray-600">Ratings {{product.rating}}</span>
+                <span class="ml-2 text-gray-600">Ratings 1.2k</span>
             </div>
 
             <button (click)="toggleBtn()" *ngIf="btn"
@@ -160,7 +159,7 @@
                         </span>
                     </div><div class="font-semibold w-full border-b leading-10">
                         Sub Category: <span class=" text-help float-right">
-                            {{product.subCategory.name}}
+                            {{product.subCategory ? product.subCategory.name:''}}
                         </span>
                     </div>
                     <div class="font-semibold w-full border-b leading-10">
@@ -276,7 +275,7 @@
             <h2 class="text-base font-semibold">Rate this product</h2>
             <p class="mt-2 text-[12px] text-help">Tell others what you think</p>
             <div class="flex mt-2 text-yellow-500 rate-product">
-                <p-rating [(ngModel)]="rate" [cancel]="false"></p-rating>
+                <p-rating [(ngModel)]="rate"(click)="giveRatingToProduct()" [cancel]="false"></p-rating>
             </div>
         </div>
 
@@ -304,8 +303,8 @@
                     </div>
                     <div class="ml-4">
                         <div class="text-inner text-[10px] lg:text-[20px]">Phone</div>
-                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[20px] text-primary">xxxx-xxxx</div>
-                        <a class="text-inner hover:underline text-[10px] lg:text-[20px]">Click here to
+                        <a class="text-lg lg:font-semibold text-[12px] lg:text-[20px] text-primary">{{product.vendor?.phone_no}}</a>
+                        <a href="tel:{{product.vendor?.phone_no}}"class="text-inner hover:underline text-[10px] lg:text-[20px]">Click here to
                             enquire</a>
                     </div>
                 </div>
@@ -317,7 +316,7 @@
                     </div>
                     <div class="ml-4">
                         <div class="text-inner text-[10px] lg:text-[20px]">E-Mail</div>
-                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">{{user.email}}</div>
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">{{product.vendor?.email}}</div>
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -328,17 +327,17 @@
                     </div>
                     <div class="ml-4">
                         <div class="text-inner text-[10px] lg:text-[20px]">Uploaded Date</div>
-                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">{{user.createdAt | date: 'dd-MM-yyyy'}}</div>
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">{{product.created_at | date: 'dd-MM-yyyy'}}</div>
                     </div>
                 </div>
                 <div class="flex items-center">
                     <div class="rounded-full p-2">
-                        <img [src]="user.avatar" alt="Owner Image"
+                        <img [src]="product.vendor?.avatar" alt="Owner Image"
                             class="h-12 w-12 object-cover rounded-full">
                     </div>
                     <div class="ml-4">
                         <div class="text-gray-600 text-[10px] lg:text-[20px]">Owner</div>
-                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">{{user.name}}</div>
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">{{product.vendor?.name}}</div>
                     </div>
                 </div>
             </div>

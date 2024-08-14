@@ -83,6 +83,8 @@ export class WishlistComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    console.log(this.products.length < 0)
+    console.log(this.products.length < 0);
+
+    
   }
 }

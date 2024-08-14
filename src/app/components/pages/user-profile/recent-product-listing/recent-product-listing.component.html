@@ -30,7 +30,7 @@
 
         <!-- Product Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div *ngFor="let product of products" routerLink="/products/productDetails"style="width:100%"
+            <div *ngFor="let product of products" [routerLink]="['/products/productDetails', product.id]"style="width:100%"
                 class="max-w-sm  cursor-pointer mx-auto bg-white rounded-lg justify-around overflow-hidden flex">
                 <div class="relative"style="width:40%;">
                     <img [src]="product.images[0]" alt="Canopy Growth" class="sm:w-44 sm:h-48 w-36 h-36"style="border-radius:8px;">

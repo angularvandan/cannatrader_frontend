@@ -73,4 +73,17 @@ export class ProductService {
     return this.http.delete(`${this.baseUrl}/api/product/${id}`);
   }
 
+  rateProduct(id:string,body:any){
+    return this.http.post(`${this.baseUrl}/api/rating/rate-product/${id}`,body)
+  }
+  addProductToWishlist(id:string){
+    return this.http.post(`${this.baseUrl}/api/wishlist/${id}`,{});
+  }
+  removeProductFromWishlist(id:string){
+    return this.http.delete(`${this.baseUrl}/api/wishlist/${id}`,{});
+  }
+  getAllWishlistProducts(){
+    return this.http.get(`${this.baseUrl}/api/wishlist/getAllWishlist`);
+  }
+
 }

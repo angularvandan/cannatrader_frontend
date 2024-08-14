@@ -44,19 +44,19 @@ export class EditProductComponent {
     id: '', name: 'Sub Category'
   }];
 
-  selectedImageFiles: File[]  = [];
+  selectedImageFiles: File[] = [];
   imagePreviews: string[] = [];
   selectedFile: File | null = null;
 
   loading: boolean = false;
-  loadingForPatchValue:boolean=false;
+  loadingForPatchValue: boolean = false;
   productId: string | null = '';
 
   productForm!: FormGroup;
   product!: IProduct;
 
 
-  constructor(private confirmationService: ConfirmationService, private messageService: MessageService, private productService: ProductService, private tostr: ToastrService, private fb: FormBuilder, private activatedRoute: ActivatedRoute,private router:Router) { }
+  constructor(private confirmationService: ConfirmationService, private messageService: MessageService, private productService: ProductService, private tostr: ToastrService, private fb: FormBuilder, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -121,11 +121,11 @@ export class EditProductComponent {
 
       //when all sub category and category is loaded then patch
       this.patchValueOfProduct();
-      this.loadingForPatchValue=false;
+      this.loadingForPatchValue = false;
 
     }, (err: any) => {
       console.log(err);
-      this.loadingForPatchValue=false;
+      this.loadingForPatchValue = false;
     });
   }
 
@@ -154,7 +154,7 @@ export class EditProductComponent {
   }
   getProductByActivatedRoute() {
     //this loading status will be false in patch value data;
-    this.loadingForPatchValue=true;
+    this.loadingForPatchValue = true;
 
     if (this.productId != '' && this.productId != null) {
       this.productService.getProductById(this.productId).subscribe({
@@ -202,55 +202,69 @@ export class EditProductComponent {
     this.preloadFile();
   }
   async preloadFile() {
-    this.selectedFile = null;
-    const blob = new Blob(['file content'], { type: 'application/pdf' });
-    const file = new File([blob], this.product.coa_document, { type: 'application/pdf' });
 
-    this.productForm.patchValue({
-      pdf: file
-    });
-    this.selectedFile = {...file,name:'COA document'};
+    //this is for select pdf
+    this.convertPdfUrlToFile(this.product.coa_document)
+      .then(file => {
+        // console.log(file);
+        this.productForm.patchValue({
+          pdf: file
+        });
+        this.selectedFile = file;
+      }).catch(error => {
+        console.error('Error converting PDF to file:', error);
+      });
 
     // below code for images convert into  file;
-    this.selectedImageFiles=[];
-    this.selectedImageFiles = this.product.images.map((imageUrl: string) => {
-      // Extract the file extension to determine the MIME type
-      const extension = imageUrl.split('.').pop()?.toLowerCase();
-    
-      // Default MIME type to handle unknown extensions
-      let mimeType = 'image/jpeg'; 
-    
-      if (extension === 'png') {
-        mimeType = 'image/png';
-      } else if (extension === 'gif') {
-        mimeType = 'image/gif';
-      } else if (extension === 'bmp') {
-        mimeType = 'image/bmp';
-      } else if (extension === 'svg') {
-        mimeType = 'image/svg+xml';
-      } else if (extension === 'webp') {
-        mimeType = 'image/webp';
-      }
-      
-      // Create a blob and file with the determined MIME type
-      const blob = new Blob(['file content'], { type: mimeType });
-      return new File([blob], imageUrl.split('/').pop() || 'default-file-name', { type: mimeType });
+    this.selectedImageFiles = [];
+    this.convertMultipleImages(this.product.images).then(files => {
+      this.productForm.patchValue({
+        images: files
+      })
+      this.selectedImageFiles = files;
+      // console.log(files);
+    }).catch(error => {
+      console.error('Error converting images to files:', error);
     });
-    this.productForm.patchValue({
-      images:this.selectedImageFiles
-    })
+  }
+
+  //this is for pdf converter in file
+  async convertPdfUrlToFile(url: string, filename: string = 'document.pdf'): Promise<File> {
+    const pdfData = await fetch(url).then(res => res.arrayBuffer());
+    const blob = new Blob([pdfData], { type: 'application/pdf' });
+    return new File([blob], filename, { type: 'application/pdf' });
+  }
+
+  //for file converter
+  async urlToFile(url: string, filename: string, mimeType: string): Promise<File> {
+    const imageData = await fetch(url).then(res => res.arrayBuffer());
+    const blob = new Blob([imageData], { type: mimeType });
+    return new File([blob], filename, { type: mimeType });
+  }
+
+  async convertMultipleImages(imageUrls: string[]): Promise<File[]> {
+    const files: File[] = [];
+
+    for (let i = 0; i < imageUrls.length; i++) {
+      const url = imageUrls[i];
+      const fileName = `image-${i + 1}.jpg`; // Generate a file name based on index
+      const file = await this.urlToFile(url, fileName, 'image/jpeg');
+      files.push(file);
+    }
+
+    return files;
   }
 
   confirm1() {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete the product details?',
       accept: () => {
-        if(this.productId){
+        if (this.productId) {
           this.productService.deleteProductById(this.productId).subscribe({
-            next:()=>{
+            next: () => {
               // this.router.navigate(['/profile/profile-details']);
               this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
-            },error:()=>{
+            }, error: () => {
               this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
             }
           });
@@ -272,6 +286,7 @@ export class EditProductComponent {
 
   onImageSelected(event: any, type: string) {
     const files = event.target.files;
+    console.log(files);
     if (type === 'images') {
 
       if (files.length + this.selectedImageFiles.length > 5) {
@@ -292,7 +307,7 @@ export class EditProductComponent {
       this.productForm.patchValue({
         images: this.selectedImageFiles
       });
-      console.log(this.selectedImageFiles);
+      // console.log(this.selectedImageFiles);
     }
   }
 
@@ -364,13 +379,13 @@ export class EditProductComponent {
 
       this.productService.editProductById(this.productId, formData).subscribe({
         next: (response: any) => {
-          console.log(response);
+          // console.log(response);
           this.loading = false;
           this.tostr.success('Updated Successfully');
           this.getProductByActivatedRoute();
 
         }, error: (err) => {
-          console.log(err);
+          // console.log(err);
           this.loading = false;
           this.tostr.error(err.error.error.message);
 
