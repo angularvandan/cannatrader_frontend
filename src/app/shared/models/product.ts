@@ -49,7 +49,9 @@ export interface IProduct {
     updated_at: string;
     user_id: string;
     vendor?:Vendor;
-
+    ratings?: number;
+    myRating?:number;
+    isWishlisted?:boolean
   }
   
   export interface Category {

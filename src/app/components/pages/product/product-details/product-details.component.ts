@@ -15,7 +15,8 @@ export class ProductDetailsComponent implements OnInit {
 
   bigImageForShowing:string='';
   totalRating: number = 0;
-  rate: number = 0
+  rate: number = 0;
+  userId:string='';
 
   btn = true
   paragraph: string = `Our premium cannabis dried flower is cultivated from top-quality strains, ensuring a potent and aromatic
@@ -26,6 +27,7 @@ export class ProductDetailsComponent implements OnInit {
   product!: IProduct;
   productId!: string|null;
   loading:boolean=true;
+  isWishlisted:boolean=false;
 
   constructor(private productService: ProductService,private userService:UserService, private activatedRoute: ActivatedRoute, private router: Router,private tostr:ToastrService) { }
 
@@ -34,6 +36,7 @@ export class ProductDetailsComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params => {
       if (params.get('id')) {
         this.productId = params.get('id');
+        this.userId=this.userService.currentUser.user.id;
         this.getSingleProduct();
         
       }
@@ -41,26 +44,40 @@ export class ProductDetailsComponent implements OnInit {
 
   }
   addProductToWishlit(id:string){
-    if(this.productId){
+    if(this.productId && !this.isWishlisted){
       this.productService.addProductToWishlist(id).subscribe({
         next:(response:any)=>{
           this.tostr.success(response.message);
+          this.isWishlisted=true;
         },
         error:(err)=>{
           console.log(err);
-          this.tostr.error(err.error.error.message);
         }
       })
+    }
+    else{
+      if(this.isWishlisted){
+        this.productService.removeProductFromWishlist(id).subscribe({
+          next:(response:any)=>{
+            this.tostr.success(response.message);
+            this.isWishlisted=false;
+          },error:(err)=>{
+            console.log(err);
+          }
+        })
+      }
     }
   }
   getSingleProduct(){
     if(this.productId){
-      this.productService.getProductById(this.productId).subscribe({
+      this.productService.getProductById(this.productId,this.userId).subscribe({
         next:(response:any)=>{
           this.product=response.product;
 
           this.bigImageForShowing=this.product.images[0];
           this.totalRating=this.product.rating;
+          this.rate=this.product?.myRating || 0;
+          this.isWishlisted=this.product.isWishlisted || false;
 
           this.loading=false;
           console.log(response);

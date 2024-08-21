@@ -86,7 +86,7 @@ button:enabled:active {
 }
 
 .p-dropdown-trigger .p-icon-wrapper {
-    transition: transform 0.3s ease; 
+    transition: transform 0.3s ease;
 }
 
 .p-dropdown-open .p-dropdown-trigger .p-icon-wrapper {
@@ -247,7 +247,8 @@ app-home {
         .p-button:hover {
             background-color: $bg-primary;
         }
-        .p-button:focus{
+
+        .p-button:focus {
             box-shadow: unset;
         }
     }
@@ -264,7 +265,8 @@ app-home {
                     background: #ECFEE6;
                 }
             }
-            .p-dropdown-open{
+
+            .p-dropdown-open {
                 border: 1px solid $bg-primary;
             }
 
@@ -285,6 +287,10 @@ app-home {
 
     .p-inputtext:enabled:focus {
         box-shadow: unset;
+        border-color: $bg-primary;
+    }
+
+    .p-inputtext:enabled:hover {
         border-color: $bg-primary;
     }
 }
@@ -342,6 +348,9 @@ app-add-product {
 
         .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
             box-shadow: none;
+        }
+        .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
+            border-color: unset;
         }
     }
 }
@@ -478,6 +487,9 @@ app-edit-product {
         .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
             box-shadow: none;
         }
+        .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
+            border-color: unset;
+        }
     }
 }
 
@@ -548,7 +560,7 @@ app-product-listing {
             color: $bg-primary;
             margin-left: 10px;
         }
-       
+
     }
 
     .custom-new-old-dropdown {
@@ -617,7 +629,8 @@ app-product-listing {
         border-color: $bg-primary;
         box-shadow: rgba(245, 245, 245, 1);
     }
-    .p-dropdown:not(.p-disabled).p-focus{
+
+    .p-dropdown:not(.p-disabled).p-focus {
         box-shadow: unset;
         border-color: unset;
     }
@@ -709,6 +722,11 @@ app-contact {
     textarea:focus-visible {
         outline: white;
     }
+
+    .p-inputtext:enabled:focus {
+        box-shadow: none;
+        border-color: unset;
+    }
 }
 
 .p-inputtext {
@@ -735,8 +753,22 @@ app-contact {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: none;
-    border-color: none;
+    border-color: unset;
 }
+
+.pi-spin {
+    animation: fa-spin 1s infinite linear!important;
+}
+@keyframes fa-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    
+    100% {
+        transform: rotate(359deg);
+    }
+}
+
 
 html,
 body {

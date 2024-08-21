@@ -33,6 +33,7 @@ export class ProductListingComponent implements OnInit {
 
   loadingForProduct: boolean = false;
   loadingError: boolean = false;
+  totalProductCount: number = 0;
 
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router, private fb: FormBuilder) { }
 
@@ -103,8 +104,8 @@ export class ProductListingComponent implements OnInit {
     //       }
     //     })
     //   });
-      // console.log(this.subCategories);
-      // console.log(this.filterform);
+    // console.log(this.subCategories);
+    // console.log(this.filterform);
     // });
 
     //when refress then patch the value of filter dropdownn
@@ -150,7 +151,7 @@ export class ProductListingComponent implements OnInit {
   //   this.router.navigate(['/products'], { queryParams: this.params });
 
   // }
-  
+
   // this is for api call of get products
   getProductsOnFilter() {
     this.loadingForProduct = true;
@@ -158,10 +159,13 @@ export class ProductListingComponent implements OnInit {
     this.productService.getAllProducts(this.params).subscribe({
       next: (response: any) => {
         console.log(response);
+
         this.products = response.products;
+        this.totalProductCount = response.count;
+
         console.log(this.products);
         this.loadingForProduct = false;
-        this.sortByAscendingAndDeceding({code:'Newest'});
+        // this.sortByAscendingAndDeceding({code:'Newest'});
 
       }, error: (err) => {
         console.log(err);
@@ -174,20 +178,22 @@ export class ProductListingComponent implements OnInit {
   }
   // when click on view more product
   viewMoreProducts() {
-    this.params = { ...this.params, limit: parseInt(this.params.limit) + 9 }
-    this.router.navigate(['/products'], { queryParams: this.params });
-  }
-
-  sortByAscendingAndDeceding(value:any) {
-    console.log(value);
-    if(value.code!='Newest'){
-
-      this.products.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
-    }
-    else{
-      this.products.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
-
+    if (this.totalProductCount>=this.params.limit) {
+      this.params = { ...this.params, limit: parseInt(this.params.limit) + 9 }
+      this.router.navigate(['/products'], { queryParams: this.params });
     }
   }
+
+  // sortByAscendingAndDeceding(value:any) {
+  //   console.log(value);
+  //   if(value.code!='Newest'){
+
+  //     this.products.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+  //   }
+  //   else{
+  //     this.products.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+  //   }
+  // }
 
 }

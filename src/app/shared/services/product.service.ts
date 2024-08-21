@@ -59,31 +59,36 @@ export class ProductService {
     return this.http.get(`${this.baseUrl}/api/product/get-recent-listing`, { params: queryParams });
   }
 
-  getProductById(id: string) {
+  getProductById(id: string,userId:string) {
+    console.log(userId);
     return this.http.post(`${this.baseUrl}/api/product/${id}`, {
       lng: "1.8674654",
       lat: "1.68465",
-      userId: "61e5e90c-6b8a-4053-86ad-6d8b291f674d"
+      userId: userId
     });
   }
-  editProductById(id:string,body:any){
-    return this.http.put(`${this.baseUrl}/api/product/${id}`,body);
+  editProductById(id: string, body: any) {
+    return this.http.put(`${this.baseUrl}/api/product/${id}`, body);
   }
-  deleteProductById(id:string){
+  deleteProductById(id: string) {
     return this.http.delete(`${this.baseUrl}/api/product/${id}`);
   }
 
-  rateProduct(id:string,body:any){
-    return this.http.post(`${this.baseUrl}/api/rating/rate-product/${id}`,body)
+  rateProduct(id: string, body: any) {
+    return this.http.post(`${this.baseUrl}/api/rating/rate-product/${id}`, body)
   }
-  addProductToWishlist(id:string){
-    return this.http.post(`${this.baseUrl}/api/wishlist/${id}`,{});
+  addProductToWishlist(id: string) {
+    return this.http.post(`${this.baseUrl}/api/wishlist/${id}`, {});
   }
-  removeProductFromWishlist(id:string){
-    return this.http.delete(`${this.baseUrl}/api/wishlist/${id}`,{});
+  removeProductFromWishlist(id: string) {
+    return this.http.delete(`${this.baseUrl}/api/wishlist/${id}`);
   }
-  getAllWishlistProducts(){
-    return this.http.get(`${this.baseUrl}/api/wishlist/getAllWishlist`);
+  getAllWishlistProducts() {
+    let params = new HttpParams()
+      .set('lat', 1.112)
+      .set('lng', 12.123);
+
+    return this.http.get(`${this.baseUrl}/api/wishlist/getAllWishlist`,{params});
   }
 
 }

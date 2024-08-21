@@ -89,7 +89,7 @@
         </ng-container>
 
         <div class="flex justify-center mt-8" *ngIf="!loadingForProduct && products.length">
-            <button (click)="viewMoreProducts()"
+            <button (click)="viewMoreProducts()"[hidden]="totalProductCount<params.limit"
                 class="bg-[#D1DACF] text-primary text-base sm:text-lg leading-5 font-semibold py-2 sm:px-4 px-3 rounded-xl">View
                 More</button>
         </div>

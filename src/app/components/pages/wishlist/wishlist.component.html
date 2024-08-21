@@ -1,4 +1,4 @@
-<div class="relative z-10 wish-list-container mx-auto p-4 flex items-center justify-center"*ngIf="products.length>0">
+<div class="relative z-10 wish-list-container mx-auto p-4 flex items-center justify-center" *ngIf="products.length>0">
     <!-- Heading -->
     <div class="max-w-full">
         <div class="bg-gray-100 py-4 md:py-6 text-center">
@@ -6,28 +6,37 @@
                 Wish List
             </p>
         </div>
+        <div class="flex justify-center">
+            <i class="pi pi-spin pi-spinner text-primary" style="font-size: 2rem" *ngIf="loading"></i>
+         </div>
 
         <!-- Product Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div routerLink="/products/productDetails" *ngFor="let product of products"
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"*ngIf="!loading">
+            <div routerLink="/products/productDetails" *ngFor="let product of products"style="width:100%;"
                 class="max-w-sm cursor-pointer mx-auto bg-white rounded-lg justify-between overflow-hidden flex my-0 md:my-4">
-                <div class="relative">
-                    <img [src]="product.imageUrl" [alt]="product.name" class="w-full h-36 sm:h-48 object-cover">
-                    <div class="posted absolute top-2 left-2 text-white backdrop-blur-md text-xs px-2 py-1 rounded">
-                        Posted: {{product.posted}}</div>
+                <div class="relative" style="min-width:40%;">
+                    <a [routerLink]="['/products/productDetails',product.id]">
+                        <img [src]="product.images[0]" [alt]="product.name" class="w-full h-36 sm:h-48 object-cover">
+
+                    </a>
+                    <!-- <div class="posted absolute top-2 left-2 text-white backdrop-blur-md text-xs px-2 py-1 rounded">
+                        Posted: {{product.posted}}</div> -->
                 </div>
-                <div class="p-4">
+                <div class="p-4" style="width:60%;">
                     <div class="flex h-full justify-between items-start">
                         <div class="flex  flex-col justify-between h-full">
                             <h2 class="font-bold text-lg text-gray-800">{{product.name}}</h2>
-                            <p class="text-sm text-gray-500 text-help font-normal">{{product.description}}</p>
-                            <p class="text-sm text-[#262626] font-normal">Strain Type: <span
-                                    class="text-side">{{product.strainType}}</span></p>
-                            <p class="text-sm text-[#262626] font-normal">THC Range: <span
-                                    class="text-side">{{product.thcRange}}</span></p>
+                            <p class="text-sm text-[#262626] font-normal">Category : <span
+                                    class="text-side">{{product.category.name}}</span></p>
+                            <p class="text-sm text-[#262626] font-normal">Sub Category : <span
+                                    class="text-side">{{product.sub_category.name}}</span></p>
+                            <p class="text-sm text-[#262626] font-normal">Strain Type : <span
+                                    class="text-side">{{product.strain_type.type}}</span></p>
+                            <p class="text-sm text-[#262626] font-normal">THC Range : <span
+                                    class="text-side">{{product.thc_range.range}}</span></p>
                             <p class="text-sm text-[#262626] flex items-center">
                                 <i class="pi pi-map-marker text-green-600 mr-1 text-side font-bold"></i>
-                                {{product.location}}
+                                {{product.distance | number:'1.2-2' }} km
                             </p>
                         </div>
                         <button class="text-gray-500">
@@ -41,7 +50,9 @@
 
         </div>
         <div class="flex justify-center mt-8">
-            <button class="font-lg cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View More</button>
+            <button [hidden]="loading"
+                class="font-lg cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
+                More</button>
         </div>
     </div>
     <!-- View More Button -->
@@ -88,16 +99,20 @@
                 <!-- Replace with the path to your sad leaf image -->
             </div>
             <p class="text-lg font-semibold text-green-800">Your Wishlist is <span
-                class="text-primary text-[28px]">Empty</span>
+                    class="text-primary text-[28px]">Empty</span>
             </p>
             <p class="text-help mb-6">No items in your wishlist yet. <br> Explore more and add some favorites!</p>
-            <button class="bg-secondary text-primary font-bold py-2 px-4 rounded-md w-40"routerLink="/products">Explore</button>
+            <button class="bg-secondary text-primary font-bold py-2 px-4 rounded-md w-40"
+                routerLink="/products">Explore</button>
         </div>
     </div>
     <div class="image-container">
         <img class="absolute top-16 left-0 w-36" src="../../../../assets/wishlist/left_leaf_wishlist.png" alt="">
-        <img class="absolute -top-16 right-0 w-36 rotate-90 hidden" src="../../../../assets/wishlist/left_leaf_wishlist.png" alt="">
-        <img class="absolute bottom-16 right-0 w-36 hidden sm:block" src="../../../../assets/wishlist/right_leaf_wishlist.png" alt="">
-        <img class="absolute -bottom-10 left-16 w-36 hidden sm:block" src="../../../../assets/wishlist/bottom_leaf_wishlist.png" alt="">
+        <img class="absolute -top-16 right-0 w-36 rotate-90 hidden"
+            src="../../../../assets/wishlist/left_leaf_wishlist.png" alt="">
+        <img class="absolute bottom-16 right-0 w-36 hidden sm:block"
+            src="../../../../assets/wishlist/right_leaf_wishlist.png" alt="">
+        <img class="absolute -bottom-10 left-16 w-36 hidden sm:block"
+            src="../../../../assets/wishlist/bottom_leaf_wishlist.png" alt="">
     </div>
 </div>

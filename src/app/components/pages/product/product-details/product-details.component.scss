@@ -1,0 +1,36 @@
+.phone:hover {
+
+    @keyframes vibrate {
+        0% {
+            transform: rotate(-5deg) translateX(0);
+        }
+
+        25% {
+            transform: rotate(5deg) translateX(-1px);
+        }
+
+        50% {
+            transform: rotate(-5deg) translateX(0);
+        }
+
+        75% {
+            transform: rotate(5deg) translateX(1px);
+        }
+
+        100% {
+            transform: rotate(-5deg) translateX(0);
+        }
+    }
+
+
+    .vibrate-icon {
+        animation: vibrate 0.3s linear infinite;
+    }
+
+    i {
+        scale: 1.2;
+        transition: scale 0.5s ease;
+    }
+
+    
+}

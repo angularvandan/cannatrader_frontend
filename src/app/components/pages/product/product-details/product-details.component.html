@@ -48,30 +48,30 @@
             <div class="p-6 rounded-lg w-full mx-auto mt-24 lg:block hidden">
                 <h2 class="text-[16px] lg:text-[32px] font-semibold mb-4">Contact Details</h2>
                 <div class="space-y-4">
-                    <div class="flex items-center">
+                    <div class="flex items-center phone">
                         <div class="rounded-full p-2">
                             <div class="twitter-icon w-12 h-12 bg-nav-bg rounded-full flex justify-center items-center">
-                                <i class="pi pi-map-marker text-primary"></i>
+                                <i class="pi pi-map-marker text-primary "></i>
                             </div>
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[20px]">Location</div>
-                            <div class="text-lg font-semibold text-[24px]">Ontario, Toronto (5 miles)</div>
+                            <div class="text-lg font-semibold cursor-pointer text-[24px] hover:text-secondary">Ontario, Toronto (5 miles)</div>
                         </div>
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex items-center phone">
                         <div class="rounded-full p-2">
                             <div class="twitter-icon w-12 h-12 bg-nav-bg rounded-full flex justify-center items-center">
-                                <i class="pi pi-phone text-primary"></i>
+                                <i class="pi pi-phone text-primary vibrate-icon"></i>
                             </div>
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[20px]">Phone</div>
-                            <a href="tel:{{product.vendor?.phone_no}}"class="text-lg font-semibold text-[20px] text-primary mr-2">{{product.vendor?.phone_no}}</a>
-                            <a class="text-inner hover:underline cursor-pointer">Click here to enquire</a>
+                            <a href="tel:{{product.vendor?.phone_no}}"class="hover:text-secondary text-lg cursor-pointer font-semibold text-[20px] text-primary mr-2">{{product.vendor?.phone_no}}</a>
+                            <a class="text-inner hover:underline cursor-pointer hover:text-secondary">Click here to enquire</a>
                         </div>
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex items-center phone">
                         <div class="rounded-full p-2">
                             <div class="twitter-icon w-12 h-12 bg-nav-bg rounded-full flex justify-center items-center">
                                 <i class="pi pi-envelope text-primary"></i>
@@ -79,10 +79,10 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[20px]">E-Mail</div>
-                            <div class="text-lg font-semibold text-[24px]">{{product.vendor?.email}}</div>
+                            <a href="mailto:{{product.vendor?.email}}" class="text-lg hover:text-secondary cursor-pointer font-semibold text-[24px]">{{product.vendor?.email}}</a>
                         </div>
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex items-center phone">
                         <div class="rounded-full p-2">
                             <div class="twitter-icon w-12 h-12 bg-nav-bg rounded-full flex justify-center items-center">
                                 <i class="pi pi-calendar text-primary"></i>
@@ -122,7 +122,7 @@
                     </div>
                     <div (click)="addProductToWishlit(product.id)"
                         class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
-                        <i class="pi pi-heart text-primary" ></i>
+                        <i class="pi text-primary"[ngClass]="isWishlisted?'pi-heart-fill':'pi-heart'" ></i>
                     </div>
                 </div>
             </div>
@@ -131,7 +131,7 @@
                 <div class="flex gap-2 items-center">
                     <p-rating [(ngModel)]="totalRating" [readonly]="true" [cancel]="false"></p-rating>
                 </div>
-                <span class="ml-2 text-gray-600">Ratings 1.2k</span>
+                <span class="ml-2 text-gray-600">Ratings {{product.ratings}}</span>
             </div>
 
             <button (click)="toggleBtn()" *ngIf="btn"
@@ -283,51 +283,51 @@
         <div class="rounded-lg w-full mx-auto lg:hidden">
             <h2 class="text-[16px] lg:text-[32px] lg:font-semiboldmb-4">Contact Details</h2>
             <div class="space-y-4">
-                <div class="flex items-center">
+                <div class="flex items-center phone">
                     <div class="rounded-full p-2">
                         <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
-                            <i class="pi pi-map-marker text-primary"></i>
+                            <i class="pi pi-map-marker text-primary vibrate-icon"></i>
                         </div>
                     </div>
                     <div class="ml-4">
-                        <div class="text-inner text-[10px] lg:text-[20px]">Location</div>
-                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">Ontario, Toronto (5 miles)
+                        <div class="text-inner text-[10px] lg:text-[20px] hover:text-secondary">Location</div>
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px] hover:text-secondary">Ontario, Toronto (5 miles)
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center">
+                <div class="flex items-center phone">
                     <div class="rounded-full p-2">
                         <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                             <i class="pi pi-phone text-primary"></i>
                         </div>
                     </div>
                     <div class="ml-4">
-                        <div class="text-inner text-[10px] lg:text-[20px]">Phone</div>
-                        <a class="text-lg lg:font-semibold text-[12px] lg:text-[20px] text-primary">{{product.vendor?.phone_no}}</a>
-                        <a href="tel:{{product.vendor?.phone_no}}"class="text-inner hover:underline text-[10px] lg:text-[20px]">Click here to
+                        <div class="text-inner text-[10px] lg:text-[20px] hover:text-secondary">Phone</div>
+                        <a class="text-lg lg:font-semibold text-[12px] lg:text-[20px] text-primary hover:text-secondary">{{product.vendor?.phone_no}}</a>
+                        <a href="tel:{{product.vendor?.phone_no}}"class="text-inner hover:underline text-[10px] lg:text-[20px]hover:text-secondary">Click here to
                             enquire</a>
                     </div>
                 </div>
-                <div class="flex items-center">
+                <div class="flex items-center phone">
                     <div class="rounded-full p-2">
                         <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                             <i class="pi pi-envelope text-primary"></i>
                         </div>
                     </div>
                     <div class="ml-4">
-                        <div class="text-inner text-[10px] lg:text-[20px]">E-Mail</div>
-                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">{{product.vendor?.email}}</div>
+                        <div class="text-inner text-[10px] lg:text-[20px] hover:text-secondary">E-Mail</div>
+                        <a href="mailto:{{product.vendor?.email}}" class="text-lg lg:font-semibold text-[12px] lg:text-[24px] hover:text-secondary">{{product.vendor?.email}}</a>
                     </div>
                 </div>
-                <div class="flex items-center">
+                <div class="flex items-center phone">
                     <div class="rounded-full p-2">
                         <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                             <i class="pi pi-calendar text-primary"></i>
                         </div>
                     </div>
                     <div class="ml-4">
-                        <div class="text-inner text-[10px] lg:text-[20px]">Uploaded Date</div>
-                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">{{product.created_at | date: 'dd-MM-yyyy'}}</div>
+                        <div class="text-inner text-[10px] lg:text-[20px] hover:text-secondary">Uploaded Date</div>
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px] hover:text-secondary">{{product.created_at | date: 'dd-MM-yyyy'}}</div>
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -336,7 +336,7 @@
                             class="h-12 w-12 object-cover rounded-full">
                     </div>
                     <div class="ml-4">
-                        <div class="text-gray-600 text-[10px] lg:text-[20px]">Owner</div>
+                        <div class="text-gray-600 text-[10px] lg:text-[20px] ">Owner</div>
                         <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px]">{{product.vendor?.name}}</div>
                     </div>
                 </div>

@@ -1,5 +1,12 @@
 <div class="flex items-center justify-center bg-cover bg-center bg-gradient-overlay">
-    <div class="max-w-3xl w-full pb-8">
+
+
+    <div class="flex justify-center items-center my-6">
+        <i class="pi pi-spin pi-spinner text-primary" style="font-size: 2rem" *ngIf="loadingForPatchValue"></i>
+    </div>
+
+    <div class="max-w-3xl w-full pb-8" *ngIf="!loadingForPatchValue">
+
         <div class="py-8">
             <nav class="flex justify-between items-center sm:mb-8" aria-label="Breadcrumb">
                 <div class="cursor-pointer ms-2">
@@ -49,10 +56,7 @@
                 <!-- <p-button  icon="pi pi-check" label="Confirm"></p-button> -->
             </div>
         </div>
-        <div class="flex justify-center items-center">
-            <i class="pi pi-spin pi-spinner" style="font-size: 2rem" *ngIf="loadingForPatchValue"></i>
-        </div>
-        <form [formGroup]="productForm" (ngSubmit)="onSubmit()"*ngIf="!loadingForPatchValue">
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
             <div>
                 <div class="input-container flex flex-col p-6 md:p-0">
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
@@ -454,7 +458,7 @@
                 </div>
             </div>
             <div class="p-6 md:p-0 ">
-                <button type="submit"[disabled]="loading"
+                <button type="submit" [disabled]="loading"
                     class="w-full font-bold py-2 px-4 text-lg rounded-md font-custom bg-secondary text-primary-btn"><i
                         class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
                     <span *ngIf="!loading">Edit products</span></button>

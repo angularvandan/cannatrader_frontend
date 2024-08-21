@@ -33,22 +33,12 @@
                     </div>
                     <div class="mb-8">
                         <label for="phone" class="block text-sm font-custom">Phone Number</label>
-                        <!-- <span class="p-input-icon-right w-full">
-                            <i class="pi pi-phone text-[#fafafa]"></i> -->
-                        <!-- <ngx-intl-tel-input [cssClass]="'custom'"
-                            [preferredCountries]="[CountryISO.Canada, CountryISO.UnitedStates]"
-                            [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
-                            [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
-                            [selectedCountryISO]="CountryISO.Canada" [phoneValidation]="true"[separateDialCode]="true" name="phone"
-                            formControlName="phone" [customPlaceholder]="'Enter your phone number'">
-                        </ngx-intl-tel-input> -->
-                        <!-- </span> -->
-                        <!-- <label for="phone" class="block text-sm  font-custom">Phone Number</label> -->
+                        
                         <span class="p-input-icon-right w-full">
                             <input pInputText id="phone" type="text" placeholder="Enter your phone number"
                                 class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
-                            <div class="absolute top-[10px] right-3 ">
-                                <svg width="25" height="25" viewBox="0 0 30 30" fill="none"
+                            <div class="absolute top-[9px] right-[9px] ">
+                                <svg width="17" height="20" viewBox="0 0 30 30" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_759_6116)">
                                         <path
@@ -71,7 +61,7 @@
 
                     <div class="mb-8">
                         <label for="description" class="block text-sm font-custom text-help">Message</label>
-                        <textarea required pInputTextarea id="description" rows="3"
+                        <textarea required pInputTextarea id="description" rows="4"
                             placeholder="Enter your message here..."
                             class="mt-1 block bg-[#F5F5F5] w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
                             name="description"></textarea>
@@ -91,19 +81,19 @@
             <div class="p-8 pt-0 rounded-lg w-full mx-auto flex items-center justify-center">
                 <div class="space-y-4">
 
-                    <div class="flex items-center">
+                    <div class="flex items-center phone">
                         <div class="rounded-full p-2">
                             <div
                                 class="twitter-icon w-12 h-12 bg-secondary rounded-full flex justify-center items-center">
-                                <i class="pi pi-phone text-primary" style="font-size: 1.25rem; font-weight:600"></i>
+                                <i class="pi pi-phone text-primary vibrate-icon" style="font-size: 1.25rem; font-weight:600"></i>
                             </div>
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[14px] sm:text-[18px]">Phone</div>
-                            <div class="text-lg text-primary font-medium text-[16px] sm:text-[20px]">2345678910</div>
+                            <a class="text-lg text-primary font-medium text-[16px] sm:text-[20px] hover:text-secondary cursor-pointer">2345678910</a>
                         </div>
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex items-center phone">
                         <div class="rounded-full p-2">
                             <div
                                 class="twitter-icon w-12 h-12 bg-secondary rounded-full flex justify-center items-center">
@@ -112,10 +102,10 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[14px] sm:text-[18px]">E-Mail</div>
-                            <div class="text-lg text-primary font-medium text-[16px] sm:text-[20px]">adminaddress@gmail.com</div>
+                            <div class="text-lg text-primary font-medium text-[16px] sm:text-[20px] hover:text-secondary cursor-pointer">adminaddress@gmail.com</div>
                         </div>
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex items-center phone">
                         <div class="rounded-full p-2">
                             <div
                                 class="twitter-icon w-12 h-12 bg-secondary rounded-full flex justify-center items-center">
@@ -125,7 +115,7 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[14px] sm:text-[18px]">Location</div>
-                            <div class="text-lg text-primary font-medium text-[16px] sm:text-[20]">66, North side Roads
+                            <div class="text-lg text-primary font-medium text-[16px] sm:text-[20px] hover:text-secondary cursor-pointer">66, North side Roads
                                 Toronto, Canada</div>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
 import { IProduct } from 'src/app/shared/models/product';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -54,15 +55,18 @@ export class EditProductComponent {
 
   productForm!: FormGroup;
   product!: IProduct;
+  userId:string='';
 
 
-  constructor(private confirmationService: ConfirmationService, private messageService: MessageService, private productService: ProductService, private tostr: ToastrService, private fb: FormBuilder, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private confirmationService: ConfirmationService, private messageService: MessageService, private productService: ProductService, private tostr: ToastrService, private fb: FormBuilder, private activatedRoute: ActivatedRoute, private router: Router,private userService:UserService) { }
 
   ngOnInit(): void {
 
     this.activatedRoute.paramMap.subscribe(params => {
       this.productId = params.get('id');
       console.log('Product ID:', this.productId);
+      this.userId=this.userService.currentUser.user.id;
+
       this.getProductByActivatedRoute();
     });
 
@@ -157,7 +161,7 @@ export class EditProductComponent {
     this.loadingForPatchValue = true;
 
     if (this.productId != '' && this.productId != null) {
-      this.productService.getProductById(this.productId).subscribe({
+      this.productService.getProductById(this.productId,this.userId).subscribe({
         next: (response: any) => {
           console.log(response);
           this.product = response.product;
@@ -222,7 +226,7 @@ export class EditProductComponent {
         images: files
       })
       this.selectedImageFiles = files;
-      // console.log(files);
+      console.log(files);
     }).catch(error => {
       console.error('Error converting images to files:', error);
     });
@@ -238,6 +242,7 @@ export class EditProductComponent {
   //for file converter
   async urlToFile(url: string, filename: string, mimeType: string): Promise<File> {
     const imageData = await fetch(url).then(res => res.arrayBuffer());
+    // console.log(imageData)
     const blob = new Blob([imageData], { type: mimeType });
     return new File([blob], filename, { type: mimeType });
   }
@@ -262,8 +267,8 @@ export class EditProductComponent {
         if (this.productId) {
           this.productService.deleteProductById(this.productId).subscribe({
             next: () => {
-              // this.router.navigate(['/profile/profile-details']);
               this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+              this.router.navigate(['/profile/profile-details']);
             }, error: () => {
               this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
             }
