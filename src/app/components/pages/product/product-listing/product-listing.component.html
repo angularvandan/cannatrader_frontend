@@ -3,7 +3,7 @@
     <div class="flex justify-center items-center mb-6" *ngIf="loadingForProduct">
         <i class="pi pi-spin pi-spinner text-[#3A5C41]" style="font-size: 2rem"></i>
     </div>
-    <div class=""*ngIf="!loadingForProduct">
+    <div class="" *ngIf="!loadingForProduct">
 
         <div class="bg-gray-100 sm:py-8">
             <nav class="flex sm:mb-8 mb-2" aria-label="Breadcrumb">
@@ -50,11 +50,12 @@
         </div>
 
         <!-- Product Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" >
-            <div *ngFor="let product of products" [routerLink]="['/products/productDetails', product.id]"style="width:100%"
-                class="max-w-sm cursor-pointer mx-auto bg-white rounded-lg justify-around overflow-hidden flex">
-                <div class="relative"style="width:40%">
-                    <img [src]="product.images[0]" alt="Canopy Growth"loadig="lazy"style="border-radius:8px;"
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div *ngFor="let product of products" style="width:100%"
+                class="max-w-sm  mx-auto bg-white rounded-lg justify-around overflow-hidden flex">
+                <div class="relative cursor-pointer" style="width:40%"
+                    [routerLink]="['/products/productDetails', product.id]">
+                    <img [src]="product.images[0]" alt="Canopy Growth" loadig="lazy" style="border-radius:8px;"
                         class=" h-36 md:h-40 lg:h-44 w-28 md:w-32 lg:w-36 object-cover">
                     <div class="absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-lg posted">Posted:
                         {{product.created_at | date: 'dd-MM-yyyy'}}
@@ -76,20 +77,24 @@
                                 Pune
                             </p>
                         </div>
-                        <button class="text-gray-500"><i class="pi pi-heart text-side"></i></button>
+
+                        <button class="text-gray-500"[disabled]="isAuth" (click)="addProductToWishlist(product.id)"><i [ngClass]="isAuth?'opacity-50 active:scale-100':'opacity-100 active:scale-110'"
+                                class="pi text-primary transform transition duration-300"
+                                [ngClass]="product.isWishlisted?'pi-heart-fill':'pi-heart'"></i></button>
                     </div>
                 </div>
             </div>
         </div>
 
         <ng-container *ngIf="!loadingForProduct">
-            <div *ngIf="!products.length || loadingError " class="flex justify-center items-center text-primary text-base sm:text-lg leading-5 font-semibold py-2 sm:px-4 px-3 ">
+            <div *ngIf="!products.length || loadingError "
+                class="flex justify-center items-center text-primary text-base sm:text-lg leading-5 font-semibold py-2 sm:px-4 px-3 ">
                 Product Not Found
             </div>
         </ng-container>
 
         <div class="flex justify-center mt-8" *ngIf="!loadingForProduct && products.length">
-            <button (click)="viewMoreProducts()"[hidden]="totalProductCount<params.limit"
+            <button (click)="viewMoreProducts()" [hidden]="totalProductCount<params.limit"
                 class="bg-[#D1DACF] text-primary text-base sm:text-lg leading-5 font-semibold py-2 sm:px-4 px-3 rounded-xl">View
                 More</button>
         </div>

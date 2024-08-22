@@ -67,7 +67,8 @@ export class ProfileDetailsComponent implements OnInit {
       },error:(err)=>{
         this.recentProductStatus=false;
       }
-    })
+    });
+    
   }
   confirm1() {
     this.confirmationService.confirm({

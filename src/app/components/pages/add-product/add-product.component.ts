@@ -114,8 +114,9 @@ export class AddProductComponent implements OnInit {
   }
   getSubCategoryById(id:any){
     this.productService.getSubCategory(id).subscribe((response:any)=>{
-      // console.log(response);
         this.subCategories=response.data;
+    },()=>{
+      this.subCategories=[];
     })
   }
 
@@ -142,7 +143,6 @@ export class AddProductComponent implements OnInit {
       })
     }
   }
-
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -180,10 +180,14 @@ export class AddProductComponent implements OnInit {
 
     if(this.productForm.valid){ 
       // console.log(this.productForm);
-      this.loading=true;
 
-      //append data into formData
-      const formData = new FormData();      
+      this.loading=true;
+      const formData = new FormData();
+
+      if(this.productForm.get('sub_category')?.value == ""){
+        this.productForm.removeControl('sub_category');
+        // console.log(this.productForm);
+      }
 
       Object.keys(this.productForm.controls).forEach(key => {
         const control = this.productForm.get(key);
@@ -221,11 +225,10 @@ export class AddProductComponent implements OnInit {
           this.loading=false;
         }
       });
-      
     }
     else{
+      console.log(this.productForm);
       this.productForm.markAllAsTouched();
     }
-
   }
 }

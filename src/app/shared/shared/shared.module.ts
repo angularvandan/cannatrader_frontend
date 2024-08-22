@@ -15,6 +15,8 @@ import { ToastModule } from 'primeng/toast';
 import { RatingModule } from 'primeng/rating';
 import { ToastrModule } from 'ngx-toastr';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { BlockUIModule } from 'primeng/blockui';
+import { PanelModule } from 'primeng/panel';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     RatingModule,
     DropdownModule,
     InputNumberModule,
+    BlockUIModule,
+    PanelModule,
     ToastrModule.forRoot(),
   ],
   exports: [
@@ -56,6 +60,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ToastModule,
     RatingModule,
     ToastrModule,
+    BlockUIModule,
+    PanelModule,
     InputNumberModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

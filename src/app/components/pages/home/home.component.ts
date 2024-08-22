@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit {
   searchForm!: FormGroup;
   loading:boolean=true;
 
-  constructor(private fb: FormBuilder, private productService: ProductService, private router: Router) {
+  constructor(private fb: FormBuilder, private productService: ProductService, private router: Router,private userService:UserService) {
 
   }
 
@@ -79,7 +80,8 @@ export class HomeComponent implements OnInit {
       latitude: this.searchForm.value.latitude,
       distance: this.searchForm.value.distance,
       limit: 9,
-      page: 1
+      page: 1,
+      userId:this.userService.currentUser.user?.id || ''
     }
     console.log(payload);
     this.router.navigate(['/products'], { queryParams: payload });

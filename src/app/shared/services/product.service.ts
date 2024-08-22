@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { IProduct } from '../models/product';
@@ -91,4 +91,20 @@ export class ProductService {
     return this.http.get(`${this.baseUrl}/api/wishlist/getAllWishlist`,{params});
   }
 
+  subscribeCompany(companyId:string){
+    return this.http.post(`${this.baseUrl}/api/subscribtion/subscribe`,{companyId})
+  }
+  unSubscribeCompany(companyId:string){
+    const body = { companyId: companyId };
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      body: body
+    };
+    return this.http.delete(`${this.baseUrl}/api/subscribtion/unsubscribe`,options)
+  }
+  getSubscribeCompany(){
+    return this.http.get(`${this.baseUrl}/api/subscribtion/subscriptions`);
+  }
 }

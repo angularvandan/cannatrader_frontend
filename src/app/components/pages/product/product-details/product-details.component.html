@@ -3,12 +3,12 @@
     <i class="pi pi-spin pi-spinner text-[#3A5C41]" style="font-size: 2rem"></i>
 </div>
 
-<div class="max-w-screen-xl mx-auto p-4"*ngIf="!loading">
+<div class="max-w-screen-xl mx-auto p-4" *ngIf="!loading">
     <!-- Breadcrumb -->
     <nav class="flex mb-8" aria-label="Breadcrumb">
         <ol class="lg:inline-flex flex w-full items-center space-x-1 ">
             <li class="flex w-full lg:inline-flex items-center justify-between lg:justify-normal">
-                <div routerLink="/products"
+                <div [routerLink]="['/products']" [queryParams]="{ userId }"
                     class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                     <i class="pi pi-arrow-left text-primary"></i>
                 </div>
@@ -16,18 +16,22 @@
                     Home / Productslisting / {{product.name}}
                 </a>
                 <div class="flex gap-4 lg:hidden">
-                    <div routerLink="../chats"
-                        class=" cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                    <button routerLink="/products/chats" [disabled]="isAuth"
+                        [ngClass]="isAuth?'opacity-50 hover:opacity-50':'opacity-100 '"
+                        class="  twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                         <svg width="36" height="20" viewBox="0 0 39 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M36.8437 10.0731V22.4613C36.8442 23.4375 36.6523 24.4043 36.2789 25.3064C35.9056 26.2085 35.3582 27.0282 34.668 27.7186C33.9777 28.409 33.1582 28.9566 32.2562 29.3302C31.3542 29.7037 30.3874 29.8959 29.4112 29.8956H24.4555L20.368 33.9831C20.2566 34.1012 20.1222 34.1953 19.973 34.2596C19.8239 34.3239 19.6633 34.3571 19.5009 34.3571C19.3385 34.3571 19.1778 34.3239 19.0287 34.2596C18.8796 34.1953 18.7451 34.1012 18.6337 33.9831L14.5462 29.8956H9.5868C8.61059 29.8956 7.64394 29.7033 6.74207 29.3297C5.84019 28.956 5.02076 28.4084 4.33056 27.718C3.64037 27.0277 3.09293 26.2081 2.71952 25.3061C2.34612 24.4042 2.15405 23.4375 2.1543 22.4613V10.0731C2.1543 8.1019 2.93736 6.21142 4.33123 4.81755C5.72509 3.42369 7.61558 2.64063 9.5868 2.64062H29.4093C31.3805 2.64063 33.271 3.42369 34.6649 4.81755C36.0587 6.21142 36.8437 8.1019 36.8437 10.0731Z"
                                 stroke="#3A5C41" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                    </div>
-                    <div
+                    </button>
+                    <button (click)="addProductToWishlit(product.id)" [disabled]="isAuth" [disabled]="isAuth"
+                        [ngClass]="isAuth?'opacity-50 hover:opacity-50':'opacity-100 '"
                         class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
-                        <i class="pi pi-heart text-primary"></i>
-                    </div>
+                        <i [ngClass]="isAuth?'opacity-50 active:scale-100 hover:opacity-50':'opacity-100 active:scale-110'"
+                            class="pi text-primary transform  transition duration-300"
+                            [ngClass]="isWishlisted?'pi-heart-fill':'pi-heart'"></i>
+                    </button>
                 </div>
             </li>
         </ol>
@@ -37,12 +41,12 @@
     <div class="flex flex-col lg:flex-row mt-4">
         <!-- Image Section -->
         <div class="flex-1">
-            <img src="{{bigImageForShowing}}" alt="Product Image"
-                class="w-full max-h-[650px] h-full rounded-lg">
+            <img src="{{bigImageForShowing}}" alt="Product Image" class="w-full max-h-[650px] h-full rounded-lg">
             <div class="flex gap-2 justify-start mt-8 overflow-x-auto">
                 <ng-container *ngFor="let image of product.images">
-                    <img src="{{image}}" alt="image"(click)="showBigImageWhenClick(image)"[ngStyle]="{'border':image==bigImageForShowing ? '4px solid green':'none'}"
-                    class="lg:w-32 lg:h-28 w-20 h-20 rounded-lg cursor-pointer">
+                    <img src="{{image}}" alt="image" (click)="showBigImageWhenClick(image)"
+                        [ngStyle]="{'border':image==bigImageForShowing ? '4px solid green':'none'}"
+                        class="lg:w-32 lg:h-28 w-20 h-20 rounded-lg cursor-pointer">
                 </ng-container>
             </div>
             <div class="p-6 rounded-lg w-full mx-auto mt-24 lg:block hidden">
@@ -56,7 +60,8 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[20px]">Location</div>
-                            <div class="text-lg font-semibold cursor-pointer text-[24px] hover:text-secondary">Ontario, Toronto (5 miles)</div>
+                            <div class="text-lg font-semibold cursor-pointer text-[24px] hover:text-secondary">Ontario,
+                                Toronto (5 miles)</div>
                         </div>
                     </div>
                     <div class="flex items-center phone">
@@ -67,8 +72,10 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[20px]">Phone</div>
-                            <a href="tel:{{product.vendor?.phone_no}}"class="hover:text-secondary text-lg cursor-pointer font-semibold text-[20px] text-primary mr-2">{{product.vendor?.phone_no}}</a>
-                            <a class="text-inner hover:underline cursor-pointer hover:text-secondary">Click here to enquire</a>
+                            <a href="tel:{{product.vendor?.phone_no}}"
+                                class="hover:text-secondary text-lg cursor-pointer font-semibold text-[20px] text-primary mr-2">{{product.vendor?.phone_no}}</a>
+                            <a class="text-inner hover:underline cursor-pointer hover:text-secondary">Click here to
+                                enquire</a>
                         </div>
                     </div>
                     <div class="flex items-center phone">
@@ -79,7 +86,8 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[20px]">E-Mail</div>
-                            <a href="mailto:{{product.vendor?.email}}" class="text-lg hover:text-secondary cursor-pointer font-semibold text-[24px]">{{product.vendor?.email}}</a>
+                            <a href="mailto:{{product.vendor?.email}}"
+                                class="text-lg hover:text-secondary cursor-pointer font-semibold text-[24px]">{{product.vendor?.email}}</a>
                         </div>
                     </div>
                     <div class="flex items-center phone">
@@ -90,7 +98,8 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[20px]">Uploaded Date</div>
-                            <div class="text-lg font-semibold text-[24px]">{{product.created_at | date:'dd-MM-yyyy'}}</div>
+                            <div class="text-lg font-semibold text-[24px]">{{product.created_at | date:'dd-MM-yyyy'}}
+                            </div>
                         </div>
                     </div>
                     <div class="flex items-center">
@@ -112,18 +121,22 @@
             <div class="flex pb-2 items-center justify-between">
                 <h1 class="text-5xl font-bold">{{product.name}}</h1>
                 <div class="lg:flex hidden gap-4">
-                    <div routerLink="/products/chats"
-                        class=" cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                    <button routerLink="/products/chats" [disabled]="isAuth"
+                        [ngClass]="isAuth?'opacity-50 hover:opacity-50':'opacity-100 '"
+                        class=" twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                         <svg width="36" height="20" viewBox="0 0 39 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M36.8437 10.0731V22.4613C36.8442 23.4375 36.6523 24.4043 36.2789 25.3064C35.9056 26.2085 35.3582 27.0282 34.668 27.7186C33.9777 28.409 33.1582 28.9566 32.2562 29.3302C31.3542 29.7037 30.3874 29.8959 29.4112 29.8956H24.4555L20.368 33.9831C20.2566 34.1012 20.1222 34.1953 19.973 34.2596C19.8239 34.3239 19.6633 34.3571 19.5009 34.3571C19.3385 34.3571 19.1778 34.3239 19.0287 34.2596C18.8796 34.1953 18.7451 34.1012 18.6337 33.9831L14.5462 29.8956H9.5868C8.61059 29.8956 7.64394 29.7033 6.74207 29.3297C5.84019 28.956 5.02076 28.4084 4.33056 27.718C3.64037 27.0277 3.09293 26.2081 2.71952 25.3061C2.34612 24.4042 2.15405 23.4375 2.1543 22.4613V10.0731C2.1543 8.1019 2.93736 6.21142 4.33123 4.81755C5.72509 3.42369 7.61558 2.64063 9.5868 2.64062H29.4093C31.3805 2.64063 33.271 3.42369 34.6649 4.81755C36.0587 6.21142 36.8437 8.1019 36.8437 10.0731Z"
                                 stroke="#3A5C41" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                    </div>
-                    <div (click)="addProductToWishlit(product.id)"
-                        class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
-                        <i class="pi text-primary"[ngClass]="isWishlisted?'pi-heart-fill':'pi-heart'" ></i>
-                    </div>
+                    </button>
+                    <button (click)="addProductToWishlit(product.id)" [disabled]="isAuth"
+                        [ngClass]="isAuth?'opacity-50 hover:opacity-50':'opacity-100 '"
+                        class=" twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                        <i [ngClass]="isAuth?'opacity-50 active:scale-100 hover:opacity-50':'opacity-100 active:scale-110'"
+                            class="pi text-primary transform transition duration-300"
+                            [ngClass]="isWishlisted?'pi-heart-fill':'pi-heart'"></i>
+                    </button>
                 </div>
             </div>
             <p class="text-2xl text-help pb-4">From Canopygrowth</p>
@@ -134,18 +147,18 @@
                 <span class="ml-2 text-gray-600">Ratings {{product.ratings}}</span>
             </div>
 
-            <button (click)="toggleBtn()" *ngIf="btn"
+            <button [disabled]="isAuth"[ngClass]="isAuth?'opacity-50 hover:opacity-50':'opacity-100 '" (click)="subscribeCompany(product.vendor?.company?.id || '')" *ngIf="isSubscribed"
                 class="mt-2 w-2/4 bg-primary text-xl font-semibold text-secondary py-2 px-4 rounded">Subscribed
                 ✓</button>
 
-            <button (click)="toggleBtn()" *ngIf="!btn"
+            <button [disabled]="isAuth"[ngClass]="isAuth?'opacity-50 hover:opacity-50':'opacity-100 '" (click)="subscribeCompany(product.vendor?.company?.id || '')" *ngIf="!isSubscribed"
                 class="mt-2 w-2/4 bg-secondary text-xl font-semibold text-primary py-2 px-4 rounded">Subscribe</button>
 
             <h2 class="text-xl font-semibold pt-10">Description</h2>
 
-            <p class="mt-4 text-help">{{ showAll ? product.description : (product.description | slice:0:charLimit) + '...' }}
-                <span class="text-[#698AFD] cursor-pointer"
-                    (click)="toggleViewMore()">{{ showAll ? 'View Less' : 'View More' }}</span>
+            <p class="mt-4 text-help">{{ showAll ? product.description : (product.description | slice:0:charLimit) +
+                '...' }}
+                <span class="text-[#698AFD] cursor-pointer" (click)="toggleViewMore()">{{ showAll ? 'View Less' : 'View More' }}</span>
             </p>
 
             <div class="w-full h-[0.5px] border border-primary mt-10 mb-8"></div>
@@ -157,7 +170,8 @@
                         Category: <span class=" text-help float-right">
                             {{product.categories.name}}
                         </span>
-                    </div><div class="font-semibold w-full border-b leading-10">
+                    </div>
+                    <div class="font-semibold w-full border-b leading-10">
                         Sub Category: <span class=" text-help float-right">
                             {{product.subCategory ? product.subCategory.name:''}}
                         </span>
@@ -275,7 +289,8 @@
             <h2 class="text-base font-semibold">Rate this product</h2>
             <p class="mt-2 text-[12px] text-help">Tell others what you think</p>
             <div class="flex mt-2 text-yellow-500 rate-product">
-                <p-rating [(ngModel)]="rate"(click)="giveRatingToProduct()" [cancel]="false"></p-rating>
+                <p-rating [(ngModel)]="rate" (click)="giveRatingToProduct()" [disabled]="isAuth"
+                    [cancel]="false"></p-rating>
             </div>
         </div>
 
@@ -291,7 +306,8 @@
                     </div>
                     <div class="ml-4">
                         <div class="text-inner text-[10px] lg:text-[20px] hover:text-secondary">Location</div>
-                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px] hover:text-secondary">Ontario, Toronto (5 miles)
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px] hover:text-secondary">Ontario,
+                            Toronto (5 miles)
                         </div>
                     </div>
                 </div>
@@ -303,8 +319,11 @@
                     </div>
                     <div class="ml-4">
                         <div class="text-inner text-[10px] lg:text-[20px] hover:text-secondary">Phone</div>
-                        <a class="text-lg lg:font-semibold text-[12px] lg:text-[20px] text-primary hover:text-secondary">{{product.vendor?.phone_no}}</a>
-                        <a href="tel:{{product.vendor?.phone_no}}"class="text-inner hover:underline text-[10px] lg:text-[20px]hover:text-secondary">Click here to
+                        <a
+                            class="text-lg lg:font-semibold text-[12px] lg:text-[20px] text-primary hover:text-secondary">{{product.vendor?.phone_no}}</a>
+                        <a href="tel:{{product.vendor?.phone_no}}"
+                            class="text-inner hover:underline text-[10px] lg:text-[20px]hover:text-secondary">Click here
+                            to
                             enquire</a>
                     </div>
                 </div>
@@ -316,7 +335,8 @@
                     </div>
                     <div class="ml-4">
                         <div class="text-inner text-[10px] lg:text-[20px] hover:text-secondary">E-Mail</div>
-                        <a href="mailto:{{product.vendor?.email}}" class="text-lg lg:font-semibold text-[12px] lg:text-[24px] hover:text-secondary">{{product.vendor?.email}}</a>
+                        <a href="mailto:{{product.vendor?.email}}"
+                            class="text-lg lg:font-semibold text-[12px] lg:text-[24px] hover:text-secondary">{{product.vendor?.email}}</a>
                     </div>
                 </div>
                 <div class="flex items-center phone">
@@ -327,7 +347,8 @@
                     </div>
                     <div class="ml-4">
                         <div class="text-inner text-[10px] lg:text-[20px] hover:text-secondary">Uploaded Date</div>
-                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px] hover:text-secondary">{{product.created_at | date: 'dd-MM-yyyy'}}</div>
+                        <div class="text-lg lg:font-semibold text-[12px] lg:text-[24px] hover:text-secondary">
+                            {{product.created_at | date: 'dd-MM-yyyy'}}</div>
                     </div>
                 </div>
                 <div class="flex items-center">

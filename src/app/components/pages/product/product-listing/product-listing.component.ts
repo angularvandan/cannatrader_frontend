@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IProduct, Product } from 'src/app/shared/models/product';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 
 @Component({
@@ -34,8 +36,11 @@ export class ProductListingComponent implements OnInit {
   loadingForProduct: boolean = false;
   loadingError: boolean = false;
   totalProductCount: number = 0;
+  isWishlisted: boolean = false;
 
-  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router, private fb: FormBuilder) { }
+  blockedPanel:boolean=true;
+
+  constructor(private productService: ProductService,private userService:UserService, private tostr: ToastrService, private activatedRoute: ActivatedRoute, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -111,6 +116,12 @@ export class ProductListingComponent implements OnInit {
     //when refress then patch the value of filter dropdownn
 
   }
+  get isAuth(){
+      if(this.userService.currentUser.token){
+        return false;
+      }
+      return true;
+  }
   // this is call for sub category
   // getSubCategoryById(id: any) {
   //   if (id != '') {
@@ -178,11 +189,47 @@ export class ProductListingComponent implements OnInit {
   }
   // when click on view more product
   viewMoreProducts() {
-    if (this.totalProductCount>=this.params.limit) {
+    if (this.totalProductCount >= this.params.limit) {
       this.params = { ...this.params, limit: parseInt(this.params.limit) + 9 }
       this.router.navigate(['/products'], { queryParams: this.params });
     }
   }
+
+  addProductToWishlist(id: string) {  
+    const productIndex = this.products.findIndex((product: IProduct) => product.id === id);
+    if (productIndex !== -1) {
+      const product = this.products[productIndex];
+  
+      if (!product.isWishlisted) {
+        this.products[productIndex] = { ...product, isWishlisted: true };
+
+        this.productService.addProductToWishlist(id).subscribe({
+          next: (response: any) => {
+            this.tostr.success(response.message);
+          },
+          error: (err) => {
+            console.log(err);
+            this.products[productIndex] = { ...product, isWishlisted: false };
+
+          }
+        });
+      }
+      else {
+        this.products[productIndex] = { ...product, isWishlisted: false };
+        this.productService.removeProductFromWishlist(id).subscribe({
+          next: (response: any) => {
+            this.tostr.success(response.message);
+            // Update the product in the list
+          },
+          error: (err) => {
+            console.log(err);
+            this.products[productIndex] = { ...product, isWishlisted: true };
+          }
+        });
+      }
+    }
+  }
+  
 
   // sortByAscendingAndDeceding(value:any) {
   //   console.log(value);
