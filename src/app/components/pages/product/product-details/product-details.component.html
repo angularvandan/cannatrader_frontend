@@ -49,9 +49,21 @@
                         class="lg:w-32 lg:h-28 w-20 h-20 rounded-lg cursor-pointer">
                 </ng-container>
             </div>
-            <div class="p-6 rounded-lg w-full mx-auto mt-24 lg:block hidden">
-                <h2 class="text-[16px] lg:text-[32px] font-semibold mb-4">Contact Details</h2>
-                <div class="space-y-4">
+            <div class="p-6 rounded-lg w-full mx-auto mt-24 lg:block hidden relative">
+                <div class="w-[500px] h-[300px] absolute top-1/3 left-12"*ngIf="isAuth"style="z-index:1000">
+                    <div class="flex flex-col items-center justify-center">
+                        <p class="text-primary text-center text-[16px] sm:text-[18px] leading-7 font-semibold mb-4">Create an account or log in to access and view <br>
+                            contact details.</p>
+                        <button routerLink="/login"  class="bg-secondary text-xl font-semibold text-primary py-2 px-4 rounded mb-4">Login to continue</button>
+                        <div class="flex items-center justify-center text-primary text-[16px] sm:text-[18px] leading-8 font-semibold">
+                            <a class="mr-2">New User?</a>
+                            <a routerLink="/signup" class="hover:underline">Create an account</a>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="text-[16px] lg:text-[32px] font-semibold mb-4 p-2">Contact Details</h2>
+                <div class="space-y-4"
+                    [ngStyle]="{'filter':isAuth?'blur(5px)':'none','pointer-events':isAuth?'none':'auto'}">
                     <div class="flex items-center phone">
                         <div class="rounded-full p-2">
                             <div class="twitter-icon w-12 h-12 bg-nav-bg rounded-full flex justify-center items-center">
@@ -147,18 +159,21 @@
                 <span class="ml-2 text-gray-600">Ratings {{product.ratings}}</span>
             </div>
 
-            <button [disabled]="isAuth"[ngClass]="isAuth?'opacity-50 hover:opacity-50':'opacity-100 '" (click)="subscribeCompany(product.vendor?.company?.id || '')" *ngIf="isSubscribed"
+            <button [disabled]="isAuth" [ngClass]="isAuth?'opacity-50 hover:opacity-50':'opacity-100 '"
+                (click)="subscribeCompany(product.vendor?.company?.id || '')" *ngIf="isSubscribed"
                 class="mt-2 w-2/4 bg-primary text-xl font-semibold text-secondary py-2 px-4 rounded">Subscribed
                 ✓</button>
 
-            <button [disabled]="isAuth"[ngClass]="isAuth?'opacity-50 hover:opacity-50':'opacity-100 '" (click)="subscribeCompany(product.vendor?.company?.id || '')" *ngIf="!isSubscribed"
+            <button [disabled]="isAuth" [ngClass]="isAuth?'opacity-50 hover:opacity-50':'opacity-100 '"
+                (click)="subscribeCompany(product.vendor?.company?.id || '')" *ngIf="!isSubscribed"
                 class="mt-2 w-2/4 bg-secondary text-xl font-semibold text-primary py-2 px-4 rounded">Subscribe</button>
 
             <h2 class="text-xl font-semibold pt-10">Description</h2>
 
             <p class="mt-4 text-help">{{ showAll ? product.description : (product.description | slice:0:charLimit) +
                 '...' }}
-                <span class="text-[#698AFD] cursor-pointer" (click)="toggleViewMore()">{{ showAll ? 'View Less' : 'View More' }}</span>
+                <span class="text-[#698AFD] cursor-pointer" (click)="toggleViewMore()">{{ showAll ? 'View Less' : 'View
+                    More' }}</span>
             </p>
 
             <div class="w-full h-[0.5px] border border-primary mt-10 mb-8"></div>
@@ -290,14 +305,26 @@
             <p class="mt-2 text-[12px] text-help">Tell others what you think</p>
             <div class="flex mt-2 text-yellow-500 rate-product">
                 <p-rating [(ngModel)]="rate" (click)="giveRatingToProduct()" [disabled]="isAuth"
-                    [cancel]="false"></p-rating>
+                    [ngStyle]="{'filter':isAuth?'blur(4px)':'none'}" [cancel]="false"></p-rating>
             </div>
         </div>
 
         <!-- Contact Details -->
-        <div class="rounded-lg w-full mx-auto lg:hidden">
-            <h2 class="text-[16px] lg:text-[32px] lg:font-semiboldmb-4">Contact Details</h2>
-            <div class="space-y-4">
+        <div class="rounded-lg w-full mx-auto lg:hidden relative">
+            <div class="w-full sm:w-[500px] h-[300px] absolute top-1/3 sm:left-12 "*ngIf="isAuth"style="z-index:1000">
+                    <div class="flex flex-col items-center justify-center">
+                        <p class="text-primary text-center text-[16px] sm:text-[18px] leading-7 font-semibold mb-4">Create an account or log in to access and view <br>
+                            contact details.</p>
+                        <button routerLink="/login"  class="bg-secondary text-xl font-semibold text-primary py-2 px-4 rounded mb-4">Login to continue</button>
+                        <div class="flex items-center justify-center text-primary text-[16px] sm:text-[18px] leading-8 font-semibold">
+                            <a class="mr-2">New User?</a>
+                            <a routerLink="/signup" class="hover:underline">Create an account</a>
+                        </div>
+                    </div>
+                </div>
+            <h2 class="text-[18px] lg:text-[32px] font-semiboldmb-4 p-2">Contact Details</h2>
+            <div class="space-y-4"
+                [ngStyle]="{'filter':isAuth?'blur(5px)':'none','pointer-events':isAuth?'none':'auto'}">
                 <div class="flex items-center phone">
                     <div class="rounded-full p-2">
                         <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
@@ -369,7 +396,8 @@
             <div class="">
                 <p class="leading-8 text-xl font-semibold text-[#262626]">COA Report </p>
             </div>
-            <div class="bg-gray-100 p-4 flex items-center justify-between">
+            <div class="bg-gray-100 p-4 flex items-center justify-between"
+                [ngStyle]="{'filter':isAuth?'blur(5px)':'none','pointer-events':isAuth?'none':'auto'}">
                 <span class="text-gray-700 flex items-center text-[12px] lg:text-[20px]">
                     <i style="font-size: 1.5rem;" class="pi pi-file place-content-center font-bold mr-4 text-2xl"></i>
                     COA Report.pdf
