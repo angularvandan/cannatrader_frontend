@@ -1,5 +1,9 @@
+<div class="flex h-screen justify-center items-center " *ngIf="loadingForPage">
+    <i class="pi pi-spin pi-spinner text-[#3A5C41]" style="font-size: 2rem"></i>
+</div>
+
 <div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay"
-    *ngIf="companyDocumentStatus">
+    *ngIf="companyDocumentStatus && !loadingForPage">
     <div class="max-w-3xl w-full pb-8">
         <div class="pt-8 pb-1">
             <nav class="flex sm:mb-2" aria-label="Breadcrumb">

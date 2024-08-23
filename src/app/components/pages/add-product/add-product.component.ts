@@ -50,6 +50,7 @@ export class AddProductComponent implements OnInit {
   imagePreviews: string[] = [];
   selectedFile: File | null = null;
   loading:boolean=false;
+  loadingForPage:boolean=true;
 
 
   user!:UserDetails;
@@ -96,6 +97,7 @@ export class AddProductComponent implements OnInit {
     });
 
     this.productService.getAllValueForAddProduct().subscribe((response:any) => {
+      this.loadingForPage=false;
       console.log(response);
       this.categories=response[0].data;
       this.thcRange=response[1].data;
@@ -104,6 +106,8 @@ export class AddProductComponent implements OnInit {
       this.growthMethod=response[4].data;
       this.trimMethod=response[5].data;
       this.dryMethod=response[6].data;
+    },(err)=>{
+      this.loadingForPage=false;
     });
 
     this.productForm.get('category')?.valueChanges.subscribe(categoryId => {

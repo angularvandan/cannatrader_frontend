@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 export interface Category {
   id: string;
@@ -42,13 +44,15 @@ export class WishlistComponent implements OnInit {
   products:WishlitProduct[]=[];
 
   loading:boolean=true;
+  userId:string='';
 
-  constructor(private productService:ProductService){
+  constructor(private productService:ProductService,private userService:UserService,private toastr:ToastrService){
 
   }
 
   ngOnInit(): void {
     this.getWishlistProducts();
+    this.userId=this.userService.currentUser.user.id;
   }
 
   getWishlistProducts(){
@@ -62,5 +66,17 @@ export class WishlistComponent implements OnInit {
         this.loading=false;
       }
     })
+  }
+  removeFromWishlist(id:string){
+    this.loading=true;
+    this.productService.removeProductFromWishlist(id).subscribe({
+      next:(response:any)=>{
+        this.toastr.success(response.message);
+        this.getWishlistProducts();
+      },error:(err)=>{
+        console.log(err);
+        this.loading=false;
+      }
+    });
   }
 }
