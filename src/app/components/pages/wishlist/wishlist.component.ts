@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -45,18 +46,23 @@ export class WishlistComponent implements OnInit {
 
   loading:boolean=true;
   userId:string='';
+  params:any={};
 
-  constructor(private productService:ProductService,private userService:UserService,private toastr:ToastrService){
+  constructor(private router:Router,private activatedRoute:ActivatedRoute, private productService:ProductService,private userService:UserService,private toastr:ToastrService){
 
   }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe((response:any)=>{
+      console.log(response);
+      this.params=response;
+    })
     this.getWishlistProducts();
     this.userId=this.userService.currentUser.user.id;
   }
 
   getWishlistProducts(){
-    this.productService.getAllWishlistProducts().subscribe({
+    this.productService.getAllWishlistProducts(this.params).subscribe({
       next:(response:any)=>{
         this.products=response.wishlistItems;
         console.log(response);
@@ -78,5 +84,12 @@ export class WishlistComponent implements OnInit {
         this.loading=false;
       }
     });
+  }
+  viewMoreProduct(){
+    this.params={
+      page:1,
+      limit:2
+    }
+    this.router.navigate(['/wishlist'], { queryParams: this.params });
   }
 }

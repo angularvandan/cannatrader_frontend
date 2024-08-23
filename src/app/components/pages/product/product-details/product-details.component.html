@@ -50,12 +50,16 @@
                 </ng-container>
             </div>
             <div class="p-6 rounded-lg w-full mx-auto mt-24 lg:block hidden relative">
-                <div class="w-[500px] h-[300px] absolute top-1/3 left-12"*ngIf="isAuth"style="z-index:1000">
+                <div class="w-[500px] h-[300px] absolute top-1/3 left-12" *ngIf="isAuth" style="z-index:1000">
                     <div class="flex flex-col items-center justify-center">
-                        <p class="text-primary text-center text-[16px] sm:text-[18px] leading-7 font-semibold mb-4">Create an account or log in to access and view <br>
+                        <p class="text-primary text-center text-[16px] sm:text-[18px] leading-7 font-semibold mb-4">
+                            Create an account or log in to access and view <br>
                             contact details.</p>
-                        <button routerLink="/login"  class="bg-secondary text-xl font-semibold text-primary py-2 px-4 rounded mb-4">Login to continue</button>
-                        <div class="flex items-center justify-center text-primary text-[16px] sm:text-[18px] leading-8 font-semibold">
+                        <button routerLink="/login"
+                            class="bg-secondary text-xl font-semibold text-primary py-2 px-4 rounded mb-4">Login to
+                            continue</button>
+                        <div
+                            class="flex items-center justify-center text-primary text-[16px] sm:text-[18px] leading-8 font-semibold">
                             <a class="mr-2">New User?</a>
                             <a routerLink="/signup" class="hover:underline">Create an account</a>
                         </div>
@@ -76,7 +80,7 @@
                                 Toronto (5 miles)</div>
                         </div>
                     </div>
-                    <div class="flex items-center phone">
+                    <div class="flex items-start phone">
                         <div class="rounded-full p-2">
                             <div class="twitter-icon w-12 h-12 bg-nav-bg rounded-full flex justify-center items-center">
                                 <i class="pi pi-phone text-primary vibrate-icon"></i>
@@ -84,10 +88,19 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[20px]">Phone</div>
-                            <a href="tel:{{product.vendor?.phone_no}}"
-                                class="hover:text-secondary text-lg cursor-pointer font-semibold text-[20px] text-primary mr-2">{{product.vendor?.phone_no}}</a>
-                            <a class="text-inner hover:underline cursor-pointer hover:text-secondary">Click here to
-                                enquire</a>
+                            <div *ngIf="!showPhoneNoStatus">
+                                <a href="tel:{{product.vendor?.phone_no}}"
+                                    class="hover:text-secondary text-lg cursor-pointer font-semibold text-[20px] text-primary mr-2">xx-xxxx-xxxx</a>
+                            </div>
+                            <div *ngIf="showPhoneNoStatus">
+                                <a href="tel:{{product.vendor?.phone_no}}"
+                                    class="hover:text-secondary text-lg cursor-pointer font-semibold text-[20px] text-primary mr-2">{{product.vendor?.phone_no}}</a>
+                            </div>
+                            <div *ngIf="!showPhoneNoStatus">
+                                <a (click)="showPhoneNoStatus=true" class="text-inner hover:underline cursor-pointer hover:text-secondary">Click
+                                    here to
+                                    enquire</a>
+                            </div>
                         </div>
                     </div>
                     <div class="flex items-center phone">
@@ -151,7 +164,7 @@
                     </button>
                 </div>
             </div>
-            <p class="text-2xl text-help pb-4">From Canopygrowth</p>
+            <p class="text-2xl text-help pb-4">From {{product.vendor?.company?.company_name}}</p>
             <div class="flex items-center pb-4">
                 <div class="flex gap-2 items-center">
                     <p-rating [(ngModel)]="totalRating" [readonly]="true" [cancel]="false"></p-rating>
@@ -311,17 +324,21 @@
 
         <!-- Contact Details -->
         <div class="rounded-lg w-full mx-auto lg:hidden relative">
-            <div class="w-full sm:w-[500px] h-[300px] absolute top-1/3 sm:left-12 "*ngIf="isAuth"style="z-index:1000">
-                    <div class="flex flex-col items-center justify-center">
-                        <p class="text-primary text-center text-[16px] sm:text-[18px] leading-7 font-semibold mb-4">Create an account or log in to access and view <br>
-                            contact details.</p>
-                        <button routerLink="/login"  class="bg-secondary text-xl font-semibold text-primary py-2 px-4 rounded mb-4">Login to continue</button>
-                        <div class="flex items-center justify-center text-primary text-[16px] sm:text-[18px] leading-8 font-semibold">
-                            <a class="mr-2">New User?</a>
-                            <a routerLink="/signup" class="hover:underline">Create an account</a>
-                        </div>
+            <div class="w-full sm:w-[500px] h-[300px] absolute top-1/3 sm:left-12 " *ngIf="isAuth" style="z-index:1000">
+                <div class="flex flex-col items-center justify-center">
+                    <p class="text-primary text-center text-[16px] sm:text-[18px] leading-7 font-semibold mb-4">Create
+                        an account or log in to access and view <br>
+                        contact details.</p>
+                    <button routerLink="/login"
+                        class="bg-secondary text-xl font-semibold text-primary py-2 px-4 rounded mb-4">Login to
+                        continue</button>
+                    <div
+                        class="flex items-center justify-center text-primary text-[16px] sm:text-[18px] leading-8 font-semibold">
+                        <a class="mr-2">New User?</a>
+                        <a routerLink="/signup" class="hover:underline">Create an account</a>
                     </div>
                 </div>
+            </div>
             <h2 class="text-[18px] lg:text-[32px] font-semiboldmb-4 p-2">Contact Details</h2>
             <div class="space-y-4"
                 [ngStyle]="{'filter':isAuth?'blur(5px)':'none','pointer-events':isAuth?'none':'auto'}">

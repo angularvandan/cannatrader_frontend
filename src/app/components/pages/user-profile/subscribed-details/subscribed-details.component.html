@@ -1,130 +1,55 @@
-<div class="subscribed-listing-container">
-
-    <div class=" py-4 flex">
-        <div class="cursor-pointer ms-2">
-            <div routerLink="../profile-details" class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
-                <i class="pi pi-arrow-left text-primary"></i>
+<div class="flex  h-screen  justify-center items-center"*ngIf="loading">
+    <i class="pi pi-spin pi-spinner text-primary" style="font-size: 2rem" ></i>
+ </div>
+<div class="subscribed-listing-container"*ngIf="!loading">
+    <div class="w-full flex justify-center items-center">
+        <div class=" py-4 flex sm:max-w-[65%] w-full">
+            <div class="cursor-pointer flex items-center w-[30%] sm:w-[45%]">
+                <div routerLink="../profile-details"
+                    class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
+                    <i class="pi pi-arrow-left text-primary"></i>
+    
+                </div>
+                <a class=" hidden cursor-pointer text-primary lg:flex text-[22px] font-medium text-gray-800 md:ml-2">
+                    <span routerLink="/home">Home</span> / Products Listing
+                </a>
+            </div>
+            <div class="flex justify-start items-center w-[70%] sm:w-[55%]" aria-label="Breadcrumb">
+                <a
+                    class="text-primary text-center inline-flex text-[22px] font-medium text-gray-800 ">
+                    Subscribed
+                </a>
             </div>
         </div>
-        <nav class="flex justify-center items-center sm:mb-8 w-full" aria-label="Breadcrumb">
-            <a
-                class="m text-primary text-center inline-flex text-[22px] font-medium text-gray-800 hover:underline md:ml-8">
-                Subscribed
-            </a>
-        </nav>
     </div>
 
     <div class="recent-subscribed flex justify-center">
-        <table class="max-w-[850px] w-full border-spacing-x-4 h-full">
+        <table class="sm:max-w-[65%] w-full border-spacing-x-4 h-full">
             <caption class="caption-bottom ">
                 <div class="py-6">
-                    <!-- <a routerLink="../subscribed-listing"
-                        class="font-lg leading-4 font-semibold bg-[#D1DACF] text-primary rounded-lg py-1 px-2">View
-                        More</a> -->
+                    <button (click)="viewMore()"*ngIf="!loading"[hidden]="total<=params.limit"
+                        class="font-lg leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-2">View
+                        More</button>
                 </div>
             </caption>
             <tbody>
                 <tr style="height:10px"></tr>
-                <tr>
+                <tr *ngFor="let data of subscribedCompanyes;let i=index;">
                     <td class="">
-                        <a href="" class="img-container">
-                            <img src="../../../../../assets/profile/user.jpg" class="shadow-4" />
+                        <a  class="img-container">
+                            <img [src]="data.Company.user.avatar" alt="user image" class="shadow-4" />
                         </a>
                     </td>
-                    <td >Vandan Sharma</td>
+                    <td>{{data.Company.company_name}}</td>
                     <td></td>
                     <td></td>
                     <td>
                         <span class="subscribed-btn-container">
-                            <button (click)="toggleBtn(0)" *ngIf="!btn[0]"
+                            <button (click)="subscribe(data.companyId)"*ngIf="!data.subscribedStatus"
                                 class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
 
-                            <button (click)="toggleBtn(0)" *ngIf="btn[0]"
+                            <button (click)="unSubscribe(data.companyId)"*ngIf="data.subscribedStatus"
                                 class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed</button>
-
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="">
-                        <a href="" class="img-container">
-                            <img src="../../../../../assets/profile/user.jpg" class="shadow-4" />
-                        </a>
-                    </td>
-                    <td>Vandan Sharma</td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <span class="subscribed-btn-container">
-                            <button (click)="toggleBtn(1)" *ngIf="!btn[1]"
-                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
-
-                            <button (click)="toggleBtn(1)" *ngIf="btn[1]"
-                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
-                                </button>
-
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="">
-                        <a href="" class="img-container">
-                            <img src="../../../../../assets/profile/user.jpg" class="shadow-4" />
-                        </a>
-                    </td>
-                    <td>Vandan Sharma</td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <span class="subscribed-btn-container">
-                            <button (click)="toggleBtn(2)" *ngIf="!btn[2]"
-                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
-
-                            <button (click)="toggleBtn(2)" *ngIf="btn[2]"
-                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
-                                </button>
-
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="">
-                        <a href="" class="img-container">
-                            <img src="../../../../../assets/profile/user.jpg" class="shadow-4" />
-                        </a>
-                    </td>
-                    <td>Vandan Sharma</td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <span class="subscribed-btn-container">
-                            <button (click)="toggleBtn(3)" *ngIf="!btn[3]"
-                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
-
-                            <button (click)="toggleBtn(3)" *ngIf="btn[3]"
-                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
-                                </button>
-
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="">
-                        <a href="" class="img-container">
-                            <img src="../../../../../assets/profile/user.jpg" class="shadow-4" />
-                        </a>
-                    </td>
-                    <td>Vandan Sharma</td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <span class="subscribed-btn-container">
-                            <button (click)="toggleBtn(4)" *ngIf="!btn[4]"
-                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
-
-                            <button (click)="toggleBtn(4)" *ngIf="btn[4]"
-                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
-                                </button>
 
                         </span>
                     </td>

@@ -186,7 +186,8 @@
 
                                         <tr *ngFor="let product of products;let i=index">
                                             <td class="">
-                                                <a class="img-container cursor-pointer"[routerLink]="['/products/productDetails', product.id]">
+                                                <a class="img-container cursor-pointer"
+                                                    [routerLink]="['/products/productDetails', product.id]">
                                                     <img [src]="product.images[0]" class="shadow-4" />
                                                 </a>
                                             </td>
@@ -207,7 +208,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="min-height-[400px]" *ngIf="!products.length">
+                                <div class="min-height-[400px]" *ngIf="!products.length && recentProductStatus">
                                     <div class="flex flex-col items-center justify-center">
                                         <div class="img-container"><img
                                                 src="../../../../../assets/profile/not_products.png"
@@ -221,13 +222,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex justify-center my-5"*ngIf="!recentProductStatus">
-                                    <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" ></i>
+                                <div class="flex justify-center items-center my-5 h-[200px]" *ngIf="!recentProductStatus">
+                                    <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="pt-6 flex justify-center">
-                            <button routerLink="/profile/recentlisting"*ngIf="products.length "
+                            <button routerLink="/profile/recentlisting" *ngIf="products.length"
+                            
                                 class="font-lg view-more cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
                                 More
                             </button>
@@ -242,7 +244,7 @@
                                 </h1>
                             </div>
                             <div class="">
-                                <a routerLink="/profile/recentlisting"*ngIf="products.length" 
+                                <a routerLink="/profile/recentlisting" *ngIf="products.length"
                                     class="font-lg view-more cursor-pointer leading-4 font-medium  text-primary rounded-lg pb-2 pt-0 px-3">View
                                     More</a>
                             </div>
@@ -252,7 +254,8 @@
                                 <div *ngIf="i<3" routerLink="productDetails"
                                     class="max-w-sm cursor-pointer mx-auto bg-white rounded-lg justify-around overflow-hidden flex">
                                     <div class="relative">
-                                        <img [src]="product.images[0]" alt="Canopy Growth" class="h-28  w-24 object-cover"style="border-radius:8px;">
+                                        <img [src]="product.images[0]" alt="Canopy Growth"
+                                            class="h-28  w-24 object-cover" style="border-radius:8px;">
                                         <div
                                             class="absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-lg posted">
                                             Posted:
@@ -303,7 +306,8 @@
                                     </h1>
                                 </div>
                                 <div class="">
-                                    <button routerLink="/profile/subscribed-listing"
+                                    <button [routerLink]="['../subscribed-listing']" [queryParams]="{limit:9,page:1}"
+                                        *ngIf="!subscribedStatus"
                                         class="font-lg view-more cursor-pointer leading-4 font-medium  text-primary rounded-lg pb-2 pt-0 px-3">View
                                         More</button>
                                 </div>
@@ -315,21 +319,21 @@
                             </caption> -->
                             <tbody>
                                 <tr style="height:10px"></tr>
-                                <tr>
+                                <tr *ngFor="let data of subscribedCompanyes;let i=index">
                                     <td class="">
-                                        <a href="" class="img-container">
-                                            <img src="../../../../../assets/profile/user.jpg" class="shadow-4" />
+                                        <a class="img-container">
+                                            <img src="{{data.Company.user.avatar}}" class="shadow-4" />
                                         </a>
                                     </td>
-                                    <td>Vandan Sharma</td>
+                                    <td>{{data.Company.company_name}}</td>
                                     <td></td>
                                     <td></td>
                                     <td>
                                         <span class="subscribed-btn-container">
-                                            <button (click)="toggleBtn(0)" *ngIf="!btn[0]"
+                                            <button (click)="subscribe(data.companyId)" *ngIf="!data.subscribedStatus"
                                                 class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
 
-                                            <button (click)="toggleBtn(0)" *ngIf="btn[0]"
+                                            <button (click)="unSubscribe(data.companyId)" *ngIf="data.subscribedStatus"
                                                 class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
                                                 ✓
                                             </button>
@@ -337,69 +341,28 @@
                                         </span>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="">
-                                        <a href="" class="img-container">
-                                            <img src="../../../../../assets/profile/user.jpg" class="shadow-4" />
-                                        </a>
-                                    </td>
-                                    <td>Vandan Sharma</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        <span class="subscribed-btn-container">
-                                            <button (click)="toggleBtn(1)" *ngIf="!btn[1]"
-                                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
 
-                                            <button (click)="toggleBtn(1)" *ngIf="btn[1]"
-                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
-                                                ✓
-                                            </button>
-
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="">
-                                        <a href="" class="img-container">
-                                            <img src="../../../../../assets/profile/user.jpg" class="shadow-4" />
-                                        </a>
-                                    </td>
-                                    <td>Vandan Sharma</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        <span class="subscribed-btn-container">
-                                            <button (click)="toggleBtn(2)" *ngIf="!btn[2]"
-                                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
-
-                                            <button (click)="toggleBtn(2)" *ngIf="btn[2]"
-                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
-                                                ✓
-                                            </button>
-
-                                        </span>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
-                        <div class="min-height-[400px]" *ngIf="false">
+                        <div class="min-height-[400px]" *ngIf="subscribedCompanyes.length<=0 && !subscribedStatus">
                             <div class="flex flex-col items-center justify-center">
-                                <div class="img-container"><img
-                                        src="../../../../../assets/profile/not_products.png"
+                                <div class="img-container"><img src="../../../../../assets/profile/not_products.png"
                                         alt="Empty product"></div>
                                 <div
                                     class="emply-title text-[#262626] text-[15px] sm:text-[20px] leading-7 font-custom">
                                     No Subscribe</div>
-                                <div
-                                    class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
+                                <div class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
                                     Subscribe your favorite cannabis shop!
                                 </div>
                             </div>
                         </div>
+                        <div class="flex h-[200px] justify-center items-center my-5" *ngIf="subscribedStatus">
+                            <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem"></i>
+                        </div>
                         <div class="hidden sm:block">
                             <div class="pt-6 flex justify-center">
-                                <button routerLink="../subscribed-listing"
+                                <button [routerLink]="['../subscribed-listing']" [queryParams]="params"
+                                    *ngIf="!subscribedStatus"
                                     class="font-lg view-more cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
                                     More</button>
                             </div>

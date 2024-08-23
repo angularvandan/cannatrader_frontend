@@ -14,10 +14,10 @@
         <!-- Product Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"*ngIf="!loading">
             <div  *ngFor="let product of products"style="width:100%;"
-                class="max-w-sm  mx-auto bg-white rounded-lg justify-between overflow-hidden flex my-0 md:my-4">
+                class="max-w-sm  mx-auto bg-white rounded-lg justify-between overflow-hidden flex my-0 ">
                 <div class="relative cursor-pointer" style="min-width:40%;">
                     <a [routerLink]="['/products/productDetails',product.id]">
-                        <img [src]="product.images[0]" [alt]="product.name" class="w-full h-36 sm:h-48 object-cover">
+                        <img [src]="product.images[0]" [alt]="product.name" class="h-full w-32 lg:w-36 object-cover"style="border-radius:8px;">
 
                     </a>
                     <!-- <div class="posted absolute top-2 left-2 text-white backdrop-blur-md text-xs px-2 py-1 rounded">
@@ -51,7 +51,7 @@
 
         </div>
         <div class="flex justify-center mt-8">
-            <button [hidden]="loading"
+            <button [hidden]="loading"(click)="viewMoreProduct()"
                 class="font-lg cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
                 More</button>
         </div>

@@ -31,6 +31,7 @@ export class RecentProductListingComponent implements OnInit{
       next:(response:any)=>{
         this.products=response.products;
         this.loading=false;
+        console.log(response);
       },error:(err)=>{
         console.log(err);
         this.loading=false;

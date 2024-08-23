@@ -17,6 +17,7 @@ export class ProductDetailsComponent implements OnInit {
   totalRating: number = 0;
   rate: number = 0;
   userId: string = '';
+  showPhoneNoStatus:boolean=false;
 
   paragraph: string = `Our premium cannabis dried flower is cultivated from top-quality strains, ensuring a potent and aromatic
                 experience Our premium cannabis dried flower is cultivated from top-quality strains, ensuring `;
@@ -28,6 +29,7 @@ export class ProductDetailsComponent implements OnInit {
   loading: boolean = true;
   isWishlisted: boolean = false;
   isSubscribed: boolean = false;
+
 
   constructor(private productService: ProductService, private userService: UserService, private activatedRoute: ActivatedRoute, private router: Router, private tostr: ToastrService) { }
 

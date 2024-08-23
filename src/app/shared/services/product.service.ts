@@ -83,10 +83,12 @@ export class ProductService {
   removeProductFromWishlist(id: string) {
     return this.http.delete(`${this.baseUrl}/api/wishlist/${id}`);
   }
-  getAllWishlistProducts() {
+  getAllWishlistProducts(pagination:any) {
     let params = new HttpParams()
       .set('lat', 1.112)
-      .set('lng', 12.123);
+      .set('lng', 12.123)
+      .set('limit',pagination.limit)
+      .set('page',pagination.page);
 
     return this.http.get(`${this.baseUrl}/api/wishlist/getAllWishlist`,{params});
   }
@@ -104,7 +106,10 @@ export class ProductService {
     };
     return this.http.delete(`${this.baseUrl}/api/subscribtion/unsubscribe`,options)
   }
-  getSubscribeCompany(){
-    return this.http.get(`${this.baseUrl}/api/subscribtion/subscriptions`);
+  getSubscribedCompany(pagination:any){
+    let params = new HttpParams()
+      .set('limit',pagination.limit)
+      .set('page',pagination.page);
+    return this.http.get(`${this.baseUrl}/api/subscribtion/subscriptions`,{params});
   }
 }

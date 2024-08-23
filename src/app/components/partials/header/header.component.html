@@ -26,7 +26,7 @@
                     class="hover:color-primary text-xl font-medium">Home</a>
                 <a routerLink="/addProduct" routerLinkActive="active-link" *ngIf="isAuth"
                     class="hover:color-secondary  text-xl font-medium">Add Products</a>
-                <a routerLink="/wishlist" routerLinkActive="active-link" *ngIf="isAuth"
+                <a routerLink="/wishlist" routerLinkActive="active-link"[queryParams]="{page:1,limit:9}"  *ngIf="isAuth"
                     class="hover:text-secondary  text-xl font-medium">Wish List</a>
                 <a routerLink="/contact-us" routerLinkActive="active-link" *ngIf="isAuth"
                     class="hover:text-secondary  text-xl font-medium">Contact</a>
@@ -84,7 +84,7 @@
             <a routerLink="/addProduct" *ngIf="isAuth"
                 class="hover:text-secondary  text-lg leading-6  font-medium text-primary" (click)="toggleMenu()">Add
                 Products</a>
-            <a routerLink="/wishlist" *ngIf="isAuth"
+            <a routerLink="/wishlist"[queryParams]="{page:1,limit:9}" *ngIf="isAuth"
                 class="hover:text-secondary  text-lg leading-6 font-medium text-primary" (click)="toggleMenu()">Wish
                 List</a>
             <a routerLink="/contact-us" *ngIf="isAuth"
