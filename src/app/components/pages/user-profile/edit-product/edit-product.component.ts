@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
@@ -41,15 +41,14 @@ export class EditProductComponent {
 
   ]
 
-  subCategories: any[] = [{
-    id: '', name: 'Sub Category'
-  }];
+  subCategories: any[] = [];
 
   selectedImageFiles: File[] = [];
   imagePreviews: string[] = [];
-  selectedFile: File | null = null;
 
   imagesLinksContainer:string[]=[];
+  pdfLinksContainer:string | null='';
+  tempImagesPreview:string[]=[];
 
   loading: boolean = false;
   loadingForPatchValue: boolean = false;
@@ -100,8 +99,8 @@ export class EditProductComponent {
       location: ['pune'],
 
       // For file inputs, you will need to handle them separately
-      images: ['', Validators.required],
-      pdf: ['', Validators.required]
+      imageUrls: ['', Validators.required],
+      pdfUrl: ['', Validators.required]
     });
 
     this.productForm.get('category')?.valueChanges.subscribe(categoryId => {
@@ -142,21 +141,21 @@ export class EditProductComponent {
       this.productService.getSubCategory(id).subscribe((response: any) => {
         console.log(response.data);
         //this is added when category has no sub category;
-        this.subCategories = [{
-          id: '', name: 'Sub Category'
-        }];
+        // this.subCategories = [{
+        //   id: '', name: 'Sub Category'
+        // }];
         this.subCategories = this.subCategories.concat(response.data);
 
       }, (err: any) => {
         //when sub category not found
-        this.productForm.patchValue({
-          sub_category: {
-            id: '', name: 'Sub Category'
-          }
-        });
-        this.subCategories = [{
-          id: '', name: 'Sub Category'
-        }];
+        // this.productForm.patchValue({
+        //   sub_category: {
+        //     id: '', name: 'Sub Category'
+        //   }
+        // });
+        // this.subCategories = [{
+        //   id: '', name: 'Sub Category'
+        // }];
       })
     }
   }
@@ -202,67 +201,19 @@ export class EditProductComponent {
       lowers: this.product.lowers,
       latitude: this.product.location.coordinates[0],
       longitude: this.product.location.coordinates[0],
-
+      imageUrls:this.product.images,
+      pdfUrl:this.product.coa_document
     });
+    //image preview for show the image in form
     this.imagePreviews = [...this.product.images];
+    this.imagesLinksContainer=[...this.product.images];
+    this.pdfLinksContainer=this.product.coa_document;
+
     console.log(this.imagePreviews);
-    // this.selectedFile=this.product.coa_document;
-    this.preloadFile();
-  }
-  async preloadFile() {
-
-    //this is for select pdf
-    this.convertPdfUrlToFile(this.product.coa_document)
-      .then(file => {
-        // console.log(file);
-        this.productForm.patchValue({
-          pdf: file
-        });
-        this.selectedFile = file;
-      }).catch(error => {
-        console.error('Error converting PDF to file:', error);
-      });
-
-    // below code for images convert into  file;
-    this.selectedImageFiles = [];
-    this.convertMultipleImages(this.product.images).then(files => {
-      this.productForm.patchValue({
-        images: files
-      })
-      this.selectedImageFiles = files;
-      console.log(files);
-    }).catch(error => {
-      console.error('Error converting images to files:', error);
-    });
+    console.log(this.imagesLinksContainer);
+    console.log(this.pdfLinksContainer);
   }
 
-  //this is for pdf converter in file
-  async convertPdfUrlToFile(url: string, filename: string = 'document.pdf'): Promise<File> {
-    const pdfData = await fetch(url).then(res => res.arrayBuffer());
-    const blob = new Blob([pdfData], { type: 'application/pdf' });
-    return new File([blob], filename, { type: 'application/pdf' });
-  }
-
-  //for file converter
-  async urlToFile(url: string, filename: string, mimeType: string): Promise<File> {
-    const imageData = await fetch(url).then(res => res.arrayBuffer());
-    // console.log(imageData)
-    const blob = new Blob([imageData], { type: mimeType });
-    return new File([blob], filename, { type: mimeType });
-  }
-
-  async convertMultipleImages(imageUrls: string[]): Promise<File[]> {
-    const files: File[] = [];
-
-    for (let i = 0; i < imageUrls.length; i++) {
-      const url = imageUrls[i];
-      const fileName = `image-${i + 1}.jpg`; // Generate a file name based on index
-      const file = await this.urlToFile(url, fileName, 'image/jpeg');
-      files.push(file);
-    }
-
-    return files;
-  }
 
   confirm1() {
     this.confirmationService.confirm({
@@ -292,45 +243,27 @@ export class EditProductComponent {
     });
   }
 
-
   onImageSelected(event: any, type: string) {
     const files = event.target.files;
     console.log(files);
     if (type === 'images') {
-
       if (files.length + this.selectedImageFiles.length > 5) {
         alert('You can only upload a maximum of 5 images.');
         return;
       }
-
       for (let file of files) {
         this.selectedImageFiles.push(file);
-
         //method for conver image into url
         this.convertIntoImageUrl(file);
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.imagePreviews.push(e.target.result);
-        };
-        reader.readAsDataURL(file);
       }
-
-      //here patch the value of image
-      this.productForm.patchValue({
-        images: this.selectedImageFiles
-      });
-      // console.log(this.selectedImageFiles);
     }
   }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
-
-      this.productForm.patchValue({
-        pdf: this.selectedFile
-      })
+      //this method for convert pdf into url
+      this.convertIntoPdfUrl(input.files[0]);
     }
   }
 
@@ -341,8 +274,33 @@ export class EditProductComponent {
 
     this.productService.imageFileToImageUrl(formData).subscribe({
       next:(response:any)=>{
-        this.imagesLinksContainer=response.imageLinks;
+        this.imagesLinksContainer.push(response.imageLinks[0]);
+        this.imagePreviews=this.imagePreviews.concat(response.imageLinks[0]);
         console.log(this.imagesLinksContainer);
+
+        this.productForm.patchValue({
+          imageUrls:this.imagesLinksContainer
+        });
+
+      },error:(err)=>{
+        console.log(err);
+      }
+    })
+  }
+
+  convertIntoPdfUrl(file:File){
+    const formData=new FormData();
+    formData.append('pdf',file);
+
+    this.productService.pdfImageToPdfUrl(formData).subscribe({
+      next:(response:any)=>{
+        this.pdfLinksContainer=response.pdfUrl;
+
+        this.productForm.patchValue({
+          pdfUrl:this.pdfLinksContainer
+        });
+
+        console.log(this.pdfLinksContainer);
       },error:(err)=>{
         console.log(err);
       }
@@ -350,22 +308,25 @@ export class EditProductComponent {
   }
 
   removeFile(): void {
-    this.selectedFile = null;
+    this.pdfLinksContainer=null;
+
     this.productForm.patchValue({
-      pdf: this.selectedFile
+      pdfUrl:null
     })
   }
 
-  removeImg(type: string, file: File) {
+  removeImg(type: string, link: string) {
     if (type === 'images') {
-      const index = this.selectedImageFiles.indexOf(file);
+      const index = this.imagesLinksContainer.indexOf(link);
       if (index > -1) {
-        this.selectedImageFiles.splice(index, 1);
+        this.imagesLinksContainer.splice(index, 1);
         this.imagePreviews.splice(index, 1);
+        console.log(this.imagesLinksContainer);
 
         this.productForm.patchValue({
-          images: this.selectedImageFiles
+          imageUrls:this.imagesLinksContainer
         })
+
       }
     }
   }
@@ -374,53 +335,63 @@ export class EditProductComponent {
 
     if (this.productForm.valid && this.productId != null) {
 
-      console.log(this.productForm);
-      this.loading = true;
-      //append data into formData
-      const formData = new FormData();
+      this.productForm.removeControl('location');
+      let body:any={};
 
-      Object.keys(this.productForm.controls).forEach(key => {
-        const control = this.productForm.get(key);
-        if (key == 'pdf' || key == 'images') {
-          // console.log(control?.value);
-          for (let i = 0; i < control?.value.length; i++) {
-            formData.append(key, control?.value[i]);
-            // console.log(control?.value[i])
-          }
-          if (key == 'pdf') {
-            formData.append(key, control?.value);
-          }
-        } else if (key === 'harvest_date') {
+      if(!this.productForm.value.sub_category){
+        this.productForm.removeControl('sub_category');
 
-          const date = new Date(control?.value);
-          const formattedDate = date.toISOString().split('T')[0]; // Convert to yyyy-mm-dd format
-          formData.append(key, formattedDate);
-
-        } else if (typeof control?.value === 'object' && control.value !== null) {
-          formData.append(key, control.value.id);
-        } else {
-          formData.append(key, control?.value);
+        body={
+          ...this.productForm.value,
+          strain_type:this.productForm.value.strain_type.id,
+          thc_range:this.productForm.value.thc_range.id,
+          category:this.productForm.value.category.id,
+          growth_method:this.productForm.value.growth_method.id,
+          grow_media:this.productForm.value.grow_media.id,
+          dry_method:this.productForm.value.dry_method.id,
+          trim_method:this.productForm.value.trim_method.id,
         }
-      });
-      formData.delete('location');
+        this.productForm.addControl('sub_category',new FormControl(null));
 
-      this.productService.editProductById(this.productId, formData).subscribe({
+      }
+      else{
+        body={
+          ...this.productForm.value,
+          strain_type:this.productForm.value.strain_type.id,
+          thc_range:this.productForm.value.thc_range.id,
+          category:this.productForm.value.category.id,
+          sub_category:this.productForm.value.sub_category.id,
+          growth_method:this.productForm.value.growth_method.id,
+          grow_media:this.productForm.value.grow_media.id,
+          dry_method:this.productForm.value.dry_method.id,
+          trim_method:this.productForm.value.trim_method.id,
+        }
+      }
+
+      this.productForm.addControl('location',new FormControl('pune'));
+
+      console.log(this.productForm);
+      console.log(body);
+      this.loading = true;
+      
+      this.productService.editProductById(this.productId, body).subscribe({
         next: (response: any) => {
           // console.log(response);
           this.loading = false;
           this.tostr.success('Updated Successfully');
           this.getProductByActivatedRoute();
 
-        }, error: (err) => {
-          // console.log(err);
+        }, error: (err:any) => {
+          console.log(err);
           this.loading = false;
-          this.tostr.error(err.error.error.message);
+          this.tostr.error(err);
 
         }
       });
 
     }
     else {
+      console.log(this.productForm);
       this.productForm.markAllAsTouched();
     }
   }

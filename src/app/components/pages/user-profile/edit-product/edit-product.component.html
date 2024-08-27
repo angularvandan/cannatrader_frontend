@@ -383,7 +383,7 @@
                                     <input type="file" id="file-upload-images"
                                         (change)="onImageSelected($event, 'images')" accept="image/*" multiple />
                                 </label>
-                                <div *ngIf="productForm.get('images')?.invalid && productForm.get('images')?.touched"
+                                <div *ngIf="productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched"
                                     class="text-red-600 text-sm">
                                     Images are required.
                                 </div>
@@ -403,18 +403,18 @@
                                             accept=".pdf" />
 
                                     </label>
-                                    <div *ngIf="productForm.get('pdf')?.invalid && productForm.get('pdf')?.touched"
+                                    <div *ngIf="productForm.get('pdfUrl')?.invalid && productForm.get('pdfUrl')?.touched"
                                         class="text-red-600 text-sm">
                                         CoA is required.
                                     </div>
                                 </div>
                             </div>
                             <div class="mt-6 w-full relative">
-                                <div class="mb-4" *ngIf="selectedFile">
+                                <div class="mb-4" *ngIf="pdfLinksContainer">
                                     <div class="file-details relative text-slate cursor-pointer">
                                         <div class="file-name flex">
                                             <i class="pi pi-file place-content-center font-medium mr-4 text-2xl"></i>
-                                            <p class="text-black break-all">{{ selectedFile.name }}</p>
+                                            <p class="text-black break-all">{{ pdfLinksContainer }}</p>
                                         </div>
                                         <i class="pi pi-times top-2 right-2 absolute font-medium"
                                             (click)="removeFile()"></i>
@@ -432,7 +432,7 @@
                                         <p>Upload Images</p>
                                         <input type="file" id="file-upload-images"
                                             (change)="onImageSelected($event, 'images')" accept="image/*" multiple />
-                                        <div *ngIf="productForm.get('images')?.invalid && productForm.get('images')?.touched"
+                                        <div *ngIf="productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched"
                                             class="text-red-600 text-sm">
                                             Images are required.
                                         </div>
@@ -449,7 +449,7 @@
                                     <div
                                         class="remove-img w-6 h-6 absolute top-2 right-2 bg-[#808384] rounded-full flex justify-center items-center">
                                         <i class="pi pi-times text-[0.6rem] text-white cursor-pointer"
-                                            (click)="removeImg('images', selectedImageFiles[i])"></i>
+                                            (click)="removeImg('images', imagesLinksContainer[i])"></i>
                                     </div>
                                 </div>
                             </div>
