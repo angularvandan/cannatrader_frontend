@@ -1,5 +1,16 @@
 .wish-list-container {
     background-color: rgba(245, 245, 245, 1);
+
+    .single-product {
+        width: 100%;
+        min-height: 170px;
+        max-height: 180px;
+
+
+        @media(max-width:768px){
+            max-height: 170px;
+        }
+    }
 }
 
 .posted {

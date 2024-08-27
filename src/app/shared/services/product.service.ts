@@ -67,6 +67,15 @@ export class ProductService {
       userId: userId
     });
   }
+
+  imageFileToImageUrl(body:any){
+    return this.http.post(`${this.baseUrl}/api/users/uploadImages`,body);
+  }
+
+  pdfImageToPdfUrl(body:{}){
+    return this.http.post(`${this.baseUrl}/api/users/uploadPDF`,body);
+  }
+
   editProductById(id: string, body: any) {
     return this.http.put(`${this.baseUrl}/api/product/${id}`, body);
   }

@@ -251,10 +251,10 @@
                         </div>
                         <div class="grid grid-cols-1 gap-4 mb-4">
                             <ng-container *ngFor="let product of products;let i=index;">
-                                <div *ngIf="i<3" routerLink="productDetails"
+                                <div *ngIf="i<3" style="width:75%;max-width:300px"
                                     class="max-w-sm cursor-pointer mx-auto bg-white rounded-lg justify-around overflow-hidden flex">
-                                    <div class="relative">
-                                        <img [src]="product.images[0]" alt="Canopy Growth"
+                                    <div class="relative cursor-pointer" style="width:40%;">
+                                        <img [src]="product.images[0]"[routerLink]="['/products/productDetails', product.id]" alt="Canopy Growth"
                                             class="h-28  w-24 object-cover" style="border-radius:8px;">
                                         <div
                                             class="absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-lg posted">
@@ -262,7 +262,7 @@
                                             {{product.created_at | date: 'dd-MM-yyyy'}}
                                         </div>
                                     </div>
-                                    <div class="px-5">
+                                    <div class="px-5"style="width:70%">
                                         <div class="flex h-full justify-between items-center">
                                             <div class="flex flex-col justify-center gap-1 h-full">
                                                 <h2 class="font-bold text-base text-gray-800">{{product.name}}</h2>
@@ -306,7 +306,7 @@
                                     </h1>
                                 </div>
                                 <div class="">
-                                    <button [routerLink]="['../subscribed-listing']" [queryParams]="{limit:9,page:1}"
+                                    <button [routerLink]="['/profile/subscribed-listing']" [queryParams]="params"
                                         *ngIf="!subscribedStatus"
                                         class="font-lg view-more cursor-pointer leading-4 font-medium  text-primary rounded-lg pb-2 pt-0 px-3">View
                                         More</button>
@@ -361,7 +361,7 @@
                         </div>
                         <div class="hidden sm:block">
                             <div class="pt-6 flex justify-center">
-                                <button [routerLink]="['../subscribed-listing']" [queryParams]="params"
+                                <button [routerLink]="['/profile/subscribed-listing']" [queryParams]="params"
                                     *ngIf="!subscribedStatus"
                                     class="font-lg view-more cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
                                     More</button>

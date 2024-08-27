@@ -49,6 +49,8 @@ export class EditProductComponent {
   imagePreviews: string[] = [];
   selectedFile: File | null = null;
 
+  imagesLinksContainer:string[]=[];
+
   loading: boolean = false;
   loadingForPatchValue: boolean = false;
   productId: string | null = '';
@@ -109,6 +111,8 @@ export class EditProductComponent {
       }
 
     });
+
+
 
   }
   getAllDropDownValue() {
@@ -301,6 +305,9 @@ export class EditProductComponent {
 
       for (let file of files) {
         this.selectedImageFiles.push(file);
+
+        //method for conver image into url
+        this.convertIntoImageUrl(file);
         const reader = new FileReader();
         reader.onload = (e: any) => {
           this.imagePreviews.push(e.target.result);
@@ -325,6 +332,21 @@ export class EditProductComponent {
         pdf: this.selectedFile
       })
     }
+  }
+
+  convertIntoImageUrl(file:File){
+
+    const formData=new FormData();
+    formData.append('images',file);
+
+    this.productService.imageFileToImageUrl(formData).subscribe({
+      next:(response:any)=>{
+        this.imagesLinksContainer=response.imageLinks;
+        console.log(this.imagesLinksContainer);
+      },error:(err)=>{
+        console.log(err);
+      }
+    })
   }
 
   removeFile(): void {

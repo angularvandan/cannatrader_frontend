@@ -14,16 +14,16 @@
         <!-- Product Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"*ngIf="!loading">
             <div  *ngFor="let product of products"style="width:100%;"
-                class="max-w-sm  mx-auto bg-white rounded-lg justify-between overflow-hidden flex my-0 ">
-                <div class="relative cursor-pointer" style="min-width:40%;">
-                    <a [routerLink]="['/products/productDetails',product.id]">
+                class="max-w-sm single-product mx-auto bg-white rounded-lg justify-between overflow-hidden flex my-0 ">
+                <div class="relative cursor-pointer h-full" style="min-width:40%;">
+                    <a [routerLink]="['/products/productDetails',product.id]" style="display:inline-block;"class="h-full">
                         <img [src]="product.images[0]" [alt]="product.name" class="h-full w-32 lg:w-36 object-cover"style="border-radius:8px;">
 
                     </a>
                     <!-- <div class="posted absolute top-2 left-2 text-white backdrop-blur-md text-xs px-2 py-1 rounded">
                         Posted: {{product.posted}}</div> -->
                 </div>
-                <div class="p-4" style="width:60%;">
+                <div class="p-4" style="min-width:60%;">
                     <div class="flex h-full justify-between items-start">
                         <div class="flex  flex-col justify-between h-full cursor-pointer"[routerLink]="['/products/productDetails',product.id]">
                             <h2 class="font-bold text-lg text-gray-800">{{product.name}}</h2>
@@ -51,7 +51,7 @@
 
         </div>
         <div class="flex justify-center mt-8">
-            <button [hidden]="loading"(click)="viewMoreProduct()"
+            <button [hidden]="loading || totalProducts < params.limit"(click)="viewMoreProduct()"
                 class="font-lg cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
                 More</button>
         </div>

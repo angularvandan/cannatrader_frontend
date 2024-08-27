@@ -47,6 +47,7 @@ export class WishlistComponent implements OnInit {
   loading:boolean=true;
   userId:string='';
   params:any={};
+  totalProducts:number=0;
 
   constructor(private router:Router,private activatedRoute:ActivatedRoute, private productService:ProductService,private userService:UserService,private toastr:ToastrService){
 
@@ -56,8 +57,8 @@ export class WishlistComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((response:any)=>{
       console.log(response);
       this.params=response;
+      this.getWishlistProducts();
     })
-    this.getWishlistProducts();
     this.userId=this.userService.currentUser.user.id;
   }
 
@@ -65,6 +66,8 @@ export class WishlistComponent implements OnInit {
     this.productService.getAllWishlistProducts(this.params).subscribe({
       next:(response:any)=>{
         this.products=response.wishlistItems;
+        this.totalProducts=response.count;
+
         console.log(response);
         this.loading=false;
       },error:(err)=>{
@@ -86,10 +89,8 @@ export class WishlistComponent implements OnInit {
     });
   }
   viewMoreProduct(){
-    this.params={
-      page:1,
-      limit:2
+    if(this.totalProducts>this.params.limit){
+      this.router.navigate(['/wishlist'], { queryParams: {...this.params, limit:parseInt(this.params.limit)+9 }});
     }
-    this.router.navigate(['/wishlist'], { queryParams: this.params });
   }
 }
