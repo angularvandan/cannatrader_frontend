@@ -43,7 +43,7 @@ export class EditProfileComponent implements OnInit {
     this.getCompanyInfo();
 
     this.profileForm = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required,Validators.pattern('^[A-Za-z ]+$')]],
       phone_no: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       avatar: [null, Validators.required]
 

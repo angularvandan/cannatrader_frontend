@@ -84,9 +84,9 @@ export class ProfileDetailsComponent implements OnInit {
         this.products=response.products.sort((a:any, b:any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
         this.recentProductStatus=true;
         // console.log(this.products);
-      },error:(err)=>{
-        this.tostr.error(err.error.message);
-        this.recentProductStatus=false;
+      },error:(err:any)=>{
+        this.tostr.error(err.error.error.message);
+        this.recentProductStatus=true;
       }
     });
     this.getSubscribedCompany();

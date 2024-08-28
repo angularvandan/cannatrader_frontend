@@ -21,7 +21,8 @@
                         </span>
                         <div class="text-red-400 text-xs"
                             *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.touched || registerForm.get('name')?.dirty)">
-                            Name is required.
+                            <div *ngIf="registerForm.get('name')?.errors?.['required']">Name is required.</div>
+                            <div *ngIf="registerForm.get('name')?.errors?.['pattern']">Only letters and space allowed.</div>
                         </div>
                     </div>
                     <div class="mb-3 w-full">

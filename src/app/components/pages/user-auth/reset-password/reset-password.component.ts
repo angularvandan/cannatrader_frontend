@@ -52,6 +52,16 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
   }
 
   handleInput(event: Event, index: number): void {
+
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+
+    // Only allow numeric values and clear input if non-numeric
+    if (!/^[0-9]*$/.test(value)) {
+      input.value = value.replace(/[^0-9]/g, '');
+    }
+
+
     const inputs = this.otpInputs.toArray();
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.value.length === 1 && index < inputs.length - 1) {
@@ -75,6 +85,10 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
     if (this.resetPasswordForm.valid) {
 
       this.getOtpOnEmail(section);
+    }
+    else{
+      this.resetPasswordForm.markAllAsTouched();
+      this.loading=false;
     }
   }
   getOtpOnEmail(section: string) {

@@ -208,7 +208,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="min-height-[400px]" *ngIf="!products.length && recentProductStatus">
+                                <div class="min-height-[400px]" *ngIf="!products.length">
                                     <div class="flex flex-col items-center justify-center">
                                         <div class="img-container"><img
                                                 src="../../../../../assets/profile/not_products.png"
@@ -362,7 +362,7 @@
                         <div class="hidden sm:block">
                             <div class="pt-6 flex justify-center">
                                 <button [routerLink]="['/profile/subscribed-listing']" [queryParams]="params"
-                                    *ngIf="!subscribedStatus"
+                                    *ngIf="!subscribedStatus && subscribedCompanyes.length"
                                     class="font-lg view-more cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
                                     More</button>
                             </div>

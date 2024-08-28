@@ -172,10 +172,17 @@
 
                                             </span>
                                         </label>
-                                        <div *ngIf="profileForm.get('name')?.errors" class="error text-red-400">
+                                        <div class="text-red-400 text-xs"
+                                            *ngIf="profileForm.get('name')?.invalid && (profileForm.get('name')?.touched || profileForm.get('name')?.dirty)">
+                                            <div *ngIf="profileForm.get('name')?.errors?.['required']">Name is
+                                                required.</div>
+                                            <div *ngIf="profileForm.get('name')?.errors?.['pattern']">Only letters and
+                                                space allowed.</div>
+                                        </div>
+                                        <!-- <div *ngIf="profileForm.get('name')?.errors" class="error text-red-400">
                                             <div *ngIf="profileForm.get('name')?.errors?.['required']">Name is required.
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="mt-6 w-full relative">
                                         <label for="phone" class="block text-md text-gray-700 font-custom">Phone Number
@@ -218,7 +225,7 @@
                                 <div class="btn-container flex gap-4 w-full ">
                                     <button (click)="notUpdateProfile()"
                                         class="cancel text-primary font-medium text-md py-2 px-12 border-[#3A5C41] border-2 rounded-md w-full">Cancel</button>
-                                    <button [disabled]="profileForm.invalid" (click)="updateProfile()"
+                                    <button [disabled]="profileForm.invalid" (click)="updateProfile()"[ngClass]=""
                                         class="Save bg-primary text-secondary text-md rounded-md py-2 px-12 w-full"><i
                                             class="pi pi-spin pi-spinner" style="font-size: 1.25rem"
                                             *ngIf="loadingForProfile"></i>

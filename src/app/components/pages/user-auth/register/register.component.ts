@@ -30,7 +30,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
     }
 
     this.registerForm = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required,Validators.pattern('^[A-Za-z ]+$')]],
       email: ['', [Validators.required, Validators.email]],
       phone_no: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       password: ['', [Validators.required, Validators.minLength(8)]],
