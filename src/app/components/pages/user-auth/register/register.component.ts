@@ -71,6 +71,15 @@ export class RegisterComponent implements AfterViewInit, OnInit {
   }
 
   handleInput(event: Event, index: number): void {
+
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+
+    // Only allow numeric values and clear input if non-numeric
+    if (!/^[0-9]*$/.test(value)) {
+      input.value = value.replace(/[^0-9]/g, '');
+    }
+
     const inputs = this.otpInputs.toArray();
     // console.log(inputs);
     const inputElement = event.target as HTMLInputElement;

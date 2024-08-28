@@ -288,18 +288,18 @@
         <form>
             <div class="mb-8">
                 <div id="otp" class="flex flex-row justify-center text-center px-2 mt-5">
-                    <input #otpInput (input)="handleInput($event, 0)" (keydown)="handleKeyDown($event, 0)"type="number"
+                    <input #otpInput (input)="handleInput($event, 0)" (keydown)="handleKeyDown($event, 0)"type="text"
                         class="m-2 border border-secondary h-10 w-10 focus:outline-none focus:ring focus:ring-secondary text-center form-control rounded"
                          id="first" maxlength="1" />
                     <input #otpInput (input)="handleInput($event, 1)" (keydown)="handleKeyDown($event, 1)"
                         class="m-2 border border-secondary h-10 w-10 focus:outline-none focus:ring focus:ring-secondary text-center form-control rounded"
-                        type="number" id="second" maxlength="1" />
+                        type="text" id="second" maxlength="1" />
                     <input #otpInput (input)="handleInput($event, 2)" (keydown)="handleKeyDown($event, 2)"
                         class="m-2 border border-secondary h-10 w-10 focus:outline-none focus:ring focus:ring-secondary text-center form-control rounded"
-                        type="number" id="third" maxlength="1" />
+                        type="text" id="third" maxlength="1" />
                     <input #otpInput (input)="handleInput($event, 3)" (keydown)="handleKeyDown($event, 3)"
                         class="m-2 border border-secondary h-10 w-10 focus:outline-none focus:ring focus:ring-secondary text-center form-control rounded"
-                        type="number" id="fourth" maxlength="1" />
+                        type="text" id="fourth" maxlength="1" />
                 </div>
             </div>
             <button type="button" (click)="verifyEmail()"[disabled]="loadingOtp"
