@@ -410,16 +410,18 @@
                                 </div>
                             </div>
                             <div class="mt-6 w-full relative">
-                                <div class="mb-4" *ngIf="pdfLinksContainer">
-                                    <div class="file-details relative text-slate cursor-pointer">
-                                        <div class="file-name flex">
-                                            <i class="pi pi-file place-content-center font-medium mr-4 text-2xl"></i>
-                                            <p class="text-black break-all">{{ pdfLinksContainer }}</p>
+                                <a [href]="pdfLinksContainer"target="_blank">
+                                    <div class="mb-4" *ngIf="pdfDocName">
+                                        <div class="file-details relative text-slate cursor-pointer">
+                                            <div class="file-name flex">
+                                                <i class="pi pi-file place-content-center font-medium mr-4 text-2xl"></i>
+                                                <p class="text-black break-all">{{ pdfDocName }}</p>
+                                            </div>
+                                            <i class="pi pi-times top-2 right-2 absolute font-medium"
+                                                (click)="removeFile()"></i>
                                         </div>
-                                        <i class="pi pi-times top-2 right-2 absolute font-medium"
-                                            (click)="removeFile()"></i>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="mt-6 w-full relative block sm:hidden">
                                 <!-- upload product image show in below div of class "product-image-container" -->

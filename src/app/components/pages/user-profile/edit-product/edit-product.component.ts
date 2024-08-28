@@ -48,6 +48,7 @@ export class EditProductComponent {
 
   imagesLinksContainer:string[]=[];
   pdfLinksContainer:string | null='';
+  pdfDocName:string='';
   tempImagesPreview:string[]=[];
 
   loading: boolean = false;
@@ -140,11 +141,7 @@ export class EditProductComponent {
     if (id != '') {
       this.productService.getSubCategory(id).subscribe((response: any) => {
         console.log(response.data);
-        //this is added when category has no sub category;
-        // this.subCategories = [{
-        //   id: '', name: 'Sub Category'
-        // }];
-        this.subCategories = this.subCategories.concat(response.data);
+        this.subCategories = response.data;
 
       }, (err: any) => {
         //when sub category not found
@@ -153,9 +150,9 @@ export class EditProductComponent {
         //     id: '', name: 'Sub Category'
         //   }
         // });
-        // this.subCategories = [{
-        //   id: '', name: 'Sub Category'
-        // }];
+        this.subCategories = [{
+          id: '', name: 'No Result Found'
+        }];
       })
     }
   }
@@ -209,9 +206,12 @@ export class EditProductComponent {
     this.imagesLinksContainer=[...this.product.images];
     this.pdfLinksContainer=this.product.coa_document;
 
-    console.log(this.imagePreviews);
-    console.log(this.imagesLinksContainer);
-    console.log(this.pdfLinksContainer);
+    this.pdfDocName=this.pdfLinksContainer.substring(this.pdfLinksContainer.lastIndexOf('/') + 1);
+    this.pdfDocName=decodeURIComponent(this.pdfDocName).replace(/^\d+-/, '');;
+
+    // console.log(this.imagePreviews);
+    // console.log(this.imagesLinksContainer);
+    // console.log(this.pdfLinksContainer);
   }
 
 
