@@ -34,6 +34,7 @@ import { TokenInterceptor } from './shared/interceptors/token.interceptor';
     FooterComponent,
     PrivacyPolicyComponent,
     TermsConditionsComponent,
+    
   ],
   imports: [
     BrowserModule,

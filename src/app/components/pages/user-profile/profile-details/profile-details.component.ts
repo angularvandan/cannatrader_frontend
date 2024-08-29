@@ -104,7 +104,7 @@ export class ProfileDetailsComponent implements OnInit {
         this.subscribedStatus=false;
         console.log(this.subscribedCompanyes);
       },error:(err)=>{
-        this.tostr.error(err.error.message);
+        this.tostr.error(err.error.error.message);
         this.subscribedStatus=false;
       }
     })

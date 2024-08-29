@@ -208,20 +208,22 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="min-height-[400px]" *ngIf="!products.length">
-                                    <div class="flex flex-col items-center justify-center">
-                                        <div class="img-container"><img
-                                                src="../../../../../assets/profile/not_products.png"
-                                                alt="Empty product"></div>
-                                        <div
-                                            class="emply-title text-[#262626] text-[15px] sm:text-[20px] leading-7 font-custom">
-                                            No Recent Listing</div>
-                                        <div
-                                            class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
-                                            Add some products
+                                <ng-container *ngIf="recentProductStatus">
+                                    <div class="min-height-[400px]" *ngIf="!products.length && recentProductStatus">
+                                        <div class="flex flex-col items-center justify-center">
+                                            <div class="img-container"><img
+                                                    src="../../../../../assets/profile/not_products.png"
+                                                    alt="Empty product"></div>
+                                            <div
+                                                class="emply-title text-[#262626] text-[15px] sm:text-[20px] leading-7 font-custom">
+                                                No Recent Listing</div>
+                                            <div
+                                                class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
+                                                Add some products
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </ng-container>
                                 <div class="flex justify-center items-center my-5 h-[200px]" *ngIf="!recentProductStatus">
                                     <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem"></i>
                                 </div>
@@ -248,6 +250,25 @@
                                     class="font-lg view-more cursor-pointer leading-4 font-medium  text-primary rounded-lg pb-2 pt-0 px-3">View
                                     More</a>
                             </div>
+                        </div>
+                        <ng-container *ngIf="recentProductStatus">
+                            <div class="min-height-[400px]" *ngIf="!products.length && recentProductStatus">
+                                <div class="flex flex-col items-center justify-center">
+                                    <div class="img-container"><img
+                                            src="../../../../../assets/profile/not_products.png"
+                                            alt="Empty product"></div>
+                                    <div
+                                        class="emply-title text-[#262626] text-[15px] sm:text-[20px] leading-7 font-custom">
+                                        No Recent Listing</div>
+                                    <div
+                                        class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
+                                        Add some products
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="flex justify-center items-center my-5 h-[200px]" *ngIf="!recentProductStatus">
+                            <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem"></i>
                         </div>
                         <div class="grid grid-cols-1 gap-4 mb-4">
                             <ng-container *ngFor="let product of products;let i=index;">

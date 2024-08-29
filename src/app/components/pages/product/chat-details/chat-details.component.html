@@ -1,61 +1,65 @@
-<div class="w-full">
-    <div class="chats-container bg-[#EDEDED] ">
-        <div
-            class="chats w-full h-full flex flex-row flex-wrap md:flex-nowrap gap-4 lg:gap-8 p-4 sm:p-8 overflow-hidden">
+<div class="w-full h-[88vh] bg-[#EDEDED]">
+    <div class="chats-container bg-[#EDEDED] h-full ">
+        <div class="chats w-full h-full flex flex-row flex-wrap md:flex-nowrap gap-4 lg:gap-8 p-4 overflow-hidden">
             <div class="users-container w-full md:w-2/5 lg:w-[33%] bg-[#FFFFFF] z-10 rounded-lg">
                 <div class="users-listing lg:px-4">
-                    <div class="title mt-2 p-2 text-2xl text-primary leading-9 font-semibold"*ngIf="!showMobileViewChats">Chats</div>
-                    <div class="users-search  p-2"*ngIf="!showMobileViewChats">
+                    <div class="title mt-2 p-2 text-2xl text-primary leading-9 font-semibold"
+                        *ngIf="!showMobileViewChats">Chats</div>
+                    <div class="users-search  p-2" *ngIf="!showMobileViewChats">
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-search"></i>
                             <input type="text" pInputText placeholder="Search here" />
                         </span>
                     </div>
                     <div class="users-chats-container p-2 max-h-[430px] overflow-y-auto hidden md:block">
-                        <div class="users-chats mt-4 " *ngFor="let user of users">
-                            <div class="users-image-container flex flex-row cursor-pointer" (click)="showChats(user)">
+                        <div class="users-chats mt-4 " *ngFor="let chat of chats">
+                            <div class="users-image-container flex flex-row cursor-pointer"
+                                (click)="showChats(chat.chatPartner)">
                                 <div class="flex-none user-image overflow-hidden rounded-full self-center mr-3">
-                                    <img class=" " src="{{user.image}}" alt="">
+                                    <img class=" " src="{{chat.chatPartner.avatar}}" alt="">
                                 </div>
                                 <div class="grow user-contents self-center">
-                                    <div class="user-title text-lg leading-5 font-medium text-primary">{{user.name}}
+                                    <div class="user-title text-lg leading-5 font-medium text-primary">
+                                        {{chat.chatPartner.name}}
                                     </div>
                                     <div class="user-message text-sm leading-5 font-medium text-[#737373]">
-                                        {{user.content}}</div>
+                                        {{chat.lastMessage.content}}</div>
                                 </div>
                                 <div class="flex-none user-notification relative">
-                                    <div class="content-time text-[15px] leading-5 text-semibold">{{user.time}}</div>
+                                    <div class="content-time text-[15px] leading-5 text-semibold">
+                                        {{chat.lastMessage.createdAt | chatDate}}</div>
                                     <div
                                         class="content-count bg-primary absolute right-0 bottom-0 rounded-full w-6 h-6 flex justify-center items-center">
                                         <span
-                                            class="text-white text-[15px] leading-5 text-semibold">{{user.count}}</span>
+                                            class="text-white text-[15px] leading-5 text-semibold">{{chat.unreadCount}}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <ng-container *ngIf="!showMobileViewChats">
-                        <div class="users-chats-container p-2 max-h-[430px] overflow-y-auto mobile-view"
-                            >
-                            <div class="users-chats mt-4 " *ngFor="let user of users">
+                        <div class="users-chats-container p-2 max-h-[430px] overflow-y-auto mobile-view">
+                            <div class="users-chats mt-4 " *ngFor="let chat of chats">
                                 <div class="users-image-container flex flex-row cursor-pointer"
-                                    (click)="showChatsMobile(user)">
+                                    (click)="showChatsMobile(chat.chatPartner)">
                                     <div class="flex-none user-image overflow-hidden rounded-full self-center mr-3">
-                                        <img class=" " src="{{user.image}}" alt="">
+                                        <img class=" " src="{{chat.chatPartner.avatar}}" alt="">
                                     </div>
                                     <div class="grow user-contents self-center">
-                                        <div class="user-title text-lg leading-5 font-medium text-primary">{{user.name}}
+                                        <div class="user-title text-lg leading-5 font-medium text-primary">
+                                            {{chat.chatPartner.name}}
                                         </div>
                                         <div class="user-message text-sm leading-5 font-medium text-[#737373]">
-                                            {{user.content}}</div>
+                                            {{chat.lastMessage.content}}</div>
                                     </div>
                                     <div class="flex-none user-notification relative">
-                                        <div class="content-time text-[15px] leading-5 text-semibold">{{user.time}}
+                                        <div class="content-time text-[15px] leading-5 text-semibold">
+                                            {{chat.lastMessage.createdAt | chatDate}}
                                         </div>
                                         <div
                                             class="content-count bg-primary absolute right-0 bottom-0 rounded-full w-6 h-6 flex justify-center items-center">
                                             <span
-                                                class="text-white text-[15px] leading-5 text-semibold">{{user.count}}</span>
+                                                class="text-white text-[15px] leading-5 text-semibold">{{chat.unreadCount}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -65,10 +69,10 @@
                 </div>
             </div>
             <div class="user-chats-container w-full md:w-3/5 lg:w-[67%] bg-[#FFFFFF] z-10 rounded-lg hidden md:block">
-                <div class="user-chats p-4 mt-2">
+                <div class="user-chats p-4 mt-2" *ngIf="activeUserChats.length">
                     <div class="user-chats-heading flex flex-row">
                         <div class="img-container overflow-hidden rounded-full mr-4">
-                            <img class="" src="{{activeUserChats[0].image}}" alt="">
+                            <img class="" src="{{activeUserChats[0].avatar}}" alt="">
                         </div>
                         <div class="name flex flex-col">
                             <span
@@ -84,21 +88,21 @@
                         </div>
                     </div>
                     <div class="user-chats-messages my-4">
-                        <div class="user-chats max-h-[350px] overflow-y-auto pe-4">
+                        <div class="user-chats max-h-[330px] overflow-y-auto pe-4">
                             <ng-container *ngFor="let msg of userChatLeftMessage">
 
                                 <div class="flex justify-start mb-2" *ngIf="msg.id==='1'">
                                     <div class="left-message flex items-start flex-col">
                                         <span
-                                            class=" py-2 px-4 bg-secondary text-primary text-sm leading-5 font-medium">{{msg.content}}</span>
-                                        <p class="mt-1">{{msg.time}}</p>
+                                            class=" py-[5px] px-4 bg-secondary text-primary text-sm leading-5 font-medium">{{msg.content}}</span>
+                                        <p class="">{{msg.time}}</p>
                                     </div>
                                 </div>
                                 <div class="flex justify-end" *ngIf="msg.id==='2'">
                                     <div class="right-message flex items-end flex-col">
                                         <span
-                                            class="self-right py-2 px-4 bg-primary text-secondary text-sm leading-5 font-medium">{{msg.content}}</span>
-                                        <p class="mt-1">{{msg.time}}</p>
+                                            class="self-right py-[5px] px-4 bg-primary text-secondary text-sm leading-5 font-medium">{{msg.content}}</span>
+                                        <p class="">{{msg.time}}</p>
                                     </div>
                                 </div>
                             </ng-container>
@@ -142,10 +146,10 @@
             <!-- this is for mobile  -->
             <div class="user-chats-container w-full md:w-3/5 lg:w-[67%] bg-[#FFFFFF] z-10 rounded-lg mobile-view"
                 *ngIf="showMobileViewChats">
-                <div class="user-chats p-4 mt-2 ">
+                <div class="user-chats p-4 mt-2 " *ngIf="activeUserChats.length">
                     <div class="user-chats-heading flex flex-row">
                         <div class="img-container overflow-hidden rounded-full mr-4">
-                            <img class="" src="{{activeUserChats[0].image}}" alt="">
+                            <img class="" [src]="activeUserChats[0].avatar" alt="">
                         </div>
                         <div class="name flex flex-col">
                             <span

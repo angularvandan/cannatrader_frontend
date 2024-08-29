@@ -20,6 +20,8 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
   userId!: string;
 
   loadingOtp:boolean=false;
+  validTimeForOtpStatus:boolean=true;
+  timeForValidOtp:number=2;
 
   constructor(private fb: FormBuilder, private userService: UserService, private tostr: ToastrService, private router: Router) { }
 
@@ -97,13 +99,15 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
     this.loadingOtp=true;
     this.userService.resetPassword(email).subscribe({
       next: (respose) => {
-
         // console.log(respose);
         this.loadingOtp = false;
         this.loading=false;
         this.section = section;
 
         this.tostr.success(respose.message);
+        setTimeout(()=>{
+          
+        },)
       }, error: (err) => {
         // console.log(err);
         this.loadingOtp = false;

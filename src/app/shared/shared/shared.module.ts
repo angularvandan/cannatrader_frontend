@@ -17,10 +17,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { BlockUIModule } from 'primeng/blockui';
 import { PanelModule } from 'primeng/panel';
+import { ChatDatePipe } from '../pipe/chat-date.pipe';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ChatDatePipe],
   imports: [
     CommonModule,
     ButtonModule,
@@ -62,7 +63,8 @@ import { PanelModule } from 'primeng/panel';
     ToastrModule,
     BlockUIModule,
     PanelModule,
-    InputNumberModule
+    InputNumberModule,
+    ChatDatePipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

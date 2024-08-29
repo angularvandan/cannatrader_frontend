@@ -157,4 +157,8 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
+  nevigateToChat(userId:string){
+    this.router.navigate(['/products/chats']);
+  }
+
 }

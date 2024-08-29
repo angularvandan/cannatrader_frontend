@@ -293,6 +293,15 @@ app-home {
     .p-inputtext:enabled:hover {
         border-color: $bg-primary;
     }
+    .p-dropdown-panel .p-dropdown-items{
+
+        max-height: 200px; /* Set a maximum height to enable scrolling */
+        overflow-y: scroll; 
+        scrollbar-width: none;
+    }
+    .p-dropdown-panel .p-dropdown-items::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 app-add-product {
