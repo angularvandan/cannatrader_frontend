@@ -121,6 +121,7 @@ export class UserService {
     );
   }
   updateCompany(companyInfo:any){
+    console.log(companyInfo);
     return this.http.put<any>(`${this.baseUrl}/api/company/update-company-info`,companyInfo);
 
   }

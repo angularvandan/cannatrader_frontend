@@ -27,6 +27,7 @@ export class EditProfileComponent implements OnInit {
   companyForm!: FormGroup;
   showCompanyForm: boolean = false;
   companyInfo: any = {};
+  pdfDocName:string='';
 
   passwordForm!: FormGroup;
 
@@ -212,16 +213,18 @@ export class EditProfileComponent implements OnInit {
   private updateCompayInfo() {
     this.loadingForCompany=true;
 
-    this.companyInfo = {
-      company_name: this.companyForm.get('company_name')?.value,
-      business_type: this.companyForm.get('business_type')?.value,
-      contact_no: this.companyForm.get('contact_no')?.value,
-      business_id_no: this.companyForm.get('business_id_no')?.value,
-      location: 'patna',
-      pdf: this.companyForm.get('pdf')?.value,
-    }
+    const formData = new FormData();
 
-    this.userService.updateCompany(this.companyInfo).subscribe({
+      formData.append('company_name', this.companyForm.get('company_name')?.value);
+      formData.append('business_type', this.companyForm.get('business_type')?.value);
+      formData.append('contact_no', this.companyForm.get('contact_no')?.value);
+      formData.append('business_id_no', this.companyForm.get('business_id_no')?.value);
+      formData.append('location', this.companyForm.get('location')?.value);
+      formData.append('latitude', this.companyForm.get('latitude')?.value);
+      formData.append('longitude', this.companyForm.get('longitude')?.value);
+      formData.append('pdf', this.companyForm.get('pdf')?.value);
+
+    this.userService.updateCompany(formData).subscribe({
       next:(response)=>{
         console.log(response);
         this.loadingForCompany=false;
@@ -273,6 +276,9 @@ export class EditProfileComponent implements OnInit {
     this.companyForm.patchValue({
       pdf: file
     });
+    this.pdfDocName=this.companyInfo.pdf.substring(this.companyInfo.pdf.lastIndexOf('/') + 1);
+    this.pdfDocName=decodeURIComponent(this.pdfDocName).replace(/^\d+-/, '');
+    
     this.selectedLicense.push(file);
   }
   //this is for select file
@@ -287,6 +293,7 @@ export class EditProfileComponent implements OnInit {
       this.companyForm.patchValue({
         pdf: this.selectedLicense[0]
       });
+      this.pdfDocName=this.selectedLicense[0].name;
       this.companyForm.get('pdf')!.updateValueAndValidity();
     }
   }
@@ -296,6 +303,7 @@ export class EditProfileComponent implements OnInit {
     this.companyForm.patchValue({
       pdf: this.selectedLicense[0]
     });
+    this.pdfDocName='';
   }
   onCancleUpdateCompany() {
     this.companyForm.patchValue(this.companyInfo);

@@ -207,7 +207,7 @@ export class EditProductComponent {
     this.pdfLinksContainer=this.product.coa_document;
 
     this.pdfDocName=this.pdfLinksContainer.substring(this.pdfLinksContainer.lastIndexOf('/') + 1);
-    this.pdfDocName=decodeURIComponent(this.pdfDocName).replace(/^\d+-/, '');;
+    this.pdfDocName=decodeURIComponent(this.pdfDocName).replace(/^\d+-/, '');
 
     // console.log(this.imagePreviews);
     // console.log(this.imagesLinksContainer);
@@ -385,7 +385,6 @@ export class EditProductComponent {
           console.log(err);
           this.loading = false;
           this.tostr.error(err);
-
         }
       });
 

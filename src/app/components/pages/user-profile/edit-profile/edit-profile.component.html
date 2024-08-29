@@ -388,14 +388,14 @@
                                                         </div>
                                                         <p>Upload document</p>
                                                         <input type="file" id="filelabel" class="hidden"
-                                                            (change)="onSelectLicense($event)" accept=".pdf" multiple>
+                                                            (change)="onSelectLicense($event)" accept=".pdf" >
                                                     </div>
                                                 </label>
                                             </div>
                                         </div>
-                                        <div *ngIf="selectedLicense.length"
+                                        <div *ngIf="pdfDocName!=''"
                                             class="license-upload-show bg-[#F5F5F5] p-4 py-6 mt-6 rounded-xl relative">
-                                            <div class="flex justify-start">
+                                            <a class="flex justify-start"[href]="selectedLicense[0].name"target="_blank">
                                                 <div>
                                                     <svg width="24" height="30" viewBox="0 0 24 30" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -412,11 +412,11 @@
 
                                                 </div>
                                                 <div class="document-name ml-4">
-                                                    <p *ngFor="let file of selectedLicense;let i=index;"
-                                                        class="mb-2 text-sm leading-6 break-all">{{i+1}}. {{file.name}}
+                                                    <p 
+                                                        class="mb-2 text-sm leading-6 break-all">{{pdfDocName}}
                                                     </p>
                                                 </div>
-                                            </div>
+                                            </a>
                                             <div class="close-btn absolute top-4 end-4 cursor-pointer"
                                                 (click)="onRemoveLicense()">
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
