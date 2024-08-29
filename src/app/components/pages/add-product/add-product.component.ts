@@ -16,54 +16,62 @@ export class AddProductComponent implements OnInit {
   date!: Date;
 
   strainTypes = [
-    
+
   ];
-  thcRange=[
-    
+  thcRange = [
+
   ]
 
   categories = [
-    
+
   ];
 
-  growthMethod=[
-    
+  growthMethod = [
+
 
   ]
-  growMedia=[
-    
+  growMedia = [
+
   ]
 
-  dryMethod=[
-    
+  dryMethod = [
+
   ]
-  trimMethod=[
-    
+  trimMethod = [
+
   ]
 
   subCategories = [
-    
+
   ];
 
   selectedLicenseFile: File | null = null;
   selectedImageFiles: File[] = [];
   imagePreviews: string[] = [];
   selectedFile: File | null = null;
-  loading:boolean=false;
-  loadingForPage:boolean=true;
+  loading: boolean = false;
+  loadingForPage: boolean = true;
 
 
-  user!:UserDetails;
+  user!: UserDetails;
 
-  companyDocumentStatus:boolean=false;
+  companyDocumentStatus: boolean = false;
 
   productForm!: FormGroup;
 
-  constructor(private userService:UserService,private fb: FormBuilder,private productService:ProductService,private tostr:ToastrService) { }
+  constructor(private userService: UserService, private fb: FormBuilder, private productService: ProductService, private tostr: ToastrService) { }
 
   ngOnInit(): void {
-    this.user=this.userService.currentUser.user;
-    this.companyDocumentStatus=this.user.is_company;
+
+    this.userService.getUserProfile().subscribe({
+      next: (response: any) => {
+        this.user = response.user;
+        this.companyDocumentStatus = this.user.is_company;
+        this.getAllValueForAddProduct();
+      }, error: (err) => {
+        this.tostr.error(err.error.error.message);
+      }
+    })
 
     this.productForm = this.fb.group({
       name: ['', Validators.required],
@@ -92,22 +100,8 @@ export class AddProductComponent implements OnInit {
       longitude: ['12312', Validators.required],
 
       // For file inputs, you will need to handle them separately
-      images: ['',Validators.required],
-      pdf: ['',Validators.required]
-    });
-
-    this.productService.getAllValueForAddProduct().subscribe((response:any) => {
-      this.loadingForPage=false;
-      console.log(response);
-      this.categories=response[0].data;
-      this.thcRange=response[1].data;
-      this.strainTypes=response[2].data;
-      this.growMedia=response[3].data;
-      this.growthMethod=response[4].data;
-      this.trimMethod=response[5].data;
-      this.dryMethod=response[6].data;
-    },(err)=>{
-      this.loadingForPage=false;
+      images: ['', Validators.required],
+      pdf: ['', Validators.required]
     });
 
     this.productForm.get('category')?.valueChanges.subscribe(categoryId => {
@@ -116,11 +110,27 @@ export class AddProductComponent implements OnInit {
     });
 
   }
-  getSubCategoryById(id:any){
-    this.productService.getSubCategory(id).subscribe((response:any)=>{
-        this.subCategories=response.data;
-    },()=>{
-      this.subCategories=[];
+  getAllValueForAddProduct(){
+    this.productService.getAllValueForAddProduct().subscribe((response: any) => {
+      this.loadingForPage = false;
+      console.log(response);
+      this.categories = response[0].data;
+      this.thcRange = response[1].data;
+      this.strainTypes = response[2].data;
+      this.growMedia = response[3].data;
+      this.growthMethod = response[4].data;
+      this.trimMethod = response[5].data;
+      this.dryMethod = response[6].data;
+    }, (err) => {
+      this.loadingForPage = false;
+    });
+  }
+
+  getSubCategoryById(id: any) {
+    this.productService.getSubCategory(id).subscribe((response: any) => {
+      this.subCategories = response.data;
+    }, () => {
+      this.subCategories = [];
     })
   }
 
@@ -143,7 +153,7 @@ export class AddProductComponent implements OnInit {
       }
       //here patch the value of image
       this.productForm.patchValue({
-        images:this.selectedImageFiles
+        images: this.selectedImageFiles
       })
     }
   }
@@ -154,7 +164,7 @@ export class AddProductComponent implements OnInit {
       this.selectedFile = input.files[0];
 
       this.productForm.patchValue({
-        pdf:this.selectedFile
+        pdf: this.selectedFile
       })
     }
   }
@@ -162,7 +172,7 @@ export class AddProductComponent implements OnInit {
   removeFile(): void {
     this.selectedFile = null;
     this.productForm.patchValue({
-      pdf:this.selectedFile
+      pdf: this.selectedFile
     })
   }
 
@@ -174,7 +184,7 @@ export class AddProductComponent implements OnInit {
         this.imagePreviews.splice(index, 1);
 
         this.productForm.patchValue({
-          images:this.selectedImageFiles
+          images: this.selectedImageFiles
         })
       }
     }
@@ -182,27 +192,27 @@ export class AddProductComponent implements OnInit {
 
   onSubmit(): void {
 
-    if(this.productForm.valid){ 
+    if (this.productForm.valid) {
       // console.log(this.productForm);
 
-      this.loading=true;
+      this.loading = true;
       const formData = new FormData();
 
-      if(this.productForm.get('sub_category')?.value == ""){
+      if (this.productForm.get('sub_category')?.value == "") {
         this.productForm.removeControl('sub_category');
         // console.log(this.productForm);
       }
 
       Object.keys(this.productForm.controls).forEach(key => {
         const control = this.productForm.get(key);
-        if (key=='pdf'||key=='images') {
+        if (key == 'pdf' || key == 'images') {
           // console.log(control?.value);
           for (let i = 0; i < control?.value.length; i++) {
             formData.append(key, control?.value[i]);
             // console.log(control?.value[i])
           }
-          if(key=='pdf'){
-            formData.append(key,control?.value);
+          if (key == 'pdf') {
+            formData.append(key, control?.value);
           }
         } else if (key === 'harvest_date') {
 
@@ -216,21 +226,21 @@ export class AddProductComponent implements OnInit {
           formData.append(key, control?.value);
         }
       });
-      
+
       //api call for add product
       this.productService.addProduct(formData).subscribe({
-        next:(response)=>{
+        next: (response) => {
           // console.log(response);
           this.tostr.success('Product added successfully');
-          this.loading=false;
-        },error:(err)=>{
+          this.loading = false;
+        }, error: (err) => {
           // console.log(err);
           this.tostr.error(err.error.error.message);
-          this.loading=false;
+          this.loading = false;
         }
       });
     }
-    else{
+    else {
       console.log(this.productForm);
       this.productForm.markAllAsTouched();
     }

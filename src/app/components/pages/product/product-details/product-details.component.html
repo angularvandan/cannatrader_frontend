@@ -50,7 +50,7 @@
                 </ng-container>
             </div>
             <div class="p-6 rounded-lg w-full mx-auto mt-24 lg:block hidden relative">
-                <div class="w-[500px] h-[300px] absolute top-1/3 left-12" *ngIf="isAuth" style="z-index:1000">
+                <div class="w-[500px] h-[300px] absolute top-1/3 left-12 -mt-[20px]" *ngIf="isAuth" style="z-index:1000">
                     <div class="flex flex-col items-center justify-center">
                         <p class="text-primary text-center text-[16px] sm:text-[18px] leading-7 font-semibold mb-4">
                             Create an account or log in to access and view <br>
@@ -67,7 +67,7 @@
                 </div>
                 <h2 class="text-[16px] lg:text-[32px] font-semibold mb-4 p-2">Contact Details</h2>
                 <div class="space-y-4"
-                    [ngStyle]="{'filter':isAuth?'blur(5px)':'none','pointer-events':isAuth?'none':'auto'}">
+                    [ngStyle]="{'filter':isAuth?'blur(10px)':'none','pointer-events':isAuth?'none':'auto'}">
                     <div class="flex items-center phone">
                         <div class="rounded-full p-2">
                             <div class="twitter-icon w-12 h-12 bg-nav-bg rounded-full flex justify-center items-center">
@@ -185,8 +185,10 @@
 
             <p class="mt-4 text-help">{{ showAll ? product.description : (product.description | slice:0:charLimit) +
                 '...' }}
-                <span class="text-[#698AFD] cursor-pointer" (click)="toggleViewMore()">{{ showAll ? 'View Less' : 'View
-                    More' }}</span>
+                <span class="text-[#698AFD] cursor-pointer" (click)="toggleViewMore()">
+                    {{ showAll ? 'View Less' : 'View More' }}
+
+                </span>
             </p>
 
             <div class="w-full h-[0.5px] border border-primary mt-10 mb-8"></div>
@@ -314,7 +316,7 @@
     <div class="mt-8 lg:grid grid-cols-1 lg:grid-cols-2 gap-4 flex flex-col-reverse">
         <!-- Rate Product -->
         <div class="lg:p-4 border-0 lg:border-t-[2px] border-primary">
-            <h2 class="text-base font-semibold">Rate this product</h2>
+            <h2 class="text-xl font-semibold">Rate this product</h2>
             <p class="mt-2 text-[12px] text-help">Tell others what you think</p>
             <div class="flex mt-2 text-yellow-500 rate-product">
                 <p-rating [(ngModel)]="rate" (click)="giveRatingToProduct()" [disabled]="isAuth"
@@ -324,7 +326,7 @@
 
         <!-- Contact Details -->
         <div class="rounded-lg w-full mx-auto lg:hidden relative">
-            <div class="w-full sm:w-[500px] h-[300px] absolute top-1/3 sm:left-12 " *ngIf="isAuth" style="z-index:1000">
+        <div class="w-full sm:w-[500px] h-[300px] absolute top-1/3 sm:left-12 -mt-[30px] " *ngIf="isAuth" style="z-index:1000">
                 <div class="flex flex-col items-center justify-center">
                     <p class="text-primary text-center text-[16px] sm:text-[18px] leading-7 font-semibold mb-4">Create
                         an account or log in to access and view <br>
@@ -341,7 +343,7 @@
             </div>
             <h2 class="text-[18px] lg:text-[32px] font-semiboldmb-4 p-2">Contact Details</h2>
             <div class="space-y-4"
-                [ngStyle]="{'filter':isAuth?'blur(5px)':'none','pointer-events':isAuth?'none':'auto'}">
+                [ngStyle]="{'filter':isAuth?'blur(10px)':'none','pointer-events':isAuth?'none':'auto'}">
                 <div class="flex items-center phone">
                     <div class="rounded-full p-2">
                         <div class="twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">

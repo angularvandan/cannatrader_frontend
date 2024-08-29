@@ -143,12 +143,12 @@ export class ProfileDetailsComponent implements OnInit {
         
         this.userService.deleteUserAccount().subscribe({
           next: (response) => {
-            this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
-            this.router.navigate(['/home']);
-            this.userService.logOut();
+            this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: response.message });
           },
           error: (err) => {
             this.tostr.error(err.error.error.message);
+          },complete:()=>{
+            this.userService.logOut();
           }
         })
       },
