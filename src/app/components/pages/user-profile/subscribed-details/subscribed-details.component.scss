@@ -41,6 +41,15 @@ $bg-primary: #3A5C41;
                         display: flex;
                         justify-content: start;
 
+                        width: 80px;
+                        height: 80px;
+
+                        @media(max-width:768px) {
+                            width: 60px;
+                            height: 60px;
+
+                        }
+
                         img {
                             border-radius: 100%;
                             width: 80px;

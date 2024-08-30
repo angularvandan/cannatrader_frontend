@@ -161,7 +161,7 @@
                 </div>
             </div>
             <div class="h-full w-full lg:w-[70vw] rounded-md m:p-8 p-4" style="box-shadow: 0px 0px 5px #cfc6c0;">
-                <div class="flex flex-col">
+                <div class="flex flex-col justify-center items-center">
                     <!-- //this is for not a mobile -->
                     <div class="recent-listing mb-5 hidden sm:block">
                         <div class="table-heading mb-2">
@@ -272,20 +272,20 @@
                         </div>
                         <div class="grid grid-cols-1 gap-4 mb-4">
                             <ng-container *ngFor="let product of products;let i=index;">
-                                <div *ngIf="i<3" style="width:75%;max-width:300px"
+                                <div *ngIf="i<3" style="width:100%;"
                                     class="max-w-sm cursor-pointer mx-auto bg-white rounded-lg justify-around overflow-hidden flex">
                                     <div class="relative cursor-pointer" style="width:40%;">
                                         <img [src]="product.images[0]"[routerLink]="['/products/productDetails', product.id]" alt="Canopy Growth"
                                             class="h-28  w-24 object-cover" style="border-radius:8px;">
                                         <div
-                                            class="absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-lg posted">
+                                            class="absolute top-1 left-0 text-white md:text-xs text-[10px] px-2 py-1 rounded-lg posted ">
                                             Posted:
                                             {{product.created_at | date: 'dd-MM-yyyy'}}
                                         </div>
                                     </div>
-                                    <div class="px-5"style="width:70%">
-                                        <div class="flex h-full justify-between items-center">
-                                            <div class="flex flex-col justify-center gap-1 h-full">
+                                    <div class="pl-5"style="width:70%">
+                                        <div class="flex h-full justify-between items-center relative">
+                                            <div class="flex flex-col justify-center gap-1 h-full whitespace-nowrap">
                                                 <h2 class="font-bold text-base text-gray-800">{{product.name}}</h2>
                                                 <p class="text-xs text-[#262626] font-normal">Strain Type: <span
                                                         class="text-side">{{product.strain_types.type}}</span>
@@ -298,7 +298,7 @@
                                                     pune
                                                 </p>
                                             </div>
-                                            <div class="flex items-center" [routerLink]="['../editProduct',product.id]">
+                                            <div class="flex items-center absolute top-2 right-0" [routerLink]="['../editProduct',product.id]">
                                                 <svg width="30" height="30" viewBox="0 0 33 34" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <circle cx="16.5" cy="17" r="16.5" transform="rotate(180 16.5 17)"
@@ -315,10 +315,7 @@
                             </ng-container>
                         </div>
                     </div>
-                    <div class="recent-subscribed">
-                        <div class="table-heading mb-2 border-b hidden sm:block" style="padding-bottom:10px;">
-                            <h1 class=" text-primary text-start text-2xl leading-8 font-semibold">Subscribed</h1>
-                        </div>
+                    <div class="recent-subscribed w-full">
                         <div class="block sm:hidden m-auto ">
                             <div class="header flex justify-between items-start mt-6">
                                 <div class="mb-2">
@@ -334,58 +331,63 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="w-full border-spacing-x-4">
-                            <!-- <caption class="caption-bottom ">
-                                
-                            </caption> -->
-                            <tbody>
-                                <tr style="height:10px"></tr>
-                                <tr *ngFor="let data of subscribedCompanyes;let i=index">
-                                    <td class="">
-                                        <a class="img-container">
-                                            <img src="{{data.Company.user.avatar}}" class="shadow-4" />
-                                        </a>
-                                    </td>
-                                    <td>{{data.Company.company_name}}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        <span class="subscribed-btn-container">
-                                            <button (click)="subscribe(data.companyId)" *ngIf="!data.subscribedStatus"
-                                                class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
-
-                                            <button (click)="unSubscribe(data.companyId)" *ngIf="data.subscribedStatus"
-                                                class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
-                                                ✓
-                                            </button>
-
-                                        </span>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                        <div class="min-height-[400px]" *ngIf="subscribedCompanyes.length<=0 && !subscribedStatus">
-                            <div class="flex flex-col items-center justify-center">
-                                <div class="img-container"><img src="../../../../../assets/profile/not_products.png"
-                                        alt="Empty product"></div>
-                                <div
-                                    class="emply-title text-[#262626] text-[15px] sm:text-[20px] leading-7 font-custom">
-                                    No Subscribe</div>
-                                <div class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
-                                    Subscribe your favorite cannabis shop!
+                        <div class=" w-full overflow-x-auto">
+                            <div class="table-heading mb-2 border-b hidden sm:block" style="padding-bottom:10px;">
+                                <h1 class=" text-primary text-start text-2xl leading-8 font-semibold">Subscribed</h1>
+                            </div>
+                            <table class="w-full border-spacing-x-4">
+                                <!-- <caption class="caption-bottom ">
+                                    
+                                </caption> -->
+                                <tbody>
+                                    <tr style="height:10px"></tr>
+                                    <tr *ngFor="let data of subscribedCompanyes;let i=index">
+                                        <td class="">
+                                            <a class="img-container">
+                                                <img src="{{data.Company.user.avatar}}" class="shadow-4" />
+                                            </a>
+                                        </td>
+                                        <td>{{data.Company.company_name}}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <span class="subscribed-btn-container">
+                                                <button (click)="subscribe(data.companyId)" *ngIf="!data.subscribedStatus"
+                                                    class="bg-secondary text-base sm:text-lg font-medium text-primary py-2 px-4 rounded-lg">Subscribe</button>
+    
+                                                <button (click)="unSubscribe(data.companyId)" *ngIf="data.subscribedStatus"
+                                                    class="bg-primary text-base sm:text-lg font-medium text-secondary py-2 px-4 rounded-lg">Subscribed
+                                                    ✓
+                                                </button>
+    
+                                            </span>
+                                        </td>
+                                    </tr>
+    
+                                </tbody>
+                            </table>
+                            <div class="min-height-[400px]" *ngIf="subscribedCompanyes.length<=0 && !subscribedStatus">
+                                <div class="flex flex-col items-center justify-center">
+                                    <div class="img-container"><img src="../../../../../assets/profile/not_products.png"
+                                            alt="Empty product"></div>
+                                    <div
+                                        class="emply-title text-[#262626] text-[15px] sm:text-[20px] leading-7 font-custom">
+                                        No Subscribe</div>
+                                    <div class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
+                                        Subscribe your favorite cannabis shop!
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="flex h-[200px] justify-center items-center my-5" *ngIf="subscribedStatus">
-                            <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem"></i>
-                        </div>
-                        <div class="hidden sm:block">
-                            <div class="pt-6 flex justify-center">
-                                <button [routerLink]="['/profile/subscribed-listing']" [queryParams]="params"
-                                    *ngIf="!subscribedStatus && subscribedCompanyes.length"
-                                    class="font-lg view-more cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
-                                    More</button>
+                            <div class="flex h-[200px] justify-center items-center my-5" *ngIf="subscribedStatus">
+                                <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem"></i>
+                            </div>
+                            <div class="hidden sm:block">
+                                <div class="pt-6 flex justify-center">
+                                    <button [routerLink]="['/profile/subscribed-listing']" [queryParams]="params"
+                                        *ngIf="!subscribedStatus && subscribedCompanyes.length"
+                                        class="font-lg view-more cursor-pointer leading-4 font-medium bg-[#D1DACF] text-primary rounded-lg py-2 px-3">View
+                                        More</button>
+                                </div>
                             </div>
                         </div>
                     </div>
