@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/pages/home/home.component';
 import { AddProductComponent } from './components/pages/add-product/add-product.component';
-import { TermsConditionsComponent } from './components/pages/terms-conditions/terms-conditions.component';
-import { PrivacyPolicyComponent } from './components/pages/privacy-policy/privacy-policy.component';
-import { ContactComponent } from './components/pages/contact/contact.component';
+import { TermsConditionsComponent } from './components/partials/terms-conditions/terms-conditions.component';
+import { PrivacyPolicyComponent } from './components/partials/privacy-policy/privacy-policy.component';
+import { ContactComponent } from './components/partials/contact/contact.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [

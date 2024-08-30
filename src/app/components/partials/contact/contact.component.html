@@ -10,32 +10,46 @@
         </div>
         <div class="contact flex flex-col lg:flex-row justify-center items-center">
             <div class="text-help bg-opacity-90 border-b lg:border-r p-8 pt-0 max-w-md w-full">
-                <h2 class="text-lg sm:text-2xl font-medium mb-6 text-primary text-center sm:text-left">Reach out to us</h2>
+                <h2 class="text-lg sm:text-2xl font-medium mb-6 text-primary text-center sm:text-left">Reach out to us
+                </h2>
                 <p class="text-sm text-center sm:text-left mb-6 text-[#8D8D8D]">Complete the form below, and we'll reach
                     <br> out to you shortly.
                 </p>
-                <form>
+                <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
                     <div class="mb-8">
                         <label for="name" class="block text-sm font-medium">Name</label>
                         <span class="p-input-icon-right w-full">
                             <i class="pi pi-user text-[#fafafa]"></i>
-                            <input pInputText id="name" type="name" placeholder="Enter your name"
+                            <input pInputText id="name" type="name" placeholder="Enter your name" formControlName="name"
                                 class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm  sm:text-sm">
                         </span>
+                        <div class="text-red-400 text-sm" *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">
+                            <div *ngIf="contactForm.get('name')?.errors?.['required']">Name is required.</div>
+                            <div *ngIf="contactForm.get('name')?.errors?.['minlength']">Name must be at least 2
+                                characters long.</div>
+                            <div *ngIf="contactForm.get('name')?.errors?.['pattern']">Name can only contain letters and
+                                spaces.</div>
+                        </div>
                     </div>
                     <div class="mb-8">
                         <label for="email" class="block text-sm font-medium">Email</label>
                         <span class="p-input-icon-right w-full">
                             <i class="pi pi-envelope text-[#fafafa]"></i>
                             <input pInputText id="email" type="email" placeholder="Enter your email address"
+                                formControlName="email"
                                 class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm  sm:text-sm">
                         </span>
+                        <div class="text-red-400 text-sm" *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+                            <div *ngIf="contactForm.get('email')?.errors?.['required']">Email is required.</div>
+                            <div *ngIf="contactForm.get('email')?.errors?.['email']">Enter a valid email address.</div>
+                        </div>
                     </div>
                     <div class="mb-8">
                         <label for="phone" class="block text-sm font-custom">Phone Number</label>
-                        
+
                         <span class="p-input-icon-right w-full">
                             <input pInputText id="phone" type="text" placeholder="Enter your phone number"
+                                formControlName="phone_no"
                                 class="mt-1 block w-full text-[#fafafa] p-2 border-0 rounded-md shadow-sm sm:text-sm">
                             <div class="absolute top-[9px] right-[9px] ">
                                 <svg width="17" height="20" viewBox="0 0 30 30" fill="none"
@@ -57,14 +71,23 @@
                                 </svg>
                             </div>
                         </span>
+                        <div class="text-red-400 text-sm" *ngIf="contactForm.get('phone_no')?.invalid && contactForm.get('phone_no')?.touched">
+                            <div *ngIf="contactForm.get('phone_no')?.errors?.['required']">Phone number is required.
+                            </div>
+                            <div *ngIf="contactForm.get('phone_no')?.errors?.['pattern']">Enter a valid 10-digit phone
+                                number.</div>
+                        </div>
                     </div>
 
                     <div class="mb-8">
                         <label for="description" class="block text-sm font-custom text-help">Message</label>
-                        <textarea required pInputTextarea id="description" rows="4"
+                        <textarea required pInputTextarea id="description" rows="4" formControlName="message"
                             placeholder="Enter your message here..."
                             class="mt-1 block bg-[#F5F5F5] w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
                             name="description"></textarea>
+                        <div class="text-red-400 text-sm" *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched">
+                            <div *ngIf="contactForm.get('message')?.errors?.['required']">Message is required.</div>
+                        </div>
                     </div>
                     <button type="submit"
                         class="w-full bg-secondary text-primary-btn justify-center flex font-bold py-2 px-4 rounded-md">Submit
@@ -73,7 +96,6 @@
                                 d="M25.7932 7.6075C26.3332 6.11375 24.8857 4.66625 23.3919 5.2075L5.13569 11.81C3.63694 12.3525 3.45569 14.3975 4.83444 15.1963L10.6619 18.57L15.8657 13.3663C16.1014 13.1386 16.4172 13.0126 16.7449 13.0154C17.0727 13.0183 17.3862 13.1497 17.618 13.3815C17.8497 13.6132 17.9812 13.9268 17.984 14.2545C17.9869 14.5822 17.8609 14.898 17.6332 15.1338L12.4294 20.3375L15.8044 26.165C16.6019 27.5437 18.6469 27.3612 19.1894 25.8638L25.7932 7.6075Z"
                                 fill="#3A5C41" />
                         </svg>
-
                     </button>
                 </form>
 
@@ -85,12 +107,14 @@
                         <div class="rounded-full p-2">
                             <div
                                 class="twitter-icon w-12 h-12 bg-secondary rounded-full flex justify-center items-center">
-                                <i class="pi pi-phone text-primary vibrate-icon" style="font-size: 1.25rem; font-weight:600"></i>
+                                <i class="pi pi-phone text-primary vibrate-icon"
+                                    style="font-size: 1.25rem; font-weight:600"></i>
                             </div>
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[14px] sm:text-[18px]">Phone</div>
-                            <a class="text-lg text-primary font-medium text-[16px] sm:text-[20px] hover:text-secondary cursor-pointer">2345678910</a>
+                            <a
+                                class="text-lg text-primary font-medium text-[16px] sm:text-[20px] hover:text-secondary cursor-pointer">2345678910</a>
                         </div>
                     </div>
                     <div class="flex items-center phone">
@@ -102,7 +126,9 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[14px] sm:text-[18px]">E-Mail</div>
-                            <div class="text-lg text-primary font-medium text-[16px] sm:text-[20px] hover:text-secondary cursor-pointer">adminaddress@gmail.com</div>
+                            <div
+                                class="text-lg text-primary font-medium text-[16px] sm:text-[20px] hover:text-secondary cursor-pointer">
+                                adminaddress&#64;gmail.com</div>
                         </div>
                     </div>
                     <div class="flex items-center phone">
@@ -115,7 +141,9 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-inner text-[14px] sm:text-[18px]">Location</div>
-                            <div class="text-lg text-primary font-medium text-[16px] sm:text-[20px] hover:text-secondary cursor-pointer">66, North side Roads
+                            <div
+                                class="text-lg text-primary font-medium text-[16px] sm:text-[20px] hover:text-secondary cursor-pointer">
+                                66, North side Roads
                                 Toronto, Canada</div>
                         </div>
                     </div>

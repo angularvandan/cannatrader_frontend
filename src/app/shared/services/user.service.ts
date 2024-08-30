@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../models/user';
@@ -131,5 +131,13 @@ export class UserService {
   deleteUserAccount(){
     return this.http.delete<any>(`${this.baseUrl}/api/users/delete`);
 
+  }
+  privacyAndTerms(params:any){
+    let queryParams = new HttpParams().set('title',params.title);
+
+    return this.http.get(`${this.baseUrl}/api/content`,{params:queryParams});
+  }
+  contactForm(body:any){
+    return this.http.post(`${this.baseUrl}/api/content/query`,body);
   }
 }

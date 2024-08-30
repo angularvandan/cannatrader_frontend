@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User, UserDetails } from 'src/app/shared/models/user';
+import { ProductService } from 'src/app/shared/services/product.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class EditProfileComponent implements OnInit {
   loadingForProfile: boolean = false;
   loadingForCompany: boolean = false;
   loadingForPassword: boolean = false;
+  loadingForPdf:boolean=true;
 
   radioForm!: FormGroup;
 
@@ -28,6 +30,7 @@ export class EditProfileComponent implements OnInit {
   showCompanyForm: boolean = false;
   companyInfo: any = {};
   pdfDocName:string='';
+  pdfLinksContainer:string='';
 
   passwordForm!: FormGroup;
 
@@ -35,7 +38,7 @@ export class EditProfileComponent implements OnInit {
   @ViewChildren('section') sections!: QueryList<ElementRef>;
 
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private tostr: ToastrService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private tostr: ToastrService,private productService:ProductService) {
 
   }
 
@@ -157,13 +160,11 @@ export class EditProfileComponent implements OnInit {
     // console.log(this.profileForm);
   }
 
-
   onFileSelectedForUserImage(event: Event): void {
     const input = event.target as HTMLInputElement;
 
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      // console.log('Selected file:', file);
 
       this.profileForm.patchValue({
         avatar: file
@@ -172,7 +173,6 @@ export class EditProfileComponent implements OnInit {
       this.updateProfile();
     }
   }
-
   //for company
   onCompanyDocUpdateSave() {
     if (this.companyInfo.pdf) {
@@ -192,8 +192,6 @@ export class EditProfileComponent implements OnInit {
       formData.append('longitude', this.companyForm.get('longitude')?.value);
       formData.append('pdf', this.companyForm.get('pdf')?.value);
 
-      console.log(this.companyForm);
-
       this.userService.registerCompany(formData).subscribe({
         next: (response) => {
           console.log(response);
@@ -205,26 +203,18 @@ export class EditProfileComponent implements OnInit {
           console.log(err);
         }
       })
-
     }
-
   }
   //this is for update company info
   private updateCompayInfo() {
     this.loadingForCompany=true;
 
-    const formData = new FormData();
+    
+    this.companyForm.patchValue({
+      pdf:this.pdfLinksContainer
+    });
 
-      formData.append('company_name', this.companyForm.get('company_name')?.value);
-      formData.append('business_type', this.companyForm.get('business_type')?.value);
-      formData.append('contact_no', this.companyForm.get('contact_no')?.value);
-      formData.append('business_id_no', this.companyForm.get('business_id_no')?.value);
-      formData.append('location', this.companyForm.get('location')?.value);
-      formData.append('latitude', this.companyForm.get('latitude')?.value);
-      formData.append('longitude', this.companyForm.get('longitude')?.value);
-      formData.append('pdf', this.companyForm.get('pdf')?.value);
-
-    this.userService.updateCompany(formData).subscribe({
+    this.userService.updateCompany(this.companyForm.value).subscribe({
       next:(response)=>{
         console.log(response);
         this.loadingForCompany=false;
@@ -270,30 +260,48 @@ export class EditProfileComponent implements OnInit {
   }
   //this is for patch value of file
   preloadFile() {
-    this.selectedLicense = [];
-    const blob = new Blob(['file content'], { type: 'application/pdf' });
-    const file = new File([blob], this.companyInfo.pdf, { type: 'application/pdf' });
-    this.companyForm.patchValue({
-      pdf: file
-    });
+
     this.pdfDocName=this.companyInfo.pdf.substring(this.companyInfo.pdf.lastIndexOf('/') + 1);
     this.pdfDocName=decodeURIComponent(this.pdfDocName).replace(/^\d+-/, '');
-    
-    this.selectedLicense.push(file);
+    // console.log(this.pdfDocName);
+    this.pdfLinksContainer=this.companyInfo.pdf;
   }
+
+  convertIntoPdfUrl(file:File){
+    this.loadingForPdf=false;
+    const formData=new FormData();
+    formData.append('pdf',file);
+
+    this.productService.pdfImageToPdfUrl(formData).subscribe({
+      next:(response:any)=>{
+        this.loadingForPdf=true;
+        this.pdfLinksContainer=response.pdfUrl;
+        this.pdfDocName=this.selectedLicense[0].name;
+        // console.log(this.pdfLinksContainer);
+      },error:(err)=>{
+        console.log(err);
+        this.loadingForPdf=true;
+      }
+    })
+  }
+
   //this is for select file
   onSelectLicense(event: Event) {
     console.log(event);
     const files: FileList | null = (event.target as HTMLInputElement).files;
     if (files && files.length > 0) {
-      const fileArray = Array.from(files);
-      console.log(fileArray);
-      this.selectedLicense = [...fileArray];
+      //need to do blank for upload again  without close the pdf
+      this.pdfDocName='';
 
+      const fileArray = Array.from(files);
+      // console.log(fileArray);
+      this.selectedLicense = [...fileArray];
+      //this is for update
+      this.convertIntoPdfUrl(this.selectedLicense[0]);
+      //this is for register
       this.companyForm.patchValue({
         pdf: this.selectedLicense[0]
       });
-      this.pdfDocName=this.selectedLicense[0].name;
       this.companyForm.get('pdf')!.updateValueAndValidity();
     }
   }
@@ -304,6 +312,7 @@ export class EditProfileComponent implements OnInit {
       pdf: this.selectedLicense[0]
     });
     this.pdfDocName='';
+    this.pdfLinksContainer='';
   }
   onCancleUpdateCompany() {
     this.companyForm.patchValue(this.companyInfo);
@@ -313,7 +322,7 @@ export class EditProfileComponent implements OnInit {
   //for change passowrd
   onChangePassword() {
     
-    console.log(this.passwordForm.value);
+    // console.log(this.passwordForm.value);
     if (this.passwordForm.valid) {
       this.loadingForPassword = true;
       this.userService.changePassword(this.passwordForm.value).subscribe({
@@ -339,8 +348,8 @@ export class EditProfileComponent implements OnInit {
 
   scrollToSection(sectionName: string) {
     const sectionEle = this.sections.find(el => el.nativeElement.id == sectionName);
-    console.log(sectionName);
-    console.log(this.sections);
+    // console.log(sectionName);
+    // console.log(this.sections);
     if (sectionEle) {
       sectionEle.nativeElement.scrollIntoView({
         behavior: 'smooth'

@@ -1,7 +1,8 @@
-import { Component, AfterViewInit, ViewChildren, QueryList, ElementRef, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChildren, QueryList, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { interval, Subscription } from 'rxjs';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UserService } from 'src/app/shared/services/user.service';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })
-export class ResetPasswordComponent implements AfterViewInit, OnInit {
+export class ResetPasswordComponent implements AfterViewInit, OnInit ,OnDestroy{
 
   @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
   loading: boolean = false;
@@ -19,9 +20,11 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
   updatePasswordForm!: FormGroup;
   userId!: string;
 
-  loadingOtp:boolean=false;
-  validTimeForOtpStatus:boolean=true;
-  timeForValidOtp:number=2;
+  loadingOtp: boolean = false;
+  validTimeForOtpStatus: boolean = true;
+
+  timeLeft: number = 120; // Time in seconds (2 minutes)
+  timerSubscription!: Subscription;
 
   constructor(private fb: FormBuilder, private userService: UserService, private tostr: ToastrService, private router: Router) { }
 
@@ -31,7 +34,7 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
     });
     this.updatePasswordForm = this.fb.group({
       newPassword: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required,Validators.minLength(8)]]
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
     }, { validator: this.passwordMatchValidator });
   }
 
@@ -88,30 +91,32 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
 
       this.getOtpOnEmail(section);
     }
-    else{
+    else {
       this.resetPasswordForm.markAllAsTouched();
-      this.loading=false;
+      this.loading = false;
     }
   }
   getOtpOnEmail(section: string) {
     const email = this.resetPasswordForm.get('email')?.value.toLowerCase();
     // console.log(email);
-    this.loadingOtp=true;
+    this.loadingOtp = true;
     this.userService.resetPassword(email).subscribe({
       next: (respose) => {
         // console.log(respose);
         this.loadingOtp = false;
-        this.loading=false;
+        this.loading = false;
         this.section = section;
 
         this.tostr.success(respose.message);
-        setTimeout(()=>{
-          
-        },)
+        // Start the countdown
+        this.timeLeft=120;
+        this.timerSubscription = interval(1000).subscribe(() => {
+          this.updateTimer();
+        });
       }, error: (err) => {
         // console.log(err);
         this.loadingOtp = false;
-        this.loading=false;
+        this.loading = false;
         this.tostr.error(err.error.error.message);
       }
     });
@@ -148,6 +153,24 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
     })
 
   }
+  updateTimer(): void {
+    if (this.timeLeft > 0) {
+      this.timeLeft--;
+    } else {
+      // Stop the timer when it reaches 0
+      this.timerSubscription.unsubscribe();
+    }
+  }
+  getFormattedTime(): string {
+    const minutes = Math.floor(this.timeLeft / 60);
+    const seconds = this.timeLeft % 60;
+    return `${this.padZero(minutes)}:${this.padZero(seconds)}`;
+  }
+
+  private padZero(value: number): string {
+    return value < 10 ? `0${value}` : `${value}`;
+  }
+
   changePassword() {
     if (this.updatePasswordForm.valid) {
       this.loading = true;
@@ -166,8 +189,14 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit {
         }
       });
     }
-    else{
+    else {
       this.updatePasswordForm.markAllAsTouched();
+    }
+  }
+  ngOnDestroy(): void {
+    // Clean up the subscription when the component is destroyed
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
     }
   }
 }

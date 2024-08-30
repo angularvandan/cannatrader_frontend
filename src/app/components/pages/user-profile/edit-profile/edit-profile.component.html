@@ -225,7 +225,7 @@
                                 <div class="btn-container flex gap-4 w-full ">
                                     <button (click)="notUpdateProfile()"
                                         class="cancel text-primary font-medium text-md py-2 px-12 border-[#3A5C41] border-2 rounded-md w-full">Cancel</button>
-                                    <button [disabled]="profileForm.invalid" (click)="updateProfile()"[ngClass]=""
+                                    <button [disabled]="profileForm.invalid" (click)="updateProfile()" [ngClass]=""
                                         class="Save bg-primary text-secondary text-md rounded-md py-2 px-12 w-full"><i
                                             class="pi pi-spin pi-spinner" style="font-size: 1.25rem"
                                             *ngIf="loadingForProfile"></i>
@@ -388,14 +388,19 @@
                                                         </div>
                                                         <p>Upload document</p>
                                                         <input type="file" id="filelabel" class="hidden"
-                                                            (change)="onSelectLicense($event)" accept=".pdf" >
+                                                            (change)="onSelectLicense($event)" accept=".pdf">
                                                     </div>
                                                 </label>
                                             </div>
                                         </div>
+                                        <div class=" mt-2 flex justify-center items-center"
+                                            *ngIf="pdfDocName==''">
+                                            <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem"
+                                                *ngIf="!loadingForPdf"></i>
+                                        </div>
                                         <div *ngIf="pdfDocName!=''"
                                             class="license-upload-show bg-[#F5F5F5] p-4 py-6 mt-6 rounded-xl relative">
-                                            <a class="flex justify-start"[href]="selectedLicense[0].name"target="_blank">
+                                            <a class="flex justify-start" [href]="pdfLinksContainer" target="_blank">
                                                 <div>
                                                     <svg width="24" height="30" viewBox="0 0 24 30" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -412,8 +417,7 @@
 
                                                 </div>
                                                 <div class="document-name ml-4">
-                                                    <p 
-                                                        class="mb-2 text-sm leading-6 break-all">{{pdfDocName}}
+                                                    <p class="mb-2 text-sm leading-6 break-all">{{pdfDocName}}
                                                     </p>
                                                 </div>
                                             </a>
