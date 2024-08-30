@@ -40,9 +40,9 @@ export class HomeComponent implements OnInit {
       category: [''],
       sub_category: [''],
       thc_range: [''],
-      longitude: [''],
-      latitude: [''],
-      distance: [''],
+      longitude: ['1112'],
+      latitude: ['22221'],
+      distance: ['20000'],
 
     });
     this.productService.getAllValueForAddProduct().subscribe((response: any) => {
@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit {
       thc_range: this.searchForm.value.thc_range.id || '',
       longitude: this.searchForm.value.longitude,
       latitude: this.searchForm.value.latitude,
-      distance: this.searchForm.value.distance,
+      distance: 20000,
       limit: 9,
       page: 1,
       userId:this.userService.currentUser.user?.id || ''

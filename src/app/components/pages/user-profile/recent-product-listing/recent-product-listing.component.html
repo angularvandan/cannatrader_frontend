@@ -34,15 +34,15 @@
                 class="max-w-sm  mx-auto bg-white rounded-lg justify-around overflow-hidden flex">
                 <div class="relative cursor-pointer"style="width:40%;"[routerLink]="['/products/productDetails', product.id]">
                     <img [src]="product.images[0]" alt="Canopy Growth" class="sm:w-44 sm:h-48 w-36 h-36"style="border-radius:8px;">
-                    <div class="absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-lg posted">Posted:
+                    <div class="absolute top-2 left-2 text-white md:text-xs text-[10px] whitespace-nowrap px-2 py-1 rounded-lg posted">Posted:
                         {{product.created_at | date: 'dd-MM-yyyy'}}
                     </div>
                 </div>
                 <div class="py-4 px-5"style="width:60%">
                     <div class="flex h-full justify-between items-start">
-                        <div class="flex flex-col justify-between h-full cursor-pointer"[routerLink]="['/products/productDetails', product.id]">
+                        <div class="flex flex-col justify-between h-full cursor-pointer whitespace-nowrap"[routerLink]="['/products/productDetails', product.id]">
                             <h2 class="font-bold text-lg text-gray-800">{{product.name}}</h2>
-                            <p class="text-sm text-[#262626] font-normal">Category: <span
+                            <p class="text-sm text-[#262626] font-normal"> <span
                                 class="text-side">{{product.categories.name}}</span>
                             <p class="text-sm text-[#262626] font-normal">Strain Type: <span
                                     class="text-side">{{product.strain_types.type}}</span>
@@ -50,10 +50,9 @@
                             <p class="text-sm text-[#262626] font-normal">THC Range: <span
                                     class="text-side">{{product.thc_ranges.range}}</span>
                             </p>
-                            <p class="text-sm text-[#262626] flex items-center">
-                                <i class="pi pi-map-marker mr-1 text-side font-bold"></i>
-                                pune
-                            </p>
+                            <p class="text-sm text-[#262626] font-normal">Posted on: <span
+                                class="text-side">{{product.created_at | date:'dd-MM-yyyy'}}</span>
+                        </p>
                         </div>
                         <button class="text-gray-500"><a [routerLink]="['/profile/editProduct',product.id]">
                             <svg width="36" height="35" viewBox="0 0 36 35" fill="none"

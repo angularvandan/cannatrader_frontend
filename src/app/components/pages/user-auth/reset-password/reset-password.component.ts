@@ -100,6 +100,8 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit ,OnDestroy{
     const email = this.resetPasswordForm.get('email')?.value.toLowerCase();
     // console.log(email);
     this.loadingOtp = true;
+    this.timeLeft=120;
+
     this.userService.resetPassword(email).subscribe({
       next: (respose) => {
         // console.log(respose);
@@ -109,7 +111,6 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit ,OnDestroy{
 
         this.tostr.success(respose.message);
         // Start the countdown
-        this.timeLeft=120;
         this.timerSubscription = interval(1000).subscribe(() => {
           this.updateTimer();
         });

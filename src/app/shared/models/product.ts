@@ -20,6 +20,7 @@ export interface IProduct {
     description: string;
     dry_method: string;
     dry_methods: DryMethod;
+    distance?:number;
     grade: string;
     grow_media: string;
     grow_medias: GrowMedia;

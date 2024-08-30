@@ -33,6 +33,7 @@ export interface WishlitProduct {
   sub_category: SubCategory;
   thc_range: ThcRange; // Assuming thc_range can be a string or null
   category: Category;
+  created_at:Date;
 }
 
 @Component({
