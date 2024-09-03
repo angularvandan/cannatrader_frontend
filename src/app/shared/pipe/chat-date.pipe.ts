@@ -20,13 +20,14 @@ export class ChatDatePipe implements PipeTransform {
       const formattedHours = hours % 12 || 12; // Convert to 12-hour format
       const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
       return `${formattedHours}:${formattedMinutes} ${ampm}`; // e.g., "9:05 AM"
-    } else if (diffInDays === 1) {
+    }
+    else if (diffInDays === 1) {
       return 'Yesterday';
-    } else {
+    }
+    else {
       // For messages older than yesterday, display date in "MM/DD/YYYY" format
       const options: Intl.DateTimeFormatOptions = { month: '2-digit', day: '2-digit', year: 'numeric' };
       return date.toLocaleDateString(undefined, options);
     }
   }
-
 }

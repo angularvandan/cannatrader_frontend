@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { IProduct } from 'src/app/shared/models/product';
 import { User, UserDetails } from 'src/app/shared/models/user';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { SocketService } from 'src/app/shared/services/socket.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class ProductDetailsComponent implements OnInit {
   totalRating: number = 0;
   rate: number = 0;
   userId: string = '';
-  showPhoneNoStatus:boolean=false;
+  showPhoneNoStatus: boolean = false;
 
   paragraph: string = `Our premium cannabis dried flower is cultivated from top-quality strains, ensuring a potent and aromatic
                 experience Our premium cannabis dried flower is cultivated from top-quality strains, ensuring `;
@@ -31,7 +32,8 @@ export class ProductDetailsComponent implements OnInit {
   isSubscribed: boolean = false;
 
 
-  constructor(private productService: ProductService, private userService: UserService, private activatedRoute: ActivatedRoute, private router: Router, private tostr: ToastrService) { }
+
+  constructor(private productService: ProductService, private userService: UserService, private activatedRoute: ActivatedRoute, private router: Router, private tostr: ToastrService, private socketService: SocketService) { }
 
   ngOnInit(): void {
 
@@ -157,7 +159,18 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  nevigateToChat(userId:string){
+  nevigateToChat(userId: string) {
+    console.log(userId);
+    if (this.userId.trim()) {
+      this.productService.startChat(userId).subscribe({
+        next:(response:any)=>{
+          console.log(response.data.id);
+          this.socketService.emit('joinChat',response.data.id);
+        },error:(err)=>{
+          console.log(err);
+        }
+      });
+    }
     this.router.navigate(['/products/chats']);
   }
 

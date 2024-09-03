@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { Observable } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class SocketService {
 
-  private socket: Socket;
+  public socket!: Socket;
   private readonly SOCKET_ENDPOINT = 'https://cannatrader.onrender.com';
 
   constructor() {
@@ -15,15 +15,25 @@ export class SocketService {
       transports: ['websocket'], // Use WebSocket transport only (optional)
       withCredentials: true // Use credentials for CORS (optional)
     });
+
+    this.socket.connect();
+    this.socket.on('connect', () => {
+      console.log('Socket connected:', this.socket.id);
+    });
+
   }
+
   // Emit an event to the server
   emit(event: string, data: any): void {
+    console.log(data);
     this.socket.emit(event, data);
   }
   // Listen for an event from the server
   on(event: string): Observable<any> {
+    console.log(event);
     return new Observable((observer) => {
       this.socket.on(event, (data) => {
+        console.log(data);
         observer.next(data);
       });
 
@@ -31,6 +41,7 @@ export class SocketService {
       return () => this.socket.off(event);
     });
   }
+  
   // Disconnect the socket
   disconnect(): void {
     if (this.socket) {

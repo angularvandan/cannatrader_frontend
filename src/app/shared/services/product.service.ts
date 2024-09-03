@@ -122,9 +122,12 @@ export class ProductService {
     return this.http.get(`${this.baseUrl}/api/subscribtion/subscriptions`,{params});
   }
   startChat(userId2:string){
-    return this.http.post(`${this.baseUrl}/api/chat/create`,{userId2})
+    return this.http.post(`${this.baseUrl}/api/chat/create`,{userId2});
   }
   getAllChats(){
     return this.http.get(`${this.baseUrl}/api/chat`);
+  }
+  getAllMessages(chatId:string){
+    return this.http.get(`${this.baseUrl}/api/chat/messages/${chatId}`);
   }
 }

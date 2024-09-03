@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import {  AfterViewChecked,  Component,  HostListener, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { SocketService } from 'src/app/shared/services/socket.service';
 
@@ -22,6 +22,17 @@ export interface LastMessage {
   senderId: string;
   createdAt: Date;
 }
+// this is for chat message
+export interface ChatMessage {
+  id: string;
+  chatId: string;
+  senderId: string;
+  receiverId: string;
+  content: string;
+  readStatus: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 
 @Component({
@@ -29,89 +40,155 @@ export interface LastMessage {
   templateUrl: './chat-details.component.html',
   styleUrls: ['./chat-details.component.scss']
 })
-export class ChatDetailsComponent implements OnInit{
+export class ChatDetailsComponent implements OnInit, AfterViewChecked {
 
-  users:any[]=[
-    {image:'../../../../../assets/chats/user.jpg',name:'Jayden',content:'Checkout our new products...',time:'09:09 AM',count:'2'},
-    {image:'../../../../../assets/chats/user1.jpg',name:'Vandan',content:'Checkout our new products...',time:'09:09 AM',count:'2'},
-    {image:'../../../../../assets/chats/user.jpg',name:'Yash',content:'Checkout our new products...',time:'09:09 AM',count:'2'},
-    {image:'../../../../../assets/chats/user1.jpg',name:'Happy',content:'Checkout our new products...',time:'09:09 AM',count:'2'},
-    {image:'../../../../../assets/chats/user.jpg',name:'Ayush',content:'Checkout our new products...',time:'09:09 AM',count:'2'},
-    {image:'../../../../../assets/chats/user1.jpg',name:'Jayden',content:'Checkout our new products...',time:'09:09 AM',count:'2'},
-    {image:'../../../../../assets/chats/user.jpg',name:'Jayden',content:'Checkout our new products...',time:'09:09 AM',count:'2'},
-    {image:'../../../../../assets/chats/user1.jpg',name:'Jayden',content:'Checkout our new products...',time:'09:09 AM',count:'2'}
-  ];
-  userChatLeftMessage:any[]=[
-    {content:'That sounds like a good plan. Would you like any edibles with that?',time:'09:10',id:'1'},
-    {content:"'I'll take two kilograms of chocolate",time:'09:10',id:'2'},
-
-    {content:"Great choice! That'll be $25.",time:'09:11',id:'1'},
-    {content:"Not today, just the chocolate",time:'09:11',id:'2'},
-
-    {content:"Would you like any edibles with that?",time:'09:12',id:'1'},
-    {content:"Thanks for your help!",time:'09:12',id:'2'},
-
-    {content:"You're welcome!",time:'09:13',id:'1'}
-  ];
-
-  activeUserChats:ChatPartner[]=[
+  activeUserChats: ChatPartner[] = [
 
   ];
- 
-  showMobileViewChats:boolean=false;
+
+  showMobileViewChats: boolean = false;
+  isMobile:boolean=true;
 
   message: string = '';
-  messages: string[] = [];
-  chats:ChatModel[]=[];
-  userId:string='';
-  
-  constructor(private socketService: SocketService,private productService:ProductService){
-    
+  messages: ChatMessage[] = [];
+  chats: ChatModel[] = [];
+
+  userId: string = '';
+  chatId: string = '';
+  receiverId: string = '';
+
+
+  constructor(private socketService: SocketService, private productService: ProductService) {
+
   }
   ngOnInit(): void {
 
-    this.socketService.on('newMessage').subscribe((message: string) => {
-      this.messages.push(message);
-    });
+    this.checkWindowWidth();
 
-    this.getAllChats();
-  }
-  sendMessage(): void {
-    if (this.message.trim()) {
-      this.socketService.emit('sendMessage', this.message);
-      this.message = ''; // Clear input field after sending
-    }
-  }
-
-  getAllChats(){
-    this.productService.getAllChats().subscribe({
-      next:(response:any)=>{
-        this.chats=response.chats;
-        this.userId=response.userId;
-      },error:(err:any)=>{
+    this.socketService.on('newMessage').subscribe({
+      next:(message)=>{
+        console.log(message);
+        this.messages.push(message);
+      },error:(err)=>{
         console.log(err);
       }
     })
+    // this is for all user who has a chats
+    this.getAllChats();
+  }
+  ngAfterViewChecked(): void {
+    this.scrollToElement();
+  }
+
+  sendMessageToServer(chatId: string, content: string, senderId: string, receiverId: string): void {
+    const message = { chatId, content, senderId, receiverId };
+    console.log(message);
+    this.socketService.emit('sendMessage', message);
+
+    //this is for show latest send message 
+    this.chats=this.chats.map((chat)=>{
+      if(chat.chatId==chatId){
+        chat.lastMessage.content=content;
+        return chat;
+      }
+      return chat;
+    })
+  }
+
+  sendMessage() {
+    this.message = this.message.trim();
+    if (this.message != '') {
+      this.sendMessageToServer(this.chatId, this.message, this.userId, this.receiverId);
+    }
+    this.message = '';
+  }
+
+  getAllChats() {
+    this.productService.getAllChats().subscribe({
+      next: (response: any) => {
+        this.chats = response.chats;
+        this.userId = response.userId;
+        console.log(response);
+      }, error: (err: any) => {
+        console.log(err);
+      }
+    })
+  }
+  getAllMessageByChatId(chatId: string, user: any) {
+    //need chatId for send message;
+    this.chatId = chatId;
+    this.receiverId = user.id;
+
+    this.chats=this.chats.map((chat)=>{
+      if(chat.chatId==chatId){
+        chat.unreadCount=0;
+        return chat;
+      }
+      return chat;
+    })
+
+    //this is for show in mobile and desktop
+    console.log(this.isMobile);
+    if(this.isMobile){
+      this.showChatsMobile(user);
+    }
+    else{
+      this.showChats(user);
+    }
+
+    this.selectChatRoom(this.chatId);
+
+    this.productService.getAllMessages(chatId).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this.messages = response.data;
+      }, error: (err) => {
+        console.log(err);
+      }, complete: () => {
+        //this is for scroll chat below
+        this.scrollToElement();
+      }
+    })
+  }
+
+  selectChatRoom(chatRoomId: string) {
+    this.socketService.emit('joinChat', chatRoomId);
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.checkWindowWidth();
   }
-  private checkWindowWidth(){
-    if (window.innerWidth > 768) {
-      this.showMobileViewChats=false;
 
+  private checkWindowWidth() {
+    if (window.innerWidth > 768) {
+      this.showMobileViewChats = false;
+      this.isMobile=false;
+    }
+    else{
+      this.isMobile=true;
     }
   }
-  showChats(user:any){
+  showChats(user: any) {
     this.activeUserChats.pop();
     this.activeUserChats.push(user);
   }
-  showChatsMobile(user:any){
-    this.showMobileViewChats=true;
+  showChatsMobile(user: any) {
+    this.showMobileViewChats = true;
     this.activeUserChats.pop();
     this.activeUserChats.push(user);
+  }
+
+  scrollToElement(): void {
+    const element = document.getElementById('scrollBelowChat');
+    const element2 = document.getElementById('scrollBelowChat2');
+    console.log(element);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    if (element2) {
+      element2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
 }

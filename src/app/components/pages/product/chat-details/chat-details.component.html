@@ -1,4 +1,4 @@
-<div class="w-full h-[88vh] bg-[#EDEDED]">
+<div class="w-full h-[87vh] bg-[#EDEDED]">
     <div class="chats-container bg-[#EDEDED] h-full ">
         <div class="chats w-full h-full flex flex-row flex-wrap md:flex-nowrap gap-4 lg:gap-8 p-4 overflow-hidden">
             <div class="users-container w-full md:w-2/5 lg:w-[33%] bg-[#FFFFFF] z-10 rounded-lg">
@@ -11,10 +11,11 @@
                             <input type="text" pInputText placeholder="Search here" />
                         </span>
                     </div>
-                    <div class="users-chats-container p-2 max-h-[430px] overflow-y-auto hidden md:block">
+                    <div class="users-chats-container p-2 max-h-[407px] overflow-y-auto hidden md:block">
                         <div class="users-chats mt-4 " *ngFor="let chat of chats">
                             <div class="users-image-container flex flex-row cursor-pointer"
-                                (click)="showChats(chat.chatPartner)">
+                                (click)="getAllMessageByChatId(chat.chatId,chat.chatPartner)"
+                                [ngClass]="chat.chatId== chatId?'active-user':''">
                                 <div class="flex-none user-image overflow-hidden rounded-full self-center mr-3">
                                     <img class=" " src="{{chat.chatPartner.avatar}}" alt="">
                                 </div>
@@ -22,13 +23,14 @@
                                     <div class="user-title text-lg leading-5 font-medium text-primary">
                                         {{chat.chatPartner.name}}
                                     </div>
-                                    <div class="user-message text-sm leading-5 font-medium text-[#737373]">
+                                    <div *ngIf="chat.lastMessage"
+                                        class="user-message text-sm leading-5 font-medium text-[#737373]">
                                         {{chat.lastMessage.content}}</div>
                                 </div>
-                                <div class="flex-none user-notification relative">
+                                <div *ngIf="chat.lastMessage" class="flex-none user-notification relative">
                                     <div class="content-time text-[15px] leading-5 text-semibold">
                                         {{chat.lastMessage.createdAt | chatDate}}</div>
-                                    <div
+                                    <div *ngIf="chat.unreadCount!=0"
                                         class="content-count bg-primary absolute right-0 bottom-0 rounded-full w-6 h-6 flex justify-center items-center">
                                         <span
                                             class="text-white text-[15px] leading-5 text-semibold">{{chat.unreadCount}}</span>
@@ -41,7 +43,8 @@
                         <div class="users-chats-container p-2 max-h-[430px] overflow-y-auto mobile-view">
                             <div class="users-chats mt-4 " *ngFor="let chat of chats">
                                 <div class="users-image-container flex flex-row cursor-pointer"
-                                    (click)="showChatsMobile(chat.chatPartner)">
+                                    [ngClass]="chat.chatId== chatId?'active-user':''"
+                                    (click)="getAllMessageByChatId(chat.chatId,chat.chatPartner)">
                                     <div class="flex-none user-image overflow-hidden rounded-full self-center mr-3">
                                         <img class=" " src="{{chat.chatPartner.avatar}}" alt="">
                                     </div>
@@ -49,14 +52,15 @@
                                         <div class="user-title text-lg leading-5 font-medium text-primary">
                                             {{chat.chatPartner.name}}
                                         </div>
-                                        <div class="user-message text-sm leading-5 font-medium text-[#737373]">
+                                        <div *ngIf="chat.lastMessage"
+                                            class="user-message text-sm leading-5 font-medium text-[#737373]">
                                             {{chat.lastMessage.content}}</div>
                                     </div>
-                                    <div class="flex-none user-notification relative">
+                                    <div *ngIf="chat.lastMessage" class="flex-none user-notification relative">
                                         <div class="content-time text-[15px] leading-5 text-semibold">
                                             {{chat.lastMessage.createdAt | chatDate}}
                                         </div>
-                                        <div
+                                        <div *ngIf="chat.unreadCount != 0"
                                             class="content-count bg-primary absolute right-0 bottom-0 rounded-full w-6 h-6 flex justify-center items-center">
                                             <span
                                                 class="text-white text-[15px] leading-5 text-semibold">{{chat.unreadCount}}</span>
@@ -69,15 +73,19 @@
                 </div>
             </div>
             <div class="user-chats-container w-full md:w-3/5 lg:w-[67%] bg-[#FFFFFF] z-10 rounded-lg hidden md:block">
-                <div class="user-chats p-4 mt-2" *ngIf="activeUserChats.length">
+                <div class="user-chats h-full p-4 mt-2" *ngIf="activeUserChats.length">
                     <div class="user-chats-heading flex flex-row">
+                        <div [routerLink]="'/product/chats'"
+                            class="cursor-pointer mr-3 twitter-icon w-12 h-12 bg-nav-bg rounded-full flex justify-center items-center">
+                            <i class="pi pi-arrow-left text-primary"></i>
+                        </div>
                         <div class="img-container overflow-hidden rounded-full mr-4">
                             <img class="" src="{{activeUserChats[0].avatar}}" alt="">
                         </div>
                         <div class="name flex flex-col">
                             <span
                                 class="text-xl leading-7 font-semibold text-primary">{{activeUserChats[0].name}}</span>
-                            <span class="texl-sm leading-5 font-medium">Customer</span>
+                            <span class="texl-sm leading-5 font-medium">Online</span>
                         </div>
                     </div>
                     <div class="user-chats-day">
@@ -87,32 +95,32 @@
                                 Today</p>
                         </div>
                     </div>
-                    <div class="user-chats-messages my-4">
-                        <div class="user-chats max-h-[330px] overflow-y-auto pe-4">
-                            <ng-container *ngFor="let msg of userChatLeftMessage">
+                    <div class="user-chats-messages h-[70%] my-4">
+                        <div class="user-chats max-h-[330px] overflow-y-auto ">
+                            <ng-container *ngFor="let msg of messages">
 
-                                <div class="flex justify-start mb-2" *ngIf="msg.id==='1'">
+                                <div class="flex justify-start mb-2" *ngIf="msg.senderId!=userId">
                                     <div class="left-message flex items-start flex-col">
                                         <span
-                                            class=" py-[5px] px-4 bg-secondary text-primary text-sm leading-5 font-medium">{{msg.content}}</span>
-                                        <p class="">{{msg.time}}</p>
+                                            class=" py-[3px] px-2 bg-secondary text-primary text-sm leading-5 font-medium">{{msg.content}}</span>
+                                        <p class="text-xs">{{msg.createdAt | timeFormat}}</p>
                                     </div>
                                 </div>
-                                <div class="flex justify-end" *ngIf="msg.id==='2'">
+                                <div class="flex justify-end mb-2" *ngIf="msg.senderId==userId">
                                     <div class="right-message flex items-end flex-col">
                                         <span
-                                            class="self-right py-[5px] px-4 bg-primary text-secondary text-sm leading-5 font-medium">{{msg.content}}</span>
-                                        <p class="">{{msg.time}}</p>
+                                            class="self-right py-[3px] px-2 bg-primary text-secondary text-sm leading-5 font-medium">{{msg.content}}</span>
+                                        <p class="text-xs">{{msg.createdAt | timeFormat}}</p>
                                     </div>
                                 </div>
                             </ng-container>
-
+                            <div class="scroll-below" id="scrollBelowChat"></div>
                         </div>
                     </div>
                     <div class="user-chat-send-btn">
                         <div class="user-send">
                             <span class="p-input-icon-left w-full">
-                                <i class="pi ">
+                                <i class="pi cursor-pointer ">
                                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -121,8 +129,9 @@
                                     </svg>
 
                                 </i>
-                                <input type="text" pInputText placeholder="Type Message here..." />
-                                <i class="pi p-input-icon-right cursor-pointer">
+                                <input type="text" pInputText placeholder="Type Message here..." [(ngModel)]="message"
+                                    (keyup.enter)="sendMessage()" />
+                                <i class="pi p-input-icon-right cursor-pointer" (click)="sendMessage()">
                                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <g clip-path="url(#clip0_759_7098)">
@@ -144,10 +153,14 @@
                 </div>
             </div>
             <!-- this is for mobile  -->
-            <div class="user-chats-container w-full md:w-3/5 lg:w-[67%] bg-[#FFFFFF] z-10 rounded-lg mobile-view"
+            <div class="user-chats-container h-full w-full md:w-3/5 lg:w-[67%] bg-[#FFFFFF] z-10 rounded-lg mobile-view"
                 *ngIf="showMobileViewChats">
-                <div class="user-chats p-4 mt-2 " *ngIf="activeUserChats.length">
+                <div class="user-chats h-full p-4 mt-2 " *ngIf="activeUserChats.length">
                     <div class="user-chats-heading flex flex-row">
+                        <div (click)="showMobileViewChats=false"
+                            class="cursor-pointer mr-3 twitter-icon w-12 h-12 bg-nav-bg rounded-full flex justify-center items-center">
+                            <i class="pi pi-arrow-left text-primary"></i>
+                        </div>
                         <div class="img-container overflow-hidden rounded-full mr-4">
                             <img class="" [src]="activeUserChats[0].avatar" alt="">
                         </div>
@@ -164,26 +177,26 @@
                                 Today</p>
                         </div>
                     </div>
-                    <div class="user-chats-messages my-4">
-                        <div class="user-chats max-h-[350px] overflow-y-auto pe-4">
-                            <ng-container *ngFor="let msg of userChatLeftMessage">
+                    <div class="user-chats-messages my-4 h-[70%]">
+                        <div class="user-chats max-h-[350px] overflow-y-auto ">
+                            <ng-container *ngFor="let msg of messages">
 
-                                <div class="flex justify-start mb-2" *ngIf="msg.id==='1'">
+                                <div class="flex justify-start mb-2" *ngIf="msg.senderId!=userId">
                                     <div class="left-message flex items-start flex-col">
                                         <span
                                             class=" py-2 px-4 bg-secondary text-primary text-sm leading-5 font-medium">{{msg.content}}</span>
-                                        <p class="mt-1">{{msg.time}}</p>
+                                        <p class="mt-1">{{msg.createdAt | timeFormat}}</p>
                                     </div>
                                 </div>
-                                <div class="flex justify-end" *ngIf="msg.id==='2'">
+                                <div class="flex justify-end" *ngIf="msg.senderId==userId">
                                     <div class="right-message flex items-end flex-col">
                                         <span
                                             class="self-right py-2 px-4 bg-primary text-secondary text-sm leading-5 font-medium">{{msg.content}}</span>
-                                        <p class="mt-1">{{msg.time}}</p>
+                                        <p class="mt-1">{{msg.createdAt | timeFormat}}</p>
                                     </div>
                                 </div>
                             </ng-container>
-
+                            <div class="scroll-below" id="scrollBelowChat2"></div>
                         </div>
                     </div>
                     <div class="user-chat-send-btn">
@@ -198,8 +211,9 @@
                                     </svg>
 
                                 </i>
-                                <input type="text" pInputText placeholder="Type Message here..." />
-                                <i class="pi p-input-icon-right cursor-pointer">
+                                <input type="text" pInputText placeholder="Type Message here..." [(ngModel)]="message"
+                                    (keyup.enter)="sendMessage()" />
+                                <i class="pi p-input-icon-right cursor-pointer" (keyup.enter)="sendMessage()">
                                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <g clip-path="url(#clip0_759_7098)">

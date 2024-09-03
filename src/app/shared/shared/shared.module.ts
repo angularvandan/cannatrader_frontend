@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
@@ -18,10 +18,11 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { BlockUIModule } from 'primeng/blockui';
 import { PanelModule } from 'primeng/panel';
 import { ChatDatePipe } from '../pipe/chat-date.pipe';
+import { TimeFormatPipe } from '../pipe/time-format.pipe';
 
 
 @NgModule({
-  declarations: [ChatDatePipe],
+  declarations: [ChatDatePipe,TimeFormatPipe],
   imports: [
     CommonModule,
     ButtonModule,
@@ -44,6 +45,9 @@ import { ChatDatePipe } from '../pipe/chat-date.pipe';
     PanelModule,
     ToastrModule.forRoot(),
   ],
+  providers:[
+    DatePipe
+  ],
   exports: [
     CommonModule,
     ButtonModule,
@@ -64,7 +68,8 @@ import { ChatDatePipe } from '../pipe/chat-date.pipe';
     BlockUIModule,
     PanelModule,
     InputNumberModule,
-    ChatDatePipe
+    ChatDatePipe,
+    TimeFormatPipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
