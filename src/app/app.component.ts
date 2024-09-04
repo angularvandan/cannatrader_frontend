@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,4 +10,12 @@ export class AppComponent {
   title = 'cannatrader';
 
   constructor(public route: Router) { }
+
+  ngOnInit(): void {
+    this.route.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        window.scrollTo(0, 0);
+      });
+  }
 }

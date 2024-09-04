@@ -232,6 +232,14 @@ export class AddProductComponent implements OnInit {
         next: (response) => {
           // console.log(response);
           this.tostr.success('Product added successfully');
+
+          //reset form data
+          this.productForm.reset();
+          this.selectedFile=null;
+          this.selectedImageFiles=[];
+          this.imagePreviews=[];
+          window.scrollTo(0, 0);
+
           this.loading = false;
         }, error: (err) => {
           // console.log(err);

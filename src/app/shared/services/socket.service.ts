@@ -11,9 +11,16 @@ export class SocketService {
   private readonly SOCKET_ENDPOINT = 'https://cannatrader.onrender.com';
 
   constructor() {
+    this.socketConnection();
+  }
+
+  socketConnection(){
     this.socket = io(this.SOCKET_ENDPOINT, {
       transports: ['websocket'], // Use WebSocket transport only (optional)
-      withCredentials: true // Use credentials for CORS (optional)
+      withCredentials: true, // Use credentials for CORS (optional)
+      reconnection: true,
+      reconnectionAttempts: Infinity,
+      reconnectionDelay: 1000,
     });
 
     this.socket.connect();
@@ -21,6 +28,10 @@ export class SocketService {
       console.log('Socket connected:', this.socket.id);
     });
 
+    this.socket.on('disconnect', () => {
+      console.log('Socket disconnected. Attempting to reconnect...');
+      this.socket.connect();
+    });
   }
 
   // Emit an event to the server

@@ -380,7 +380,8 @@ export class EditProductComponent {
           this.loading = false;
           this.tostr.success('Updated Successfully');
           this.getProductByActivatedRoute();
-
+          window.scrollTo(0, 0);
+          
         }, error: (err:any) => {
           console.log(err);
           this.loading = false;
