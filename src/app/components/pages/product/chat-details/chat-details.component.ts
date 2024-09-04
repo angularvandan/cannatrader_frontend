@@ -1,4 +1,5 @@
 import { AfterViewChecked, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { format, isToday, isTomorrow, isYesterday, parseISO } from 'date-fns';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { SocketService } from 'src/app/shared/services/socket.service';
 
@@ -53,6 +54,10 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
   messages: ChatMessage[] = [];
   chats: ChatModel[] = [];
 
+  //it will update for show group of message with particular date
+  chatGroups: { date: string, dateLabel: string, messages: ChatMessage[] }[] = [];
+
+
   userId: string = '';
   chatId: string = '';
   receiverId: string = '';
@@ -77,7 +82,7 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
         console.log(err);
       }
     })
-    
+
   }
   ngAfterViewChecked(): void {
     this.scrollToElement();
@@ -124,7 +129,7 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
     })
   }
 
-  sortTheUserWhoInChats(){
+  sortTheUserWhoInChats() {
     //this is for sort the user who in the chat wrt latest message
     const sortedChats = this.chats.sort((a, b) => {
       if (a.lastMessage === null) return 1; // Treat null as the latest
@@ -168,6 +173,7 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
       }, complete: () => {
         //this is for scroll chat below
         this.scrollToElement();
+        this.groupChatsByDate();
       }
     })
   }
@@ -211,6 +217,39 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
       element2.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
+
+  groupChatsByDate() {
+    let previousDate = '';
+
+    this.messages.forEach(chat => {
+      let date = chat.createdAt.toString();
+      const messageDate = format(parseISO(date), 'yyyy-MM-dd');
+      const dayLabel = this.getDayLabel(date);
+
+      if (messageDate !== previousDate) {
+        this.chatGroups.push({ date: messageDate, dateLabel: dayLabel, messages: [chat] });
+        previousDate = messageDate;
+      } else {
+        this.chatGroups[this.chatGroups.length - 1].messages.push(chat);
+      }
+    });
+    console.log(this.chatGroups);
+  }
+
+  getDayLabel(date: string): string {
+    const parsedDate = parseISO(date);
+    if (isToday(parsedDate)) return 'Today';
+    if (isTomorrow(parsedDate)) return 'Tomorrow';
+    if (isYesterday(parsedDate)) return 'Yesterday';
+    return format(parsedDate, 'EEEE, MMMM d');
+  }
+
+  //this is for show time of get and send message
+  formatTime(date: Date): string {
+    let dateString = date.toString();
+    return format(parseISO(dateString), 'hh:mm a');
+  }
+
   ngOnDestroy(): void {
     console.log('disconnect');
     this.socketService.disconnect();

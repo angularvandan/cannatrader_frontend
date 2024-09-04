@@ -18,11 +18,10 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { BlockUIModule } from 'primeng/blockui';
 import { PanelModule } from 'primeng/panel';
 import { ChatDatePipe } from '../pipe/chat-date.pipe';
-import { TimeFormatPipe } from '../pipe/time-format.pipe';
 
 
 @NgModule({
-  declarations: [ChatDatePipe,TimeFormatPipe],
+  declarations: [ChatDatePipe],
   imports: [
     CommonModule,
     ButtonModule,
@@ -68,9 +67,8 @@ import { TimeFormatPipe } from '../pipe/time-format.pipe';
     BlockUIModule,
     PanelModule,
     InputNumberModule,
-    ChatDatePipe,
-    TimeFormatPipe
-  ],
+    ChatDatePipe
+    ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SharedModule { }

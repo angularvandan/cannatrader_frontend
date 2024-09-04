@@ -99,14 +99,14 @@
                                     <div class="left-message flex items-start flex-col">
                                         <span
                                             class=" py-[3px] px-2 bg-secondary text-primary text-sm leading-5 font-medium">{{msg.content}}</span>
-                                        <p class="text-xs">{{msg.createdAt | timeFormat}}</p>
+                                        <p class="text-xs">{{formatTime(msg.createdAt)}}</p>
                                     </div>
                                 </div>
                                 <div class="flex justify-end mb-2" *ngIf="msg.senderId==userId">
                                     <div class="right-message flex items-end flex-col">
                                         <span
                                             class="self-right py-[3px] px-2 bg-primary text-secondary text-sm leading-5 font-medium">{{msg.content}}</span>
-                                        <p class="text-xs">{{msg.createdAt | timeFormat}}</p>
+                                        <p class="text-xs">{{formatTime(msg.createdAt)}}</p>
                                     </div>
                                 </div>
                             </ng-container>
@@ -181,14 +181,14 @@
                                     <div class="left-message flex items-start flex-col">
                                         <span
                                             class=" py-2 px-4 bg-secondary text-primary text-sm leading-5 font-medium">{{msg.content}}</span>
-                                        <p class="mt-1">{{msg.createdAt | timeFormat}}</p>
+                                        <p class="mt-1">{{formatTime(msg.createdAt)}}</p>
                                     </div>
                                 </div>
                                 <div class="flex justify-end" *ngIf="msg.senderId==userId">
                                     <div class="right-message flex items-end flex-col">
                                         <span
                                             class="self-right py-2 px-4 bg-primary text-secondary text-sm leading-5 font-medium">{{msg.content}}</span>
-                                        <p class="mt-1">{{msg.createdAt | timeFormat}}</p>
+                                        <p class="mt-1">{{formatTime(msg.createdAt)}}</p>
                                     </div>
                                 </div>
                             </ng-container>
