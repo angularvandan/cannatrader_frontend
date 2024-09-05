@@ -62,7 +62,7 @@
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                         <div class="mt-6 w-full relative">
                             <label for="name" class="block text-sm text-gray-700 font-custom">Product Name <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
                             <input required pInputText id="name" type="text" placeholder="Enter Product Name"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
                                 formControlName="name">
@@ -73,7 +73,7 @@
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="strainTypes" class="block text-sm text-gray-700 font-custom">Strain Types <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
                             <p-dropdown [required]="true" class="w-full" placeholder="Select strain type"
                                 [options]="strainTypes" optionLabel="type" formControlName="strain_type"></p-dropdown>
                             <div *ngIf="productForm.get('strain_type')?.invalid && productForm.get('strain_type')?.touched"
@@ -85,7 +85,7 @@
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                         <div class="mt-6 w-full relative">
                             <label for="thcRange" class="block text-sm text-gray-700 font-custom">THC Range <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
                             <p-dropdown [required]="true" class="w-full" [options]="thcRange"
                                 placeholder="Select THC range" optionLabel="range"
                                 formControlName="thc_range"></p-dropdown>
@@ -96,7 +96,7 @@
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="categories" class="block text-sm text-gray-700 font-custom">Categories <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
                             <p-dropdown [required]="true" class="w-full" placeholder="Select category"
                                 [options]="categories" optionLabel="name" formControlName="category"></p-dropdown>
                             <div *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched"
@@ -108,7 +108,7 @@
                     </div>
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                         <div class="mt-6 w-full relative">
-                            <label for="lineage" class="block text-sm text-gray-700 font-custom">Lineage</label>
+                            <label for="lineage" class="block text-sm text-gray-700 font-custom">Lineage<span class="text-red-500 text-sm"> *</span></label>
                             <input pInputText id="lineage" type="text" placeholder="Enter Lineage"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
                                 formControlName="lineage">
@@ -128,7 +128,7 @@
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                         <div class="mt-6 w-full relative">
                             <label for="thcTotal" class="block text-sm text-gray-700 font-custom">THC Total (%) <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
                             <input required pInputText id="thcTotal" type="number" step="0.01"
                                 placeholder="Enter THC Total"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
@@ -145,7 +145,7 @@
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="harvestDate" class="block text-sm text-gray-700 font-custom">Harvest Date <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
                             <p-calendar [showIcon]="true" formControlName="harvest_date"></p-calendar>
                             <div *ngIf="productForm.get('harvest_date')?.invalid && productForm.get('harvest_date')?.touched"
                                 class="text-red-600 text-sm">
@@ -157,7 +157,7 @@
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                         <div class="mt-6 w-full relative">
                             <label for="terpene" class="block text-sm text-gray-700 font-custom">Terpene (%) <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
                             <input required pInputText id="terpene" type="number" step="0.01"
                                 placeholder="Enter Terpene"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
@@ -174,7 +174,7 @@
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="cbd" class="block text-sm text-gray-700 font-custom">CBD (%) <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
                             <input required pInputText id="cbd" type="number" step="0.01" placeholder="Enter CBD"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
                                 formControlName="cbd">
@@ -190,7 +190,7 @@
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                         <div class="mt-6 w-full relative">
                             <label for="grade" class="block text-sm text-gray-700 font-custom">Grade (like A-AAAA) <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
                             <input required pInputText id="grade" type="text" placeholder="Enter Grade"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
                                 formControlName="grade">
@@ -201,7 +201,7 @@
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="available" class="block text-sm text-gray-700 font-custom">Available (grams)
-                                <span class="text-red">*</span></label>
+                                <span class="text-red-500">*</span></label>
                             <input required pInputText id="available" type="number" placeholder="Enter Available Grams"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
                                 formControlName="available">
@@ -219,7 +219,7 @@
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                         <div class="mt-6 w-full relative">
                             <label for="growMedia" class="block text-sm text-gray-700 font-custom">Grow Media <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
                             <p-dropdown [required]="true" class="w-full" placeholder="Select grow media"
                                 [options]="growMedia" optionLabel="media" formControlName="grow_media"></p-dropdown>
                             <div *ngIf="productForm.get('grow_media')?.invalid && productForm.get('grow_media')?.touched"
@@ -230,7 +230,7 @@
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="growthMethod" class="block text-sm text-gray-700 font-custom">Growth Method
-                                <span class="text-red">*</span></label>
+                                <span class="text-red-500">*</span></label>
 
                             <p-dropdown [required]="true" class="w-full" placeholder="Select growth method"
                                 [options]="growthMethod" optionLabel="method"
@@ -244,7 +244,7 @@
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 irradiated">
                         <div class="mt-6 w-full relative">
                             <label for="irradiated" class="block text-sm text-gray-700 font-custom">Irradiated <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
                             <div class="flex flex-wrap gap-3">
                                 <div class="flex align-items-center">
                                     <p-radioButton formControlName="irradiated" ngDefaultControl value="yes"
@@ -260,7 +260,7 @@
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="dryMethod" class="block text-sm text-gray-700 font-custom">Dry Method <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
 
                             <p-dropdown [required]="true" class="w-full" placeholder="Select dry method"
                                 [options]="dryMethod" optionLabel="method" formControlName="dry_method"></p-dropdown>
@@ -274,7 +274,7 @@
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                         <div class="mt-6 w-full relative">
                             <label for="budSize" class="block text-sm text-gray-700 font-custom">Bud Size <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
                             <input required pInputText id="budSize" type="text" placeholder="Enter Bud Size"
                                 class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
                                 formControlName="bud_size">
@@ -286,7 +286,7 @@
                         </div>
                         <div class="mt-6 w-full relative">
                             <label for="trimMethod" class="block text-sm text-gray-700 font-custom">Trim Method <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
 
                             <p-dropdown [required]="true" class="w-full" placeholder="Select trim method"
                                 [options]="trimMethod" optionLabel="method" formControlName="trim_method"></p-dropdown>
@@ -301,7 +301,7 @@
                         <div class="flex flex-col w-full ">
                             <div class="mt-6 w-full relative">
                                 <label for="tops" class="block text-sm text-gray-700 font-custom">Tops (%) <span
-                                        class="text-red">*</span></label>
+                                        class="text-red-500">*</span></label>
                                 <input required pInputText id="tops" type="number" step="0.01" placeholder="Enter Tops"
                                     class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
                                     formControlName="tops">
@@ -316,7 +316,7 @@
                             </div>
                             <div class="mt-6 w-full relative">
                                 <label for="mids" class="block text-sm text-gray-700 font-custom">Mids (%) <span
-                                        class="text-red">*</span></label>
+                                        class="text-red-500">*</span></label>
                                 <input required pInputText id="mids" type="number" step="0.01" placeholder="Enter Mids"
                                     class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
                                     formControlName="mids">
@@ -333,7 +333,7 @@
 
                         <div class="mt-6 w-full relative">
                             <label for="description" class="block text-sm text-gray-700 font-custom">Description <span
-                                    class="text-red">*</span></label>
+                                    class="text-red-500">*</span></label>
                             <textarea required pInputTextarea id="description" rows="6" placeholder="Enter Description"
                                 class="mt-1 block bg-[#F5F5F5] w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
                                 formControlName="description" style="border: none;"></textarea>
@@ -348,7 +348,7 @@
                         <div class="flex flex-col w-full ">
                             <div class="mt-6 w-full relative">
                                 <label for="lowers" class="block text-sm text-gray-700 font-custom">Lowers (%) <span
-                                        class="text-red">*</span></label>
+                                        class="text-red-500">*</span></label>
                                 <input required pInputText id="lowers" type="number" step="0.01"
                                     placeholder="Enter Lowers"
                                     class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
@@ -365,7 +365,7 @@
                             </div>
                             <div class="mt-6 w-full relative">
                                 <label for="location" class="block text-sm text-gray-700 font-custom">Location <span
-                                        class="text-red">*</span></label>
+                                        class="text-red-500">*</span></label>
                                 <input required pInputText id="location" type="text" placeholder="Enter Location"
                                     formControlName="location"
                                     class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm">
@@ -375,7 +375,7 @@
                         <div class="mt-6 w-full relative hidden sm:block">
                             <!-- upload product image show in below div of class "product-image-container" -->
                             <label for="productImages" class="block text-sm text-gray-700 font-custom">Upload Product
-                                Images (Max 5 images) </label>
+                                Images (Max 5 images)<span class="text-red-500 "> *</span></label>
                             <div class="file-upload-container">
                                 <label for="file-upload-images" class="file-upload-label">
                                     <i class="pi pi-cloud-upload"></i>
@@ -394,7 +394,7 @@
                     <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                         <div class="flex flex-col w-full ">
                             <div class="mt-6 w-full relative">
-                                <label for="license" class="block text-sm text-gray-700 font-custom">COA</label>
+                                <label for="license" class="block text-sm text-gray-700 font-custom">COA<span class="text-red-500 text-sm"> *</span></label>
                                 <div class="file-upload-container">
                                     <label for="file-upload-license" class="file-upload-label">
                                         <i class="pi pi-cloud-upload"></i>
@@ -427,7 +427,7 @@
                                 <!-- upload product image show in below div of class "product-image-container" -->
                                 <label for="productImages" class="block text-sm text-gray-700 font-custom">Upload
                                     Product
-                                    Images (Max 5 images) </label>
+                                    Images (Max 5 images)<span class="text-red-500 text-sm"> *</span></label>
                                 <div class="file-upload-container">
                                     <label for="file-upload-images" class="file-upload-label">
                                         <i class="pi pi-cloud-upload"></i>

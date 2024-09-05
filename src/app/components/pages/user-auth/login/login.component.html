@@ -8,9 +8,9 @@
             range of items
             for <br class="hidden sm:block"> purchase.
         </p>
-        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()"autocomplete="off">
             <div class="mb-4">
-                <label for="email" class="block text-sm font-medium">Email</label>
+                <label for="email" class="block text-sm font-medium">Email<span class="text-red-500 "> *</span></label>
                 <span class="p-input-icon-left w-full">
                     <i class="pi pi-envelope text-[#fafafa]"></i>
                     <input pInputText id="email" type="email" placeholder="Enter your email address"
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="mb-2">
-                <label for="password" class="block text-sm font-medium">Password</label>
+                <label for="password" class="block text-sm font-medium">Password<span class="text-red-500 "> *</span></label>
                 <span class="p-input-icon-left w-full">
                     <i class="pi pi-lock z-10  text-[#fafafa]"></i>
                     <p-password [toggleMask]="true" [feedback]="false" placeholder="Enter your password"
@@ -46,8 +46,8 @@
                     Password?</a>
             </div>
             <button type="submit"
-                class="w-full bg-secondary text-primary-btn justify-center font-bold py-2 px-4 rounded-md "
-                [disabled]="loginForm.invalid || loading">
+                class="w-full bg-secondary  justify-center font-bold py-2 px-4 rounded-md "
+                [disabled]="loading || loginForm.invalid" [ngClass]="loginForm.invalid?'opacity-80 bg-[#FFFFFF3D] text-black ':'text-primary-btn'">
 
                 <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
                 <span *ngIf="!loading">Sign In</span>

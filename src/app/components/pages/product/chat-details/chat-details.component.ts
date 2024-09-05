@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, HostListener, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { format, isToday, isTomorrow, isYesterday, parseISO } from 'date-fns';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { SocketService } from 'src/app/shared/services/socket.service';
@@ -62,6 +62,8 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
   chatId: string = '';
   receiverId: string = '';
 
+  @ViewChildren('scrollContainer') private scrollContainer!: QueryList<ElementRef>;
+
 
   constructor(private socketService: SocketService, private productService: ProductService) {
 
@@ -78,6 +80,10 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
       next: (message) => {
         console.log(message);
         this.messages.push(message);
+
+        //append messages in this method
+        this.groupChatsByDate();
+
       }, error: (err) => {
         console.log(err);
       }
@@ -85,7 +91,21 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
 
   }
   ngAfterViewChecked(): void {
-    this.scrollToElement();
+    this.scrollToBottom();
+  }
+  
+  scrollToBottom(): void {
+    // console.log(this.scrollContainer);
+    try {
+      if(this.scrollContainer.first){
+        this.scrollContainer.first.nativeElement.scrollTop = this.scrollContainer.first.nativeElement.scrollHeight;
+      }
+      if(this.scrollContainer.last){
+        this.scrollContainer.last.nativeElement.scrollTop = this.scrollContainer.last.nativeElement.scrollHeight;
+      }
+    } catch (err) {
+      console.error('Error scrolling to bottom:', err);
+    }
   }
 
 
@@ -172,7 +192,6 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
         console.log(err);
       }, complete: () => {
         //this is for scroll chat below
-        this.scrollToElement();
         this.groupChatsByDate();
       }
     })
@@ -196,28 +215,19 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
       this.isMobile = true;
     }
   }
+  //this is for desktop
   showChats(user: any) {
     this.activeUserChats.pop();
     this.activeUserChats.push(user);
   }
+  //this is for mobile
   showChatsMobile(user: any) {
     this.showMobileViewChats = true;
     this.activeUserChats.pop();
     this.activeUserChats.push(user);
   }
 
-  scrollToElement(): void {
-    const element = document.getElementById('scrollBelowChat');
-    const element2 = document.getElementById('scrollBelowChat2');
-    // console.log(element);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    if (element2) {
-      element2.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
-
+  // this is for add the date of specific chats
   groupChatsByDate() {
     let previousDate = '';
 
@@ -244,10 +254,22 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
     return format(parsedDate, 'EEEE, MMMM d');
   }
 
+  shouldShowDayLabel(date: string, index: number): boolean {
+    return index === 0 || this.chatGroups[index - 1].date !== date;
+  }
+
   //this is for show time of get and send message
   formatTime(date: Date): string {
     let dateString = date.toString();
     return format(parseISO(dateString), 'hh:mm a');
+  }
+
+  trackByDate(index: number, group: any): string {
+    return group.date;
+  }
+
+  trackById(index: number, msg: any): string {
+    return msg.id;
   }
 
   ngOnDestroy(): void {

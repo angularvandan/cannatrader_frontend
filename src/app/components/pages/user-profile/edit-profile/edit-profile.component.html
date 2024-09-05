@@ -151,7 +151,7 @@
                                 <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                                     <div class="mt-6 w-full">
                                         <label for="name" class=" relative block text-md leading-6 font-custom">Enter
-                                            Name <span class="text-red">*</span>
+                                            Name <span class="text-red-500">*</span>
 
                                             <input formControlName="name" required pInputText id="name" type="text"
                                                 placeholder="Enter Your Name"
@@ -186,7 +186,7 @@
                                     </div>
                                     <div class="mt-6 w-full relative">
                                         <label for="phone" class="block text-md text-gray-700 font-custom">Phone Number
-                                            <span class="text-red">*</span>
+                                            <span class="text-red-500">*</span>
                                             <input formControlName="phone_no" required pInputText type="tel"
                                                 maxlength="10" pattern="[0-9]*" (input)="onPhoneInput($event)"
                                                 id="phone" placeholder="Enter Your Phone Number"
@@ -271,7 +271,7 @@
                                     <div class="mt-6 w-full">
                                         <label for="companyname" class="block text-md leading-6 font-custom">Compnay
                                             Name
-                                            <span class="text-red">*</span></label>
+                                            <span class="text-red-500">*</span></label>
                                         <input required pInputText id="companyname" type="text"
                                             formControlName="company_name" placeholder="Enter Your Company Name"
                                             class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm">
@@ -283,7 +283,7 @@
                                     <div class="mt-6 w-full">
                                         <label for="businesstype"
                                             class="block text-md text-gray-700 font-custom">Business
-                                            Type or service <span class="text-red">*</span></label>
+                                            Type or service <span class="text-red-500">*</span></label>
                                         <input required pInputText id="businesstype" type="text"
                                             formControlName="business_type"
                                             placeholder="Enter your business type or service"
@@ -301,7 +301,7 @@
                                     <div class="mt-6 w-full ">
                                         <label for="businessmobile"
                                             class="block text-md leading-6 font-custom relative">Business
-                                            Shop Mobile Number <span class="text-red">*</span>
+                                            Shop Mobile Number <span class="text-red-500">*</span>
                                             <input required pInputText id="businessmobile" type="tel" maxlength="10"
                                                 pattern="[0-9]*" (input)="onPhoneInput($event)"
                                                 formControlName="contact_no" placeholder="Enter Your Mobile Number"
@@ -336,7 +336,7 @@
                                         <label for="businessid" class="block text-md text-gray-700 font-custom">Business
                                             ID
                                             Number
-                                            <span class="text-red">*</span></label>
+                                            <span class="text-red-500">*</span></label>
                                         <input required pInputText type="number" id="businessid"
                                             formControlName="business_id_no" placeholder="Enter your business ID number"
                                             class="mt-1 block w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm">
@@ -350,7 +350,7 @@
                                 <div class="flex flex-row w-full sm:gap-8 flex-wrap sm:flex-nowrap gap-0 ">
                                     <div class="mt-6 w-full ">
                                         <label for="location" class="block text-md leading-6 font-custom">Business
-                                            Location <span class="text-red">*</span></label>
+                                            Location <span class="text-red-500">*</span></label>
                                         <div class="w-full relative">
                                             <input required pInputText id="location" type="text"
                                                 formControlName="location" placeholder="Enter Your Location"
@@ -371,7 +371,7 @@
                                             <label for="licencse" class="block text-md text-gray-700 font-custom">Health
                                                 Canada
                                                 License Document
-                                                <span class="text-red">*</span></label>
+                                                <span class="text-red-500">*</span></label>
                                             <div class="file-upload-container ">
                                                 <label for="filelabel">
                                                     <div
@@ -458,7 +458,7 @@
                                 <div class="flex flex-col w-full">
                                     <div class="mt-6 relative">
                                         <label for="currentpassword" class="block text-md leading-6 font-custom">Current
-                                            Password <span class="text-red">*</span></label>
+                                            Password <span class="text-red-500">*</span></label>
                                         <span class=" w-full">
                                             <p-password [toggleMask]="true" [feedback]="false"
                                                 placeholder="Enter Current Password"
@@ -477,7 +477,7 @@
                                     <div class="mt-6 relative">
                                         <label for="newpassword" class="block text-md leading-6 font-custom">New
                                             Password
-                                            <span class="text-red">*</span></label>
+                                            <span class="text-red-500">*</span></label>
                                         <span class=" w-full">
                                             <p-password [toggleMask]="true" [feedback]="false"
                                                 placeholder="Enter New Password"
