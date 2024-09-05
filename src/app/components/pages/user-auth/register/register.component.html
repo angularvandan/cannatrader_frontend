@@ -142,8 +142,8 @@
                     You must accept the terms and conditions.
                 </div>
             </div>
-            <button type="submit"[disabled]="loading || registerForm.invalid" [ngClass]="registerForm.invalid?'opacity-80 bg-[#FFFFFF3D] text-black ':'text-primary-btn'"
-                class="w-full font-bold py-2 px-4 rounded-md font-custom bg-secondary ">
+            <button type="submit"[disabled]="loading || registerForm.invalid" [ngClass]="registerForm.invalid?'opacity-80 bg-[#FFFFFF3D] text-black ':' bg-secondary text-primary-btn'"
+                class="w-full font-bold py-2 px-4 rounded-md font-custom ">
                 <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
                 <span *ngIf="!loading">Sign
                     Up</span>
@@ -179,8 +179,8 @@
                         type="text" id="fourth" maxlength="1" />
                 </div>
             </div>
-            <button type="button" (click)="verifyEmail()"[disabled]="loadingOtp"
-                class="w-full bg-secondary text-primary-btn justify-center font-bold py-2 px-4 rounded-md">
+            <button type="button" (click)="verifyEmail()"[disabled]="loadingOtp"[ngClass]="loadingOtp?'opacity-80 bg-[#FFFFFF3D] text-black ':' bg-secondary text-primary-btn'"
+                class="w-full   justify-center font-bold py-2 px-4 rounded-md">
                 <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loadingOtp"></i>
                 <span *ngIf="!loadingOtp">Verify & Continue</span>
             </button>
