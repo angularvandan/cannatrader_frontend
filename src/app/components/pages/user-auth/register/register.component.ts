@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren }
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { interval, Subscription } from 'rxjs';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
   registerForm!: FormGroup;
   formData = new FormData();
-
+  timeLeft: number = 120; // Time in seconds (2 minutes)
+  timerSubscription!: Subscription;
 
   ngOnInit(): void {
 
@@ -119,6 +121,8 @@ export class RegisterComponent implements AfterViewInit, OnInit {
       next: (response: any) => {
 
         // console.log(response);
+        this.timerSubscription.unsubscribe();
+
         this.loadingOtp = false;
         this.router.navigate(['/login']);
         this.tostr.success("Email Verifyed Successfully");
@@ -133,12 +137,17 @@ export class RegisterComponent implements AfterViewInit, OnInit {
   }
   resendOtpForVerifyEmail() {
     this.loading = true;
+    this.timeLeft=120;
     console.log(this.registerForm.value.email.toLowerCase());
     this.userService.getOtpForEmailVerify({ email: this.registerForm.value.email.toLowerCase() }).subscribe({
       next: (response) => {
         console.log(response);
         this.tostr.success(response.message);
         this.loading = false;
+
+        this.timerSubscription = interval(1000).subscribe(() => {
+          this.updateTimer();
+        });
 
       }, error: (err) => {
         // console.log(err);
@@ -147,6 +156,24 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
       }
     })
+  }
+
+  updateTimer(): void {
+    if (this.timeLeft > 0) {
+      this.timeLeft--;
+    } else {
+      // Stop the timer when it reaches 0
+      this.timerSubscription.unsubscribe();
+    }
+  }
+  getFormattedTime(): string {
+    const minutes = Math.floor(this.timeLeft / 60);
+    const seconds = this.timeLeft % 60;
+    return `${this.padZero(minutes)}:${this.padZero(seconds)}`;
+  }
+
+  private padZero(value: number): string {
+    return value < 10 ? `0${value}` : `${value}`;
   }
 
   onSignup() {
@@ -162,6 +189,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
       this.formData.append('phone_no', this.registerForm.value.phone_no);
 
       // console.log(this.formData);
+      this.timeLeft=120;
 
       this.userService.register(this.formData).subscribe({
         next: (response: any) => {
@@ -172,6 +200,11 @@ export class RegisterComponent implements AfterViewInit, OnInit {
           this.tostr.success(response.message);
           this.section = 'otp';
 
+          //this is for show remaining time of valid otp
+          this.timerSubscription = interval(1000).subscribe(() => {
+            this.updateTimer();
+          });
+
         },
         error: (err) => {
 
@@ -179,7 +212,6 @@ export class RegisterComponent implements AfterViewInit, OnInit {
           this.formData = new FormData();
 
           this.tostr.error(err.error.error.message);
-
         }
       });
     }

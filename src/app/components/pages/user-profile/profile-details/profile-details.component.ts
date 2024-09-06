@@ -85,6 +85,7 @@ export class ProfileDetailsComponent implements OnInit {
         this.recentProductStatus=true;
         // console.log(this.products);
       },error:(err:any)=>{
+        console.log(err);
         // this.tostr.error(err.error.error.message);
         this.recentProductStatus=true;
       }

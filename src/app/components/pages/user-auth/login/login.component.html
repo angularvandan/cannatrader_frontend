@@ -46,8 +46,8 @@
                     Password?</a>
             </div>
             <button type="submit"
-                class="w-full bg-secondary  justify-center font-bold py-2 px-4 rounded-md "
-                [disabled]="loading || loginForm.invalid" [ngClass]="loginForm.invalid?'opacity-80 bg-[#FFFFFF3D] text-black ':'text-primary-btn'">
+                class="w-full   justify-center font-bold py-2 px-4 rounded-md "
+                [disabled]="loading || loginForm.invalid" [ngClass]="loginForm.invalid?'opacity-80 bg-[#949494] text-[#616161]':'text-primary-btn bg-secondary' + (loading ? ' opacity-80' : '')">
 
                 <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
                 <span *ngIf="!loading">Sign In</span>

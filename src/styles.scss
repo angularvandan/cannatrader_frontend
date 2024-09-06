@@ -334,10 +334,22 @@ app-add-product {
         .p-button {
             border: none;
             background-color: #F5F5F5;
-            color: black;
+            color: $bg-primary;
+        }
+        .p-button:focus{
+            box-shadow: unset;
         }
 
-        .p-button:hover {
+        .p-button:enabled:hover {
+            background: #F5F5F5;
+            color: $bg-primary;
+            border-color: unset;
+        }
+        .p-button:enabled:active{
+            background: #F5F5F5;
+            border-color: unset;
+        }
+        .p-button:enabled:focus{
             background: #F5F5F5;
         }
     }
@@ -477,10 +489,22 @@ app-edit-product {
         .p-button {
             border: none;
             background-color: #F5F5F5;
-            color: black;
+            color: $bg-primary;
+        }
+        .p-button:focus{
+            box-shadow: unset;
         }
 
-        .p-button:hover {
+        .p-button:enabled:hover {
+            background: #F5F5F5;
+            color: $bg-primary;
+            border-color: unset;
+        }
+        .p-button:enabled:active{
+            background: #F5F5F5;
+            border-color: unset;
+        }
+        .p-button:enabled:focus{
             background: #F5F5F5;
         }
     }

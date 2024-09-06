@@ -1,7 +1,9 @@
 <div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-overlay"
     *ngIf="section!='otp'">
     <div class=" bg-opacity-90 p-4 rounded-lg shadow-lg max-w-3xl w-full max-w-[400px]">
-        <h2 class="font-semibold mb-4 text-center font-custom text-secondary text-3xl sm:text-[40px] font-Poppins leading-12">Sign Up
+        <h2
+            class="font-semibold mb-4 text-center font-custom text-secondary text-3xl sm:text-[40px] font-Poppins leading-12">
+            Sign Up
         </h2>
         <p class="text-center mb-2 font-custom text-[#fafafa] leading-5 text-[15px]">Sign up to enjoy the
             convenience of shopping
@@ -13,7 +15,8 @@
 
                 <div class="flex flex-row w-full flex-wrap gap-0 ">
                     <div class="mb-3 w-full">
-                        <label for="name" class="block text-sm  font-custom">Name<span class="text-red-500 "> *</span></label>
+                        <label for="name" class="block text-sm  font-custom">Name<span class="text-red-500 ">
+                                *</span></label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-user text-[#fafafa]"></i>
                             <input pInputText id="name" type="text" placeholder="Enter your name" formControlName="name"
@@ -22,11 +25,13 @@
                         <div class="text-red-400 text-xs"
                             *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.touched || registerForm.get('name')?.dirty)">
                             <div *ngIf="registerForm.get('name')?.errors?.['required']">Name is required.</div>
-                            <div *ngIf="registerForm.get('name')?.errors?.['pattern']">Only letters and space allowed.</div>
+                            <div *ngIf="registerForm.get('name')?.errors?.['pattern']">Only letters and space allowed.
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3 w-full">
-                        <label for="email" class="block text-sm  font-custom">Email<span class="text-red-500 "> *</span></label>
+                        <label for="email" class="block text-sm  font-custom">Email<span class="text-red-500 ">
+                                *</span></label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-envelope text-[#fafafa]"></i>
                             <input pInputText id="email" type="email" placeholder="Enter your email address"
@@ -40,7 +45,8 @@
                         </div>
                     </div>
                     <div class="mb-3 w-full ">
-                        <label for="phone" class="block text-sm  font-custom">Phone Number<span class="text-red-500 "> *</span></label>
+                        <label for="phone" class="block text-sm  font-custom">Phone Number<span class="text-red-500 ">
+                                *</span></label>
                         <span class="p-input-icon-left w-full">
                             <input pInputText id="phone" type="tel" maxlength="10" pattern="[0-9]*"
                                 (input)="onPhoneInput($event)" placeholder="Enter your phone number"
@@ -81,7 +87,8 @@
                 <div class="flex flex-row w-full flex-wrap gap-0 ">
 
                     <div class="mb-3 w-full">
-                        <label for="password" class="block text-sm  font-custom">Password<span class="text-red-500 "> *</span></label>
+                        <label for="password" class="block text-sm  font-custom">Password<span class="text-red-500 ">
+                                *</span></label>
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-lock text-[#fafafa]"></i>
                             <p-password [toggleMask]="true" [feedback]="false" placeholder="Enter your password"
@@ -115,10 +122,10 @@
                             Passwords do not match.
                         </div>
                     </div>
-                    
+
                 </div>
 
-                
+
             </div>
             <div class="mb-3 ">
                 <div class="flex flex-row gap-2 items-start">
@@ -131,7 +138,8 @@
                     </label>
                     <div class="text-xs ">
                         By continuing, you agree to cannatrader
-                        <a class="hover:underline text-secondary cursor-pointer" (click)="onNavigateToPrivacyPolicyTermCondition('terms-condition')">Terms of
+                        <a class="hover:underline text-secondary cursor-pointer"
+                            (click)="onNavigateToPrivacyPolicyTermCondition('terms-condition')">Terms of
                             Use</a> and <a class="hover:underline text-secondary cursor-pointer"
                             (click)="onNavigateToPrivacyPolicyTermCondition('privacy-policy')">Privacy
                             Policy</a>.
@@ -142,7 +150,8 @@
                     You must accept the terms and conditions.
                 </div>
             </div>
-            <button type="submit"[disabled]="loading || registerForm.invalid" [ngClass]="registerForm.invalid?'opacity-80 bg-[#FFFFFF3D] text-black ':' bg-secondary text-primary-btn'"
+            <button type="submit" [disabled]="loading || registerForm.invalid"
+                [ngClass]="registerForm.invalid?'opacity-80 bg-[#949494] text-[#616161] ':' bg-secondary text-primary-btn' + (loading ? ' opacity-80' : '')"
                 class="w-full font-bold py-2 px-4 rounded-md font-custom ">
                 <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
                 <span *ngIf="!loading">Sign
@@ -165,9 +174,9 @@
         <form>
             <div class="mb-8">
                 <div id="otp" class="flex flex-row justify-center text-center px-2 mt-5">
-                    <input #otpInput (input)="handleInput($event, 0)" (keydown)="handleKeyDown($event, 0)"type="text"
+                    <input #otpInput (input)="handleInput($event, 0)" (keydown)="handleKeyDown($event, 0)" type="text"
                         class="m-2 border border-secondary h-10 w-10 focus:outline-none focus:ring focus:ring-secondary text-center form-control rounded"
-                         id="first" maxlength="1" />
+                        id="first" maxlength="1" />
                     <input #otpInput (input)="handleInput($event, 1)" (keydown)="handleKeyDown($event, 1)"
                         class="m-2 border border-secondary h-10 w-10 focus:outline-none focus:ring focus:ring-secondary text-center form-control rounded"
                         type="text" id="second" maxlength="1" />
@@ -179,15 +188,18 @@
                         type="text" id="fourth" maxlength="1" />
                 </div>
             </div>
-            <button type="button" (click)="verifyEmail()"[disabled]="loadingOtp"
+            <button type="button" (click)="verifyEmail()" [disabled]="loadingOtp"
                 class="w-full bg-secondary text-primary-btn  justify-center font-bold py-2 px-4 rounded-md">
                 <i class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loadingOtp"></i>
                 <span *ngIf="!loadingOtp">Verify & Continue</span>
             </button>
         </form>
         <p class="mt-4 text-center mx-4">Didn’t receive the OTP?<a
-                class="hover:underline text-secondary mx-4 cursor-pointer" (click)="resendOtpForVerifyEmail()"><i
+                class=" text-secondary mx-4" ><i
                     class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
-                <span *ngIf="!loading">Resend</span></a></p>
+                <span class="hover:underline cursor-pointer" (click)="resendOtpForVerifyEmail()" *ngIf="!loading && !timeLeft">Resend</span>
+                <span *ngIf="timeLeft && (timeLeft && !loading)">{{getFormattedTime()}}</span>
+
+            </a></p>
     </div>
 </div>

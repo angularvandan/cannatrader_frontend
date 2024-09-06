@@ -145,6 +145,8 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit ,OnDestroy{
         this.loading = false;
 
         this.userId = response.userId;
+        this.timerSubscription.unsubscribe();
+
 
       }, error: (err) => {
 
