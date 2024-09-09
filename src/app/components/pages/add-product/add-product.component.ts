@@ -192,6 +192,11 @@ export class AddProductComponent implements OnInit {
 
   onSubmit(): void {
 
+    this.productForm.patchValue({
+      latitude:'12132',
+      longitude:'2334.23'
+    })
+
     if (this.productForm.valid) {
       // console.log(this.productForm);
 

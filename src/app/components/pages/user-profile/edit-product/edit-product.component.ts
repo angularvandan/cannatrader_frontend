@@ -223,7 +223,9 @@ export class EditProductComponent {
           this.productService.deleteProductById(this.productId).subscribe({
             next: () => {
               this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
-              this.router.navigate(['/profile/profile-details']);
+              setTimeout(() => {
+                this.router.navigate(['/profile/profile-details']);
+              }, 1000);
             }, error: () => {
               this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
             }

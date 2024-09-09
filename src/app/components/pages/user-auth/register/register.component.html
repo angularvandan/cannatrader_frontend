@@ -105,7 +105,6 @@
                                 least 8 characters long</div>
                         </div>
                     </div>
-
                 </div>
                 <div class="flex flex-row w-full flex-wrap gap-0 ">
                     <div class="mb-3 w-full">
@@ -194,10 +193,10 @@
                 <span *ngIf="!loadingOtp">Verify & Continue</span>
             </button>
         </form>
-        <p class="mt-4 text-center mx-4">Didn’t receive the OTP?<a
-                class=" text-secondary mx-4" ><i
+        <p class="mt-4 text-center mx-4">Didn’t receive the OTP?<a class=" text-secondary mx-4"><i
                     class="pi pi-spin pi-spinner" style="font-size: 1.25rem" *ngIf="loading"></i>
-                <span class="hover:underline cursor-pointer" (click)="resendOtpForVerifyEmail()" *ngIf="!loading && !timeLeft">Resend</span>
+                <span class="hover:underline cursor-pointer" (click)="resendOtpForVerifyEmail()"
+                    *ngIf="!loading && !timeLeft">Resend</span>
                 <span *ngIf="timeLeft && (timeLeft && !loading)">{{getFormattedTime()}}</span>
 
             </a></p>

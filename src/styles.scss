@@ -93,6 +93,7 @@ button:enabled:active {
 .p-dropdown-open .p-dropdown-trigger .p-icon-wrapper {
     transform: rotate(180deg);
 }
+
 .p-inputtext:focus::placeholder {
     color: transparent;
 }
@@ -298,12 +299,15 @@ app-home {
     .p-inputtext:enabled:hover {
         border-color: $bg-primary;
     }
-    .p-dropdown-panel .p-dropdown-items{
 
-        max-height: 200px; /* Set a maximum height to enable scrolling */
-        overflow-y: scroll; 
+    .p-dropdown-panel .p-dropdown-items {
+
+        max-height: 200px;
+        /* Set a maximum height to enable scrolling */
+        overflow-y: scroll;
         scrollbar-width: none;
     }
+
     .p-dropdown-panel .p-dropdown-items::-webkit-scrollbar {
         display: none;
     }
@@ -311,11 +315,45 @@ app-home {
 
 app-add-product {
 
+    //this is for autofill change color
+    input:-webkit-autofill {
+        background-color: transparent !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    input:-moz-autofill {
+        background-color: transparent !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    input:-webkit-autofill:focus {
+        background-color: transparent !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    input:-webkit-autofill:active {
+        background-color: transparent !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
     .p-dropdown,
     .p-inputtext {
         width: 100%;
         background-color: #F5F5F5;
         border: 0px;
+    }
+
+    .p-dropdown .p-dropdown-label.p-placeholder,
+    .p-dropdown-label {
+        font-size: 16px;
+        font-weight: 500;
+        color: #8d8d8d !important;
+    }
+
+    .p-dropdown-panel .p-dropdown-items span {
+        color: #495057;
+        font-size: 16px;
+        font-weight: 500;
     }
 
     .p-dropdown:not(.p-disabled).p-focus {
@@ -329,6 +367,12 @@ app-add-product {
 
         .p-calendar {
             width: 100%;
+
+            .p-inputtext {
+                font-size: 16px;
+                font-weight: 500;
+                color: #8d8d8d !important;
+            }
         }
 
         .p-button {
@@ -336,7 +380,8 @@ app-add-product {
             background-color: #F5F5F5;
             color: $bg-primary;
         }
-        .p-button:focus{
+
+        .p-button:focus {
             box-shadow: unset;
         }
 
@@ -345,11 +390,13 @@ app-add-product {
             color: $bg-primary;
             border-color: unset;
         }
-        .p-button:enabled:active{
+
+        .p-button:enabled:active {
             background: #F5F5F5;
             border-color: unset;
         }
-        .p-button:enabled:focus{
+
+        .p-button:enabled:focus {
             background: #F5F5F5;
         }
     }
@@ -375,6 +422,7 @@ app-add-product {
         .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
             box-shadow: none;
         }
+
         .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
             border-color: unset;
         }
@@ -478,6 +526,40 @@ app-edit-product {
         box-shadow: none;
     }
 
+    //this is for autofill change color
+    input:-webkit-autofill {
+        background-color: transparent !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    input:-moz-autofill {
+        background-color: transparent !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    input:-webkit-autofill:focus {
+        background-color: transparent !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    input:-webkit-autofill:active {
+        background-color: transparent !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    .p-dropdown .p-dropdown-label.p-placeholder,
+    .p-dropdown-label {
+        font-size: 16px;
+        font-weight: 500;
+        color: #8d8d8d !important;
+    }
+
+    .p-dropdown-panel .p-dropdown-items span {
+        color: #495057;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
     p-calendar {
         display: block;
         width: 100%;
@@ -486,12 +568,23 @@ app-edit-product {
             width: 100%;
         }
 
+        .p-calendar {
+            width: 100%;
+
+            .p-inputtext {
+                font-size: 16px;
+                font-weight: 500;
+                color: #8d8d8d !important;
+            }
+        }
+
         .p-button {
             border: none;
             background-color: #F5F5F5;
             color: $bg-primary;
         }
-        .p-button:focus{
+
+        .p-button:focus {
             box-shadow: unset;
         }
 
@@ -500,11 +593,13 @@ app-edit-product {
             color: $bg-primary;
             border-color: unset;
         }
-        .p-button:enabled:active{
+
+        .p-button:enabled:active {
             background: #F5F5F5;
             border-color: unset;
         }
-        .p-button:enabled:focus{
+
+        .p-button:enabled:focus {
             background: #F5F5F5;
         }
     }
@@ -560,6 +655,7 @@ app-edit-product {
         .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
             box-shadow: none;
         }
+
         .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
             border-color: unset;
         }
@@ -747,7 +843,8 @@ app-profile-details {
         margin-left: 0;
         width: 100%;
     }
-    @media(max-width:768px){
+
+    @media(max-width:768px) {
         .pi {
             font-size: 1rem;
         }
@@ -835,13 +932,14 @@ app-contact {
 }
 
 .pi-spin {
-    animation: fa-spin 1s infinite linear!important;
+    animation: fa-spin 1s infinite linear !important;
 }
+
 @keyframes fa-spin {
     0% {
         transform: rotate(0deg);
     }
-    
+
     100% {
         transform: rotate(359deg);
     }

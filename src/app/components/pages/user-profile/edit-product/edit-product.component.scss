@@ -13,6 +13,42 @@ i {
     color: #DCDCDCDC;
 }
 
+.input-container {
+    label {
+        color: #737373;
+        font-size: 18px;
+        line-height: 27px;
+        font-weight: 500;
+        font-family: 'Poppins';
+
+        span {
+            color: red;
+        }
+
+        @media (max-width:768px) {
+            font-size: 16px;
+            line-height: 24px;
+        }
+    }
+
+    .p-dropdown,
+    .p-inputtext {
+        background-color: #F5F5F5;
+        border: 0px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #8D8D8D
+    }
+    #description::placeholder, #description {
+        font-weight: 500;
+        font-size: 16px;
+        color: #8D8D8D;
+    }
+    #description:focus::placeholder {
+        color: transparent;
+    }
+}
+
 .p-inputtext:enabled:focus {
     outline: 0 none;
     outline-offset: 0;

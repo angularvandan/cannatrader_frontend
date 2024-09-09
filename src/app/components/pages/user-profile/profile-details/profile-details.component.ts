@@ -25,7 +25,7 @@ export interface Subscription {
   createdAt: string;
   updatedAt: string;
   Company: Company;
-  subscribedStatus:boolean
+  subscribedStatus: boolean
 }
 
 
@@ -51,62 +51,62 @@ export class ProfileDetailsComponent implements OnInit {
     is_verified: false
   };
 
-  params:any={
-    page:1,
-    limit:4,
+  params: any = {
+    page: 1,
+    limit: 4,
   }
-  subscribedCompanyes:Subscription[]=[]
+  subscribedCompanyes: Subscription[] = []
 
-  loadingUserImage:boolean=true;
-  recentProductStatus:boolean=false;
-  subscribedStatus:boolean=true;
+  loadingUserImage: boolean = true;
+  recentProductStatus: boolean = false;
+  subscribedStatus: boolean = true;
 
-  constructor(private router: Router, private activatedRoute:ActivatedRoute, private tostr: ToastrService, private userService: UserService, private confirmationService: ConfirmationService, private messageService: MessageService,private productService:ProductService) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private tostr: ToastrService, private userService: UserService, private confirmationService: ConfirmationService, private messageService: MessageService, private productService: ProductService) { }
 
   ngOnInit(): void {
 
-    this.loadingUserImage=true;
+    this.loadingUserImage = true;
     this.userService.getUserProfile().subscribe({
       next: (response) => {
-        this.loadingUserImage=false;
+        this.loadingUserImage = false;
         this.user = response.user;
         // console.log(this.user);
       }, error: (err) => {
         this.tostr.error(err.error.message);
-        this.loadingUserImage=false;
+        this.loadingUserImage = false;
       }
     });
     //for recent listing products
-    this.productService.getRecentListingProducts({limit:3,page:1}).subscribe({
-      next:(response:any)=>{
+    this.productService.getRecentListingProducts({ limit: 3, page: 1 }).subscribe({
+      next: (response: any) => {
         //for newest
         // console.log(response.products);
-        this.products=response.products.sort((a:any, b:any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
-        this.recentProductStatus=true;
+        this.products = response.products.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        this.recentProductStatus = true;
         // console.log(this.products);
-      },error:(err:any)=>{
+      }, error: (err: any) => {
         console.log(err);
         // this.tostr.error(err.error.error.message);
-        this.recentProductStatus=true;
+        this.recentProductStatus = true;
       }
     });
     this.getSubscribedCompany();
   }
 
-  getSubscribedCompany(){
+  getSubscribedCompany() {
     this.productService.getSubscribedCompany(this.params).subscribe({
-      next:(response:any)=>{
-        this.subscribedCompanyes=response.subscribtions;
+      next: (response: any) => {
+        this.subscribedCompanyes = response.subscribtions;
 
         //need to add extra property for show and hide subscription
-        this.subscribedCompanyes=this.subscribedCompanyes.map(data=>{
-          return {...data,subscribedStatus:true};
+        this.subscribedCompanyes = this.subscribedCompanyes.map(data => {
+          return { ...data, subscribedStatus: true };
         })
-        this.subscribedStatus=false;
+        this.subscribedStatus = false;
         console.log(this.subscribedCompanyes);
-      },error:(err)=>{
+      }, error: (err) => {
         this.tostr.error(err.error.error.message);
-        this.subscribedStatus=false;
+        this.subscribedStatus = false;
       }
     })
   }
@@ -115,8 +115,10 @@ export class ProfileDetailsComponent implements OnInit {
       message: 'Are you sure you want to logout?',
       accept: () => {
         this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
-        this.router.navigate(['/home']);
-        this.userService.logOut();
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+          this.userService.logOut();
+        }, 1000);
       },
       reject: (type: any) => {
         switch (type) {
@@ -141,14 +143,14 @@ export class ProfileDetailsComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete Account ?',
       accept: () => {
-        
+
         this.userService.deleteUserAccount().subscribe({
           next: (response) => {
             this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: response.message });
           },
           error: (err) => {
             this.tostr.error(err.error.error.message);
-          },complete:()=>{
+          }, complete: () => {
             this.userService.logOut();
           }
         })
@@ -166,39 +168,39 @@ export class ProfileDetailsComponent implements OnInit {
     });
   }
 
-  unSubscribe(companyId:string) {
+  unSubscribe(companyId: string) {
 
     //this is for change status of subscriptionn
-    this.subscribedCompanyes=this.changeSubscribedStatus(companyId,false);
+    this.subscribedCompanyes = this.changeSubscribedStatus(companyId, false);
 
     this.productService.unSubscribeCompany(companyId).subscribe({
-      next:(response:any)=>{
+      next: (response: any) => {
         this.tostr.success(response.message);
-      },error:(err)=>{
+      }, error: (err) => {
         this.tostr.error(err.error.message);
-        this.subscribedCompanyes=this.changeSubscribedStatus(companyId,true);
+        this.subscribedCompanyes = this.changeSubscribedStatus(companyId, true);
 
       }
     })
   }
-  subscribe(companyId:string){
+  subscribe(companyId: string) {
 
-    this.subscribedCompanyes=this.changeSubscribedStatus(companyId,true);
+    this.subscribedCompanyes = this.changeSubscribedStatus(companyId, true);
 
     this.productService.subscribeCompany(companyId).subscribe({
-      next:(response:any)=>{
+      next: (response: any) => {
         this.tostr.success(response.message);
-      },error:(err:any)=>{
+      }, error: (err: any) => {
         this.tostr.error(err.error.message);
-        this.subscribedCompanyes=this.changeSubscribedStatus(companyId,false);
+        this.subscribedCompanyes = this.changeSubscribedStatus(companyId, false);
 
       }
     })
   }
-  changeSubscribedStatus(companyId:string,status:boolean){
-    return this.subscribedCompanyes.map(data=>{
-      if(data.companyId==companyId){
-        return {...data,subscribedStatus:status}
+  changeSubscribedStatus(companyId: string, status: boolean) {
+    return this.subscribedCompanyes.map(data => {
+      if (data.companyId == companyId) {
+        return { ...data, subscribedStatus: status }
       }
       return data;
     })

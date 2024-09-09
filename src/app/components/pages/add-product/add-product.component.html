@@ -110,7 +110,7 @@
                         <div class="mt-6 w-full relative">
                             <label for="harvestDate" class="block text-sm text-gray-700 font-custom">Harvest Date <span
                                     class="text-red">*</span></label>
-                            <p-calendar [showIcon]="true" formControlName="harvest_date"></p-calendar>
+                            <p-calendar [showIcon]="true" formControlName="harvest_date"placeholder="Select Harvest Date"></p-calendar>
                             <div *ngIf="productForm.get('harvest_date')?.invalid && productForm.get('harvest_date')?.touched"
                                 class="text-red-600 text-sm">
                                 Harvest Date is required.

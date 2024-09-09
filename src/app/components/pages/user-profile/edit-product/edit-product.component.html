@@ -335,7 +335,7 @@
                             <label for="description" class="block text-sm text-gray-700 font-custom">Description <span
                                     class="text-red-500">*</span></label>
                             <textarea required pInputTextarea id="description" rows="6" placeholder="Enter Description"
-                                class="focus:outline-none mt-1 block bg-[#F5F5F5] w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
+                                class="focus:outline-none mt-1 block bg-[#F5F5F5] w-full p-2 border-0 rounded-md shadow-sm "
                                 formControlName="description" style="border: none;"></textarea>
                             <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched"
                                 class="text-red-600 text-sm">
