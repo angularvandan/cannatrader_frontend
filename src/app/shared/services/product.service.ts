@@ -130,4 +130,7 @@ export class ProductService {
   getAllMessages(chatId:string){
     return this.http.get(`${this.baseUrl}/api/chat/messages/${chatId}`);
   }
+  readAllMessage(chatId:string){
+    return this.http.post(`${this.baseUrl}/api/chat/read-all-messages`,{chatId});
+  }
 }

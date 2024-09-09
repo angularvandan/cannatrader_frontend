@@ -84,7 +84,7 @@
                             <span class="texl-sm leading-5 font-medium">Online</span>
                         </div>
                     </div>
-                    <div class="user-chats-messages h-[70%] my-4">
+                    <div class="user-chats-messages h-[75%] my-4">
                         <div #scrollContainer class="user-chats max-h-[330px] overflow-y-auto ">
                             <ng-container *ngFor="let group of chatGroups; let i = index; trackBy: trackByDate">
                                 <div class="user-chats-day" *ngIf="shouldShowDayLabel(group.date, i)">

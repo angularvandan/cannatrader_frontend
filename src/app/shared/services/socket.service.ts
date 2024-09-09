@@ -36,7 +36,7 @@ export class SocketService {
 
   // Emit an event to the server
   emit(event: string, data: any): void {
-    console.log(data);
+    // console.log(data);
     this.socket.emit(event, data);
   }
   // Listen for an event from the server
@@ -44,7 +44,7 @@ export class SocketService {
     console.log(event);
     return new Observable((observer) => {
       this.socket.on(event, (data) => {
-        console.log(data);
+        // console.log(data);
         observer.next(data);
       });
 

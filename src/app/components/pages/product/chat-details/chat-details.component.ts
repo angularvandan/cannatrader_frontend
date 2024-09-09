@@ -81,6 +81,10 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
         console.log(message);
         this.messages.push(message);
 
+        this.messages.sort((a, b) => {
+          return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+        });
+
         //append messages in this method
         this.groupChatsByDate();
 
@@ -188,11 +192,28 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
       next: (response: any) => {
         console.log(response);
         this.messages = response.data;
+
+        this.messages.sort((a, b) => {
+          return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+        });
+
+        this.readAllMessages(this.chatId);
+
       }, error: (err) => {
         console.log(err);
       }, complete: () => {
         //this is for scroll chat below
         this.groupChatsByDate();
+      }
+    })
+  }
+
+  readAllMessages(chatId:string){
+    this.productService.readAllMessage(chatId).subscribe({
+      next:(response)=>{
+        console.log(response);
+      },error:(err)=>{
+        console.log(err);
       }
     })
   }
@@ -230,6 +251,7 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
   // this is for add the date of specific chats
   groupChatsByDate() {
     let previousDate = '';
+    this.chatGroups=[];
 
     this.messages.forEach(chat => {
       let date = chat.createdAt.toString();
@@ -243,6 +265,7 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
         this.chatGroups[this.chatGroups.length - 1].messages.push(chat);
       }
     });
+
     console.log(this.chatGroups);
   }
 
