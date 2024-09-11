@@ -2,7 +2,7 @@
     <div class="chats-container bg-[#EDEDED] h-full ">
         <div class="chats w-full h-full flex flex-row flex-wrap md:flex-nowrap gap-4 lg:gap-8 p-4 overflow-hidden">
             <div class="users-container w-full md:w-2/5 lg:w-[33%] bg-[#FFFFFF] z-10 rounded-lg">
-                <div class="users-listing lg:px-4">
+                <div class="users-listing lg:px-4 h-full">
                     <div class="title mt-2 p-2 text-2xl text-primary leading-9 font-semibold"
                         *ngIf="!showMobileViewChats">Chats</div>
                     <div class="users-search  p-2" *ngIf="!showMobileViewChats">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <ng-container *ngIf="!showMobileViewChats">
-                        <div class="users-chats-container p-2 max-h-[430px] overflow-y-auto mobile-view">
+                        <div class="users-chats-container p-2 h-[70%] overflow-y-auto mobile-view">
                             <div class="users-chats mt-4 " *ngFor="let chat of chats">
                                 <div class="users-image-container flex flex-row cursor-pointer"
                                     [ngClass]="chat.chatId== chatId?'active-user':''"
@@ -129,7 +129,7 @@
 
                                 </i>
                                 <input type="text" pInputText placeholder="Type Message here..." [(ngModel)]="message"
-                                    (keyup.enter)="sendMessage()" />
+                                    (keyup.enter)="sendMessage()"/>
                                 <i class="pi p-input-icon-right cursor-pointer" (click)="sendMessage()">
                                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -145,7 +145,6 @@
                                         </defs>
                                     </svg>
                                 </i>
-
                             </span>
                         </div>
                     </div>
@@ -170,7 +169,7 @@
                         </div>
                     </div>
                     
-                    <div class="user-chats-messages my-4 h-[75%]">
+                    <div class="user-chats-messages my-4 h-[80%]">
                         <!-- <div class="user-chats max-h-[350px] overflow-y-auto ">
                             <ng-container *ngFor="let msg of messages">
 
@@ -190,7 +189,7 @@
                                 </div>
                             </ng-container>
                         </div> -->
-                        <div #scrollContainer class="user-chats max-h-[350px] overflow-y-auto ">
+                        <div #scrollContainer class="user-chats h-full  overflow-y-auto ">
                             <ng-container *ngFor="let group of chatGroups; let i = index; trackBy: trackByDate">
                                 <div class="user-chats-day" *ngIf="shouldShowDayLabel(group.date, i)">
                                     <div class="flex justify-center align-items-center">

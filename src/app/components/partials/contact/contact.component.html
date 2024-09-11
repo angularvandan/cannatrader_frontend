@@ -17,7 +17,7 @@
                 </p>
                 <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
                     <div class="mb-8">
-                        <label for="name" class="block text-sm font-medium">Name</label>
+                        <label for="name" class="block text-sm font-medium">Name<span class="text-red-500 "> *</span></label>
                         <span class="p-input-icon-right w-full">
                             <i class="pi pi-user text-[#fafafa]"></i>
                             <input pInputText id="name" type="name" placeholder="Enter your name" formControlName="name"
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="mb-8">
-                        <label for="email" class="block text-sm font-medium">Email</label>
+                        <label for="email" class="block text-sm font-medium">Email<span class="text-red-500 "> *</span></label>
                         <span class="p-input-icon-right w-full">
                             <i class="pi pi-envelope text-[#fafafa]"></i>
                             <input pInputText id="email" type="email" placeholder="Enter your email address"
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="mb-8">
-                        <label for="phone" class="block text-sm font-custom">Phone Number</label>
+                        <label for="phone" class="block text-sm font-custom">Phone Number<span class="text-red-500 "> *</span></label>
 
                         <span class="p-input-icon-right w-full">
                             <input pInputText id="phone" type="text" placeholder="Enter your phone number"
@@ -80,7 +80,7 @@
                     </div>
 
                     <div class="mb-8">
-                        <label for="description" class="block text-sm font-custom text-help">Message</label>
+                        <label for="description" class="block text-sm font-custom text-help">Message<span class="text-red-500 "> *</span></label>
                         <textarea required pInputTextarea id="description" rows="4" formControlName="message"
                             placeholder="Enter your message here..."
                             class="mt-1 block bg-[#F5F5F5] w-full text-gray-700 p-2 border-0 rounded-md shadow-sm sm:text-sm"
