@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { IProduct } from '../models/product';
 
 @Injectable({
@@ -132,5 +132,19 @@ export class ProductService {
   }
   readAllMessage(chatId:string){
     return this.http.post(`${this.baseUrl}/api/chat/read-all-messages`,{chatId});
+  }
+  getNotifications(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/api/notifications`);
+  }
+  // Method to mark a notification as read
+  markAsRead(id:string): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}/api/notifications/mark-read?id=${id}`,{});
+  }
+  // Method to delete a notification
+  deleteNotification(notificationId: string): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/api/notifications/${notificationId}`);
+  }
+  sendMessage(body:any){
+    return this.http.post(`${this.baseUrl}/api/chat/message`,body);
   }
 }

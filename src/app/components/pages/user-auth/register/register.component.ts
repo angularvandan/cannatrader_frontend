@@ -25,6 +25,8 @@ export class RegisterComponent implements AfterViewInit, OnInit {
   timeLeft: number = 120; // Time in seconds (2 minutes)
   timerSubscription!: Subscription;
 
+  otpAllFieldFillStatus:boolean=false;
+
   ngOnInit(): void {
 
     if (this.userService.currentUser.token) {
@@ -90,6 +92,8 @@ export class RegisterComponent implements AfterViewInit, OnInit {
         inputs[index + 1].nativeElement.focus();
       }
     }
+    //this is for disabled button when not enter otp
+    this.otpAllFieldFillStatus=inputs.every(data=>data.nativeElement.value!='' && data.nativeElement.value!=null && data.nativeElement.value!=undefined );
   }
   handleKeyDown(event: KeyboardEvent, index: number): void {
 
@@ -98,6 +102,8 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
     if (event.key === 'Backspace' && index !== 0) {
       inputs[index].nativeElement.value = '';
+      //this is for disabled button when not enter otp
+      this.otpAllFieldFillStatus=inputs.every(data=>data.nativeElement.value!='' && data.nativeElement.value!=null && data.nativeElement.value!=undefined );
       setTimeout(() => {
         inputs[index - 1].nativeElement.focus();
 

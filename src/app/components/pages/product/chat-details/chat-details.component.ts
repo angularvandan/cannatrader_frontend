@@ -78,8 +78,13 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
     //this is for real time ream message
     this.socketService.on('newMessage').subscribe({
       next: (message) => {
+        
+        message.createdAt=new Date().toISOString();
+        message.updatedAt=new Date().toISOString();
         console.log(message);
+
         this.messages.push(message);
+
 
         this.messages.sort((a, b) => {
           return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
@@ -118,6 +123,15 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
     console.log(message);
     this.socketService.emit('sendMessage', message);
 
+    this.productService.sendMessage(message).subscribe({
+      next:(response)=>{
+        console.log(response);
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    });
+
 
     //this is for show latest send message 
     this.chats = this.chats.map((chat) => {
@@ -132,6 +146,9 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
   sendMessage() {
     this.message = this.message.trim();
     if (this.message != '') {
+      console.log(this.chatId);
+      console.log(this.userId);
+      console.log(this.receiverId);
       this.sendMessageToServer(this.chatId, this.message, this.userId, this.receiverId);
     }
     this.message = '';
@@ -168,6 +185,8 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
     this.chatId = chatId;
     this.receiverId = user.id;
     console.log(this.chatId);
+    console.log(this.receiverId);
+    console.log(this.userId);
 
     this.chats = this.chats.map((chat) => {
       if (chat.chatId == chatId) {
@@ -185,7 +204,6 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
     else {
       this.showChats(user);
     }
-
     this.selectChatRoom(this.chatId);
 
     this.productService.getAllMessages(this.chatId).subscribe({
@@ -252,8 +270,9 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
   groupChatsByDate() {
     let previousDate = '';
     this.chatGroups=[];
-
+    console.log(this.messages);
     this.messages.forEach(chat => {
+
       let date = chat.createdAt.toString();
       const messageDate = format(parseISO(date), 'yyyy-MM-dd');
       const dayLabel = this.getDayLabel(date);

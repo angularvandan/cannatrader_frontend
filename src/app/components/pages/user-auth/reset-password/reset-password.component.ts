@@ -14,6 +14,7 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit ,OnDestroy{
 
   @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
   loading: boolean = false;
+  otpAllFieldFillStatus:boolean=false;
   section: string = 'sendEmail';
 
   resetPasswordForm!: FormGroup;
@@ -72,12 +73,16 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit ,OnDestroy{
     if (inputElement.value.length === 1 && index < inputs.length - 1) {
       inputs[index + 1].nativeElement.focus();
     }
+    this.otpAllFieldFillStatus=inputs.every(data=>data.nativeElement.value!='' && data.nativeElement.value!=null && data.nativeElement.value!=undefined );
+    console.log(this.otpAllFieldFillStatus);
   }
 
   handleKeyDown(event: KeyboardEvent, index: number): void {
     const inputs = this.otpInputs.toArray();
     if (event.key === 'Backspace' && index !== 0) {
       inputs[index].nativeElement.value = '';
+
+      this.otpAllFieldFillStatus=inputs.every(data=>data.nativeElement.value!='' && data.nativeElement.value!=null && data.nativeElement.value!=undefined );
       setTimeout(() => {
         inputs[index - 1].nativeElement.focus();
       }, 0)

@@ -8,19 +8,18 @@ import { Observable } from 'rxjs';
 export class SocketService {
 
   public socket!: Socket;
-  private readonly SOCKET_ENDPOINT = 'https://cannatrader.onrender.com';
+  private readonly SOCKET_ENDPOINT = 'https://cannatrader-socket.onrender.com';
 
   constructor() {
     this.socketConnection();
   }
 
-  socketConnection(){
+  socketConnection() {
     this.socket = io(this.SOCKET_ENDPOINT, {
       transports: ['websocket'], // Use WebSocket transport only (optional)
       withCredentials: true, // Use credentials for CORS (optional)
       reconnection: true,
       reconnectionAttempts: Infinity,
-      reconnectionDelay: 1000,
     });
 
     this.socket.connect();
@@ -44,7 +43,7 @@ export class SocketService {
     console.log(event);
     return new Observable((observer) => {
       this.socket.on(event, (data) => {
-        // console.log(data);
+        console.log(data);
         observer.next(data);
       });
 
@@ -52,7 +51,7 @@ export class SocketService {
       return () => this.socket.off(event);
     });
   }
-  
+
   // Disconnect the socket
   disconnect(): void {
     if (this.socket) {
