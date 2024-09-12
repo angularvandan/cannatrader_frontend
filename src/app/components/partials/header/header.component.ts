@@ -10,6 +10,7 @@ export interface Notification {
   image: string;
   userId: string;
   isRead: boolean;
+  allRead:boolean;
   redirectUrl: string | null;
   createdAt: Date; // ISO 8601 date string
   updatedAt: Date; // ISO 8601 date string
@@ -36,9 +37,13 @@ export class HeaderComponent implements OnInit {
       this.user = newUser;
     });
 
+    this.getAllNotifications();
+  }
+
+  getAllNotifications(){
     this.productService.getNotifications().subscribe({
       next: (response: any) => {
-        
+
         this.notifications = response.notifications;
         this.totalNumberOfNotificationReadFalse();
 
@@ -48,6 +53,7 @@ export class HeaderComponent implements OnInit {
       }
     })
   }
+
   readNotification(id:string){
 
     this.showIconForReadOrNot(id,true);
@@ -65,7 +71,7 @@ export class HeaderComponent implements OnInit {
   }
 
   totalNumberOfNotificationReadFalse(){
-    this.totalReadFalseNotification = this.notifications.filter(notification => !notification.isRead).length;
+    this.totalReadFalseNotification = this.notifications.filter(notification => !notification.allRead).length;
   }
 
   showIconForReadOrNot(id:string,status:boolean){
@@ -89,6 +95,18 @@ export class HeaderComponent implements OnInit {
   notificationOpenClick() {
     this.sidebarVisible = true;
     this.showAndHideScroll();
+    //this is for after clicking need to set notification as 0;
+    this.totalReadFalseNotification=0;
+    this.productService.markAsAllRead().subscribe({
+      next:(response)=>{
+        // console.log(response);
+        this.getAllNotifications();
+
+      },error:(err)=>{
+        console.log(err);
+        this.totalNumberOfNotificationReadFalse();
+      }
+    })
   }
   showAndHideScroll() {
     // console.log('hi');

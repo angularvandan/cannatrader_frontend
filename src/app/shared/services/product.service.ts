@@ -140,6 +140,9 @@ export class ProductService {
   markAsRead(id:string): Observable<any> {
     return this.http.patch<any>(`${this.baseUrl}/api/notifications/mark-read?id=${id}`,{});
   }
+  markAsAllRead(): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}/api/notifications/mark-all-read`,{});
+  }
   // Method to delete a notification
   deleteNotification(notificationId: string): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/api/notifications/${notificationId}`);

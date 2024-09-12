@@ -64,8 +64,8 @@
                 class="hover:bg-secondary  rounded-xl text-base sm:text-xl font-medium cursor-pointer py-1 px-2 whitespace-nowrap">Sign
                 up</a>
 
-            <a routerLink="/profile/profile-details" *ngIf="isAuth">
-                <img class="w-8 h-8 text-white user-profile rounded-full" [src]="user.user.avatar" alt="">
+            <a routerLink="/profile/profile-details" class="w-8 h-8 rounded-full overflow-hidden" *ngIf="isAuth">
+                <img class="text-white user-profile rounded-full" [src]="user.user.avatar" alt="">
             </a>
 
         </div>
