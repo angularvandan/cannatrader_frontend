@@ -8,15 +8,25 @@ $bg-primary: #3A5C41;
                 .users-search {
                     .p-inputtext {
                         background: #ededed;
-                        border-radius: 28px;
-                    }
+                        border-radius: 20px;
+                        border: none;
+                        box-shadow: none;
+                        outline: none;
+
+                        color: $bg-primary;
+                        font-weight: 500;
+                        font-size: 15px;
+                        line-height: 20px;                    }
 
                     .p-inputtext::placeholder {
                         color: #737373;
-                        font-weight: 400;
+                        font-weight: 500;
                         font-size: 15px;
                         line-height: 20px;
 
+                    }
+                    .p-inputtext:enabled:focus::placeholder{
+                        color: transparent;
                     }
 
                     .p-inputtext:enabled:focus,

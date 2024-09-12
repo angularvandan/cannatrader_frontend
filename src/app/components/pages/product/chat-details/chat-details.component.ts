@@ -56,6 +56,8 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
 
   //it will update for show group of message with particular date
   chatGroups: { date: string, dateLabel: string, messages: ChatMessage[] }[] = [];
+  filterUserNameOfChats:string='';
+  filterChatsOfUsers:ChatModel[]=[];
 
 
   userId: string = '';
@@ -77,13 +79,13 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
 
     //this is for real time ream message
     this.socketService.on('newMessage').subscribe({
-      next: (message) => {
-        
-        message.createdAt=new Date().toISOString();
-        message.updatedAt=new Date().toISOString();
-        console.log(message);
+      next: (response) => {
 
-        this.messages.push(message);
+        response.createdAt = new Date().toISOString();
+        response.updatedAt = new Date().toISOString();
+        // console.log(response);
+
+        this.messages.push(response);
 
 
         this.messages.sort((a, b) => {
@@ -92,6 +94,13 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
 
         //append messages in this method
         this.groupChatsByDate();
+        //this is for show latest send message 
+        this.addLastMessageIntoChat(response.chatId,response.content);
+
+        if(this.activeUserChats.length){
+          console.log('readed');
+          this.readAllMessages(this.chatId);
+        }
 
       }, error: (err) => {
         console.log(err);
@@ -102,14 +111,14 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
   ngAfterViewChecked(): void {
     this.scrollToBottom();
   }
-  
+
   scrollToBottom(): void {
     // console.log(this.scrollContainer);
     try {
-      if(this.scrollContainer.first){
+      if (this.scrollContainer.first) {
         this.scrollContainer.first.nativeElement.scrollTop = this.scrollContainer.first.nativeElement.scrollHeight;
       }
-      if(this.scrollContainer.last){
+      if (this.scrollContainer.last) {
         this.scrollContainer.last.nativeElement.scrollTop = this.scrollContainer.last.nativeElement.scrollHeight;
       }
     } catch (err) {
@@ -120,19 +129,19 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
 
   sendMessageToServer(chatId: string, content: string, senderId: string, receiverId: string): void {
     const message = { chatId, content, senderId, receiverId };
-    console.log(message);
+    // console.log(message);
     this.socketService.emit('sendMessage', message);
 
     this.productService.sendMessage(message).subscribe({
-      next:(response)=>{
-        console.log(response);
+      next: (response) => {
+        // console.log(response);
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err);
       }
     });
-
-
+  }
+  addLastMessageIntoChat(chatId: string, content: string) {
     //this is for show latest send message 
     this.chats = this.chats.map((chat) => {
       if (chat.chatId == chatId) {
@@ -146,9 +155,7 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
   sendMessage() {
     this.message = this.message.trim();
     if (this.message != '') {
-      console.log(this.chatId);
-      console.log(this.userId);
-      console.log(this.receiverId);
+      
       this.sendMessageToServer(this.chatId, this.message, this.userId, this.receiverId);
     }
     this.message = '';
@@ -159,7 +166,7 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
       next: (response: any) => {
         this.chats = response.chats;
         this.userId = response.userId;
-        console.log(response);
+        // console.log(response);
 
         //this is for sort the user who in the chat wrt latest message
         this.sortTheUserWhoInChats();
@@ -168,6 +175,10 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
         console.log(err);
       }
     })
+  }
+
+  get filterChatsUser(){
+      return this.chats.filter(user=>user.chatPartner.name.toLowerCase().includes(this.filterUserNameOfChats.trim().toLowerCase()))
   }
 
   sortTheUserWhoInChats() {
@@ -181,12 +192,12 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
   }
 
   getAllMessageByChatId(chatId: string, user: any) {
+    //need to blank filet of user when click on specific
+    this.filterUserNameOfChats='';
+
     //need chatId for send message;
     this.chatId = chatId;
     this.receiverId = user.id;
-    console.log(this.chatId);
-    console.log(this.receiverId);
-    console.log(this.userId);
 
     this.chats = this.chats.map((chat) => {
       if (chat.chatId == chatId) {
@@ -208,7 +219,7 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
 
     this.productService.getAllMessages(this.chatId).subscribe({
       next: (response: any) => {
-        console.log(response);
+        // console.log(response);
         this.messages = response.data;
 
         this.messages.sort((a, b) => {
@@ -226,11 +237,11 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
     })
   }
 
-  readAllMessages(chatId:string){
+  readAllMessages(chatId: string) {
     this.productService.readAllMessage(chatId).subscribe({
-      next:(response)=>{
+      next: (response) => {
         console.log(response);
-      },error:(err)=>{
+      }, error: (err) => {
         console.log(err);
       }
     })
@@ -269,7 +280,7 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
   // this is for add the date of specific chats
   groupChatsByDate() {
     let previousDate = '';
-    this.chatGroups=[];
+    this.chatGroups = [];
     console.log(this.messages);
     this.messages.forEach(chat => {
 

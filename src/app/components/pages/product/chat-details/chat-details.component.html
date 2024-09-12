@@ -7,12 +7,12 @@
                         *ngIf="!showMobileViewChats">Chats</div>
                     <div class="users-search  p-2" *ngIf="!showMobileViewChats">
                         <span class="p-input-icon-left w-full">
-                            <i class="pi pi-search"></i>
-                            <input type="text" pInputText placeholder="Search here" />
+                            <i class="pi pi-search"style="font-size:1rem"></i>
+                            <input type="text" [(ngModel)]="filterUserNameOfChats" pInputText placeholder="Search here..." />
                         </span>
                     </div>
                     <div class="users-chats-container p-2 max-h-[407px] overflow-y-auto hidden md:block">
-                        <div class="users-chats mt-4 " *ngFor="let chat of chats">
+                        <div class="users-chats mt-4 " *ngFor="let chat of filterChatsUser">
                             <div class="users-image-container flex flex-row cursor-pointer"
                                 (click)="getAllMessageByChatId(chat.chatId,chat.chatPartner)"
                                 [ngClass]="chat.chatId== chatId?'active-user':''">
@@ -41,7 +41,7 @@
                     </div>
                     <ng-container *ngIf="!showMobileViewChats">
                         <div class="users-chats-container p-2 h-[70%] overflow-y-auto mobile-view">
-                            <div class="users-chats mt-4 " *ngFor="let chat of chats">
+                            <div class="users-chats mt-4 " *ngFor="let chat of filterChatsUser">
                                 <div class="users-image-container flex flex-row cursor-pointer"
                                     [ngClass]="chat.chatId== chatId?'active-user':''"
                                     (click)="getAllMessageByChatId(chat.chatId,chat.chatPartner)">
@@ -90,7 +90,7 @@
                                 <div class="user-chats-day" *ngIf="shouldShowDayLabel(group.date, i)">
                                     <div class="flex justify-center align-items-center">
                                         <p
-                                            class="bg-[#D1DACF] text-sm leading-5 font-semibold text-primary px-3 py-1 rounded-[30px]">
+                                            class="bg-[#D1DACF] text-sm leading-5 font-semibold text-primary px-3 py-1 my-2 rounded-[30px]">
                                             {{ group.dateLabel }}
                                         </p>
                                     </div>
@@ -194,7 +194,7 @@
                                 <div class="user-chats-day" *ngIf="shouldShowDayLabel(group.date, i)">
                                     <div class="flex justify-center align-items-center">
                                         <p
-                                            class="bg-[#D1DACF] text-sm leading-5 font-semibold text-primary px-3 py-1 rounded-[30px]">
+                                            class="bg-[#D1DACF] text-sm leading-5 font-semibold text-primary px-3 py-1 my-2 rounded-[30px]">
                                             {{ group.dateLabel }}
                                         </p>
                                     </div>

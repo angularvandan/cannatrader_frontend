@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
 
   user!: User;
   notifications: Notification[] = [];
-  totalUnReadNotification!:number;
+  totalReadFalseNotification:number=0;
 
   constructor(private userService: UserService, private productService: ProductService, private renderer: Renderer2) { }
 
@@ -38,7 +38,10 @@ export class HeaderComponent implements OnInit {
 
     this.productService.getNotifications().subscribe({
       next: (response: any) => {
+        
         this.notifications = response.notifications;
+        this.totalNumberOfNotificationReadFalse();
+
         console.log(this.notifications);
       }, error: (err) => {
         console.log(err);
@@ -52,13 +55,17 @@ export class HeaderComponent implements OnInit {
     this.productService.markAsRead(id).subscribe({
       next:(response)=>{
         console.log(response);
-
+        this.totalNumberOfNotificationReadFalse();
       },error:(err)=>{
         console.log(err);
         this.showIconForReadOrNot(id,false);
 
       }
     })
+  }
+
+  totalNumberOfNotificationReadFalse(){
+    this.totalReadFalseNotification = this.notifications.filter(notification => !notification.isRead).length;
   }
 
   showIconForReadOrNot(id:string,status:boolean){
