@@ -281,6 +281,7 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
   groupChatsByDate() {
     let previousDate = '';
     this.chatGroups = [];
+    
     console.log(this.messages);
     this.messages.forEach(chat => {
 

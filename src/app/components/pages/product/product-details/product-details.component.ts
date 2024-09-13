@@ -166,12 +166,12 @@ export class ProductDetailsComponent implements OnInit {
         next:(response:any)=>{
           console.log(response.data.id);
           this.socketService.emit('joinChat',response.data.id);
+          this.router.navigate(['/products/chats']);
         },error:(err)=>{
           console.log(err);
         }
       });
     }
-    this.router.navigate(['/products/chats']);
   }
 
 }
