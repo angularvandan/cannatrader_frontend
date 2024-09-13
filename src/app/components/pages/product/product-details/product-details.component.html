@@ -365,12 +365,20 @@
                     </div>
                     <div class="ml-4">
                         <div class="text-inner text-[10px] lg:text-[20px] hover:text-secondary">Phone</div>
-                        <a
-                            class="text-lg lg:font-semibold text-[12px] lg:text-[20px] text-primary hover:text-secondary">{{product.vendor?.phone_no}}</a>
-                        <a href="tel:{{product.vendor?.phone_no}}"
-                            class="text-inner hover:underline text-[10px] lg:text-[20px]hover:text-secondary">Click here
-                            to
-                            enquire</a>
+                        <div *ngIf="!showPhoneNoStatus">
+                            <a href="tel:{{product.vendor?.phone_no}}"
+                                class="hover:text-secondary text-lg cursor-pointer font-semibold text-[20px] text-primary mr-2">xx-xxxx-xxxx</a>
+                        </div>
+                        <div *ngIf="showPhoneNoStatus">
+                            <a href="tel:{{product.vendor?.phone_no}}"
+                                class="hover:text-secondary lg:font-semibold cursor-pointer font-semibold text-[12px] lg:text-[20px] text-primary mr-2">{{product.vendor?.phone_no}}</a>
+                        </div>
+                        <div *ngIf="!showPhoneNoStatus">
+                            <a (click)="showPhoneNoStatus=true" class="text-inner hover:underline cursor-pointer hover:text-secondary">Click
+                                here to
+                                enquire</a>
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="flex items-center phone">
@@ -400,7 +408,7 @@
                 <div class="flex items-center">
                     <div class="rounded-full p-2">
                         <img [src]="product.vendor?.avatar" alt="Owner Image"
-                            class="h-12 w-12 object-cover rounded-full">
+                            class="h-10 w-10 object-cover rounded-full">
                     </div>
                     <div class="ml-4">
                         <div class="text-gray-600 text-[10px] lg:text-[20px] ">Owner</div>

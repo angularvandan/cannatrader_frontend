@@ -164,6 +164,7 @@ export class ProductDetailsComponent implements OnInit {
     if (this.userId.trim()) {
       this.productService.startChat(userId).subscribe({
         next:(response:any)=>{
+          console.log(response);
           console.log(response.data.id);
           this.socketService.emit('joinChat',response.data.id);
           this.router.navigate(['/products/chats']);

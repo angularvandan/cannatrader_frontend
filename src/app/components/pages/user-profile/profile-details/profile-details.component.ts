@@ -97,6 +97,7 @@ export class ProfileDetailsComponent implements OnInit {
     this.productService.getSubscribedCompany(this.params).subscribe({
       next: (response: any) => {
         this.subscribedCompanyes = response.subscribtions;
+        console.log(response);
 
         //need to add extra property for show and hide subscription
         this.subscribedCompanyes = this.subscribedCompanyes.map(data => {

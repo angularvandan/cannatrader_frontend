@@ -168,6 +168,14 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
         this.userId = response.userId;
         // console.log(response);
 
+        this.chats=this.chats.map(chat=>{
+          if(!chat.lastMessage.createdAt){
+            chat.lastMessage.createdAt=new Date();
+          }
+          return chat;
+        })
+        
+
         //this is for sort the user who in the chat wrt latest message
         this.sortTheUserWhoInChats();
 
