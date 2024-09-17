@@ -49,6 +49,8 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
 
   showMobileViewChats: boolean = false;
   isMobile: boolean = true;
+  getAllMessageStatus:boolean=true;
+  getAllChatsStatus:boolean=true;
 
   message: string = '';
   messages: ChatMessage[] = [];
@@ -166,6 +168,7 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
       next: (response: any) => {
         this.chats = response.chats;
         this.userId = response.userId;
+        this.getAllChatsStatus=false;
         // console.log(response);
 
         this.chats=this.chats.map(chat=>{
@@ -173,9 +176,8 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
             chat.lastMessage.createdAt=new Date();
           }
           return chat;
-        })
+        });
         
-
         //this is for sort the user who in the chat wrt latest message
         this.sortTheUserWhoInChats();
 
@@ -200,6 +202,10 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
   }
 
   getAllMessageByChatId(chatId: string, user: any) {
+
+    this.chatGroups=[];
+    this.getAllMessageStatus=true;
+
     //need to blank filet of user when click on specific
     this.filterUserNameOfChats='';
 
@@ -227,8 +233,10 @@ export class ChatDetailsComponent implements OnInit, AfterViewChecked, OnDestroy
 
     this.productService.getAllMessages(this.chatId).subscribe({
       next: (response: any) => {
-        // console.log(response);
+        console.log(response);
         this.messages = response.data;
+
+        this.messages.length ? this.getAllMessageStatus=true : this.getAllMessageStatus=false;
 
         this.messages.sort((a, b) => {
           return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();

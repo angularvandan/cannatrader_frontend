@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   loading: boolean = false;
 
 
-  constructor(private userService: UserService, private fb: FormBuilder, private tostr: ToastrService, private router: Router,) { }
+  constructor(private userService: UserService, private fb: FormBuilder, private router: Router, private messageService: MessageService) { }
 
 
   ngOnInit(): void {
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    
+
     if (this.loginForm.valid) {
       this.loading = true;
       console.log(this.loginForm.value);
@@ -40,18 +40,22 @@ export class LoginComponent implements OnInit {
       this.userService.login(payload).subscribe({
         next: (res) => {
           this.loading = true;
-          this.router.navigate(['/home']);
 
-          this.tostr.success('Login Successfully', res.user.name);
+          this.messageService.add({ severity: 'success', summary: 'Login Successfully', detail: res.user.name });
+          setTimeout(() => {
+            this.router.navigate(['/home']);
+          }, 1500);
         }, error: (err) => {
-          this.tostr.error(err.error.error.message);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error.error.message });
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 1500);
           this.loading = false;
-          this.router.navigate(['/login']);
 
         }
       });
     }
-    else{
+    else {
       this.loginForm.markAllAsTouched();
     }
 

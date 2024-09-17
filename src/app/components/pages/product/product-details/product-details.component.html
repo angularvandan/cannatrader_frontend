@@ -25,7 +25,7 @@
                                 stroke="#3A5C41" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </button>
-                    <button (click)="addProductToWishlit(product.id)" [disabled]="isAuth" [disabled]="isAuth"
+                    <button (click)="addProductToWishlit(product.id)" [disabled]="isAuth"
                         [ngClass]="isAuth?'opacity-50 hover:opacity-50':'opacity-100 '"
                         class="cursor-pointer twitter-icon w-10 h-10 bg-nav-bg rounded-full flex justify-center items-center">
                         <i [ngClass]="isAuth?'opacity-50 active:scale-100 hover:opacity-50':'opacity-100 active:scale-110'"
@@ -183,12 +183,16 @@
 
             <h2 class="text-xl font-semibold pt-10">Description</h2>
 
-            <p class="mt-4 text-help">{{ showAll ? product.description : (product.description | slice:0:charLimit) +
+            <p class="mt-4 text-help"*ngIf="product.description.length>100 ">{{ showAll ? product.description : (product.description | slice:0:charLimit) +
                 '...' }}
                 <span class="text-[#698AFD] cursor-pointer" (click)="toggleViewMore()">
                     {{ showAll ? 'View Less' : 'View More' }}
 
                 </span>
+            </p>
+
+            <p class="mt-4 text-help"*ngIf="product.description.length<=100 ">
+                {{product.description}}
             </p>
 
             <div class="w-full h-[0.5px] border border-primary mt-10 mb-8"></div>

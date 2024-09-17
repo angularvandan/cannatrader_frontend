@@ -18,6 +18,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { BlockUIModule } from 'primeng/blockui';
 import { PanelModule } from 'primeng/panel';
 import { ChatDatePipe } from '../pipe/chat-date.pipe';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -42,10 +43,12 @@ import { ChatDatePipe } from '../pipe/chat-date.pipe';
     InputNumberModule,
     BlockUIModule,
     PanelModule,
+    
     ToastrModule.forRoot(),
   ],
   providers:[
-    DatePipe
+    DatePipe,
+    MessageService
   ],
   exports: [
     CommonModule,

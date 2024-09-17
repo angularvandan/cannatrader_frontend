@@ -7,11 +7,29 @@
                         *ngIf="!showMobileViewChats">Chats</div>
                     <div class="users-search  p-2" *ngIf="!showMobileViewChats">
                         <span class="p-input-icon-left w-full">
-                            <i class="pi pi-search"style="font-size:1rem"></i>
-                            <input type="text" [(ngModel)]="filterUserNameOfChats" pInputText placeholder="Search here..." />
+                            <i class="pi pi-search" style="font-size:1rem"></i>
+                            <input type="text" [(ngModel)]="filterUserNameOfChats" pInputText
+                                placeholder="Search here..." />
                         </span>
                     </div>
                     <div class="users-chats-container p-2 max-h-[407px] overflow-y-auto hidden md:block">
+                        <div class="h-[300px]" *ngIf="!filterChatsUser.length && !getAllChatsStatus">
+                            <div class="flex flex-col items-center justify-center h-full">
+                                <div class="img-container">
+                                    <img src="../../../../../assets/profile/not_products.png" alt="Empty product">
+                                </div>
+                                <div
+                                    class="emply-title text-[#262626] text-[15px] sm:text-[20px] leading-7 font-custom">
+                                    No Chats</div>
+                                <div class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
+                                    Browse products and start a chat
+                                    with the vendor.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex h-[80%]  justify-center items-center my-6" *ngIf="!filterChatsUser.length">
+                            <i class="pi pi-spin pi-spinner text-[#3A5C41]" style="font-size: 2rem"></i>
+                        </div>
                         <div class="users-chats mt-4 " *ngFor="let chat of filterChatsUser">
                             <div class="users-image-container flex flex-row cursor-pointer"
                                 (click)="getAllMessageByChatId(chat.chatId,chat.chatPartner)"
@@ -41,6 +59,24 @@
                     </div>
                     <ng-container *ngIf="!showMobileViewChats">
                         <div class="users-chats-container p-2 h-[70%] overflow-y-auto mobile-view">
+                            <div class="h-[400px]" *ngIf="!filterChatsUser.length && !getAllChatsStatus">
+                                <div class="flex flex-col items-center justify-center h-full">
+                                    <div class="img-container">
+                                        <img src="../../../../../assets/profile/not_products.png" alt="Empty product">
+                                    </div>
+                                    <div
+                                        class="emply-title text-[#262626] text-[15px] sm:text-[20px] leading-7 font-custom">
+                                        No Chats</div>
+                                    <div
+                                        class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
+                                        Browse products and start a chat
+                                        with the vendor.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex h-[80%]  justify-center items-center my-6" *ngIf="!filterChatsUser.length">
+                                <i class="pi pi-spin pi-spinner text-[#3A5C41]" style="font-size: 2rem"></i>
+                            </div>
                             <div class="users-chats mt-4 " *ngFor="let chat of filterChatsUser">
                                 <div class="users-image-container flex flex-row cursor-pointer"
                                     [ngClass]="chat.chatId== chatId?'active-user':''"
@@ -73,6 +109,18 @@
                 </div>
             </div>
             <div class="user-chats-container w-full md:w-3/5 lg:w-[67%] bg-[#FFFFFF] z-10 rounded-lg hidden md:block">
+                <div class="h-full" *ngIf="!activeUserChats.length">
+                    <div class="flex flex-col items-center justify-center h-full">
+                        <div class="img-container"><img src="../../../../../assets/profile/not_products.png"
+                                alt="Empty product"></div>
+                        <div class="emply-title text-[#262626] text-[15px] sm:text-[20px] leading-7 font-custom">
+                            No Chats</div>
+                        <div class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
+                            Browse products and start a chat
+                            with the vendor.
+                        </div>
+                    </div>
+                </div>
                 <div class="user-chats h-full p-4 mt-2" *ngIf="activeUserChats.length">
                     <div class="user-chats-heading flex flex-row">
                         <div class="img-container overflow-hidden rounded-full mr-4">
@@ -85,35 +133,55 @@
                         </div>
                     </div>
                     <div class="user-chats-messages h-[75%] my-4">
-                        <div #scrollContainer class="user-chats max-h-[330px] overflow-y-auto ">
-                            <ng-container *ngFor="let group of chatGroups; let i = index; trackBy: trackByDate">
-                                <div class="user-chats-day" *ngIf="shouldShowDayLabel(group.date, i)">
-                                    <div class="flex justify-center align-items-center">
-                                        <p
-                                            class="bg-[#D1DACF] text-sm leading-5 font-semibold text-primary px-3 py-1 my-2 rounded-[30px]">
-                                            {{ group.dateLabel }}
-                                        </p>
-                                    </div>
+                        <div class="min-height-[400px]" *ngIf="!chatGroups.length && !getAllMessageStatus">
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="img-container"><img src="../../../../../assets/profile/not_products.png"
+                                        alt="Empty product"></div>
+                                <div
+                                    class="emply-title text-[#262626] text-[15px] sm:text-[20px] leading-7 font-custom">
+                                    No Chats</div>
+                                <div class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
+                                    Browse products and start a chat
+                                    with the vendor.
                                 </div>
-                                <ng-container *ngFor="let msg of group.messages;let i=index; trackBy: trackById">
+                            </div>
+                        </div>
+                        <div class="flex h-[80%]  justify-center items-center my-6"
+                            *ngIf="!chatGroups.length && getAllMessageStatus">
+                            <i class="pi pi-spin pi-spinner text-[#3A5C41]" style="font-size: 2rem"></i>
+                        </div>
 
-                                    <div class="flex justify-start mb-2" *ngIf="msg.senderId!=userId">
-                                        <div class="left-message flex items-start flex-col">
-                                            <span
-                                                class=" py-[3px] px-2 bg-secondary text-primary text-sm leading-5 font-medium">{{msg.content}}</span>
-                                            <p class="text-xs">{{formatTime(msg.createdAt)}}</p>
+                        <div #scrollContainer class="user-chats max-h-[350px] overflow-y-auto ">
+                            <ng-container *ngIf="chatGroups.length">
+                                <ng-container *ngFor="let group of chatGroups; let i = index; trackBy: trackByDate">
+                                    <div class="user-chats-day" *ngIf="shouldShowDayLabel(group.date, i)">
+                                        <div class="flex justify-center align-items-center">
+                                            <p
+                                                class="bg-[#D1DACF] text-sm leading-5 font-semibold text-primary px-3 py-1 my-2 rounded-[30px]">
+                                                {{ group.dateLabel }}
+                                            </p>
                                         </div>
                                     </div>
-                                    <div class="flex justify-end mb-2" *ngIf="msg.senderId==userId">
-                                        <div class="right-message flex items-end flex-col">
-                                            <span
-                                                class="self-right py-[3px] px-2 bg-primary text-secondary text-sm leading-5 font-medium">{{msg.content}}</span>
-                                            <p class="text-xs">{{formatTime(msg.createdAt)}}</p>
+                                    <ng-container *ngFor="let msg of group.messages;let i=index; trackBy: trackById">
+
+                                        <div class="flex justify-start mb-2" *ngIf="msg.senderId!=userId">
+                                            <div class="left-message flex items-start flex-col">
+                                                <span
+                                                    class=" py-[3px] px-2 bg-secondary text-primary text-sm leading-5 font-medium">{{msg.content}}</span>
+                                                <p class="text-xs">{{formatTime(msg.createdAt)}}</p>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="flex justify-end mb-2" *ngIf="msg.senderId==userId">
+                                            <div class="right-message flex items-end flex-col">
+                                                <span
+                                                    class="self-right py-[3px] px-2 bg-primary text-secondary text-sm leading-5 font-medium">{{msg.content}}</span>
+                                                <p class="text-xs">{{formatTime(msg.createdAt)}}</p>
+                                            </div>
+                                        </div>
+                                    </ng-container>
                                 </ng-container>
                             </ng-container>
-                            
+
                         </div>
                     </div>
                     <div class="user-chat-send-btn">
@@ -129,7 +197,7 @@
 
                                 </i>
                                 <input type="text" pInputText placeholder="Type Message here..." [(ngModel)]="message"
-                                    (keyup.enter)="sendMessage()"/>
+                                    (keyup.enter)="sendMessage()" />
                                 <i class="pi p-input-icon-right cursor-pointer" (click)="sendMessage()">
                                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -153,6 +221,20 @@
             <!-- this is for mobile  -->
             <div class="user-chats-container h-full w-full md:w-3/5 lg:w-[67%] bg-[#FFFFFF] z-10 rounded-lg mobile-view"
                 *ngIf="showMobileViewChats">
+
+                <div class="h-[400px]" *ngIf="!activeUserChats.length">
+                    <div class="flex flex-col items-center justify-center h-full">
+                        <div class="img-container"><img src="../../../../../assets/profile/not_products.png"
+                                alt="Empty product"></div>
+                        <div class="emply-title text-[#262626] text-[15px] sm:text-[20px] leading-7 font-custom">
+                            No Chats</div>
+                        <div class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
+                            Browse products and start a chat
+                            with the vendor.
+                        </div>
+                    </div>
+                </div>
+
                 <div class="user-chats h-full p-4 mt-2 " *ngIf="activeUserChats.length">
                     <div class="user-chats-heading flex flex-row">
                         <div (click)="showMobileViewChats=false"
@@ -168,8 +250,26 @@
                             <span class="texl-sm leading-5 font-medium">Online</span>
                         </div>
                     </div>
-                    
+
                     <div class="user-chats-messages my-4 h-[80%]">
+
+                        <div class="h-[400px]" *ngIf="!chatGroups.length && !getAllMessageStatus">
+                            <div class="flex flex-col items-center justify-center h-full">
+                                <div class="img-container"><img src="../../../../../assets/profile/not_products.png"
+                                        alt="Empty product"></div>
+                                <div
+                                    class="emply-title text-[#262626] text-[15px] sm:text-[20px] leading-7 font-custom">
+                                    No Chats</div>
+                                <div class="sub-title text-[#737373] font-custom sm:text-[12px] text-[14px] leading-5">
+                                    Browse products and start a chat
+                                    with the vendor.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex h-[80%]  justify-center items-center my-6"
+                            *ngIf="!chatGroups.length && getAllMessageStatus">
+                            <i class="pi pi-spin pi-spinner text-[#3A5C41]" style="font-size: 2rem"></i>
+                        </div>
                         <!-- <div class="user-chats max-h-[350px] overflow-y-auto ">
                             <ng-container *ngFor="let msg of messages">
 
@@ -217,7 +317,7 @@
                                     </div>
                                 </ng-container>
                             </ng-container>
-                            
+
                         </div>
                     </div>
                     <div class="user-chat-send-btn">
