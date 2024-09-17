@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
 
     this.searchForm = this.fb.group({
       strain_type: [''],
-      category: [''],
+      category: ['',Validators.required],
       sub_category: [''],
       thc_range: [''],
       longitude: ['1112'],
