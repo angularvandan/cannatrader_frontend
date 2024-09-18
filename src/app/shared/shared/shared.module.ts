@@ -12,7 +12,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarModule } from 'primeng/sidebar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { RatingModule } from 'primeng/rating';
-import { ToastrModule } from 'ngx-toastr';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { BlockUIModule } from 'primeng/blockui';
 import { PanelModule } from 'primeng/panel';
@@ -41,9 +40,7 @@ import { ChatDatePipe } from '../pipe/chat-date.pipe';
     InputNumberModule,
     BlockUIModule,
     PanelModule,
-    
-    ToastrModule.forRoot(),
-  ],
+    ],
   providers:[
     DatePipe,
 
@@ -63,7 +60,6 @@ import { ChatDatePipe } from '../pipe/chat-date.pipe';
     SidebarModule,
     ConfirmDialogModule,
     RatingModule,
-    ToastrModule,
     BlockUIModule,
     PanelModule,
     InputNumberModule,

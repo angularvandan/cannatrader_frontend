@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class ContactComponent implements OnInit {
 
   contactForm!: FormGroup;
-  constructor(private fb: FormBuilder,private userService:UserService,private toastr:ToastrService) { }
+  constructor(private fb: FormBuilder,private userService:UserService,private messageService:MessageService) { }
 
   ngOnInit() {
     this.contactForm = new FormGroup({
@@ -39,7 +39,7 @@ export class ContactComponent implements OnInit {
       console.log(this.contactForm.value);
       this.userService.contactForm(this.contactForm.value).subscribe({
         next:(response:any)=>{
-          this.toastr.success(response.message);
+          this.messageService.add({severity:'success',summary:'Success',detail:response.message})
           this.contactForm.reset();
         },error:(err)=>{
           console.log(err);

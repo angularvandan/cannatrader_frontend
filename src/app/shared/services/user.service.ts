@@ -2,9 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../models/user';
-import { ToastrService } from 'ngx-toastr';
 import { IUserLogin } from '../interfaces/IUserLogin';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 const USER_KEY='cannatrader_user';
 
@@ -18,7 +18,7 @@ export class UserService {
   private userSubject =new BehaviorSubject<User>(this.getuserFromLocalStorage());
   public userObservable:Observable<User>;
 
-  constructor(private http:HttpClient,private tostr:ToastrService,private router:Router) {
+  constructor(private http:HttpClient,private messageService:MessageService,private router:Router) {
     this.userObservable=this.userSubject.asObservable();
 
   }
@@ -90,8 +90,7 @@ export class UserService {
           this.userSubject.next(this.getuserFromLocalStorage());
 
         },error:(err)=>{
-          console.log(err);
-          this.tostr.error(err.error.error.message);
+          this.messageService.add({severity:'error',summary:'Error',detail:err.error.error.message})
         }
       })
     );

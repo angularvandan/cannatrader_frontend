@@ -23,7 +23,6 @@
     "date-fns": "^2.30.0",
     "google-libphonenumber": "^3.2.35",
     "ngx-bootstrap": "^10.3.0",
-    "ngx-toastr": "^16.2.0",
     "primeicons": "^7.0.0",
     "primeng": "^15.4.1",
     "rxjs": "~7.8.0",
