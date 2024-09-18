@@ -46,7 +46,7 @@
                 <ng-container *ngFor="let image of product.images">
                     <img src="{{image}}" alt="image" (click)="showBigImageWhenClick(image)"
                         [ngStyle]="{'border':image==bigImageForShowing ? '4px solid green':'none'}"
-                        class="lg:w-32 lg:h-28 w-20 h-20 rounded-lg cursor-pointer">
+                        class="lg:w-28 lg:h-28 w-20 h-20 rounded-lg cursor-pointer">
                 </ng-container>
             </div>
             <div class="p-6 rounded-lg w-full mx-auto mt-24 lg:block hidden relative">

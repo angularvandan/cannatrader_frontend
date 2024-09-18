@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ViewChildren, QueryList, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
 import { interval, Subscription } from 'rxjs';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -27,7 +27,7 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit ,OnDestroy{
   timeLeft: number = 120; // Time in seconds (2 minutes)
   timerSubscription!: Subscription;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private tostr: ToastrService, private router: Router) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private messageService:MessageService, private router: Router) { }
 
   ngOnInit(): void {
     this.resetPasswordForm = this.fb.group({
@@ -108,13 +108,12 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit ,OnDestroy{
     this.timeLeft=120;
 
     this.userService.resetPassword(email).subscribe({
-      next: (respose) => {
+      next: (response) => {
         // console.log(respose);
         this.loadingOtp = false;
         this.loading = false;
         this.section = section;
-
-        this.tostr.success(respose.message);
+        this.messageService.add({severity:'success',summary:'Success',detail:response.message})
         // Start the countdown
         this.timerSubscription = interval(1000).subscribe(() => {
           this.updateTimer();
@@ -123,7 +122,7 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit ,OnDestroy{
         // console.log(err);
         this.loadingOtp = false;
         this.loading = false;
-        this.tostr.error(err.error.error.message);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error.error.message})
       }
     });
   }
@@ -146,7 +145,7 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit ,OnDestroy{
         // console.log(response);
 
         this.section = section;
-        this.tostr.success(response.message);
+        this.messageService.add({severity:'success',summary:'Success',detail:response.message})
         this.loading = false;
 
         this.userId = response.userId;
@@ -156,7 +155,7 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit ,OnDestroy{
       }, error: (err) => {
 
         this.loading = false;
-        this.tostr.error(err.error.error.message);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error.error.message})
       }
     })
 
@@ -187,13 +186,13 @@ export class ResetPasswordComponent implements AfterViewInit, OnInit ,OnDestroy{
 
       this.userService.updatePassword(this.userId, newPassword, confirmPassword).subscribe({
         next: (response) => {
-          this.tostr.success(response.message);
+          this.messageService.add({severity:'success',summary:'Success',detail:response.message})
           this.loading = false;
           this.router.navigate(['/login']);
 
         }, error: (err) => {
           this.loading = false;
-          this.tostr.error(err.error.message);
+          this.messageService.add({severity:'error',summary:'Error',detail:err.error.message})
         }
       });
     }

@@ -11,14 +11,12 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarModule } from 'primeng/sidebar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ToastModule } from 'primeng/toast';
 import { RatingModule } from 'primeng/rating';
 import { ToastrModule } from 'ngx-toastr';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { BlockUIModule } from 'primeng/blockui';
 import { PanelModule } from 'primeng/panel';
 import { ChatDatePipe } from '../pipe/chat-date.pipe';
-import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -37,7 +35,7 @@ import { MessageService } from 'primeng/api';
     ReactiveFormsModule,
     SidebarModule,
     ConfirmDialogModule,
-    ToastModule,
+    
     RatingModule,
     DropdownModule,
     InputNumberModule,
@@ -48,7 +46,7 @@ import { MessageService } from 'primeng/api';
   ],
   providers:[
     DatePipe,
-    MessageService
+
   ],
   exports: [
     CommonModule,
@@ -64,7 +62,6 @@ import { MessageService } from 'primeng/api';
     DropdownModule,
     SidebarModule,
     ConfirmDialogModule,
-    ToastModule,
     RatingModule,
     ToastrModule,
     BlockUIModule,

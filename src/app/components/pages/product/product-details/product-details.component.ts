@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
 import { IProduct } from 'src/app/shared/models/product';
-import { User, UserDetails } from 'src/app/shared/models/user';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { SocketService } from 'src/app/shared/services/socket.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -20,8 +19,6 @@ export class ProductDetailsComponent implements OnInit {
   userId: string = '';
   showPhoneNoStatus: boolean = false;
 
-  paragraph: string = `Our premium cannabis dried flower is cultivated from top-quality strains, ensuring a potent and aromatic
-                experience Our premium cannabis dried flower is cultivated from top-quality strains, ensuring `;
   charLimit: number = 100;
   showAll: boolean = false;
 
@@ -33,14 +30,14 @@ export class ProductDetailsComponent implements OnInit {
 
 
 
-  constructor(private productService: ProductService, private userService: UserService, private activatedRoute: ActivatedRoute, private router: Router, private tostr: ToastrService, private socketService: SocketService) { }
+  constructor(private productService: ProductService, private userService: UserService, private activatedRoute: ActivatedRoute, private router: Router, private socketService: SocketService,private messageService:MessageService) { }
 
   ngOnInit(): void {
 
     this.activatedRoute.paramMap.subscribe(params => {
       if (params.get('id')) {
         this.productId = params.get('id');
-        console.log(this.userService.currentUser);
+        // console.log(this.userService.currentUser);
 
         if (this.userService.currentUser.user) {
           this.userId = this.userService.currentUser?.user.id;
@@ -62,7 +59,7 @@ export class ProductDetailsComponent implements OnInit {
       this.isWishlisted = true;
       this.productService.addProductToWishlist(id).subscribe({
         next: (response: any) => {
-          this.tostr.success(response.message);
+          this.messageService.add({severity:'success',summary:'Success',detail:response.message})
         },
         error: (err) => {
           console.log(err);
@@ -76,7 +73,7 @@ export class ProductDetailsComponent implements OnInit {
         this.isWishlisted = false;
         this.productService.removeProductFromWishlist(id).subscribe({
           next: (response: any) => {
-            this.tostr.success(response.message);
+            this.messageService.add({severity:'success',summary:'Success',detail:response.message})
           }, error: (err) => {
             console.log(err);
             this.isWishlisted = true;
@@ -119,7 +116,7 @@ export class ProductDetailsComponent implements OnInit {
         this.isSubscribed = true;
         this.productService.subscribeCompany(companyId).subscribe({
           next: (response: any) => {
-            this.tostr.success(response.message);
+            this.messageService.add({severity:'success',summary:'Success',detail:response.message})
           }, error: (err) => {
             console.log(err);
             this.isSubscribed = false;
@@ -131,7 +128,7 @@ export class ProductDetailsComponent implements OnInit {
         this.isSubscribed = false;
         this.productService.unSubscribeCompany(companyId).subscribe({
           next: (response: any) => {
-            this.tostr.success(response.message);
+            this.messageService.add({severity:'success',summary:'Success',detail:response.message})
           }, error: (err) => {
             console.log(err);
             this.isSubscribed = true;
@@ -149,7 +146,7 @@ export class ProductDetailsComponent implements OnInit {
     if (this.productId) {
       this.productService.rateProduct(this.productId, { rating: this.rate }).subscribe({
         next: (response: any) => {
-          this.tostr.success(response.message);
+          this.messageService.add({severity:'success',summary:'Success',detail:response.message})
           this.getSingleProduct();
         }, error: (err: any) => {
           console.log(err);

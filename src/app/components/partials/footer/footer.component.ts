@@ -9,16 +9,16 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class FooterComponent {
 
-  user!:User;
+  user!: User;
 
-  constructor(private userService:UserService){}
-  
+  constructor(private userService: UserService) { }
+
   ngOnInit(): void {
-      this.userService.userObservable.subscribe(newUser=>{
-        this.user=newUser;
-      });
+    this.userService.userObservable.subscribe(newUser => {
+      this.user = newUser;
+    });
   }
-  get isAuth(){
+  get isAuth() {
     return this.user.token;
   }
 

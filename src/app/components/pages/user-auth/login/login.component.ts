@@ -42,9 +42,9 @@ export class LoginComponent implements OnInit {
           this.loading = true;
 
           this.messageService.add({ severity: 'success', summary: 'Login Successfully', detail: res.user.name });
-          setTimeout(() => {
+          // setTimeout(() => {
             this.router.navigate(['/home']);
-          }, 1500);
+          // }, 1500);
         }, error: (err) => {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error.error.message });
           setTimeout(() => {

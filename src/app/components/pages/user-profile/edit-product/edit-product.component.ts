@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
 import { IProduct } from 'src/app/shared/models/product';
 import { ProductService } from 'src/app/shared/services/product.service';
@@ -60,7 +59,7 @@ export class EditProductComponent {
   userId:string='';
 
 
-  constructor(private confirmationService: ConfirmationService, private messageService: MessageService, private productService: ProductService, private tostr: ToastrService, private fb: FormBuilder, private activatedRoute: ActivatedRoute, private router: Router,private userService:UserService) { }
+  constructor(private confirmationService: ConfirmationService, private messageService: MessageService, private productService: ProductService, private fb: FormBuilder, private activatedRoute: ActivatedRoute, private router: Router,private userService:UserService) { }
 
   ngOnInit(): void {
 
@@ -117,7 +116,7 @@ export class EditProductComponent {
   }
   getAllDropDownValue() {
     this.productService.getAllValueForAddProduct().subscribe((response: any) => {
-      console.log(response);
+      // console.log(response);
       this.categories = response[0].data;
       this.thcRange = response[1].data;
       this.strainTypes = response[2].data;
@@ -140,16 +139,11 @@ export class EditProductComponent {
   getSubCategoryById(id: any) {
     if (id != '') {
       this.productService.getSubCategory(id).subscribe((response: any) => {
-        console.log(response.data);
+        // console.log(response.data);
         this.subCategories = response.data;
 
       }, (err: any) => {
-        //when sub category not found
-        // this.productForm.patchValue({
-        //   sub_category: {
-        //     id: '', name: 'Sub Category'
-        //   }
-        // });
+       
         this.subCategories = [{
           id: '', name: 'No Result Found'
         }];
@@ -163,7 +157,7 @@ export class EditProductComponent {
     if (this.productId != '' && this.productId != null) {
       this.productService.getProductById(this.productId,this.userId).subscribe({
         next: (response: any) => {
-          console.log(response);
+          // console.log(response);
           this.product = response.product;
           this.getAllDropDownValue();
         }, error: (err) => {
@@ -380,14 +374,13 @@ export class EditProductComponent {
         next: (response: any) => {
           // console.log(response);
           this.loading = false;
-          this.tostr.success('Updated Successfully');
+          this.messageService.add({severity:'success',summary:'Success',detail:'Updated Successfully'})
           this.getProductByActivatedRoute();
           window.scrollTo(0, 0);
           
         }, error: (err:any) => {
-          console.log(err);
           this.loading = false;
-          this.tostr.error(err);
+          this.messageService.add({severity:'error',summary:'Error',detail:'err'})
         }
       });
 

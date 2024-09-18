@@ -4,7 +4,6 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserDetails } from 'src/app/shared/models/user';
-import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'src/app/shared/services/product.service';
 
 export interface User {
@@ -33,7 +32,7 @@ export interface Subscription {
   selector: 'app-profile-details',
   templateUrl: './profile-details.component.html',
   styleUrls: ['./profile-details.component.scss'],
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService]
 
 })
 export class ProfileDetailsComponent implements OnInit {
@@ -61,7 +60,7 @@ export class ProfileDetailsComponent implements OnInit {
   recentProductStatus: boolean = false;
   subscribedStatus: boolean = true;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private tostr: ToastrService, private userService: UserService, private confirmationService: ConfirmationService, private messageService: MessageService, private productService: ProductService) { }
+  constructor(private router: Router, private userService: UserService, private confirmationService: ConfirmationService, private messageService: MessageService, private productService: ProductService) { }
 
   ngOnInit(): void {
 
@@ -72,7 +71,7 @@ export class ProfileDetailsComponent implements OnInit {
         this.user = response.user;
         // console.log(this.user);
       }, error: (err) => {
-        this.tostr.error(err.error.message);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error.message})
         this.loadingUserImage = false;
       }
     });
@@ -86,7 +85,6 @@ export class ProfileDetailsComponent implements OnInit {
         // console.log(this.products);
       }, error: (err: any) => {
         console.log(err);
-        // this.tostr.error(err.error.error.message);
         this.recentProductStatus = true;
       }
     });
@@ -106,7 +104,7 @@ export class ProfileDetailsComponent implements OnInit {
         this.subscribedStatus = false;
         console.log(this.subscribedCompanyes);
       }, error: (err) => {
-        this.tostr.error(err.error.error.message);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error.error.message})
         this.subscribedStatus = false;
       }
     })
@@ -150,7 +148,7 @@ export class ProfileDetailsComponent implements OnInit {
             this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: response.message });
           },
           error: (err) => {
-            this.tostr.error(err.error.error.message);
+            this.messageService.add({severity:'error',summary:'Error',detail:err.error.error.message})
           }, complete: () => {
             this.userService.logOut();
           }
@@ -176,9 +174,9 @@ export class ProfileDetailsComponent implements OnInit {
 
     this.productService.unSubscribeCompany(companyId).subscribe({
       next: (response: any) => {
-        this.tostr.success(response.message);
+        this.messageService.add({severity:'success',summary:'Success',detail:response.message})
       }, error: (err) => {
-        this.tostr.error(err.error.message);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error.message})
         this.subscribedCompanyes = this.changeSubscribedStatus(companyId, true);
 
       }
@@ -190,9 +188,9 @@ export class ProfileDetailsComponent implements OnInit {
 
     this.productService.subscribeCompany(companyId).subscribe({
       next: (response: any) => {
-        this.tostr.success(response.message);
+        this.messageService.add({severity:'success',summary:'Success',detail:response.message})
       }, error: (err: any) => {
-        this.tostr.error(err.error.message);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error.message})
         this.subscribedCompanyes = this.changeSubscribedStatus(companyId, false);
 
       }

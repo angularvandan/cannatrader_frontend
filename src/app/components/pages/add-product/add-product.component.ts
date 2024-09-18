@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
 import { UserDetails } from 'src/app/shared/models/user';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -52,14 +52,13 @@ export class AddProductComponent implements OnInit {
   loading: boolean = false;
   loadingForPage: boolean = true;
 
-
   user!: UserDetails;
 
   companyDocumentStatus: boolean = false;
 
   productForm!: FormGroup;
 
-  constructor(private userService: UserService, private fb: FormBuilder, private productService: ProductService, private tostr: ToastrService) { }
+  constructor(private userService: UserService, private fb: FormBuilder, private productService: ProductService, private messageService: MessageService) { }
 
   ngOnInit(): void {
 
@@ -69,7 +68,7 @@ export class AddProductComponent implements OnInit {
         this.companyDocumentStatus = this.user.is_company;
         this.getAllValueForAddProduct();
       }, error: (err) => {
-        this.tostr.error(err.error.error.message);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error.error.message })
       }
     })
 
@@ -110,7 +109,7 @@ export class AddProductComponent implements OnInit {
     });
 
   }
-  getAllValueForAddProduct(){
+  getAllValueForAddProduct() {
     this.productService.getAllValueForAddProduct().subscribe((response: any) => {
       this.loadingForPage = false;
       console.log(response);
@@ -193,8 +192,8 @@ export class AddProductComponent implements OnInit {
   onSubmit(): void {
 
     this.productForm.patchValue({
-      latitude:'12132',
-      longitude:'2334.23'
+      latitude: '12132',
+      longitude: '2334.23'
     })
 
     if (this.productForm.valid) {
@@ -236,19 +235,18 @@ export class AddProductComponent implements OnInit {
       this.productService.addProduct(formData).subscribe({
         next: (response) => {
           // console.log(response);
-          this.tostr.success('Product added successfully');
-
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Product added successfully' })
           //reset form data
           this.productForm.reset();
-          this.selectedFile=null;
-          this.selectedImageFiles=[];
-          this.imagePreviews=[];
+          this.selectedFile = null;
+          this.selectedImageFiles = [];
+          this.imagePreviews = [];
           window.scrollTo(0, 0);
 
           this.loading = false;
         }, error: (err) => {
           // console.log(err);
-          this.tostr.error(err.error.error.message);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error.error.message })
           this.loading = false;
         }
       });

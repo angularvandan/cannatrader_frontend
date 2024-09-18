@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
 import { IProduct, } from 'src/app/shared/models/product';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -22,7 +22,7 @@ export class ProductListingComponent implements OnInit {
   totalProductCount: number = 0;
   isWishlisted: boolean = false;
 
-  constructor(private productService: ProductService, private userService: UserService, private tostr: ToastrService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private productService: ProductService, private userService: UserService,  private activatedRoute: ActivatedRoute, private router: Router,private messageService:MessageService) { }
 
   ngOnInit(): void {
 
@@ -86,7 +86,7 @@ export class ProductListingComponent implements OnInit {
 
         this.productService.addProductToWishlist(id).subscribe({
           next: (response: any) => {
-            this.tostr.success(response.message);
+            this.messageService.add({severity:'success',summary:'Success',detail:response.message})
           },
           error: (err) => {
             console.log(err);
@@ -99,7 +99,7 @@ export class ProductListingComponent implements OnInit {
         this.products[productIndex] = { ...product, isWishlisted: false };
         this.productService.removeProductFromWishlist(id).subscribe({
           next: (response: any) => {
-            this.tostr.success(response.message);
+            this.messageService.add({severity:'success',summary:'Success',detail:response.message})
             // Update the product in the list
           },
           error: (err) => {

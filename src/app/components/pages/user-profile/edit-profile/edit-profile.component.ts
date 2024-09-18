@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnChanges, OnInit, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
 import { User, UserDetails } from 'src/app/shared/models/user';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -38,7 +38,7 @@ export class EditProfileComponent implements OnInit {
   @ViewChildren('section') sections!: QueryList<ElementRef>;
 
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private tostr: ToastrService,private productService:ProductService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router,private messageService:MessageService, private productService:ProductService) {
 
   }
 
@@ -124,12 +124,12 @@ export class EditProfileComponent implements OnInit {
       next: (response) => {
         console.log(response);
         this.loadingForProfile = false;
-        this.tostr.success(response.message);
+        this.messageService.add({severity:'success',summary:'Success',detail:response.message})
         this.getUpdatedProfile();
       }, error: (err) => {
-        console.log(err);
+        // console.log(err);
         this.loadingForProfile = false;
-        this.tostr.error(err.error.error.message);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error.error.message})
       }
     });
   }
@@ -196,11 +196,11 @@ export class EditProfileComponent implements OnInit {
         next: (response) => {
           console.log(response);
           this.loadingForCompany = false;
-          this.tostr.success('Company Details has Saved.')
+          this.messageService.add({severity:'success',summary:'Success',detail:'Company Details has Saved.'})
+
         }, error: (err) => {
-          this.tostr.error(err.error.error.message);
+          this.messageService.add({severity:'error',summary:'Error',detail:err.error.error.message})
           this.loadingForCompany = false;
-          console.log(err);
         }
       })
     }
@@ -218,10 +218,10 @@ export class EditProfileComponent implements OnInit {
       next:(response)=>{
         console.log(response);
         this.loadingForCompany=false;
+        this.messageService.add({severity:'success',summary:'Success',detail:'Updated Successfully'})
 
-        this.tostr.success('Updated Successfully');
       },error:(err)=>{
-        console.log(err.error.error.message);
+        console.log(err);
         this.loadingForCompany=false;
 
       }
@@ -328,13 +328,13 @@ export class EditProfileComponent implements OnInit {
       this.userService.changePassword(this.passwordForm.value).subscribe({
         next: (response) => {
           this.loadingForPassword = false;
-          this.tostr.success(response.message);
+          this.messageService.add({severity:'success',summary:'Success',detail:response.message})
           this.passwordForm.reset();
 
         },
         error: (err) => {
           this.loadingForPassword = false;
-          this.tostr.error(err.error.error.message);
+          this.messageService.add({severity:'error',summary:'Error',detail:err.error.error.message})
         }
       })
     }

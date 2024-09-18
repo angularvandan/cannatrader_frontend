@@ -20,6 +20,8 @@ import { PrivacyPolicyComponent } from './components/partials/privacy-policy/pri
 import { TermsConditionsComponent } from './components/partials/terms-conditions/terms-conditions.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -43,6 +45,7 @@ import { TokenInterceptor } from './shared/interceptors/token.interceptor';
     FormsModule,
     BrowserAnimationsModule,
     SharedModule,
+    ToastModule,
     DropdownModule,
     HttpClientModule,
   ],
@@ -51,7 +54,7 @@ import { TokenInterceptor } from './shared/interceptors/token.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },MessageService
   ],
   bootstrap: [AppComponent]
 })

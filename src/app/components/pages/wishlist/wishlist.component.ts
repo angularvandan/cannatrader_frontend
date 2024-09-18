@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -50,7 +50,7 @@ export class WishlistComponent implements OnInit {
   params:any={};
   totalProducts:number=0;
 
-  constructor(private router:Router,private activatedRoute:ActivatedRoute, private productService:ProductService,private userService:UserService,private toastr:ToastrService){
+  constructor(private router:Router,private activatedRoute:ActivatedRoute, private productService:ProductService,private userService:UserService,private messsageService:MessageService){
 
   }
 
@@ -81,7 +81,7 @@ export class WishlistComponent implements OnInit {
     this.loading=true;
     this.productService.removeProductFromWishlist(id).subscribe({
       next:(response:any)=>{
-        this.toastr.success(response.message);
+        this.messsageService.add({severity:'success',summary:'Success',detail:response.message})
         this.getWishlistProducts();
       },error:(err)=>{
         console.log(err);

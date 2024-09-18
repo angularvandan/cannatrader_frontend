@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/shared/services/product.service';
 
 export interface User {
@@ -40,7 +40,7 @@ export class SubscribedDetailsComponent implements OnInit {
   subscribedCompanyes: Subscription[] = [];
   total:number=0;
 
-  constructor(private productService: ProductService, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private productService: ProductService ,private messageService:MessageService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
 
@@ -75,9 +75,9 @@ export class SubscribedDetailsComponent implements OnInit {
 
     this.productService.unSubscribeCompany(companyId).subscribe({
       next:(response:any)=>{
-        this.toastr.success(response.message);
+        this.messageService.add({severity:'success',summary:'Success',detail:response.message})
       },error:(err)=>{
-        this.toastr.error(err.error.message);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error.message})
         this.subscribedCompanyes=this.changeSubscribedStatus(companyId,true);
 
       }
@@ -89,11 +89,10 @@ export class SubscribedDetailsComponent implements OnInit {
 
     this.productService.subscribeCompany(companyId).subscribe({
       next:(response:any)=>{
-        this.toastr.success(response.message);
+        this.messageService.add({severity:'success',summary:'Success',detail:response.message})
       },error:(err:any)=>{
-        this.toastr.error(err.error.message);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error.message})
         this.subscribedCompanyes=this.changeSubscribedStatus(companyId,false);
-
       }
     })
   }

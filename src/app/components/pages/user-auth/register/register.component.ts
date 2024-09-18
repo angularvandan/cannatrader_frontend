@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
 import { interval, Subscription } from 'rxjs';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -18,7 +18,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
   @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
 
 
-  constructor(private router: Router, private fb: FormBuilder, private userService: UserService, private tostr: ToastrService) { }
+  constructor(private router: Router, private fb: FormBuilder, private userService: UserService,private messageService:MessageService) { }
 
   registerForm!: FormGroup;
   formData = new FormData();
@@ -131,11 +131,12 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
         this.loadingOtp = false;
         this.router.navigate(['/login']);
-        this.tostr.success("Email Verifyed Successfully");
+        this.messageService.add({severity:'success',summary:'Success',detail:"Email Verifyed Successfully"})
+
 
       }, error: (err: any) => {
         this.loadingOtp = false;
-        this.tostr.error(err.error.error.message);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error.error.message})
         console.log(err);
       }
     });
@@ -148,7 +149,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
     this.userService.getOtpForEmailVerify({ email: this.registerForm.value.email.toLowerCase() }).subscribe({
       next: (response) => {
         console.log(response);
-        this.tostr.success(response.message);
+        this.messageService.add({severity:'success',summary:'Success',detail:response.message})
         this.loading = false;
 
         this.timerSubscription = interval(1000).subscribe(() => {
@@ -157,7 +158,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
       }, error: (err) => {
         // console.log(err);
-        this.tostr.error(err.error.error.message);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error.error.message})
         this.loading = false;
 
       }
@@ -201,11 +202,9 @@ export class RegisterComponent implements AfterViewInit, OnInit {
         next: (response: any) => {
           // console.log(response);
           this.formData = new FormData();
-
           this.loading = false;
-          this.tostr.success(response.message);
+          this.messageService.add({severity:'success',summary:'Success',detail:response.message})
           this.section = 'otp';
-
           //this is for show remaining time of valid otp
           this.timerSubscription = interval(1000).subscribe(() => {
             this.updateTimer();
@@ -213,11 +212,9 @@ export class RegisterComponent implements AfterViewInit, OnInit {
 
         },
         error: (err) => {
-
           this.loading = false;
           this.formData = new FormData();
-
-          this.tostr.error(err.error.error.message);
+          this.messageService.add({severity:'error',summary:'Error',detail:err.error.error.message})
         }
       });
     }
