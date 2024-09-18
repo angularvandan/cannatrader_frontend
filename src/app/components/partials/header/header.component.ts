@@ -10,7 +10,7 @@ export interface Notification {
   image: string;
   userId: string;
   isRead: boolean;
-  allRead:boolean;
+  allRead: boolean;
   redirectUrl: string | null;
   createdAt: Date; // ISO 8601 date string
   updatedAt: Date; // ISO 8601 date string
@@ -28,7 +28,8 @@ export class HeaderComponent implements OnInit {
 
   user!: User;
   notifications: Notification[] = [];
-  totalReadFalseNotification:number=0;
+  totalReadFalseNotification: number = 0;
+
 
   constructor(private userService: UserService, private productService: ProductService, private renderer: Renderer2) { }
 
@@ -40,11 +41,28 @@ export class HeaderComponent implements OnInit {
     this.getAllNotifications();
   }
 
-  getAllNotifications(){
+  getAllNotifications() {
     this.productService.getNotifications().subscribe({
       next: (response: any) => {
 
         this.notifications = response.notifications;
+
+        //this is used for change url who come from backend
+        this.notifications = this.notifications.map((item) => {
+          switch (item.redirectUrl) {
+            case 'Chat':
+              return { ...item, redirectUrl: 'products/chats' };
+            case 'Profile':
+              return { ...item, redirectUrl: 'profile/edit-profile' };
+            case 'Subscription':
+              return { ...item, redirectUrl: 'profile/profile-details' };
+            case 'Product':
+              return { ...item, redirectUrl: 'home' };
+            default:
+              return item;
+          }
+        });
+
         this.totalNumberOfNotificationReadFalse();
 
         console.log(this.notifications);
@@ -54,30 +72,31 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  readNotification(id:string){
-
-    this.showIconForReadOrNot(id,true);
+  readNotification(id: string) {
+    
+    this.toggleMenu();
+    this.showIconForReadOrNot(id, true);
 
     this.productService.markAsRead(id).subscribe({
-      next:(response)=>{
+      next: (response) => {
         console.log(response);
         this.totalNumberOfNotificationReadFalse();
-      },error:(err)=>{
+      }, error: (err) => {
         console.log(err);
-        this.showIconForReadOrNot(id,false);
+        this.showIconForReadOrNot(id, false);
 
       }
     })
   }
 
-  totalNumberOfNotificationReadFalse(){
+  totalNumberOfNotificationReadFalse() {
     this.totalReadFalseNotification = this.notifications.filter(notification => !notification.allRead).length;
   }
 
-  showIconForReadOrNot(id:string,status:boolean){
-    this.notifications=this.notifications.map((notification:Notification)=>{
-      if(notification.id==id){
-        notification.isRead=status;
+  showIconForReadOrNot(id: string, status: boolean) {
+    this.notifications = this.notifications.map((notification: Notification) => {
+      if (notification.id == id) {
+        notification.isRead = status;
         return notification;
       }
       return notification;
@@ -96,13 +115,13 @@ export class HeaderComponent implements OnInit {
     this.sidebarVisible = true;
     this.showAndHideScroll();
     //this is for after clicking need to set notification as 0;
-    this.totalReadFalseNotification=0;
+    this.totalReadFalseNotification = 0;
     this.productService.markAsAllRead().subscribe({
-      next:(response)=>{
+      next: (response) => {
         // console.log(response);
         this.getAllNotifications();
 
-      },error:(err)=>{
+      }, error: (err) => {
         console.log(err);
         this.totalNumberOfNotificationReadFalse();
       }

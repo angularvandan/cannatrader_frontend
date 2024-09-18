@@ -111,7 +111,7 @@
         </ng-template>
         <ng-template pTemplate="content" class="p-8">
             <ng-container *ngFor="let notification of notifications">
-                <div class="content-details flex justify-start items-center gap-2 cursor-pointer"(click)="readNotification(notification.id)">
+                <div routerLink="{{notification.redirectUrl}}" class="content-details flex justify-start items-center gap-2 cursor-pointer"(click)="readNotification(notification.id)">
                     <div class="p-1"*ngIf="notification.isRead"></div>
                     <div class="current-content" *ngIf="!notification.isRead">
                         <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
