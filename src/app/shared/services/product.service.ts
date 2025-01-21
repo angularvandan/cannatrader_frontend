@@ -8,7 +8,7 @@ import { IProduct } from '../models/product';
 })
 export class ProductService {
 
-  private baseUrl = "https://cannatrader.onrender.com";
+  private baseUrl = "https://cannatrader-backend.onrender.com";
 
 
   constructor(private http: HttpClient) { }
@@ -59,7 +59,7 @@ export class ProductService {
     return this.http.get(`${this.baseUrl}/api/product/get-recent-listing`, { params: queryParams });
   }
 
-  getProductById(id: string,userId:string) {
+  getProductById(id: string, userId: string) {
     console.log(userId);
     return this.http.post(`${this.baseUrl}/api/product/${id}`, {
       lng: "1.8674654",
@@ -68,12 +68,12 @@ export class ProductService {
     });
   }
 
-  imageFileToImageUrl(body:any){
-    return this.http.post(`${this.baseUrl}/api/users/uploadImages`,body);
+  imageFileToImageUrl(body: any) {
+    return this.http.post(`${this.baseUrl}/api/users/uploadImages`, body);
   }
 
-  pdfImageToPdfUrl(body:{}){
-    return this.http.post(`${this.baseUrl}/api/users/uploadPDF`,body);
+  pdfImageToPdfUrl(body: {}) {
+    return this.http.post(`${this.baseUrl}/api/users/uploadPDF`, body);
   }
 
   editProductById(id: string, body: any) {
@@ -92,20 +92,20 @@ export class ProductService {
   removeProductFromWishlist(id: string) {
     return this.http.delete(`${this.baseUrl}/api/wishlist/${id}`);
   }
-  getAllWishlistProducts(pagination:any) {
+  getAllWishlistProducts(pagination: any) {
     let params = new HttpParams()
       .set('lat', 1.112)
       .set('lng', 12.123)
-      .set('limit',pagination.limit)
-      .set('page',pagination.page);
+      .set('limit', pagination.limit)
+      .set('page', pagination.page);
 
-    return this.http.get(`${this.baseUrl}/api/wishlist/getAllWishlist`,{params});
+    return this.http.get(`${this.baseUrl}/api/wishlist/getAllWishlist`, { params });
   }
 
-  subscribeCompany(companyId:string){
-    return this.http.post(`${this.baseUrl}/api/subscribtion/subscribe`,{companyId})
+  subscribeCompany(companyId: string) {
+    return this.http.post(`${this.baseUrl}/api/subscribtion/subscribe`, { companyId })
   }
-  unSubscribeCompany(companyId:string){
+  unSubscribeCompany(companyId: string) {
     const body = { companyId: companyId };
     const options = {
       headers: new HttpHeaders({
@@ -113,41 +113,41 @@ export class ProductService {
       }),
       body: body
     };
-    return this.http.delete(`${this.baseUrl}/api/subscribtion/unsubscribe`,options)
+    return this.http.delete(`${this.baseUrl}/api/subscribtion/unsubscribe`, options)
   }
-  getSubscribedCompany(pagination:any){
+  getSubscribedCompany(pagination: any) {
     let params = new HttpParams()
-      .set('limit',pagination.limit)
-      .set('page',pagination.page);
-    return this.http.get(`${this.baseUrl}/api/subscribtion/subscriptions`,{params});
+      .set('limit', pagination.limit)
+      .set('page', pagination.page);
+    return this.http.get(`${this.baseUrl}/api/subscribtion/subscriptions`, { params });
   }
-  startChat(userId2:string){
-    return this.http.post(`${this.baseUrl}/api/chat/create`,{userId2});
+  startChat(userId2: string) {
+    return this.http.post(`${this.baseUrl}/api/chat/create`, { userId2 });
   }
-  getAllChats(){
+  getAllChats() {
     return this.http.get(`${this.baseUrl}/api/chat`);
   }
-  getAllMessages(chatId:string){
+  getAllMessages(chatId: string) {
     return this.http.get(`${this.baseUrl}/api/chat/messages/${chatId}`);
   }
-  readAllMessage(chatId:string){
-    return this.http.post(`${this.baseUrl}/api/chat/read-all-messages`,{chatId});
+  readAllMessage(chatId: string) {
+    return this.http.post(`${this.baseUrl}/api/chat/read-all-messages`, { chatId });
   }
   getNotifications(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/api/notifications`);
   }
   // Method to mark a notification as read
-  markAsRead(id:string): Observable<any> {
-    return this.http.patch<any>(`${this.baseUrl}/api/notifications/mark-read?id=${id}`,{});
+  markAsRead(id: string): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}/api/notifications/mark-read?id=${id}`, {});
   }
   markAsAllRead(): Observable<any> {
-    return this.http.patch<any>(`${this.baseUrl}/api/notifications/mark-all-read`,{});
+    return this.http.patch<any>(`${this.baseUrl}/api/notifications/mark-all-read`, {});
   }
   // Method to delete a notification
   deleteNotification(notificationId: string): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/api/notifications/${notificationId}`);
   }
-  sendMessage(body:any){
-    return this.http.post(`${this.baseUrl}/api/chat/message`,body);
+  sendMessage(body: any) {
+    return this.http.post(`${this.baseUrl}/api/chat/message`, body);
   }
 }
